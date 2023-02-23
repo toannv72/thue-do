@@ -1,0 +1,33 @@
+.running-text p {
+    display: inline-block;
+    white-space: nowrap;
+    margin-left: 50px;
+}
+
+// .running-text {
+//     width: 100%;
+//     /* Thiết lập độ rộng là 4 lần độ rộng của thẻ cha */
+//     transform: translateX(100%);
+//     /* Bắt đầu từ phía bên phải */
+//     animation: running-text 10s linear infinite;
+// }
+
+// @keyframes running-text {
+//     from {
+//         transform: translateX(100%);
+//     }
+
+//     to {
+//         transform: translateX(0%);
+//     }
+// }
+
+marquee {
+    font-size: 20px;
+    // background-color: #121418;
+    // color: #e9e6e4;
+    // padding: 12px 0;
+    width: 100%;
+    // margin-left: -20px;
+    flex-shrink: 0;
+}

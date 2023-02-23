@@ -1,0 +1,30 @@
+.toan {
+    // height: 300px;
+    // background-color: aliceblue;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.toan-1 {
+    height: 100%;
+    display: flex;
+    // background-color: rgb(95, 165, 226);
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.toan-2 {
+    height: 50px;
+    width: 200px;
+    background-color: rgb(206 206 206 / 32%);
+    margin: 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.toan-index{
+    margin-left: 15px;
+}

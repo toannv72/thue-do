@@ -1,0 +1,45 @@
+.a1 {
+    // width: 100%;
+    min-height: 60px;
+    padding: 0 var(--default-layout-horizontal-spacer);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 1px 0px rgba(2, 2, 2, 0.66);
+    background: black;
+    color: aliceblue;
+}
+
+.a2 {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 30px;
+    box-shadow: 0px 1px 0px rgba(2, 2, 2, 0.66);
+    margin-top: 25px;
+}
+
+.a2 img {
+    width: 250px;
+    display: block;
+    margin: 0 auto;
+}
+
+.container {
+    margin-top: 10px;
+}
+
+.a3 {
+    margin-top: 15px;
+    display: flex;
+    min-height: 60px;
+    padding: 0 var(--default-layout-horizontal-spacer);
+    display: flex;
+    justify-content: space-between;
+  
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.a3-1{
+        text-align: center;
+}

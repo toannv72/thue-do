@@ -1,0 +1,41 @@
+.tab-list {
+    border-bottom: 1px solid #ccc;
+    padding-left: 0;
+}
+
+.tab-list-item {
+    color: #2e4765;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 25px 10px;
+}
+
+.tab-list-active,
+.tab-list-item:hover {
+    color: #00a550;
+}
+
+.nu {
+    display: block;
+    position: relative;
+    background-color: #f8f9fb;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 10px;
+    color: #141414;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 100%;
+}
+
+.value {
+    display: block;
+    color: #a9aaad;
+    font-size: 16px;
+}

@@ -1,0 +1,158 @@
+{
+  "posts": [
+    {
+      "img": "https://j-p.vn/vnt_upload/product/hinhweb/1020400364303_1.JPG",
+      "gia": "120.000",
+      "daMua": "30",
+      "name": "Áo thun croptop",
+      "id": 1
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1547043904-a62fe1c81e8a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
+      "gia": "300.000",
+      "daMua": "10",
+      "name": "Máy ảnh Sony",
+      "id": 2
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1617464751553-be2115620e2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80",
+      "gia": "150.000",
+      "daMua": "24",
+      "name": "Gimbal chống rung",
+      "id": 3
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1581661701347-6e695689365b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80",
+      "gia": "240.000",
+      "daMua": "16",
+      "name": "Quần áo Cosplay",
+      "id": 4
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "gia": "230.000",
+      "daMua": "42",
+      "name": "Lều cắm trại",
+      "id": 5
+    },
+    {
+      "img": "https://plus.unsplash.com/premium_photo-1663051324515-610b4eaa9755?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1218&q=80",
+      "gia": "70.000",
+      "daMua": "27",
+      "name": "Thuyền Sup",
+      "id": 6
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1609630875171-b1321377ee65?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=380&q=80",
+      "gia": "5.000.000",
+      "daMua": "6",
+      "name": "Xe moto Yamaha R6",
+      "id": 8
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80",
+      "gia": "80.000",
+      "daMua": "32",
+      "name": "Váy đi biển",
+      "id": 10
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "gia": "3.000.000",
+      "daMua": "18",
+      "name": "Oto Ford Everest",
+      "id": 11
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1543290556-86c013a17574?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+      "gia": "1.000.000",
+      "daMua": "5",
+      "name": "Váy cưới",
+      "id": 12
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1588434013438-e1dd134eda16?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80",
+      "gia": "3.100.000",
+      "daMua": "4",
+      "name": "Flycam DJI",
+      "id": 13
+    },
+    {
+      "img": "https://ungdungthuedo.vn/wp-content/uploads/2022/07/fbb95dc808ab8c3fafdc2f59b5ccc0d9.jpeg",
+      "gia": "85.000",
+      "daMua": "53",
+      "name": "Đồ tốt nghiệp",
+      "id": 14
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1620910977125-303cad033a49?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+      "gia": "900.000",
+      "daMua": "28",
+      "name": "Âu phục",
+      "id": 15
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1589731119540-c4586781dae1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "gia": "3.500.000",
+      "daMua": "19",
+      "name": "Túi xách Dior",
+      "id": 16
+    },
+    {
+      "img": "https://product.hstatic.net/200000038580/product/mtp82_vw_34fr_watch-40-titanium-light-cell-edition5s_vw_34fr_wf_co_f78c0b6fa4074cf98b3f0cb615e94a87_master.jpg",
+      "gia": "350.000",
+      "daMua": "32",
+      "name": "Apple watch series 5",
+      "id": 18
+    },
+    {
+      "img": "https://cf.shopee.vn/file/2dc286372c1240ac9e81fa12ee618608",
+      "gia": "420.000",
+      "daMua": "26",
+      "name": "Giày Adidas",
+      "id": 19
+    },
+    {
+      "img": "https://cf.shopee.vn/file/4857477baa7af125ea29d913b730f9e1",
+      "gia": "1.600.000",
+      "daMua": "15",
+      "name": "Đầm dạ hội",
+      "id": 20
+    },
+    {
+      "img": "https://saigonsoundlight.com/wp-content/uploads/2021/03/cho-thue-am-thanh-1.jpg",
+      "gia": "2.000.000",
+      "daMua": "39",
+      "name": "Dàn âm thanh sự kiện",
+      "id": 21
+    },
+    {
+      "img": "https://product.hstatic.net/200000038580/product/iphone-14-pro-finish-select-202209-6-7inch-deeppurple_b9d77639728240398e2c1f2d88113351_master.jpg",
+      "gia": "1.100.000",
+      "daMua": "45",
+      "name": "Iphone 14 Promax",
+      "id": 22
+    },
+    {
+      "img": "https://pianovietthanh.vn/wp-content/uploads/2017/08/1-52.jpg",
+      "gia": "2.450.000",
+      "daMua": "21",
+      "name": "Đàn Piano Upright",
+      "id": 23
+    }
+  ],
+  "Responsive": [
+    {
+      "img": "https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/329149838_558473532883494_2508217283299694150_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=730e14&_nc_ohc=MUdbqLmEIkMAX_Npu7X&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfA6wskHIR_eX9kBe3nFQHTKT55sO8GeGIBvmGykCtBSwg&oe=63F3B2DF",
+      "id": 1
+    },
+    {
+      "img": "https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/329030779_769727287852097_1232347120338707489_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=730e14&_nc_ohc=VeTPCEgFeN8AX9izJew&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfAfgtlQPPl8XF8Hute2NMlym6WjtMAjiM9YTWGRLbyqCw&oe=63E8FF9B",
+      "id": 2
+    },
+    {
+      "img": "https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/328063220_619078163361298_6566497839462960659_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=730e14&_nc_ohc=55wa2p_W9goAX_jvggv&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfA_T_ukxniqIrD3a6IKX4CRfVkkrEbOl_RwCj_z2ycTiw&oe=63EA56B0",
+      "id": 4
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+.wrapper {
+    width: 250px;
+    padding: 20px 0 26px 8px;
+    margin-left: -18px;
+    position: fixed;
+}
+
+ @media (max-width: 740px) {
+
+     /* styles cho khi trình duyệt có chiều rộng <= 767px */
+    .wrapper {
+            width: 0px;
+           
+        }
+   
+ }
