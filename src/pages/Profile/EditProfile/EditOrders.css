@@ -1,0 +1,250 @@
+.form {
+    background: rgb(216 203 203 / 57%);
+    padding: 40px;
+    max-width: 800px;
+    height: 670px;
+    /*Need to change */
+    margin: 40px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px 4px rgba(255, 255, 255, 0.3);
+}
+
+#EditProfile1 {
+    color: #636363;
+}
+
+.tab-group {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+}
+
+.tab-group:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.tab-group li a {
+    display: block;
+    text-decoration: none;
+    padding: 15px;
+    background: rgba(250, 199, 156, 0.25);
+    color: #fac79c;
+    font-size: 20px;
+    float: left;
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.tab-group li a:hover {
+    background: #fac79c;
+    color: #6D6D6B;
+}
+
+.tab-group .active a {
+    background: #FFF9F4;
+    color: #6D6D6B;
+}
+
+.tab-content>div:last-child {
+    display: none;
+}
+
+.form-control {
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    border: 1px solid #fac79c;
+    color: #f9e2ca;
+    border-radius: 0;
+    outline: 0;
+}
+
+/* Text Input Style, Add this class to your input*/
+.input-style {
+    background-color: #fff5e6;
+    border: none;
+height: 50px;
+    border-radius: 23px;
+    color: #8C8C8C;
+}
+
+#EditProfile {
+    font-family: Tamil Sangam MN;
+}
+
+.button {
+    border: 0;
+    outline: none;
+    border-radius: 0;
+    padding: 15px 0;
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    background: #ffffff;
+    color: #6D6D6B;
+    transition: all 0.5s ease;
+}
+
+.button:hover,
+.button:focus {
+    background: #fac79c;
+}
+
+.button-block {
+    display: block;
+    width: 100%;
+}
+
+/* Food Allergy */
+/* Food Disease */
+/* Fruit / vegetable you love? */
+/* Fruit / vegetable you hate? */
+#sec1,
+#sec2,
+#sec3 {
+    width: 900px;
+    height: 10px;
+    background-color: #ffffff;
+    margin: auto;
+    border: 0px;
+}
+
+#firstchoice,
+#secondchoice,
+#thirthchoice {
+    color: #545151;
+}
+
+/*=====================================*/
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+    font-family: Tamil Sangam MN;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+}
+
+.dropdown .select {
+    background: #fff;
+    color: #545151;
+    border: 1px solid #f9e2ca;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 6px 35px 6px 12px;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+    min-width: 160px;
+}
+
+.dropdown .select:after {
+    content: '';
+    position: absolute;
+    border: 5px solid transparent;
+    border-top: 5px solid #fac79c;
+    top: 14px;
+    right: 10px;
+}
+
+.dropdown .select:before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    background: #fac79c;
+    top: 0;
+    bottom: 0;
+    right: 30px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+}
+
+.dropdown .select2 {
+    background: #fff;
+    color: #545151;
+    border: 1px solid #fac79c;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 6px 35px 6px 12px;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+    min-width: 220px;
+}
+
+.dropdown .select2:after {
+    content: '';
+    position: absolute;
+    border: 5px solid transparent;
+    border-top: 5px solid #f9e2ca;
+    top: 14px;
+    right: 10px;
+}
+
+.dropdown .select2:before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    background: #fac79c;
+    top: 0;
+    bottom: 0;
+    right: 30px;
+}
+
+.option-list {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.17);
+    font-size: 14px;
+    left: 0;
+    list-style: none;
+    margin: 2px 0 0;
+    min-width: 160px;
+    max-height: 1000px;
+    overflow-y: auto;
+    padding: 5px 0;
+    position: absolute;
+    top: 100%;
+    z-index: 100;
+    display: none;
+}
+
+.option-list a {
+    clear: both;
+    color: #545151;
+    display: block;
+    font-weight: 400;
+    line-height: 1.42857;
+    padding: 3px 20px;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.option-list a:hover {
+    background: #f7a09f;
+    color: #fff;
+}

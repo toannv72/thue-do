@@ -1,13 +1,12 @@
-
 import images from '~/assets/images';
-import './Profile.css';
+import './EditOrders.css';
 import classNames from 'classnames/bind';
-import styles from './Product.module.scss';
-import Menu, { MenuItem } from './Menu';
+import styles from '../Product.module.scss';
+import Menu, { MenuItem } from '../Menu';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
-function Profile() {
+function EditOrders() {
     const id = localStorage.getItem('username');
     const imgUser = JSON.parse(localStorage.getItem('user'));
 
@@ -65,8 +64,55 @@ function Profile() {
                     </div>
                 </Menu>
             </div>
+
+            <div class="form">
+                <div>
+                    <h1 id="EditProfile1">Edit profile</h1>
+                </div>
+                <div class="tab-content">
+                    <form id="EditProfile">
+                        <p>
+                            <medium id="UserName">User name *</medium>
+                            <input
+                                type="UserName"
+                                class="form-control input-style"
+                                id="exampleInputUserName"
+                                aria-describedby="UserName"
+                            />
+                        </p>
+
+                        <p>
+                            <medium id="Email">Email address</medium>
+                            <input
+                                type="email"
+                                class="form-control input-style"
+                                id="exampleInputEmail1"
+                                aria-describedby="emailHelp"
+                            />
+                            <small id="emailHelp" class="form-text text-muted">
+                                A valid e-mail address. All e-mails from the system will be sent to this address.
+                            </small>
+                        </p>
+                        <p>
+                            <medium id="Password">Password *</medium>
+                            <input
+                                type="Password"
+                                class="form-control input-style"
+                                id="exampleInputPassword"
+                                aria-describedby="Password"
+                            />
+                        </p>
+
+                        <div>
+                            <button type="submit" class="button button-block">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 }
 
-export default Profile;
+export default EditOrders;

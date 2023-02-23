@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 export default function CreateProducts() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState();
     const [images, setImages] = useState([]);
     const [brand, setBrand] = useState([]);
     const [images1, setImages1] = useState('');
@@ -27,43 +27,7 @@ export default function CreateProducts() {
     };
     return (
         <>
-            <link
-                href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
-                rel="stylesheet"
-                type="text/css"
-            />
-            <link
-                href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"
-                rel="stylesheet"
-                type="text/css"
-            />
-            <link
-                href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/1.8/css/bootstrap-switch.css"
-                rel="stylesheet"
-                type="text/css"
-            />
-            <link
-                href="https://davidstutz.github.io/bootstrap-multiselect/css/bootstrap-multiselect.css"
-                rel="stylesheet"
-                type="text/css"
-            />
-            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
-            <script
-                src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js"
-                type="text/javascript"
-            ></script>
-            <script
-                src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"
-                type="text/javascript"
-            ></script>
-            <script
-                src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/1.8/js/bootstrap-switch.min.js"
-                type="text/javascript"
-            ></script>
-            <script
-                src="https://davidstutz.github.io/bootstrap-multiselect/js/bootstrap-multiselect.js"
-                type="text/javascript"
-            ></script>
+            
             <Menu>
                 <div className={cx('function')}>
                     <div className={cx('')}>
@@ -75,44 +39,7 @@ export default function CreateProducts() {
                 </div>
             </Menu>
             <h1>Add Product</h1>
-            {/* <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="name">tên sảm phẩm:</label>
-                    <input type="text" id="name" value={name} onChange={(event) => setName(event.target.value)} />
-                </div>
-                <div>
-                    <label htmlFor="description">Description:</label>
-                    <textarea
-                        id="description"
-                        value={description}
-                        onChange={(event) => setDescription(event.target.value)}
-                    />
-                </div>
-                <select onChange={(event) => setBrand([`id:${event.target.value}`])}>
-                    <option disabled value="">
-                        Choose your favorite nation
-                    </option>
-                    <option value="1">England</option>
-                    <option value="2">France</option>
-                    <option value="3">Spain</option>
-                </select>
-                <div>
-                    <label htmlFor="name">giá sản phẩm:</label>
-                    <input type="text" id="name" value={price} onChange={(event) => setPrice(event.target.value)} />
-                </div>
-
-                <div>
-                    ảnh 1
-                    <input value={images1} onChange={(event) => setImages1(event.target.value)} />
-                    ảnh 2
-                    <input value={images2} onChange={(event) => setImages2(`${event.target.value}`)} />
-                    ảnh 3
-                    <input value={images3} onChange={(event) => setImages3(`${event.target.value}`)} />
-                </div>
-                <button type="submit">Submit</button>
-            </form> */}
-
-            {/* ///////////////////////// */}
+         
 
             <div className="panel panel-primary dialog-panel">
                 <div className="panel-heading">

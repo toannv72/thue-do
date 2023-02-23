@@ -1,13 +1,12 @@
-
 import images from '~/assets/images';
-import './Profile.css';
+
 import classNames from 'classnames/bind';
-import styles from './Product.module.scss';
-import Menu, { MenuItem } from './Menu';
+import styles from '../Product.module.scss';
+import Menu, { MenuItem } from '../Menu';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
-function Profile() {
+function EditOrders() {
     const id = localStorage.getItem('username');
     const imgUser = JSON.parse(localStorage.getItem('user'));
 
@@ -69,4 +68,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default EditOrders;

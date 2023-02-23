@@ -19,6 +19,12 @@ const routes = {
     admin: '/admin',
     pay: '/pay:id',
 
+    EditProfile: '/editProfile',
+    History: '/history',
+    EditOrders: '/editOrders',
+    // pay: '/pay:id',
+    // pay: '/pay:id',
+
     adminHome: '/admin/home',
 
     adminCreateProduct: '/admin/product/create',

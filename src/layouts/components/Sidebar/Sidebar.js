@@ -36,12 +36,7 @@ function Sidebar() {
                     icon={<BlogActiveIcon />}
                     activeIcon={<BlogActiveIcon />}
                 />
-                <MenuItem
-                    title="Trở thành Chủ Tiệm"
-                    to={config.routes.shopOwner}
-                    icon={<TiemActiveIcon />}
-                    activeIcon={<TiemActiveIcon />}
-                />
+              
             </Menu>
 
             {/* <SuggestedAccounts label="Shop nổi bật " /> */}

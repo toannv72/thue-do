@@ -29,6 +29,9 @@ import { UserAdmin } from '~/admin/User';
 import { HomeAdmin } from '~/admin/Home';
 import { CreateProducts } from '~/admin/Product/CreateProducts';
 import { ProductManagement } from '~/admin/Product/ProductManagement';
+import EditProfile from '~/pages/Profile/EditProfile/EditProfile';
+import History from '~/pages/Profile/History/History';
+import EditOrders from '~/pages/Profile/EditOrders/EditOrders';
 // import ProductManagement from '~/layouts/Admin/ProductManagement/ProductManagement';
 
 // Public routes
@@ -49,6 +52,10 @@ const publicRoutes = [
     { path: config.routes.products, component: Products },
     { path: config.routes.post, component: Posts },
     { path: config.routes.pay, component: Pay },
+
+    { path: config.routes.EditProfile, component: EditProfile },
+    { path: config.routes.History, component: History },
+    { path: config.routes.EditOrders, component: EditOrders },
 
     { path: config.routes.adminHome, component: HomeAdmin, layout: AdminLayout },
     { path: config.routes.adminNotification, component: NotificationAdmin, layout: AdminLayout },

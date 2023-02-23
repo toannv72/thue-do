@@ -536,7 +536,9 @@
     width: 100%;
     height: 100%;
 }
-
+.ufo-bar-col3{
+    width: 600px;
+}
 .ufo-bar-fff {
     margin: .25em .5em 0 0;
     color: var(--dark);

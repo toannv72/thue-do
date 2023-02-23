@@ -185,7 +185,7 @@ export const UserGroupIcon = ({ width = '3rem', height = '3rem', className }) =>
 //       /> </svg>
 // );
 
-export const BlogActiveIcon = ({ width = '2.2rem', height = '2.2rem', className }) => (
+export const BlogActiveIcon = ({ width = '3rem', height = '3rem', className }) => (
     <svg
         className={className}
         width={width}
