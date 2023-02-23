@@ -3,10 +3,18 @@ import Quote from '~/layouts/Footer/Footer';
 import './test.css';
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Login() {
+        const { pathname } = useLocation();
+
+        useEffect(() => {
+            window.scrollTo(0, 0);
+        }, [pathname]);
+
     // const [cnt1, setcnt1] = useState('');
     // const [cnt2, setcnt2] = useState('');
     // const [cnt3, setcnt3] = useState('is-hidden');

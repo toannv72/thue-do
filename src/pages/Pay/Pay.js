@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './Pay.css';
 
 function Settings() {
@@ -11,7 +12,14 @@ function Settings() {
 
      const [products, setProducts] = useState([]);
      const [error, setError] = useState(null);
-     const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
+    
+        const { pathname } = useLocation();
+
+        useEffect(() => {
+            window.scrollTo(0, 0);
+        }, [pathname]);
+
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}products/getOne/${lastPart}`)
             .then((res) => res.json())

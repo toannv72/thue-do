@@ -1,8 +1,15 @@
 import classNames from 'classnames/bind';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import styles from './SanPham.module.scss';
 
 function SanPham2() {
     const cx = classNames.bind(styles);
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     return (
         <>

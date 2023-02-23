@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Footer from '~/layouts/Footer/Footer';
 import FeaturedTitle from '../Product/FeaturedTitle/FeaturedTitle';
 
@@ -7,6 +9,12 @@ import Home from './Home';
 import Home2 from './Home2';
 import Home3 from './Home3';
 function ControlledCarousel() {
+        const { pathname } = useLocation();
+
+        useEffect(() => {
+            window.scrollTo(0, 0);
+        }, [pathname]);
+
     return (
         <div>
             <TextRun />

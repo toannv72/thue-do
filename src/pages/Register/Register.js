@@ -3,10 +3,13 @@ import Quote from '~/layouts/Footer/Footer';
 // import './test.css';
 import classNames from 'classnames/bind';
 import styles from './Register.module.scss';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Login() {
+    
     const [cnt1, setcnt1] = useState('');
     const [cnt2, setcnt2] = useState('');
     const [cnt3, setcnt3] = useState('is-hidden');
@@ -20,6 +23,11 @@ function Login() {
     const [errorMessage1, setErrorMessage1] = useState('');
     const [error, setError] = useState('');
     const [error1, setError1] = useState('');
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();

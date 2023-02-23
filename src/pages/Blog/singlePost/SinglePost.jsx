@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Footer from '~/layouts/Footer';
 
 import "./singlePost.css";
 
 export default function SinglePost() {
+        const { pathname } = useLocation();
+
+        useEffect(() => {
+            window.scrollTo(0, 0);
+        }, [pathname]);
+
   return (
       <div className="singlePost">
           <div className="singlePostWrapper">

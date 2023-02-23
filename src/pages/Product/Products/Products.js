@@ -9,13 +9,14 @@ export default function Products() {
     const cx = className.bind(styles);
     const currentUrl = window.location.href;
     const urlParts = currentUrl.split('products:');
-    const lastPart = urlParts[urlParts.length - 1];
-
-
+    const [lastPart, setLastPart] = useState(urlParts[urlParts.length - 1]);
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-
+    
+ 
+        
+       
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}products/getOne/${lastPart}`)
             .then((res) => res.json())
@@ -58,9 +59,9 @@ export default function Products() {
                                 //chế độ trung tâm
                                 // centerMode={true}
                             >
-                                <img alt="" src={products.images[0] ? products.images[0].url : ''} />
-                                <img alt="" src={products.images[1] ? products.images[1].url : ''} />
-                                <img alt="" src={products.images[2]? products.images[2].url : ''} />
+                                <img alt="" src={products.images[0] ? products.images[0].url : null} />
+                                <img alt="" src={products.images[1] ? products.images[1].url : null} />
+                                <img alt="" src={products.images[2] ? products.images[2].url : null} />
                             </Carousel>
                         </div>
                     </div>
@@ -76,14 +77,14 @@ export default function Products() {
                                         <div className={cx('Mark')}>1</div>
                                         <div className={cx('nTpKes')}>đánh giá</div>
                                     </div>
-                                    <div className={cx('sold')}>
+                                    {/* <div className={cx('sold')}>
                                         <div className={cx('Mark')}>{products.quantity}</div>
                                         <div className={cx('c8aTLs')}>đã thuê</div>
-                                    </div>
+                                    </div> */}
                                 </div>
-                                <button className={cx('GyD5JO')}>Tố cáo</button>
+                                <button className={cx('GyD5JO')}>Báo cáo</button>
                             </div>
-                            <div className={cx('product-price')}>{products.price}</div>
+                            <div className={cx('product-price')}>{products.price.toLocaleString('vi-VN')} đ</div>
                             <div className={cx('h-y3ij')}>{products.description}</div>
                             <div className={cx('p+UZsF')}>
                                 <div className={cx('ThEIyI')}>
@@ -105,6 +106,7 @@ export default function Products() {
 
                 <div className={cx('FeaturedTitle')}>
                     <FeaturedTitle
+                        
                         titles="Sản phẩm liên quan"
                         children={<SanPham3 url="products/getAllProduct?page=0&size=20" />}
                     />

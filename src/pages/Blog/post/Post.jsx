@@ -1,7 +1,14 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./post.css";
 
 export default function Post({ img, writing, hour }) {
+        const { pathname } = useLocation();
+
+        useEffect(() => {
+            window.scrollTo(0, 0);
+        }, [pathname]);
+
     return (
         <div className="post">
             <div className="postImg1">
