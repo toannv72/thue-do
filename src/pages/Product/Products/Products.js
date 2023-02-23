@@ -32,7 +32,7 @@ export default function Products() {
                     setError(error);
                 },
             );
-    }, );
+    }, []);
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -83,7 +83,7 @@ export default function Products() {
                                 <button className={cx('GyD5JO')}>Tố cáo</button>
                             </div>
                             <div className={cx('product-price')}>{products.price}</div>
-                            <div className={cx('h-y3ij')}></div>
+                            <div className={cx('h-y3ij')}>{products.description}</div>
                             <div className={cx('p+UZsF')}>
                                 <div className={cx('ThEIyI')}>
                                     <div className={cx('p+UZsF')}>

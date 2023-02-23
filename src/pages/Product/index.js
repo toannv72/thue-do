@@ -8,7 +8,7 @@ import SanPham3 from './SanPham3';
 function Following() {
     return (
         <div>
-            <FeaturedTitle titles="Gợi ý hôm nay" children={<SanPham3 url="products/getAllProduct?page=0&size=20" />} />
+            <FeaturedTitle titles="Gợi ý hôm nay" children={<SanPham3 url="products/getAllProduct?page=0&size=50" />} />
             <FeaturedTitle titles="Sản phẩm hot" children={<SanPham3 url="products/getAllProduct?page=0&size=20" />} />
 
             {/* <div>

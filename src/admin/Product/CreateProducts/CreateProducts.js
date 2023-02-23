@@ -2,7 +2,7 @@ import config from '~/config';
 import Menu, { MenuItem } from '../../Menu';
 import classNames from 'classnames/bind';
 import styles from './Product.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Create.css';
 import axios from 'axios';
 
@@ -10,24 +10,29 @@ const cx = classNames.bind(styles);
 export default function CreateProducts() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState();
+    const [price, setPrice] = useState(0);
     const [images, setImages] = useState([]);
-    const [brand, setBrand] = useState([]);
+    const [category, setCategory] = useState();
     const [images1, setImages1] = useState('');
     const [images2, setImages2] = useState('');
     const [images3, setImages3] = useState('');
 
-    console.log(name, description, price, images, brand);
-
-    const handleSubmit = (event) => {
+    useEffect(() => {
         setImages([{ url: images1 }, { url: images2 }, { url: images3 }]);
+    }, [images1, images2, images3]);
+    console.log(images);
+    const handleSubmit = (event) => {
+   
+    
         event.preventDefault();
-        const product = { name, description, price, images, brand };
-        axios.post('/api/products', product).catch((error) => console.log(error));
+       const product = { name, description, price, images, category };
+        console.log("thu nhan dc",product);
+        axios
+            .post('https://product-rental.herokuapp.com/api/products/create', product)
+            .catch((error) => console.log(error));
     };
     return (
         <>
-            
             <Menu>
                 <div className={cx('function')}>
                     <div className={cx('')}>
@@ -39,7 +44,6 @@ export default function CreateProducts() {
                 </div>
             </Menu>
             <h1>Add Product</h1>
-         
 
             <div className="panel panel-primary dialog-panel">
                 <div className="panel-heading">
@@ -55,13 +59,13 @@ export default function CreateProducts() {
                                 <select
                                     className="form-control"
                                     id="id_accomodation"
-                                    onChange={(event) => setBrand([`id:${event.target.value}`])}
+                                    onChange={(event) => setCategory({ id: event.target.value })}
                                 >
                                     <option value="">--Chọn loại sản phẩm--</option>
-                                    <option value="4">Quần áo</option>
-                                    <option value="14">Trang sức</option>
-                                    <option value="24">Công nghệ</option>
-                                    <option value="44">Thể thao</option>
+                                    <option value="1">Quần áo</option>
+                                    <option value="2">Trang sức</option>
+                                    <option value="3">Công nghệ</option>
+                                    <option value="4">Thể thao</option>
                                 </select>
                             </div>
                         </div>

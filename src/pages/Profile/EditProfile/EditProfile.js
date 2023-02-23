@@ -1,7 +1,7 @@
 import images from '~/assets/images';
-import './EditOrders.css';
+// import './EditOrders.css';
 import classNames from 'classnames/bind';
-import styles from '../Product.module.scss';
+import styles from './EditOrders.module.scss';
 import Menu, { MenuItem } from '../Menu';
 import config from '~/config';
 
@@ -65,46 +65,51 @@ function EditOrders() {
                 </Menu>
             </div>
 
-            <div class="form">
+            <div className={cx('form')}>
                 <div>
-                    <h1 id="EditProfile1">Edit profile</h1>
+                    <h1 className={cx('EditProfile1')} id="EditProfile1">
+                        Edit profile
+                    </h1>
                 </div>
-                <div class="tab-content">
-                    <form id="EditProfile">
+                <div className={cx('tab-content')}>
+                    <form className={cx('EditProfile')} id="EditProfile">
                         <p>
-                            <medium id="UserName">User name *</medium>
+                            <medium className={cx('EditProfile')} id="UserName">
+                                User name *
+                            </medium>
                             <input
                                 type="UserName"
-                                class="form-control input-style"
+                                className={cx('form-control')}
                                 id="exampleInputUserName"
                                 aria-describedby="UserName"
                             />
                         </p>
 
                         <p>
-                            <medium id="Email">Email address</medium>
+                            <medium className={cx('')} id="Email">
+                                Email address
+                            </medium>
                             <input
                                 type="email"
-                                class="form-control input-style"
+                                className={cx('form-control')}
                                 id="exampleInputEmail1"
                                 aria-describedby="emailHelp"
                             />
-                            <small id="emailHelp" class="form-text text-muted">
-                                A valid e-mail address. All e-mails from the system will be sent to this address.
-                            </small>
                         </p>
                         <p>
-                            <medium id="Password">Password *</medium>
+                            <medium className={cx('Password')} id="Password">
+                                Password *
+                            </medium>
                             <input
                                 type="Password"
-                                class="form-control input-style"
+                                className={cx('form-control')}
                                 id="exampleInputPassword"
                                 aria-describedby="Password"
                             />
                         </p>
 
                         <div>
-                            <button type="submit" class="button button-block">
+                            <button type="submit" className={cx('button')}>
                                 Save
                             </button>
                         </div>

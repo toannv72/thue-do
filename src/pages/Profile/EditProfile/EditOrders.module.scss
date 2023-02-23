@@ -8,8 +8,14 @@
     border-radius: 10px;
     box-shadow: 0 4px 10px 4px rgba(255, 255, 255, 0.3);
 }
+.function {
+    display: flex;
+}
 
-#EditProfile1 {
+.function a {
+    text-decoration: none
+}
+.EditProfile1 {
     color: #636363;
 }
 
@@ -61,6 +67,11 @@
     color: #f9e2ca;
     border-radius: 0;
     outline: 0;
+    background-color: #fff5e6;
+        border: none;
+        height: 50px;
+        border-radius: 23px;
+        color: #8C8C8C;
 }
 
 /* Text Input Style, Add this class to your input*/
@@ -121,12 +132,7 @@ height: 50px;
 }
 
 /*=====================================*/
-*,
-*:after,
-*:before {
-    box-sizing: border-box;
-    font-family: Tamil Sangam MN;
-}
+
 
 .dropdown {
     position: relative;

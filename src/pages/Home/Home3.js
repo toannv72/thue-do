@@ -13,28 +13,14 @@ export default function Home3() {
                         <div className={cx('toan-index')}>Thời trang</div>
                         <div></div>
                     </div>
-                    <div className={cx('toan-2')}>
-                        <div className={cx('toan-index')}>Giày dép</div>
-                        <div></div>
-                    </div>
+                  
                     <div className={cx('toan-2')}>
                         <div className={cx('toan-index')}>Đồ công nghệ</div>
                         <div></div>
                     </div>
+                 
                     <div className={cx('toan-2')}>
-                        <div className={cx('toan-index')}>Phương tiện</div>
-                        <div></div>
-                    </div>
-                    <div className={cx('toan-2')}>
-                        <div className={cx('toan-index')}>Du lịch</div>
-                        <div></div>
-                    </div>
-                    <div className={cx('toan-2')}>
-                        <div className={cx('toan-index')}>Sách </div>
-                        <div></div>
-                    </div>
-                    <div className={cx('toan-2')}>
-                        <div className={cx('toan-index')}>Mẹ&bé</div>
+                        <div className={cx('toan-index')}>Thể thao</div>
                         <div></div>
                     </div>
                     <div className={cx('toan-2')}>

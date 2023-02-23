@@ -7,9 +7,9 @@ function TextRun() {
     return (
         <div className={cx('div')}>
             <marquee className={cx('running-text')}>
-                <p>This is some running text.</p>
-                <p>This is some more running text.</p>
-                <p>And even more running text.</p>
+                <p>Save money today – Live better tomorrow.</p>
+                {/* <p>This is some more running text.</p>
+                <p>And even more running text.</p> */}
             </marquee>
         </div>
     );

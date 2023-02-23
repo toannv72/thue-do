@@ -21,23 +21,27 @@ export default function name() {
             </div>
             <div className={cx('card')}>
                 <div className={cx('content')}>
-                    <h2 className={cx('title')}>DU LỊCH</h2>
+                    <h2 className={cx('title')}>THỂ THAO </h2>
                     <p className={cx('copy')}>
-                        Bạn chuẩn bị cho chuyến du lịch dài ngày sắp tới? Bạn lần đầu đi du lịch khám phá (trekking)
-                        nhưng có quá nhiều thứ phải mua? Giải pháp thông minh cho tình huống này là bạn có thể đi thuê.
-                        Thuê đồ vừa có thể giải quyết tất cả nhu cầu của bạn vừa tiết kiệm được tiền bạc, thời gian và
-                        công sức. Đó là lý do thị trường cho thuê đồ hiệu vô cùng nở rộ thời gian qua.
+                        Dụng cụ thể thao là vật không thể thiếu trong quá trình tập luyện thể dục thể thao, tuy nhiên
+                        nếu bạn không có nhu cầu sử dụng chúng thường xuyên và trong thời gian dài sẽ gây lãng phí. Bên
+                        cạnh đó, những dụng cụ thể thao chính hãng, mang đến trải nghiệm tuyệt vời cho người sử dụng
+                        thường có giá bán tương đối cao mà không phải ai cũng có thể mua được. Việc thuê dụng cụ thể
+                        thao giúp bạn vừa tiết kiệm được chi phí , vừa có cơ hội sử dụng nhiều loại dụng cụ thể thao
+                        chính hãng và hiệu quả.
                     </p>
                     <button className={cx('btn')}>View Trips</button>
                 </div>
             </div>
             <div className={cx('card')}>
                 <div className={cx('content')}>
-                    <h2 className={cx('title')}>XE MÁY</h2>
+                    <h2 className={cx('title')}>TRANG SỨC </h2>
                     <p className={cx('copy')}>
-                        Thuê xe máy tự lái để du lịch trải nghiệm hiện đang là dịch vụ được ưa chuộng bậc nhất. Không
-                        chỉ bởi sự tiện lợi “thích thì đi; mệt thì dừng; đói thì ăn; đẹp thì check in” mà còn mang đến
-                        cho du khách sự trải nghiệm trọn vẹn địa điểm du lịch với chi phí rẻ nhất.
+                        Trang sức là một trong những món phụ kiện giúp tôn lên vẻ đẹp của bộ trang phục và cá tính của
+                        người đeo. Để trang bị một bộ trang sức hoàn chỉnh từ bông tai, dây chuyền, tới vòng tay, nhẫn…
+                        sẽ tốn không ít chi phí. Thay vì đầu tư mua vài bộ trang sức của riêng mình, bạn nên lựa chọn
+                        hình thức thuê trang sức để luôn được sở hữu những món phụ kiện mới lạ, độc đáo, phù hợp với
+                        từng kiểu trang phục hay các sự kiện tham dự.
                     </p>
 
                     <a className={cx('btn')} href="https://www.facebook.com/">

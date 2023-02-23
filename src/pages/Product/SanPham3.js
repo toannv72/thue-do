@@ -29,10 +29,10 @@ function SanPham3({ url }) {
                     setError(error);
                 },
             );
-    }, );
+    }, []);
 
     if (error) {
-        <ErrorToast message={error.message} />;
+        return <ErrorToast message={error.message} />;
     } else if (!isLoaded) {
         return <div>Loading...</div>;
     } else {
