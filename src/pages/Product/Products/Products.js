@@ -15,7 +15,7 @@ export default function Products() {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    console.log(products);
+
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}products/getOne/${lastPart}`)
             .then((res) => res.json())
@@ -33,6 +33,7 @@ export default function Products() {
                 },
             );
     }, []);
+
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -57,9 +58,9 @@ export default function Products() {
                                 //chế độ trung tâm
                                 // centerMode={true}
                             >
-                                <img alt="" src={products.images[0].url} />
-                                <img alt="" src={products.images[1].url} />
-                                <img alt="" src={products.images[2].url} />
+                                <img alt="" src={products.images[0] ? products.images[0].url : ''} />
+                                <img alt="" src={products.images[1] ? products.images[1].url : ''} />
+                                <img alt="" src={products.images[2]? products.images[2].url : ''} />
                             </Carousel>
                         </div>
                     </div>
