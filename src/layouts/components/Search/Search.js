@@ -68,7 +68,7 @@ function Search() {
         // Using a wrapper <div> tag around the reference element solves
         // this by creating a new parentNode context.
         <div>
-            <HeadlessTippy
+            {/* <HeadlessTippy
                 interactive
                 visible={showResult && searchResult.length > 0}
                 render={(attrs) => (
@@ -82,7 +82,7 @@ function Search() {
                     </div>
                 )}
                 onClickOutside={handleHideResult}
-            >
+            > */}
                 <div className={cx('search')}>
                     <input
                         ref={inputRef}
@@ -103,7 +103,7 @@ function Search() {
                         <SearchIcon />
                     </button>
                 </div>
-            </HeadlessTippy>
+            {/* </HeadlessTippy> */}
         </div>
     );
 }

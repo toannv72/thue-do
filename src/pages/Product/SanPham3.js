@@ -54,7 +54,7 @@ function SanPham3({ url }) {
                             <div className={cx('container__profile')}>
                                 <div className={cx('container__profile__text')}>
                                     <h2>{item.name}</h2>
-                                    <h4>{item.price}</h4>
+                                    <h4>{item.price.toLocaleString('vi-VN')}đ</h4>
                                 </div>
                             </div>
                         </Link>

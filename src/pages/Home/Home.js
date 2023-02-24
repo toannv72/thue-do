@@ -43,11 +43,11 @@ export default function Home() {
             );
     }, []);
 
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-        return <div>Loading...</div>;
-    } else {
+    // if (error) {
+    //     return <div>Error: {error.message}</div>;
+    // } else if (!isLoaded) {
+    //     return <div>Loading...</div>;
+    // } else {
         return (
             <div className={cx('toan')}>
                 <Carousel
@@ -62,15 +62,18 @@ export default function Home() {
                     // centerMode={true}
                     onClickItem={toan}
                 >
-                    {items.map((item, index) => (
+                    {/* {items.map((item, index) => (
                         <div key={index}>
                             <img alt={index} src={item.img} />
                      
                         </div>
-                    ))}
+                    ))} */}
+                    <img
+                        alt=""
+                        src="https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/329149838_558473532883494_2508217283299694150_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=730e14&_nc_ohc=gWLIsMTOmKIAX9IaS7q&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfAZtN8qRVFPqo3JUEZeAeAFqXCABsy86hKoRTYZkAwDLg&oe=63FD961F"
+                    />
                 </Carousel>
-
             </div>
         );
     }
-}
+// }
