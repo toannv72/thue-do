@@ -75,7 +75,11 @@ function Settings() {
                             <div className="pay-header-selection">
                                 <div className="pay-product product-selected">
                                     <div className="pay-item-image">
-                                        <img className="image-item" alt="" src={products.images?products.images[1].url:""} />
+                                        <img
+                                            className="image-item"
+                                            alt=""
+                                            src={products.images ? products.images[1].url : ''}
+                                        />
                                     </div>
                                     <div className="pay-item-info-name">{products.name}</div>
                                     <div className="pay-item-info-type">
@@ -115,7 +119,7 @@ function Settings() {
                                         <div div="pay-shipping-change-delivery">
                                             <div className="pay-shipping-change-transporter">
                                                 {/* <dt className="pay-totalprice-label"></dt> */}
-                                                <dd className="pay-total-price-payment">0</dd>
+                                                <dd className="pay-total-price-payment">{products.deposit}</dd>
                                             </div>
                                         </div>
                                     </div>

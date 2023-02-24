@@ -37,29 +37,31 @@ function SanPham3({ url }) {
         return <div>Loading...</div>;
     } else {
         return (
-            <div className={cx('card')}>
-                <link
-                    rel="stylesheet"
-                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-                    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
-                    crossOrigin="anonymous"
-                />
-                {items.map((item, index) => (
-                    <div className={cx('container')} key={index}>
-                        <Link to={`/products:${item.id}`} >
-                            <div className={cx('to')}>
-                                <img src={item.images[0].url} alt="" srcSet="" />
-                            </div>
-
-                            <div className={cx('container__profile')}>
-                                <div className={cx('container__profile__text')}>
-                                    <h2>{item.name}</h2>
-                                    <h4>{item.price.toLocaleString('vi-VN')}đ</h4>
+            <div>
+                <div className={cx('card')}>
+                    <link
+                        rel="stylesheet"
+                        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+                        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+                        crossOrigin="anonymous"
+                    />
+                    {items.map((item, index) => (
+                        <div className={cx('container')} key={index}>
+                            <Link to={`/products:${item.id}`}>
+                                <div className={cx('to')}>
+                                    <img src={item.images[1] ? item.images[1].url : ''} alt="" srcSet="" />
                                 </div>
-                            </div>
-                        </Link>
-                    </div>
-                ))}
+                                {console.log(item.images[0])}
+                                <div className={cx('container__profile')}>
+                                    <div className={cx('container__profile__text')}>
+                                        <h2>{item.name}</h2>
+                                        <h4>{item.price ? item.price.toLocaleString('vi-VN') : ''}đ</h4>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                    ))}
+                </div>
             </div>
         );
     }

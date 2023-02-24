@@ -70,7 +70,15 @@ export default function Home() {
                     ))} */}
                     <img
                         alt=""
-                        src="https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/329149838_558473532883494_2508217283299694150_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=730e14&_nc_ohc=gWLIsMTOmKIAX9IaS7q&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfAZtN8qRVFPqo3JUEZeAeAFqXCABsy86hKoRTYZkAwDLg&oe=63FD961F"
+                        src="https://raw.githubusercontent.com/toansola3/thue-do/master/img/328063220_619078163361298_6566497839462960659_n.jpg"
+                    />
+                    <img
+                        alt=""
+                        src="https://github.com/toansola3/thue-do/blob/master/img/333133513_1458268194700445_2870753470290308647_n.jpg?raw=true"
+                    />
+                    <img
+                        alt=""
+                        src="https://github.com/toansola3/thue-do/blob/master/img/329149838_558473532883494_2508217283299694150_n.jpg?raw=true"
                     />
                 </Carousel>
             </div>
