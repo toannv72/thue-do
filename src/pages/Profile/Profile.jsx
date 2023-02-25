@@ -18,7 +18,12 @@ function Profile() {
                 <div className="user-header-wrapper">
                     <div className="user-header-inner flexbox">
                         <div className="user-header-overlay"></div>
-                        <img className="user-header" src={imgUser.imageUrl} alt="" />
+                        <img
+                            className="user-header"
+                            src={imgUser.imageUrl ? imgUser.imageUrl : images.noImage1}
+                           
+                            alt=""
+                        />
                     </div>
                 </div>
                 <div className="user-info-bar">
