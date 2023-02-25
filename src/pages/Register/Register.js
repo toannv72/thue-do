@@ -161,7 +161,7 @@ function Login() {
                         <button className="form__button button submit">SIGN UP</button>
                     </form>
                 </div>
-                <div className={`container b-container ${cnt1} ${cnt2}`} id="b-container">
+                <div className={`container b-container ${cnt1} ${cnt2}`} id="b-container" style={{ width: 515 }}>
                     <form className="form" id="b-form" method="" action="" onSubmit={handleSubmit1}>
                         <h2 className="form_title title">Sign in to Website</h2>
                         <div className="form__icons">

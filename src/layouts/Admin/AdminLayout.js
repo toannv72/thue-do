@@ -14,9 +14,9 @@ function AdminLayout({ children }) {
     // }, [toan]);
     return (
         <div>
-            {/* {!state ? (
+            {!state ? (
                 <></>
-            ) : ( */}
+            ) : (
             <>
                 <link
                     href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
@@ -63,7 +63,7 @@ function AdminLayout({ children }) {
                     <div className={cx('content')}>{children}</div>
                 </div>
             </>
-            {/* )} */}
+            )}
         </div>
     );
 }
