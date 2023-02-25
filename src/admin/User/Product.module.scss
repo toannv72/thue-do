@@ -1,29 +1,26 @@
-.function {
+.function{
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 60%;
-    margin: auto;
-
-    height: 50px;
+        align-items: center;
+        justify-content: space-between;
+        width: 60%;
+        margin: auto;
+        
+        height: 50px;
 }
-
-.function a {
+.function a{
     text-decoration: none
 }
-
 .card {
 
-    img {
+    img{
         width: 50px;
     }
 }
 
-.table {
-    font-size: large;
-    text-align: center;
+.table{
+        font-size: large;
+        text-align: center;
 }
-
 .delete {
     button {
         background: red;
@@ -31,16 +28,14 @@
         height: 30px;
     }
 }
-
 .edit {
     button {
         background: rgb(13, 230, 103);
         height: 30px;
-        width: 30px;
+            width: 30px;
     }
 }
-
-.img {
+.img{
     width: 50px;
 }
 
@@ -80,7 +75,7 @@
     border-top-right-radius: 0;
 
     .button {
-    
+
         width: 50px;
         color: #d21010 !important;
         border-radius: 0.357rem;

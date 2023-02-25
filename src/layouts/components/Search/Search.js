@@ -32,15 +32,17 @@ function Search() {
         const fetchApi = async () => {
             setLoading(true);
 
-            const result = await searchServices.search(debouncedValue);
-            console.log(result);
-
+            // const result = await searchServices.search(debouncedValue);
+            const result = await fetch(`${process.env.REACT_APP_BASE_URLS}products/${searchValue}`);
+        
+            const data = await result.json();
+            console.log(data);
             // const endpoint = 'http://localhost:3000/posts';
             // fetch(endpoint)
             //     .then((response) => response.json())
             //     .then((data) => setSearchResult(data));
 
-            setSearchResult(result);
+            setSearchResult(data);
             setLoading(false);
         };
 
@@ -68,21 +70,21 @@ function Search() {
         // Using a wrapper <div> tag around the reference element solves
         // this by creating a new parentNode context.
         <div>
-            {/* <HeadlessTippy
+            <HeadlessTippy
                 interactive
                 visible={showResult && searchResult.length > 0}
                 render={(attrs) => (
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                         <PopperWrapper>
-                            <h4 className={cx('search-title')}>Accounts</h4>
-                            {searchResult.map((result) => (
-                                <AccountItem key={result.id} data={result} />
+                            <h4 className={cx('search-title')}>Sản phẩm</h4>
+                            {searchResult.map((result, index) => (
+                                index<=3?<AccountItem key={index} data={result} />:null
                             ))}
                         </PopperWrapper>
                     </div>
                 )}
                 onClickOutside={handleHideResult}
-            > */}
+            >
                 <div className={cx('search')}>
                     <input
                         ref={inputRef}
@@ -103,7 +105,7 @@ function Search() {
                         <SearchIcon />
                     </button>
                 </div>
-            {/* </HeadlessTippy> */}
+            </HeadlessTippy>
         </div>
     );
 }

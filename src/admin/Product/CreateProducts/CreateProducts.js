@@ -11,6 +11,7 @@ export default function CreateProducts() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
+    const [deposit, setDeposit] = useState(0);
     const [images, setImages] = useState([]);
     const [category, setCategory] = useState();
     const [images1, setImages1] = useState('');
@@ -18,18 +19,16 @@ export default function CreateProducts() {
     const [images3, setImages3] = useState('');
 
     useEffect(() => {
-        setImages([{ url: images1 }, { url: images2 }, { url: images3 }]);
+        setImages([{ url: images1, name: '1' }, { url: images2, name: '2' }, { url: images3 ,name:"3"}]);
     }, [images1, images2, images3]);
     console.log(images);
     const handleSubmit = (event) => {
    
     
         event.preventDefault();
-       const product = { name, description, price, images, category };
+       const product = { name, description, price, images, category, deposit };
         console.log("thu nhan dc",product);
-        axios
-            .post('https://product-rental.herokuapp.com/api/products/create', product)
-            .catch((error) => console.log(error));
+        axios.post(`${process.env.REACT_APP_BASE_URLS}products/create`, product).catch((error) => console.log(error));
     };
     return (
         <>
@@ -102,6 +101,25 @@ export default function CreateProducts() {
                                             type="text"
                                             value={price}
                                             onChange={(event) => setPrice(event.target.value)}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                Giá tiền đặt cọc sản phẩm
+                            </label>
+                            <div className="col-md-8">
+                                <div className="col-md-4 indent-small">
+                                    <div className="form-group internal">
+                                        <input
+                                            className="form-control"
+                                            id="id_last_name"
+                                            placeholder="Đặt cọc"
+                                            type="text"
+                                            value={deposit}
+                                            onChange={(event) => setDeposit(event.target.value)}
                                         />
                                     </div>
                                 </div>
