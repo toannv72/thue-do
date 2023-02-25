@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './Pay.css';
-
 function Settings() {
     const currentUser = localStorage.getItem('user');
     const User = JSON.parse(localStorage.getItem('user'));
@@ -15,7 +14,13 @@ function Settings() {
     const [isLoaded, setIsLoaded] = useState(false);
     
         const { pathname } = useLocation();
-
+const [state, setState] = useState([
+    {
+        startDate: new Date(),
+        endDate: null,
+        key: 'selection',
+    },
+]);
         useEffect(() => {
             window.scrollTo(0, 0);
         }, [pathname]);

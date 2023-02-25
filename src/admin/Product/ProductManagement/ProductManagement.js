@@ -3,19 +3,36 @@ import Menu, { MenuItem } from '../../Menu';
 import classNames from 'classnames/bind';
 import styles from './Product.module.scss';
 import { useEffect, useState } from 'react';
-
+import ErrorToast from '~/pages/Product/ErrorToast';
+import AlertBox from '~/admin/Notifications/Notification';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 const cx = classNames.bind(styles);
 export default function CreateProducts() {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+    const [showEditConfirmation, setShowEditConfirmation] = useState(false);
     const [productToDelete, setProductToDelete] = useState(null);
+    const [productToEdit, setProductToEdit] = useState(null);
 
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState();
+    const [deposit, setDeposit] = useState();
+    const [category, setCategory] = useState();
+    const [imageUrl, setImageUrl] = useState();
+    const [imageUrl2, setImageUrl2] = useState();
+    const [imageUrl3, setImageUrl3] = useState();
+console.log(productToEdit);
     const handleDelete = (product) => {
         setProductToDelete(product);
         setShowDeleteConfirmation(true);
     };
-  
+    const handleEdit = (id) => {
+        setShowEditConfirmation(true);
+    };
     const confirmDelete = async () => {
         setShowDeleteConfirmation(false);
 
@@ -25,19 +42,56 @@ export default function CreateProducts() {
             });
 
             if (response.ok) {
-                console.log(`Xóa sản phẩm có id = ${productToDelete.id} thành công!`);
-              
+                toast.success(`Xóa sản phẩm thành công!`);
             } else {
-                console.error(`Xóa sản phẩm có id = ${productToDelete.id} không thành công!`);
+                toast.error(`Xóa sản phẩm không thành công!`);
             }
 
             setProductToDelete(null);
         }
     };
 
+    const confirmEdit = (event) => {
+        event.preventDefault();
+        const updatedProduct = {
+            id: productToEdit,
+            name: name,
+            description: description,
+            price: price,
+            deposit: deposit,
+            category: { id: category },
+            images: [
+                { id: 1123, name: '1', url: imageUrl },
+                { id: 223, name: '2', url: imageUrl2 },
+                { id: 323, name: '3', url: imageUrl3 },
+            ],
+        };
+        console.log(updatedProduct);
+        axios
+            .put(`${process.env.REACT_APP_BASE_URLS}products/update`, updatedProduct)
+            .then((response) => {
+                 if (response.status === 200) {
+                     toast.success(`Thay đổi sản phẩm thành công!`);
+                 } else {
+                     toast.error(`Thay đổi sản phẩm không thành công!`);
+                 }
+            })
+            .catch((error) => {
+                console.log(error);
+                     toast.error(`Thay đổi sản phẩm không thành công!`);
+
+            });
+    };
+    const handleAlertClose = () => {
+        //   setShowAlert(false);
+    };
     const cancelDelete = () => {
         setShowDeleteConfirmation(false);
         setProductToDelete(null);
+    };
+    const cancelEdit = () => {
+        setShowEditConfirmation(false);
+        setProductToEdit(null);
     };
 
     useEffect(() => {
@@ -50,17 +104,13 @@ export default function CreateProducts() {
         if (searchTerm !== '') {
             fetchSearchResults();
         }
-    }, [searchTerm, productToDelete]);
+    }, [searchTerm, productToDelete, productToEdit]);
 
     const handleInputChange = (event) => {
         const searchValue = event.target.value;
         if (!searchValue.startsWith(' ')) {
             setSearchTerm(searchValue);
         }
-    };
-
-    const handleEdit = (id) => {
-        console.log(`Chỉnh sửa sản phẩm có id = ${id}`);
     };
 
     return (
@@ -90,6 +140,7 @@ export default function CreateProducts() {
                 />
             </form>
             <div className={cx('table')}>
+                <ToastContainer />
                 <table className="table table-hover table-bordered" id="sampleTable">
                     <thead>
                         <tr>
@@ -143,6 +194,7 @@ export default function CreateProducts() {
                                             data-toggle="modal"
                                             data-target="#ModalUP"
                                             onClick={() => {
+                                                setProductToEdit(result.id);
                                                 handleEdit();
                                             }}
                                         >
@@ -170,6 +222,223 @@ export default function CreateProducts() {
                             <button className={cx('button1')} onClick={confirmDelete}>
                                 Đồng ý
                             </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {showEditConfirmation && (
+                <div className={cx('contact-container1')}>
+                    {/* <form onSubmit={confirmEdit}>
+                        <label>
+                            Name:
+                            <input type="text" value={name} onChange={(event) => setName(event.target.value)} />
+                        </label>
+                        <br />
+                        <label>
+                            Description:
+                            <input
+                                type="text"
+                                value={description}
+                                onChange={(event) => setDescription(event.target.value)}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Price:
+                            <input type="number" value={price} onChange={(event) => setPrice(event.target.value)} />
+                        </label>
+                        <br />
+                        <label>
+                            Deposit:
+                            <input type="number" value={deposit} onChange={(event) => setDeposit(event.target.value)} />
+                        </label>
+                        <br />
+                        <label>
+                            Category:
+                            <select value={category} onChange={(event) => setCategory(event.target.value)}>
+                                <option value="1">Category 1</option>
+                                <option value="2">Category 2</option>
+                                <option value="3">Category 3</option>
+                            </select>
+                        </label>
+                        <br />
+                        <label>
+                            Image URL1:
+                            <input type="text" value={imageUrl} onChange={(event) => setImageUrl(event.target.value)} />
+                        </label>
+                        <label>
+                            Image URL2:
+                            <input
+                                type="text"
+                                value={imageUrl2}
+                                onChange={(event) => setImageUrl2(event.target.value)}
+                            />
+                        </label>
+                        <label>
+                            Image URL3:
+                            <input
+                                type="text"
+                                value={imageUrl3}
+                                onChange={(event) => setImageUrl3(event.target.value)}
+                            />
+                        </label>
+                        <br />
+                        <button type="submit">Update Product</button>
+                        <p onClick={cancelEdit}>hủy</p>
+                    </form> */}
+                    <div className="panel panel-primary dialog-panel">
+                        <div className="panel-heading">
+                            <h4>Thêm Sản Phẩm</h4>
+                        </div>
+                        <div className="panel-body">
+                            <form className="form-horizontal">
+                                <div className="form-group">
+                                    <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_accomodation">
+                                        Loại hàng
+                                    </label>
+                                    <div className="col-md-2">
+                                        <select
+                                            className="form-control"
+                                            id="id_accomodation"
+                                            onChange={(event) => setCategory(event.target.value)}
+                                        >
+                                            <option value="">--Chọn loại sản phẩm--</option>
+                                            <option value="1">Quần áo</option>
+                                            <option value="2">Trang sức</option>
+                                            <option value="3">Công nghệ</option>
+                                            <option value="4">Thể thao</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                        Tên sảm phẩm
+                                    </label>
+                                    <div className="col-md-8">
+                                        <div className="col-md-8 indent-small">
+                                            <div className="form-group internal">
+                                                <input
+                                                    className="form-control"
+                                                    id="id_last_name"
+                                                    placeholder="Tên sản phẩm"
+                                                    type="text"
+                                                    value={name}
+                                                    onChange={(event) => setName(event.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                        Giá tiền
+                                    </label>
+                                    <div className="col-md-8">
+                                        <div className="col-md-4 indent-small">
+                                            <div className="form-group internal">
+                                                <input
+                                                    className="form-control"
+                                                    id="id_last_name"
+                                                    placeholder="Giá tiền"
+                                                    type="text"
+                                                    value={price}
+                                                    onChange={(event) => setPrice(event.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                        Giá tiền đặt cọc sản phẩm
+                                    </label>
+                                    <div className="col-md-8">
+                                        <div className="col-md-4 indent-small">
+                                            <div className="form-group internal">
+                                                <input
+                                                    className="form-control"
+                                                    id="id_last_name"
+                                                    placeholder="Đặt cọc"
+                                                    type="text"
+                                                    value={deposit} onChange={(event) => setDeposit(event.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                        Ảnh sản phẩm
+                                    </label>
+                                    <div className="col-md-8">
+                                        <div className="col-md-3 indent-small">
+                                            <div className="form-group internal">
+                                                <input
+                                                    className="form-control"
+                                                    id="id_last_name"
+                                                    placeholder="Ảnh 1"
+                                                    type="text"
+                                                    value={imageUrl}
+                                                    onChange={(event) => setImageUrl(event.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-3 indent-small">
+                                            <div className="form-group internal">
+                                                <input
+                                                    className="form-control"
+                                                    id="id_last_name"
+                                                    placeholder="Ảnh 2"
+                                                    type="text"
+                                                    value={imageUrl2}
+                                                    onChange={(event) => setImageUrl2(event.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-2 indent-small">
+                                            <div className="form-group internal">
+                                                <input
+                                                    className="form-control"
+                                                    id="id_last_name"
+                                                    placeholder="Ảnh 3"
+                                                    type="text"
+                                                    value={imageUrl3}
+                                                    onChange={(event) => setImageUrl3(event.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_comments">
+                                        Miêu tả sản phẩm
+                                    </label>
+                                    <div className="col-md-6">
+                                        <textarea
+                                            onChange={(event) => setDescription(event.target.value)}
+                                            className="form-control"
+                                            id="id_comments"
+                                            placeholder="Miêu tả"
+                                            rows="5"
+                                        ></textarea>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <div className="col-md-offset-4 col-md-3">
+                                        <button className="btn-lg btn-primary" type="submit" onClick={confirmEdit}>
+                                            Thay đổi
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <div className="col-md-offset-4 col-md-3">
+                                        <button className="btn-lg btn-primary" type="submit" onClick={cancelEdit}>
+                                            Hủy
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

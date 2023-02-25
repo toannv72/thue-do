@@ -3,6 +3,7 @@ import Menu, { MenuItem } from '../../Menu';
 import classNames from 'classnames/bind';
 import styles from './Product.module.scss';
 import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import './Create.css';
 import axios from 'axios';
 
@@ -19,16 +20,30 @@ export default function CreateProducts() {
     const [images3, setImages3] = useState('');
 
     useEffect(() => {
-        setImages([{ url: images1, name: '1' }, { url: images2, name: '2' }, { url: images3 ,name:"3"}]);
+        setImages([
+            { url: images1, name: '1' },
+            { url: images2, name: '2' },
+            { url: images3, name: '3' },
+        ]);
     }, [images1, images2, images3]);
     console.log(images);
     const handleSubmit = (event) => {
-   
-    
         event.preventDefault();
-       const product = { name, description, price, images, category, deposit };
-        console.log("thu nhan dc",product);
-        axios.post(`${process.env.REACT_APP_BASE_URLS}products/create`, product).catch((error) => console.log(error));
+        const product = { name, description, price, images, category, deposit };
+
+        axios
+            .post(`${process.env.REACT_APP_BASE_URLS}products/create`, product)
+            .then((response) => {
+                if (response.status === 200) {
+                    toast.success(`Thêm sản phẩm thành công!`);
+                } else {
+                    toast.error(`Thêm sản phẩm không thành công!`);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error(`Thêm sản phẩm không thành công!`);
+            });
     };
     return (
         <>
@@ -43,7 +58,7 @@ export default function CreateProducts() {
                 </div>
             </Menu>
             <h1>Add Product</h1>
-
+            <ToastContainer />
             <div className="panel panel-primary dialog-panel">
                 <div className="panel-heading">
                     <h4>Thêm Sản Phẩm</h4>

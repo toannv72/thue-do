@@ -7,11 +7,11 @@ import Sidebar from './Sidebar/index';
 const cx = classNames.bind(styles);
 function AdminLayout({ children }) {
     const [state, setState] = useState(false);
-    // const toan = JSON.parse(localStorage.getItem('user')).role[0].name;
+    const toan = JSON.parse(localStorage.getItem('user')).role[0].name;
 
-    // useEffect(() => {
-    //     setState(toan === 'ADMIN' ? true : false);
-    // }, [toan]);
+    useEffect(() => {
+        setState(toan === 'ADMIN' ? true : false);
+    }, [toan]);
     return (
         <div>
             {!state ? (

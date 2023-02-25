@@ -130,7 +130,7 @@ function Login() {
             <div className={cx('main')}>
                 <div className={`container a-container ${cnt1}`} id="a-container">
                     <form className="form" id="a-form" method="" action="" onSubmit={handleSubmit}>
-                        <h2 className="form_title title">Create Account</h2>
+                        <h2 className="form_title title">Tạo Tài khoản</h2>
                         <div className="form__icons">
                             <img
                                 className="form__icon"
@@ -138,11 +138,11 @@ function Login() {
                                 alt=""
                             />
                         </div>
-                        <span className="form__span">or use email for registration</span>
+                        <span className="form__span">Mời bạn đăng ký ở đây!</span>
                         <input
                             className="form__input"
                             type="text"
-                            placeholder="Name"
+                            placeholder="Tên đăng nhập"
                             onChange={(event) => setUsername(event.target.value)}
                             value={username}
                         />
@@ -159,19 +159,19 @@ function Login() {
                         <input
                             className="form__input"
                             type="password"
-                            placeholder="Password"
+                            placeholder="Mật khẩu"
                             value={password}
                             onChange={(event) => setPassword(event.target.value)}
                         />
                         {errorMessage && !password && <span className={cx('error')}>Vui lòng nhập Mật Khẩu</span>}
                         {error && <p className={cx('error')}>{error}</p>}
 
-                        <button className="form__button button submit">SIGN UP</button>
+                        <button className="form__button button submit">ĐĂNG KÝ</button>
                     </form>
                 </div>
                 <div className={`container b-container ${cnt1} ${cnt2}`} id="b-container" style={{width:515}}>
                     <form className="form" id="b-form" method="" action="" onSubmit={handleSubmit1}>
-                        <h2 className="form_title title">Sign in to Website</h2>
+                        <h2 className="form_title title">Đăng nhập vào Website</h2>
                         <div className="form__icons">
                             <img
                                 className="form__icon"
@@ -179,12 +179,12 @@ function Login() {
                                 alt=""
                             />
                         </div>
-                        <span className="form__span">or use your email account</span>
+                        <span className="form__span">Mời bạn đăng nhập ở đây!</span>
 
                         <input
                             className="form__input"
                             type="text"
-                            placeholder="Email"
+                            placeholder="Tên đăng nhập"
                             value={username}
                             onChange={(event) => {
                                 setUsername(event.target.value);
@@ -195,7 +195,7 @@ function Login() {
                         <input
                             className="form__input"
                             type="password"
-                            placeholder="Password"
+                            placeholder="Mật khẩu"
                             value={password}
                             onChange={(event) => {
                                 setPassword(event.target.value);
@@ -206,18 +206,18 @@ function Login() {
 
 
                         <a className="form__link" href="# ">
-                            Forgot your password?
+                            Quên mật khẩu?
                         </a>
-                        <button className="form__button button submit">SIGN IN</button>
+                        <button className="form__button button submit">ĐĂNG NHẬP</button>
                     </form>
                 </div>
                 <div className={`switch ${cnt4}`} id="switch-cnt">
                     <div className={`switch__circle ${cnt4}`}></div>
                     <div className={`switch__circle switch__circle--t ${cnt4}`}></div>
                     <div className={`switch__container ${cnt5}`} id={`switch-c1 `}>
-                        <h2 className="switch__title title">Welcome Back !</h2>
+                        <h2 className="switch__title title">Chào mừng bạn đã quay trở lại Thuê Đồ</h2>
                         <p className="switch__description description">
-                            To keep connected with us please login with your personal info
+                            Bạn đã có tài khoản? Hãy đăng nhập ở đây nhé!
                         </p>
                         <button
                             className="switch__button button switch-btn"
@@ -237,13 +237,13 @@ function Login() {
                                 setErrorMessage1('');
                             }}
                         >
-                            SIGN IN
+                            ĐĂNG NHẬP
                         </button>
                     </div>
                     <div className={`switch__container ${cnt3}`} id="switch-c2">
-                        <h2 className="switch__title title">Hello Friend !</h2>
+                        <h2 className="switch__title title">Chào mừng bạn đến với Thuê Đồ</h2>
                         <p className="switch__description description">
-                            Enter your personal details and start journey with us
+                            Bạn chưa có tài khoản? Hãy đăng ký ở đây nhé!
                         </p>
                         <button
                             className="switch__button button switch-btn1"
@@ -263,7 +263,7 @@ function Login() {
                                 setErrorMessage1('');
                             }}
                         >
-                            SIGN UP
+                            ĐĂNG KÝ
                         </button>
                     </div>
                 </div>
