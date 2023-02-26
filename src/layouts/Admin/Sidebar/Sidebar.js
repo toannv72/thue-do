@@ -34,7 +34,7 @@ function Sidebar() {
                         </div>
                     </div>
 
-                    <div className="search position-relative text-center px-4 py-3 mt-2">
+                    {/* <div className="search position-relative text-center px-4 py-3 mt-2">
                         <input
                             type="text"
                             className="form-control w-100 border-0 bg-transparent"
@@ -42,12 +42,12 @@ function Sidebar() {
                             style={{ color: 'aliceblue' }}
                         />
                         <i className="fa fa-search position-absolute d-block fs-6"></i>
-                    </div>
+                    </div> */}
  
                     <ul className="categories list-unstyled">
-                        <li className="">
+                        {/* <li className="">
                             <MenuItem title="Home" to={config.routes.adminHome} />
-                        </li>
+                        </li> */}
                         <li className="">
                             <MenuItem title="Sản phẩm " to={config.routes.adminProduct} />
                         </li>

@@ -9,7 +9,6 @@ import { useEffect } from 'react';
 const cx = classNames.bind(styles);
 
 function Login() {
-    
     const [cnt1, setcnt1] = useState('');
     const [cnt2, setcnt2] = useState('');
     const [cnt3, setcnt3] = useState('is-hidden');
@@ -109,7 +108,7 @@ function Login() {
             const decentralization = JSON.parse(localStorage.getItem('user'));
             // console.log(decentralization.role[0].name);
             if (decentralization.role[0].name === 'ADMIN') {
-                window.location.href = '/admin';
+                window.location.href = '/admin/product';
                 // console.log('admin');
             } else {
                 console.log('user');
@@ -207,9 +206,7 @@ function Login() {
                     <div className={`switch__circle switch__circle--t ${cnt4}`}></div>
                     <div className={`switch__container ${cnt5}`} id={`switch-c1 `}>
                         <h2 className="switch__title title">Chào mừng bạn đã quay trở lại Thuê Đồ</h2>
-                        <p className="switch__description description">
-                            Bạn đã có tài khoản? Hãy đăng nhập ở đây nhé!
-                        </p>
+                        <p className="switch__description description">Bạn đã có tài khoản? Hãy đăng nhập ở đây nhé!</p>
                         <button
                             className="switch__button button switch-btn"
                             onClick={() => {
@@ -232,9 +229,7 @@ function Login() {
                     </div>
                     <div className={`switch__container ${cnt3}`} id="switch-c2">
                         <h2 className="switch__title title">Chào mừng bạn đến với Thuê Đồ</h2>
-                        <p className="switch__description description">
-                            Bạn chưa có tài khoản? Hãy đăng ký ở đây nhé!
-                        </p>
+                        <p className="switch__description description">Bạn chưa có tài khoản? Hãy đăng ký ở đây nhé!</p>
                         <button
                             className="switch__button button switch-btn1"
                             onClick={() => {
