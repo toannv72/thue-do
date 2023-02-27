@@ -1,6 +1,13 @@
 import FeaturedTitle from '~/pages/Product/FeaturedTitle/FeaturedTitle';
-import SanPham3 from '~/pages/Product/SanPham3';
+
+import Quote from '~/layouts/Footer/Footer';
+import Category from '../Category/Category';
 
 export default function Sport() {
-    <FeaturedTitle titles="Thể Thao" children={<SanPham3 url="categories/getOne/1" />} />;
+    return (
+        <div>
+            <FeaturedTitle titles="Thể Thao" children={<Category url="categories/getOne/4" />} />
+            <Quote />
+        </div>
+    );
 }

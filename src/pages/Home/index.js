@@ -20,7 +20,7 @@ function ControlledCarousel() {
             <TextRun />
             <Home />
             <Home2 />
-            <Home3 />
+            {/* <Home3 /> */}
             <FeaturedTitle
                 titles="Gợi ý sản phẩm"
                 children={<SanPham3 url="products/getAllProduct?page=0&size=20" />}

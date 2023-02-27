@@ -4,6 +4,7 @@ import Splitting from 'splitting';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ErrorToast from './ErrorToast';
+import Image from '~/components/Image';
 
 Splitting();
 const cx = classNames.bind(styles);
@@ -50,9 +51,9 @@ function SanPham3({ url }) {
                             <a href={`/products:${item.id}`}>
                                 <div className={cx('to')}>
                                     {/* <img src={item.images[1] ? item.images[1].url : ''} alt="" srcSet="" /> */}
-                                    {item.images.map((item, indexs) => (
-                                      indexs===0? <img alt="" src={item.url} key={indexs} />:<></>
-                                    ))}
+                                    {item.images.map((item, indexs) =>
+                                        indexs === 0 ? <Image alt="" src={item.url} key={indexs} /> : <div key={indexs}></div>,
+                                    )}
                                 </div>
 
                                 <div className={cx('container__profile')}>

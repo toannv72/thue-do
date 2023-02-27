@@ -19,12 +19,16 @@ export default function Posts() {
                 // instead of a catch() block so that we don't swallow
                 // exceptions from actual bugs in components.
                 (error) => {
-                    setIsLoaded(true);
-                    setError(error);
+                    throw new Error(error.message);
                 },
-            );
+            )
+            .catch((error) => {
+                setIsLoaded(true);
+                setError(error.message);
+            });
     }, []);
-
+console.log(items);
+console.log(error);
     if (error) {
         return <ErrorToast message={error.message} />;
     } else if (!isLoaded) {
@@ -32,17 +36,15 @@ export default function Posts() {
     } else {
         return (
             <div className="posts" style={{ flexWraprap: 'wrap', justifyContent: 'center' }}>
-                {items.map((item, index) => (
+                {!items.error?items.map((item) => (
                     <Post
-                        key={index}
+                        key={item.id}
                         title={item.title}
                         img={item.imageTitle}
                         writing={item.description}
-                       
                         id={item.id}
                     />
-                ))}
-
+                )):<h1>không có blog</h1>}
             </div>
         );
     }

@@ -4,7 +4,9 @@ import { Carousel } from 'react-responsive-carousel';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FeaturedTitle from '../FeaturedTitle/FeaturedTitle';
-import SanPham3 from '../SanPham3';
+
+import Image from '~/components/Image';
+import Category from '~/pages/ProductCategory/Category/Category';
 export default function Products() {
     const cx = className.bind(styles);
     const currentUrl = window.location.href;
@@ -14,7 +16,6 @@ export default function Products() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    console.log(products.images);
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}products/getOne/${lastPart}`)
@@ -62,7 +63,7 @@ export default function Products() {
                                         <img alt="" src={products.images[1] ? products.images[1].url : null} />
                                         <img alt="" src={products.images[2] ? products.images[2].url : null} /> */}
                                         {products.images.map((item, index) => (
-                                            <img alt="" src={item.url} key={index} />
+                                            <Image alt="" src={item.url} key={index} />
                                         ))}
                                     </Carousel>
                                 </div>
@@ -111,7 +112,7 @@ export default function Products() {
                         <div className={cx('FeaturedTitle')}>
                             <FeaturedTitle
                                 titles="Sản phẩm liên quan"
-                                children={<SanPham3 url="products/getAllProduct?page=0&size=20" />}
+                                children={<Category url={`categories/getOne/${products.category.id}`} />}
                             />
                         </div>
                     </div>

@@ -18,7 +18,7 @@ export default function CreateProducts() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const product = { title, author, description, imageTitle, imageCover };
-
+console.log(product);
         axios
             .post(`${process.env.REACT_APP_BASE_URLS}blog/create`, product)
             .then((response) => {
@@ -99,14 +99,21 @@ export default function CreateProducts() {
                             <div className="col-md-8">
                                 <div className="col-md-4 indent-small">
                                     <div className="form-group internal">
-                                        <input
+                                        {/* <textarea
                                             className="form-control"
                                             id="id_last_name"
                                             placeholder="Nội dung Blog"
                                             type="text"
                                             value={description}
                                             onChange={(event) => setDescription(event.target.value)}
-                                        />
+                                        /> */}
+                                        <textarea
+                                            onChange={(event) => setDescription(event.target.value)}
+                                            className="form-control"
+                                            id="id_comments"
+                                            placeholder="Nội dung Blog"
+                                            rows="5"
+                                        ></textarea>
                                     </div>
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import Image from '~/components/Image';
 const cx = classNames.bind(styles);
 export default function CreateProducts() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -16,16 +17,11 @@ export default function CreateProducts() {
     const [productToDelete, setProductToDelete] = useState(null);
     const [productToEdit, setProductToEdit] = useState(null);
 
-    const [name, setName] = useState('');
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState();
-    const [deposit, setDeposit] = useState();
-    const [category, setCategory] = useState();
-    const [status, setStatus] = useState();
-    const [imageUrl, setImageUrl] = useState();
-    const [imageUrl2, setImageUrl2] = useState();
-    const [imageUrl3, setImageUrl3] = useState();
-
+    const [imageTitle, setImageTitle] = useState('');
+    const [imageCover, setImageCover] = useState('');
     const handleDelete = (product) => {
         setProductToDelete(product);
         setShowDeleteConfirmation(true);
@@ -37,7 +33,7 @@ export default function CreateProducts() {
         setShowDeleteConfirmation(false);
 
         if (productToDelete) {
-            const response = await fetch(`${process.env.REACT_APP_BASE_URLS}products/remove/${productToDelete}`, {
+            const response = await fetch(`${process.env.REACT_APP_BASE_URLS}blog/remove/${productToDelete}`, {
                 method: 'DELETE',
             });
 
@@ -55,36 +51,28 @@ export default function CreateProducts() {
         event.preventDefault();
         const updatedProduct = {
             id: productToEdit,
-            name: name,
-            status:status,
+            title: title,
+            author: author,
             description: description,
-            price: price,
-            deposit: deposit,
-            category: { id: category },
-            images: [
-                { id: 1123, name: '1', url: imageUrl },
-                { id: 223, name: '2', url: imageUrl2 },
-                { id: 323, name: '3', url: imageUrl3 },
-            ],
+            imageTitle: imageTitle,
+            imageCover: imageCover,
         };
-        console.log(updatedProduct);
+
         axios
-            .put(`${process.env.REACT_APP_BASE_URLS}products/update`, updatedProduct)
+            .put(`${process.env.REACT_APP_BASE_URLS}blog/update`, updatedProduct)
             .then((response) => {
-                 if (response.status === 200) {
-                     toast.success(`Thay đổi sản phẩm thành công!`);
-                 } else {
-                     toast.error(`Thay đổi sản phẩm không thành công!`);
-                 }
-                 setShowEditConfirmation(false);
+                if (response.status === 200) {
+                    toast.success(`Thay đổi sản phẩm thành công!`);
+                } else {
+                    toast.error(`Thay đổi sản phẩm không thành công!`);
+                }
+                setShowEditConfirmation(false);
             })
             .catch((error) => {
                 console.log(error);
-                     toast.error(`Thay đổi sản phẩm không thành công!`);
-
+                toast.error(`Thay đổi sản phẩm không thành công!`);
             });
     };
-
     const cancelDelete = () => {
         setShowDeleteConfirmation(false);
         setProductToDelete(null);
@@ -96,7 +84,7 @@ export default function CreateProducts() {
 
     useEffect(() => {
         const fetchSearchResults = async () => {
-            const response = await fetch(`${process.env.REACT_APP_BASE_URLS}products/${searchTerm}`);
+            const response = await fetch(`${process.env.REACT_APP_BASE_URLS}blog/${searchTerm}`);
             const data = await response.json();
             setSearchResults(data);
         };
@@ -145,13 +133,13 @@ export default function CreateProducts() {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm</th>
+                            <th>Mã Blog</th>
+                            <th>Tên Blog</th>
                             <th>Ảnh</th>
-                            <th>Tình trạng</th>
-                            <th>Giá tiền</th>
-                            <th>Đặt cọc</th>
-                            <th>Danh mục</th>
+                            <th>Ảnh bìa</th>
+                            <th>Tác giả</th>
+                            <th>Nội dung</th>
+                            <th>Thời gian đăng</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
@@ -160,17 +148,16 @@ export default function CreateProducts() {
                             <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>{result.id}</td>
-                                <td>{result.name}</td>
+                                <td>{result.title}</td>
                                 <td>
-                                    <img className={cx('img')} src={result.images[1].url} alt="" width="100px;" />
+                                    <Image className={cx('img')} src={result.imageTitle} alt="" width="100px;" />
                                 </td>
-
                                 <td>
-                                    <span className="badge bg-success">{result.status}</span>
+                                    <Image className={cx('img')} src={result.imageCover} alt="" width="100px;" />
                                 </td>
-                                <td>{result.price.toLocaleString('vi-VN')}đ</td>
-                                <td>{result.deposit.toLocaleString('vi-VN')}đ</td>
-                                <td>{result.category.name}</td>
+                                <td>{result.author}</td>
+                                <td>{result.description}</td>
+                                <td>{result.createdDate}</td>
                                 <td>
                                     <div className={cx('delete')}>
                                         <button
@@ -236,43 +223,8 @@ export default function CreateProducts() {
                         <div className="panel-body">
                             <form className="form-horizontal">
                                 <div className="form-group">
-                                    <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_accomodation">
-                                        Loại hàng
-                                    </label>
-                                    <div className="col-md-2">
-                                        <select
-                                            className="form-control"
-                                            id="id_accomodation"
-                                            onChange={(event) => setCategory(event.target.value)}
-                                        >
-                                            <option value="">--Chọn loại sản phẩm--</option>
-                                            <option value="1">Quần áo</option>
-                                            <option value="2">Trang sức</option>
-                                            <option value="3">Công nghệ</option>
-                                            <option value="4">Thể thao</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_accomodation">
-                                        Trạng thái
-                                    </label>
-                                    <div className="col-md-2">
-                                        <select
-                                            className="form-control"
-                                            id="id_accomodation"
-                                            onChange={(event) => setStatus(event.target.value)}
-                                        >
-                                            <option value="">--Chọn trạng thái sản phẩm--</option>
-                                            <option value="APPROVED">APPROVED</option>
-                                            <option value="RENTING">RENTING</option>
-                                            <option value="REJECTED">REJECTED</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="form-group">
                                     <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
-                                        Tên sảm phẩm
+                                        Tiêu đề
                                     </label>
                                     <div className="col-md-8">
                                         <div className="col-md-8 indent-small">
@@ -280,10 +232,10 @@ export default function CreateProducts() {
                                                 <input
                                                     className="form-control"
                                                     id="id_last_name"
-                                                    placeholder="Tên sản phẩm"
+                                                    placeholder="Tiêu đề"
                                                     type="text"
-                                                    value={name}
-                                                    onChange={(event) => setName(event.target.value)}
+                                                    value={title}
+                                                    onChange={(event) => setTitle(event.target.value)}
                                                 />
                                             </div>
                                         </div>
@@ -291,7 +243,7 @@ export default function CreateProducts() {
                                 </div>
                                 <div className="form-group">
                                     <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
-                                        Giá tiền
+                                        Tác giả
                                     </label>
                                     <div className="col-md-8">
                                         <div className="col-md-4 indent-small">
@@ -299,91 +251,81 @@ export default function CreateProducts() {
                                                 <input
                                                     className="form-control"
                                                     id="id_last_name"
-                                                    placeholder="Giá tiền"
+                                                    placeholder="Tác giả"
                                                     type="text"
-                                                    value={price}
-                                                    onChange={(event) => setPrice(event.target.value)}
+                                                    value={author}
+                                                    onChange={(event) => setAuthor(event.target.value)}
                                                 />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div className="form-group">
                                     <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
-                                        Giá tiền đặt cọc sản phẩm
+                                        Nội dung
                                     </label>
                                     <div className="col-md-8">
-                                        <div className="col-md-4 indent-small">
+                                        <div className="col-md-8 indent-small">
                                             <div className="form-group internal">
-                                                <input
-                                                    className="form-control"
-                                                    id="id_last_name"
-                                                    placeholder="Đặt cọc"
-                                                    type="text"
-                                                    value={deposit}
-                                                    onChange={(event) => setDeposit(event.target.value)}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
-                                        Ảnh sản phẩm
-                                    </label>
-                                    <div className="col-md-8">
-                                        <div className="col-md-3 indent-small">
-                                            <div className="form-group internal">
-                                                <input
-                                                    className="form-control"
-                                                    id="id_last_name"
-                                                    placeholder="Ảnh 1"
-                                                    type="text"
-                                                    value={imageUrl}
-                                                    onChange={(event) => setImageUrl(event.target.value)}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-3 indent-small">
-                                            <div className="form-group internal">
-                                                <input
-                                                    className="form-control"
-                                                    id="id_last_name"
-                                                    placeholder="Ảnh 2"
-                                                    type="text"
-                                                    value={imageUrl2}
-                                                    onChange={(event) => setImageUrl2(event.target.value)}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-2 indent-small">
-                                            <div className="form-group internal">
-                                                <input
-                                                    className="form-control"
-                                                    id="id_last_name"
-                                                    placeholder="Ảnh 3"
-                                                    type="text"
-                                                    value={imageUrl3}
-                                                    onChange={(event) => setImageUrl3(event.target.value)}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_comments">
-                                        Miêu tả sản phẩm
-                                    </label>
-                                    <div className="col-md-6">
-                                        <textarea
-                                            onChange={(event) => setDescription(event.target.value)}
+                                                {/* <textarea
                                             className="form-control"
-                                            id="id_comments"
-                                            placeholder="Miêu tả"
-                                            rows="5"
-                                        ></textarea>
+                                            id="id_last_name"
+                                            placeholder="Nội dung Blog"
+                                            type="text"
+                                            value={description}
+                                            onChange={(event) => setDescription(event.target.value)}
+                                        /> */}
+                                                <textarea
+                                                    onChange={(event) => setDescription(event.target.value)}
+                                                    className="form-control"
+                                                    id="id_comments"
+                                                    placeholder="Nội dung Blog"
+                                                    rows="5"
+                                                ></textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div className="form-group">
+                                    <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                        Ảnh tiêu đề
+                                    </label>
+                                    <div className="col-md-8">
+                                        <div className="col-md-4 indent-small">
+                                            <div className="form-group internal">
+                                                <input
+                                                    className="form-control"
+                                                    id="id_last_name"
+                                                    placeholder="Ảnh tiêu đề"
+                                                    type="text"
+                                                    value={imageTitle}
+                                                    onChange={(event) => setImageTitle(event.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                        Ảnh bìa
+                                    </label>
+                                    <div className="col-md-8">
+                                        <div className="col-md-4 indent-small">
+                                            <div className="form-group internal">
+                                                <input
+                                                    className="form-control"
+                                                    id="id_last_name"
+                                                    placeholder=" Ảnh bìa"
+                                                    type="text"
+                                                    value={imageCover}
+                                                    onChange={(event) => setImageCover(event.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div className="form-group">
                                     <div className="col-md-offset-1 col-md-12">
                                         <button
