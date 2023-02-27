@@ -8,7 +8,7 @@ export default function Posts() {
       const [isLoaded, setIsLoaded] = useState(false);
       const [items, setItems] = useState([]);
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_BASE_URLS}blog/getAllBlog?page=0&size=20`)
+        fetch(`${process.env.REACT_APP_BASE_URLS}blog/getAllBlog?page=0&size=200&sort=id%2Cdesc`)
             .then((res) => res.json())
             .then(
                 (result) => {

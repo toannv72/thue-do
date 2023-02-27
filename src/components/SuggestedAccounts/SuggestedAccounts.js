@@ -10,10 +10,28 @@ function SuggestedAccounts({ label }) {
         <div className={cx('wrapper')}>
             <p className={cx('label')}>{label}</p>
 
-            <AccountItem />
-            <AccountItem />
+            <AccountItem
+                name="Thời Trang"
+                link="/fashion"
+                img="https://scontent.fsgn2-7.fna.fbcdn.net/v/t1.15752-9/328650646_1024693248523162_6394091229000750571_n.png?_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=PYgWD-pHCJ0AX9Sth7F&_nc_ht=scontent.fsgn2-7.fna&oh=03_AdR-Lj1_XPFnRgZJpxMpPwyZE0xrdm7kzcjF6fU1RmMVTg&oe=64242E77"
+            />
+            <AccountItem
+                name="Công Nghệ"
+                link="/technology"
+                img="https://scontent.fsgn2-8.fna.fbcdn.net/v/t1.15752-9/333741670_1401215150705726_7311997147277245387_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=-HLp8XZ8gFcAX-zD5Ln&_nc_ht=scontent.fsgn2-8.fna&oh=03_AdQoxQVP2p3i-iPzva1RB9tItjm8lY5w8WRvhoY4KczdcQ&oe=64244E8D"
+            />
+            <AccountItem
+                name="Trang Sức"
+                link="/jewelry"
+                img="https://scontent.fsgn2-8.fna.fbcdn.net/v/t1.15752-9/333600127_194346569951985_3609327566465129901_n.png?_nc_cat=102&ccb=1-7&_nc_sid=ae9488&_nc_ohc=g-7P-tVVTB8AX8jbwQo&tn=0JSHJhxrrqbYvLZr&_nc_ht=scontent.fsgn2-8.fna&oh=03_AdSf2Tzd4LUkADfAZ0chsBPF9ILKVI5GP261TX9kVGcEbA&oe=64244825"
+            />
+            <AccountItem
+                name="Thể Thao"
+                link="/sport"
+                img="https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.15752-9/328365879_743792684027703_328927088686978532_n.png?_nc_cat=104&ccb=1-7&_nc_sid=ae9488&_nc_ohc=MAYA699Z-HEAX-ub3ef&_nc_ht=scontent.fsgn2-5.fna&oh=03_AdRxGq0l4CpgoTYCL-ydbrN7S3KJfdGCxRrrug9m9FFbgA&oe=642452B5"
+            />
 
-            <p className={cx('more-btn')}>See all</p>
+            {/* <p className={cx('more-btn')}>See all</p> */}
         </div>
     );
 }

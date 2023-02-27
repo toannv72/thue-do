@@ -49,12 +49,9 @@ function SanPham3({ url }) {
                         <div className={cx('container')} key={index}>
                             <a href={`/products:${item.id}`}>
                                 <div className={cx('to')}>
-                                    {/* <img src={item.images[1] ? item.images[1].url : ''} alt="" srcSet="" /> */}
-                                    {item.images.map((item, indexs) => (
-                                      indexs===0? <img alt="" src={item.url} key={indexs} />:<></>
-                                    ))}
+                                    <img src={item.images[1] ? item.images[1].url : ''} alt="" srcSet="" />
                                 </div>
-
+                         
                                 <div className={cx('container__profile')}>
                                     <div className={cx('container__profile__text')}>
                                         <h2>{item.name}</h2>

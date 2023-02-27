@@ -43,7 +43,7 @@ function Sidebar() {
                         />
                         <i className="fa fa-search position-absolute d-block fs-6"></i>
                     </div> */}
- 
+
                     <ul className="categories list-unstyled">
                         {/* <li className="">
                             <MenuItem title="Home" to={config.routes.adminHome} />
@@ -53,6 +53,9 @@ function Sidebar() {
                         </li>
                         <li className="">
                             <MenuItem title="Người dùng" to={config.routes.adminUser} />
+                        </li>
+                        <li className="">
+                            <MenuItem title="Blog" to={config.routes.adminBlog} />
                         </li>
                         <li className="">
                             <MenuItem title="Đơn hàng" to={config.routes.adminOrder} />

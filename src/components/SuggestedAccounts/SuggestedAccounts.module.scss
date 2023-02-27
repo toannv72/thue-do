@@ -1,22 +1,26 @@
 .wrapper {
     border-top: 1px solid #e3e3e4;
+    margin-top: 10px;
 }
 
 .label {
     padding: 8px;
     font-size: 1.4rem;
     font-weight: 600;
+    margin-top: 10px;
 }
 
 .account-item {
     display: flex;
     padding: 8px;
+    margin-top: 10px;
     cursor: pointer;
+        align-items: center;
 }
 
 .avatar {
-    width: 32px;
-    height: 32px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     object-fit: cover;
 }

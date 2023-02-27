@@ -13,7 +13,7 @@ import {
    
     TiemActiveIcon,
 } from '~/components/Icons';
-// import SuggestedAccounts from '~/components/SuggestedAccounts';
+import SuggestedAccounts from '~/components/SuggestedAccounts';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
@@ -39,9 +39,8 @@ function Sidebar() {
               
             </Menu>
 
-            {/* <SuggestedAccounts label="Shop nổi bật " /> */}
+            <SuggestedAccounts label="Danh mục sản phẩm" />
 
-            {/* <SuggestedAccounts label="Following accounts" /> */}
         </aside>
     );
 }

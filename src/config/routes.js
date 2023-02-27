@@ -19,11 +19,15 @@ const routes = {
     admin: '/admin',
     pay: '/pay:id',
 
+    technology: '/technology',
+    sport: '/sport',
+    fashion: '/fashion',
+    jewelry: '/jewelry',
+
     EditProfile: '/editProfile',
     History: '/history',
     EditOrders: '/editOrders',
-    // pay: '/pay:id',
-    // pay: '/pay:id',
+ 
 
     adminHome: '/admin/home',
 
@@ -34,6 +38,9 @@ const routes = {
     adminNotification: '/admin/notification',
     adminOrder: '/admin/order',
     adminUser: '/admin/user',
+    adminBlog: '/admin/blog',
+    adminCreateBlog: '/admin/blog/create',
+    adminBlogManagement: '/admin/blog/management',
 };
 
 export default routes;
