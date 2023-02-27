@@ -5,7 +5,7 @@ const routes = {
     profile: '/@:nickname',
     upload: '/upload',
     logout: '/logout',
-    search: '/search',
+    search: '/search:abc',
     blog: '/blog',
     shopOwner: '/shop-owner',
     logIn: '/logIn',
@@ -15,7 +15,7 @@ const routes = {
     settings: '/settings',
     feedback: '/feedback',
     registrationForm: '/registrationForm',
-    post: '/post/abc',
+    post: '/post:id',
     admin: '/admin',
     pay: '/pay:id',
 

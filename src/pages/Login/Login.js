@@ -123,7 +123,7 @@ function Login() {
                 console.log('user');
                 window.location.href = '/';
             }
-        }
+        } 
     };
     return (
         <div>

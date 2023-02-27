@@ -83,6 +83,7 @@ export default function CreateProducts() {
                                 </select>
                             </div>
                         </div>
+                    
                         <div className="form-group">
                             <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
                                 Tên sảm phẩm

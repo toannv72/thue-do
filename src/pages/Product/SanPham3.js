@@ -51,7 +51,7 @@ function SanPham3({ url }) {
                                 <div className={cx('to')}>
                                     <img src={item.images[1] ? item.images[1].url : ''} alt="" srcSet="" />
                                 </div>
-                                {console.log(item.images[0])}
+                         
                                 <div className={cx('container__profile')}>
                                     <div className={cx('container__profile__text')}>
                                         <h2>{item.name}</h2>

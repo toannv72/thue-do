@@ -10,6 +10,7 @@ import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/hooks';
 import styles from './Search.module.scss';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -31,17 +32,8 @@ function Search() {
 
         const fetchApi = async () => {
             setLoading(true);
-
-            // const result = await searchServices.search(debouncedValue);
             const result = await fetch(`${process.env.REACT_APP_BASE_URLS}products/${searchValue}`);
-        
             const data = await result.json();
-            console.log(data);
-            // const endpoint = 'http://localhost:3000/posts';
-            // fetch(endpoint)
-            //     .then((response) => response.json())
-            //     .then((data) => setSearchResult(data));
-
             setSearchResult(data);
             setLoading(false);
         };
@@ -65,7 +57,9 @@ function Search() {
             setSearchValue(searchValue);
         }
     };
-
+    const handleSearch=() => {
+    console.log(123);
+}
     return (
         // Using a wrapper <div> tag around the reference element solves
         // this by creating a new parentNode context.
@@ -77,34 +71,42 @@ function Search() {
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                         <PopperWrapper>
                             <h4 className={cx('search-title')}>Sản phẩm</h4>
-                            {searchResult.map((result, index) => (
-                                index<=3?<AccountItem key={index} data={result} />:null
-                            ))}
+                            {searchResult.map((result, index) =>
+                                index <= 3 ? <AccountItem key={index} data={result} /> : null,
+                            )}
                         </PopperWrapper>
                     </div>
                 )}
                 onClickOutside={handleHideResult}
             >
-                <div className={cx('search')}>
-                    <input
-                        ref={inputRef}
-                        value={searchValue}
-                        placeholder="Tìm kiếm món đồ nào đó..."
-                        spellCheck={false}
-                        onChange={handleChange}
-                        onFocus={() => setShowResult(true)}
-                    />
-                    {!!searchValue && !loading && (
-                        <button className={cx('clear')} onClick={handleClear}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                    )}
-                    {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-
-                    <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
-                        <SearchIcon />
-                    </button>
-                </div>
+                    <div className={cx('search')}>
+                        <input
+                            ref={inputRef}
+                            value={searchValue}
+                            placeholder="Tìm kiếm món đồ nào đó..."
+                            spellCheck={false}
+                            onChange={handleChange}
+                            onFocus={() => setShowResult(true)}
+                        />
+                        {!!searchValue && !loading && (
+                            <button className={cx('clear')} onClick={handleClear}>
+                                <FontAwesomeIcon icon={faCircleXmark} />
+                            </button>
+                        )}
+                        {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
+                        {searchValue ? (
+                            <a href={`/search:${searchValue}`}>
+                                <button className={cx('search-btn')}>
+                                    <SearchIcon />
+                                </button>
+                            </a>
+                        ) : (
+                            <button className={cx('search-btn')} >
+                                <SearchIcon />
+                            </button>
+                        )}
+                    </div>
+            
             </HeadlessTippy>
         </div>
     );

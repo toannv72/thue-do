@@ -3,8 +3,7 @@ import Menu, { MenuItem } from '../../Menu';
 import classNames from 'classnames/bind';
 import styles from './Product.module.scss';
 import { useEffect, useState } from 'react';
-import ErrorToast from '~/pages/Product/ErrorToast';
-import AlertBox from '~/admin/Notifications/Notification';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -22,15 +21,16 @@ export default function CreateProducts() {
     const [price, setPrice] = useState();
     const [deposit, setDeposit] = useState();
     const [category, setCategory] = useState();
+    const [status, setStatus] = useState();
     const [imageUrl, setImageUrl] = useState();
     const [imageUrl2, setImageUrl2] = useState();
     const [imageUrl3, setImageUrl3] = useState();
-console.log(productToEdit);
+
     const handleDelete = (product) => {
         setProductToDelete(product);
         setShowDeleteConfirmation(true);
     };
-    const handleEdit = (id) => {
+    const handleEdit = () => {
         setShowEditConfirmation(true);
     };
     const confirmDelete = async () => {
@@ -56,6 +56,7 @@ console.log(productToEdit);
         const updatedProduct = {
             id: productToEdit,
             name: name,
+            status:status,
             description: description,
             price: price,
             deposit: deposit,
@@ -75,6 +76,7 @@ console.log(productToEdit);
                  } else {
                      toast.error(`Thay đổi sản phẩm không thành công!`);
                  }
+                 setShowEditConfirmation(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -82,9 +84,7 @@ console.log(productToEdit);
 
             });
     };
-    const handleAlertClose = () => {
-        //   setShowAlert(false);
-    };
+
     const cancelDelete = () => {
         setShowDeleteConfirmation(false);
         setProductToDelete(null);
@@ -104,7 +104,7 @@ console.log(productToEdit);
         if (searchTerm !== '') {
             fetchSearchResults();
         }
-    }, [searchTerm, productToDelete, productToEdit]);
+    }, [searchTerm, productToDelete, productToEdit, showEditConfirmation]);
 
     const handleInputChange = (event) => {
         const searchValue = event.target.value;
@@ -229,64 +229,6 @@ console.log(productToEdit);
 
             {showEditConfirmation && (
                 <div className={cx('contact-container1')}>
-                    {/* <form onSubmit={confirmEdit}>
-                        <label>
-                            Name:
-                            <input type="text" value={name} onChange={(event) => setName(event.target.value)} />
-                        </label>
-                        <br />
-                        <label>
-                            Description:
-                            <input
-                                type="text"
-                                value={description}
-                                onChange={(event) => setDescription(event.target.value)}
-                            />
-                        </label>
-                        <br />
-                        <label>
-                            Price:
-                            <input type="number" value={price} onChange={(event) => setPrice(event.target.value)} />
-                        </label>
-                        <br />
-                        <label>
-                            Deposit:
-                            <input type="number" value={deposit} onChange={(event) => setDeposit(event.target.value)} />
-                        </label>
-                        <br />
-                        <label>
-                            Category:
-                            <select value={category} onChange={(event) => setCategory(event.target.value)}>
-                                <option value="1">Category 1</option>
-                                <option value="2">Category 2</option>
-                                <option value="3">Category 3</option>
-                            </select>
-                        </label>
-                        <br />
-                        <label>
-                            Image URL1:
-                            <input type="text" value={imageUrl} onChange={(event) => setImageUrl(event.target.value)} />
-                        </label>
-                        <label>
-                            Image URL2:
-                            <input
-                                type="text"
-                                value={imageUrl2}
-                                onChange={(event) => setImageUrl2(event.target.value)}
-                            />
-                        </label>
-                        <label>
-                            Image URL3:
-                            <input
-                                type="text"
-                                value={imageUrl3}
-                                onChange={(event) => setImageUrl3(event.target.value)}
-                            />
-                        </label>
-                        <br />
-                        <button type="submit">Update Product</button>
-                        <p onClick={cancelEdit}>hủy</p>
-                    </form> */}
                     <div className="panel panel-primary dialog-panel">
                         <div className="panel-heading">
                             <h4>Thêm Sản Phẩm</h4>
@@ -308,6 +250,23 @@ console.log(productToEdit);
                                             <option value="2">Trang sức</option>
                                             <option value="3">Công nghệ</option>
                                             <option value="4">Thể thao</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_accomodation">
+                                        Trạng thái
+                                    </label>
+                                    <div className="col-md-2">
+                                        <select
+                                            className="form-control"
+                                            id="id_accomodation"
+                                            onChange={(event) => setStatus(event.target.value)}
+                                        >
+                                            <option value="">--Chọn trạng thái sản phẩm--</option>
+                                            <option value="APPROVED">APPROVED</option>
+                                            <option value="RENTING">RENTING</option>
+                                            <option value="REJECTED">REJECTED</option>
                                         </select>
                                     </div>
                                 </div>
@@ -361,7 +320,8 @@ console.log(productToEdit);
                                                     id="id_last_name"
                                                     placeholder="Đặt cọc"
                                                     type="text"
-                                                    value={deposit} onChange={(event) => setDeposit(event.target.value)}
+                                                    value={deposit}
+                                                    onChange={(event) => setDeposit(event.target.value)}
                                                 />
                                             </div>
                                         </div>
@@ -425,14 +385,15 @@ console.log(productToEdit);
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <div className="col-md-offset-4 col-md-3">
-                                        <button className="btn-lg btn-primary" type="submit" onClick={confirmEdit}>
+                                    <div className="col-md-offset-1 col-md-12">
+                                        <button
+                                            className="btn-lg btn-primary"
+                                            style={{ marginLeft: 100, marginRight: 100, background: 'red' }}
+                                            type="submit"
+                                            onClick={confirmEdit}
+                                        >
                                             Thay đổi
                                         </button>
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <div className="col-md-offset-4 col-md-3">
                                         <button className="btn-lg btn-primary" type="submit" onClick={cancelEdit}>
                                             Hủy
                                         </button>

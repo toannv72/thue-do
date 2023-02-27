@@ -42,7 +42,7 @@ const publicRoutes = [
     { path: config.routes.blog, component: Blog },
     { path: config.routes.profile, component: Profile },
     { path: config.routes.upload, component: Upload, layout: HeaderOnly },
-    { path: config.routes.search, component: Search, layout: null },
+    { path: config.routes.search, component: Search, },
     { path: config.routes.message, component: Message, layout: HeaderOnly },
     { path: config.routes.shoppingCart, component: ShoppingCart },
     { path: config.routes.settings, component: Setting },

@@ -92,7 +92,7 @@ export default function Products() {
                                         <div className={cx('ThEIyI')}>
                                             <div className={cx('p+UZsF')}>
                                                 <button className={cx('btn')} type="button">
-                                                    <span>thêm vào giỏ hàng</span>
+                                                    <span>Thêm vào giỏ hàng</span>
                                                 </button>
                                                 <Link to={`/pay:${products.id}`}>
                                                     <button className={cx('btn')} type="button" aria-disabled="false">

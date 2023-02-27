@@ -100,12 +100,26 @@
 .btn {
     height: 48px;
     margin-left: 10px;
-    background: #fe2c55;
+    background: #fe2c56de;
     width: 217px;
     font-size: 1.8rem;
     margin-top: 10px;
     border-radius: 10px;
     color: #fff;
+
+}
+
+.btn:hover {
+
+    height: 48px;
+    margin-left: 10px;
+    background: #f60000;
+    width: 217px;
+    font-size: 1.8rem;
+    margin-top: 10px;
+    border-radius: 10px;
+    color: #fff;
+
 
 }
 
@@ -146,6 +160,6 @@
     }
 }
 
-.FeaturedTitle{
+.FeaturedTitle {
     margin-top: 30px;
 }
