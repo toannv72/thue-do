@@ -16,7 +16,9 @@ export default function name() {
                         quyết tất cả nhu cầu của bạn vừa tiết kiệm được tiền bạc, thời gian và công sức. Đó là lý do thị
                         trường cho thuê đồ hiệu vô cùng nở rộ thời gian qua.
                     </p>
-                    <button className={cx('btn')}>View Trips</button>
+                    <a className={cx('btn')} href="/fashion">
+                        View Trips
+                    </a>
                 </div>
             </div>
             <div className={cx('card')}>
@@ -30,7 +32,9 @@ export default function name() {
                         thao giúp bạn vừa tiết kiệm được chi phí , vừa có cơ hội sử dụng nhiều loại dụng cụ thể thao
                         chính hãng và hiệu quả.
                     </p>
-                    <button className={cx('btn')}>View Trips</button>
+                    <a className={cx('btn')} href="/sport">
+                        Book Now
+                    </a>
                 </div>
             </div>
             <div className={cx('card')}>
@@ -44,7 +48,7 @@ export default function name() {
                         từng kiểu trang phục hay các sự kiện tham dự.
                     </p>
 
-                    <a className={cx('btn')} href="https://www.facebook.com/">
+                    <a className={cx('btn')} href="/jewelry">
                         Book Now
                     </a>
                 </div>
@@ -57,7 +61,9 @@ export default function name() {
                         phục vụ cho công việc, giải trí thì hiện nay bạn hoàn toàn có thể tìm đến những đơn vị dịch vụ
                         thuê để chọn một sản phẩm phù hợp nhu cầu, chi phí để tác nghiệp.
                     </p>
-                    <button className={cx('btn')}>Book Now</button>
+                    <a className={cx('btn')} href="/technology">
+                        Book Now
+                    </a>
                 </div>
             </div>
         </main>
