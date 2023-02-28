@@ -2,7 +2,6 @@ import styles from './SanPham3.module.scss';
 import classNames from 'classnames/bind';
 import Splitting from 'splitting';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import ErrorToast from '~/pages/Product/ErrorToast';
 import Image from '~/components/Image';
 

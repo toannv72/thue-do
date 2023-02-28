@@ -91,6 +91,11 @@
     background: #fafafa;
     height: 182px;
     padding-bottom: 15px;
+        overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
 }
 
 // .p\+UZsF {
@@ -158,6 +163,7 @@
 
     img {
         height: 410px;
+        object-fit: cover;
     }
 }
 

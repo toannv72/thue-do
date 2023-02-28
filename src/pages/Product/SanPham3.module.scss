@@ -1,8 +1,10 @@
 .to img {
-        width: 185px;
+    width: 185px;
     height: 210px;
+    object-fit: cover;
 }
-.to{
+
+.to {
     overflow: hidden;
 }
 
@@ -87,9 +89,10 @@
     font-style: italic;
 }
 
-.container__profile__text{
+.container__profile__text {
     color: #ff002d;
 }
+
 .container:hover {
     transform: scale(1.03);
 }

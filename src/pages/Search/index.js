@@ -12,7 +12,8 @@ function Search() {
     const cx = classNames.bind(styles);
     const currentUrl = window.location.href;
     const urlParts = currentUrl.split('search:');
-    const [lastPart, setLastPart] = useState(urlParts[urlParts.length - 1]);
+    // const [lastPart, setLastPart] = useState(urlParts[urlParts.length - 1]);
+    const lastPart= urlParts[urlParts.length - 1];
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const { pathname } = useLocation();

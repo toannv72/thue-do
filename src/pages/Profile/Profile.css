@@ -402,6 +402,7 @@
 .user-header-wrapper {
     width: 100%;
     position: relative;
+    object-fit: cover;
 }
 
 .user-icon-wrapper {
