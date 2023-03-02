@@ -39,6 +39,7 @@ function Category({ url }) {
     } else {
         return (
             <div>
+                
                 <div className={cx('card')}>
                     <link
                         rel="stylesheet"
@@ -51,7 +52,11 @@ function Category({ url }) {
                             <a href={`/products:${item.id}`}>
                                 <div className={cx('to')}>
                                     {item.images.map((item, indexs) =>
-                                        indexs === 0 ? <Image alt="" src={item.url} key={indexs} /> : <div key={indexs}></div>,
+                                        indexs === 0 ? (
+                                            <Image alt="" src={item.url} key={indexs} />
+                                        ) : (
+                                            <div key={indexs}></div>
+                                        ),
                                     )}
                                 </div>
 

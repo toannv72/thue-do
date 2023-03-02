@@ -26,7 +26,7 @@ function Sidebar() {
                         <img
                             className="rounded-pill img-fluid"
                             width="65"
-                            src="https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/244991766_580533039649474_7432751751824164431_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=174925&_nc_ohc=ogqFSmCU9hcAX_rXWqt&_nc_oc=AQkaAHlbWTdW2cYCr2R6XO8XOyScHpo8MJ7MLK0kkLBxjILWy2uMHCGPYbY2tGVYhGY&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfCLraIUKRsIVLYjf5aLrrtbePhcnLApMB9Z768wm46djA&oe=63FAA901"
+                            src="https://scontent.fsgn2-7.fna.fbcdn.net/v/t31.18172-8/29664952_606326369700204_5868669910184361399_o.jpg?_nc_cat=100&ccb=1-7&_nc_sid=174925&_nc_ohc=Tg8PiY0mwsYAX-Of7lU&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfBafsZFOPLwixvOLLl86jucn4_dHM0QedpYL9-wgDKQYQ&oe=64251F13"
                             alt=""
                         />
                         <div className="ms-2" style={{ color: 'aliceblue' }}>
