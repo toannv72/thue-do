@@ -162,7 +162,7 @@ export default function CreateProducts() {
                                 <td>{result.id}</td>
                                 <td>{result.name}</td>
                                 <td>
-                                    <img className={cx('img')} src={result.images[1].url} alt="" width="100px;" />
+                                    <img className={cx('img')} src={result.images[0].url} alt="" width="100px;" />
                                 </td>
 
                                 <td>

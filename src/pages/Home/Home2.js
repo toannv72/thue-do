@@ -17,7 +17,7 @@ export default function name() {
                         trường cho thuê đồ hiệu vô cùng nở rộ thời gian qua.
                     </p>
                     <a className={cx('btn')} href="/fashion">
-                        View Trips
+                        Book Now
                     </a>
                 </div>
             </div>

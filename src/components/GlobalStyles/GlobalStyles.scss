@@ -24,7 +24,8 @@ html {
 }
 
 body {
-    font-family: var(--font-family);
+    // font-family: var(--font-family);
+        font-family: system-ui;
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizespeed;
