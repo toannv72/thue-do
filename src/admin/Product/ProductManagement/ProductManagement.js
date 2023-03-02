@@ -67,7 +67,7 @@ export default function CreateProducts() {
                 { id: 323, name: '3', url: imageUrl3 },
             ],
         }
-    
+    console.log(updatedProduct);
         axios
             .put(`${process.env.REACT_APP_BASE_URLS}products/update`, updatedProduct)
             .then((response) => {
