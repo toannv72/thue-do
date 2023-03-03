@@ -1,29 +1,41 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './Pay.css';
+import 'react-date-range/dist/styles.css'; // import stylesheet
+import 'react-date-range/dist/theme/default.css'; // import theme
+import { DateRange } from 'react-date-range';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+// import { Calendar } from 'react-date-range';
 function Settings() {
     const currentUser = localStorage.getItem('user');
     const User = JSON.parse(localStorage.getItem('user'));
- const currentUrl = window.location.href;
- const urlParts = currentUrl.split('pay:');
+    const currentUrl = window.location.href;
+    const urlParts = currentUrl.split('pay:');
     const lastPart = urlParts[urlParts.length - 1];
-    
 
-     const [products, setProducts] = useState([]);
-     const [error, setError] = useState(null);
+    const [products, setProducts] = useState([]);
+    const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    
-        const { pathname } = useLocation();
-const [state, setState] = useState([
-    {
-        startDate: new Date(),
-        endDate: null,
-        key: 'selection',
-    },
-]);
-        useEffect(() => {
-            window.scrollTo(0, 0);
-        }, [pathname]);
+    const [open, setOpen] = useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleOpen = () => {
+        setOpen(true);
+    };
+    const { pathname } = useLocation();
+    const [state, setState] = useState([
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection',
+        },
+    ]);
+
+    // console.log(state);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}products/getOne/${lastPart}`)
@@ -49,17 +61,19 @@ const [state, setState] = useState([
                     <div className="border-envelop"></div>
                     <div className="pay-header-user-location">
                         <div className="pay-info">
+                            Thông tin nhận hàng:<br></br>
                             <div className="pay-info-item i-name-phone">
-                                {' '}
                                 <span className="pay-header-user-name">
+                                    TÊN:
+                                    {User.lastName} {''}
                                     {User.firstName}
-                                    {User.lastName}
                                 </span>
-                                <span className="pay-header-user-phone">+0333875398</span>
                             </div>
                             <div className="pay-info-item i-phone">
-                                {' '}
-                                <span className="pay-header-user-phone">{User.address}</span>
+                                <span className="pay-header-user-phone"> SĐT:{User.phone} </span>
+                            </div>
+                            <div className="pay-info-item i-phone">
+                                <span className="pay-header-user-phone">ĐỊA CHỈ{User.address}</span>
                             </div>
                             <div className="pay-info-item i-change">
                                 <a href="" className="pay-change-selected">
@@ -83,16 +97,42 @@ const [state, setState] = useState([
                                         <img
                                             className="image-item"
                                             alt=""
-                                            src={products.images ? products.images[1].url : ''}
+                                            src={products.images ? products.images[0].url : ''}
                                         />
                                     </div>
                                     <div className="pay-item-info-name">{products.name}</div>
                                     <div className="pay-item-info-type">
-                                        <span className="pay-item-span-type"> Size Z</span>
+                                        <span className="pay-item-span-type"> </span>
                                     </div>
                                 </div>
                                 <div className="pay-price">{products.price}</div>
-                                <div className="pay-quantity">1</div>
+                                <div className="pay-quantity">
+                                    <button onClick={handleOpen}>Chọn ngày thuê</button>
+
+                                    <Dialog 
+                                        // maxWidth={800}
+                                        // maxHeight={800}
+                                        open={open}
+                                        // TransitionComponent={Transition}
+                                        keepMounted
+                                        onClose={handleClose}
+                                        aria-describedby="alert-dialog-slide-description"
+                                    >
+                                        <DialogTitle></DialogTitle>
+                                        <DialogContent>
+                                            <DateRange
+                                                editableDateInputs={false}
+                                                onChange={(item) => setState([item.selection])}
+                                                moveRangeOnFirstSelection={false}
+                                                // retainEndDateOnFirstSelection={false}
+                                                // onRangeFocusChange={handleRangeFocusChange}
+                                                ranges={state}
+                                                minDate={new Date()}
+                                            />
+                                        </DialogContent>
+                                        <DialogActions></DialogActions>
+                                    </Dialog>
+                                </div>
                                 <div className="pay-total-price">{products.price}</div>
                             </div>
 
@@ -100,7 +140,7 @@ const [state, setState] = useState([
                                 <div className="pay-item-voucher">
                                     <div className="pay-notice-voucher"> </div>
                                     <div className="pay-choosing-voucher">
-                                        <a className="pay-item-btn-change-boucher"> </a>
+                                        {/* <a className="pay-item-btn-change-boucher"> </a> */}
                                     </div>
                                 </div>
                                 <div className="pay-item-footer">
@@ -108,7 +148,6 @@ const [state, setState] = useState([
                                         <div className=" pay-footer-noting">
                                             <div className="pay-footer-noting-lb">Lời nhắn</div>
                                             <div className="pay-footer-noting">
-                                                {' '}
                                                 <input
                                                     className="pay-footer-noting-txt"
                                                     placeholder="Lưu ý cho người bán"

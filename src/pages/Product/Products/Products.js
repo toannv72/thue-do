@@ -7,6 +7,8 @@ import FeaturedTitle from '../FeaturedTitle/FeaturedTitle';
 
 import Image from '~/components/Image';
 import Category from '~/pages/ProductCategory/Category/Category';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
 export default function Products() {
     const cx = className.bind(styles);
     const currentUrl = window.location.href;
@@ -16,6 +18,22 @@ export default function Products() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
 
+    const product = { id: lastPart };
+    const user = { id: JSON.parse(localStorage.getItem('user')).id };
+    console.log(user);
+    const createUser = () => {
+        const products = { product, user };
+        axios
+            .post(`${process.env.REACT_APP_BASE_URLS}cart-iteam/create`, products)
+            .then((response) => {
+                console.log(response.data);
+                toast.success(`Thêm vào giỏ thành công!`);
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error(`Thêm vào giỏ không thành công!`);
+            });
+    };
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}products/getOne/${lastPart}`)
@@ -44,6 +62,7 @@ export default function Products() {
             <div>
                 {products ? (
                     <div>
+                        <ToastContainer />
                         <div className={cx('product')}>
                             <div className={cx('product-left')}>
                                 <div className={cx('product-left-img')}>
@@ -75,11 +94,6 @@ export default function Products() {
 
                                     <div className={cx('information')}>
                                         <div className={cx('Evaluates')}>
-                                            <div className={cx('Mark')}>5.0</div>
-                                            <div className={cx('Evaluate')}>
-                                                <div className={cx('Mark')}>1</div>
-                                                <div className={cx('nTpKes')}>đánh giá</div>
-                                            </div>
                                             {/* <div className={cx('sold')}>
                                             <div className={cx('Mark')}>{products.quantity}</div>
                                             <div className={cx('c8aTLs')}>đã thuê</div>
@@ -88,13 +102,13 @@ export default function Products() {
                                         <button className={cx('GyD5JO')}>Báo cáo</button>
                                     </div>
                                     <div className={cx('product-price')}>
-                                        {products.price.toLocaleString('vi-VN')} đ
+                                        {products.price.toLocaleString('vi-VN')} đ/ngày
                                     </div>
                                     <div className={cx('h-y3ij')}>{products.description}</div>
                                     <div className={cx('p+UZsF')}>
                                         <div className={cx('ThEIyI')}>
                                             <div className={cx('p+UZsF')}>
-                                                <button className={cx('btn')} type="button">
+                                                <button className={cx('btn')} type="button" onClick={createUser}>
                                                     <span>Thêm vào giỏ hàng</span>
                                                 </button>
                                                 <Link to={`/pay:${products.id}`}>

@@ -227,7 +227,7 @@ width: 90%;
     font-family: helvetica, arial, sans-serif;
 }
 
-a.remove {
+button.remove {
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
     color: #ffffff;
@@ -245,10 +245,12 @@ a.remove {
     transition: all 0.25s linear;
 }
 
-a.remove:hover {
+button.remove:hover {
     background: #f30;
 }
-
+.h3{
+    width: 500px;
+}
 .promoCode {
     border: 2px solid #efefef;
     float: left;

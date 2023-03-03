@@ -105,7 +105,12 @@
 
 .pay-quantity {
     width: 15%;
+    color: #000;
+}
 
+.pay-quantity button {
+    background-color: rgb(254 44 85);
+    color: #ffffff;
 }
 
 .pay-total-price {
@@ -134,6 +139,7 @@
 .image-item {
     height: 50px;
     width: 50px;
+    object-fit: cover;
 }
 
 .pay-item-span-type {
@@ -222,7 +228,7 @@
 .pay-shipping-info {
 
     /* border-left: .0625rem dashed var(--black-border); */
-width: 60%;
+    width: 60%;
     padding: 0 -46px 0px;
     text-align: center;
 
@@ -347,7 +353,7 @@ width: 60%;
 .pay-submit-btn {
 
 
-    background-color:#fe2c55;
+    background-color: #fe2c55;
     padding: 10px 30px;
     color: var(--light-bg);
     float: right;
