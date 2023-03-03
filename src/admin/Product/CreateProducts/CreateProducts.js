@@ -17,30 +17,9 @@ export default function CreateProducts() {
     const [deposit, setDeposit] = useState(0);
     const [images, setImages] = useState([]);
     const [category, setCategory] = useState();
-    const [images1, setImages1] = useState('');
-    const [images2, setImages2] = useState('');
-    const [images3, setImages3] = useState('');
+    const [toan, setToan] = useState(false);
 
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     const product = { name, description, price, images, category, deposit };
-
-    //     axios
-    //         .post(`${process.env.REACT_APP_BASE_URLS}products/create`, product)
-    //         .then((response) => {
-    //             if (response.status === 200) {
-    //                 toast.success(`Thêm sản phẩm thành công!`);
-    //             } else {
-    //                 toast.error(`Thêm sản phẩm không thành công!`);
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //             toast.error(`Thêm sản phẩm không thành công!`);
-    //         });
-    // };
     const handleSubmit1 = () => {
-        // event.preventDefault();
         const product = { name, description, price, images, category, deposit };
 
         axios
@@ -56,29 +35,39 @@ export default function CreateProducts() {
                 console.log(error);
                 toast.error(`Thêm sản phẩm không thành công!`);
             });
-      console.log(product);
+                        setToan(false);
+        
     };
     const [img, setImg] = useState(null);
 
     const upImg = () => {
-
         if (img == null) return;
-        const imagerRef = ref(storage, `images/${img.name + v4()}`);
-        uploadBytes(imagerRef, img).then(() => {
-            getDownloadURL(imagerRef).then((url) => {
-                setImages([{ url: url }]);
-                //    console.log(images); // Được thực thi khi state đã được cập nhật
-                   console.log(url); // in ra đường dẫn của ảnh
-         
+        const urls = [];
+        for (let index = 0; index < img.length; index++) {
+            const imagerRef = ref(storage, `images/${img[index].name + v4()}`);
+            uploadBytes(imagerRef, img[index]).then(() => {
+                getDownloadURL(imagerRef).then((url) => {
+                    // setImages([...images, { url: url }]);
+                    urls.push({ url: url });
+                    //    console.log(images); // Được thực thi khi state đã được cập nhật
+                    console.log(url); // in ra đường dẫn của ảnh
+                    console.log(index); 
+                    console.log(img.length); 
+                    if (index === img.length-1) {
+                        setImages(urls);
+                        setToan(true);
+                    }
+                });
             });
-          
-        });
-    };
-    useEffect(() => {
-        if (images.length > 0) {
-            handleSubmit1();
         }
-    }, [images]);
+    };
+    console.log(images);
+    useEffect(() => {
+        if (toan) {
+            handleSubmit1();
+            console.log('toan');
+        }
+    }, [toan]);
     return (
         <>
             <Menu>
@@ -187,7 +176,10 @@ export default function CreateProducts() {
                                             id="id_last_name"
                                             placeholder="Ảnh 3"
                                             type="file"
-                                            onChange={(event) => setImg(event.target.files[0])}
+                                            multiple
+                                            onChange={(e) => {
+                                                setImg(e.target.files);
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -207,18 +199,10 @@ export default function CreateProducts() {
                                 ></textarea>
                             </div>
                         </div>
-                        {/* <div className="form-group">
-                            <div className="col-md-offset-4 col-md-3">
-                                <button className="btn-lg btn-primary" type="submit">
-                                    Thêm sản phẩm
-                                </button>
-                            </div>
-                        </div> */}
                     </form>
-                    {/* <button onClick={upImg}>toan</button> */}
                     <div className="form-group">
                         <div className="col-md-offset-4 col-md-3">
-                            <button className="btn-lg btn-primary" onClick={upImg} >
+                            <button className="btn-lg btn-primary" onClick={upImg}>
                                 Thêm sản phẩm
                             </button>
                         </div>

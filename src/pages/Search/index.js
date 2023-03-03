@@ -60,7 +60,7 @@ function Search() {
                             <a href={`/products:${item.id}`} key={index}>
                                 <div className={cx('container')}>
                                     <div className={cx('to')}>
-                                        <img src={item.images[1] ? item.images[1].url : ''} alt="" srcSet="" />
+                                        <img src={item.images[0] ? item.images[0].url : ''} alt="" srcSet="" />
                                     </div>
 
                                     <div className={cx('container__profile')}>
