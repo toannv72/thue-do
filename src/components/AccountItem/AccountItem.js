@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 function AccountItem({ data }) {
     return (
         <a href={`/products:${data.id}`} className={cx('wrapper')}>
-            <Image className={cx('avatar')} src={data.images[1].url} alt="" />
+            <Image className={cx('avatar')} src={data.images[0].url} alt="" />
             <div className={cx('info')}>
                 <h4 className={cx('name')}>
                     <span>{data.name}</span>

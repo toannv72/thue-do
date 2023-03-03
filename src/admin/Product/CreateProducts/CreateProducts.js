@@ -6,7 +6,9 @@ import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import './Create.css';
 import axios from 'axios';
-
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { storage } from '~/configs/firebase';
+import { v4 } from 'uuid';
 const cx = classNames.bind(styles);
 export default function CreateProducts() {
     const [name, setName] = useState('');
@@ -19,16 +21,26 @@ export default function CreateProducts() {
     const [images2, setImages2] = useState('');
     const [images3, setImages3] = useState('');
 
-    useEffect(() => {
-        setImages([
-            { url: images1, name: '1' },
-            { url: images2, name: '2' },
-            { url: images3, name: '3' },
-        ]);
-    }, [images1, images2, images3]);
-    console.log(images);
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     const product = { name, description, price, images, category, deposit };
+
+    //     axios
+    //         .post(`${process.env.REACT_APP_BASE_URLS}products/create`, product)
+    //         .then((response) => {
+    //             if (response.status === 200) {
+    //                 toast.success(`Thêm sản phẩm thành công!`);
+    //             } else {
+    //                 toast.error(`Thêm sản phẩm không thành công!`);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //             toast.error(`Thêm sản phẩm không thành công!`);
+    //         });
+    // };
+    const handleSubmit1 = () => {
+        // event.preventDefault();
         const product = { name, description, price, images, category, deposit };
 
         axios
@@ -44,7 +56,29 @@ export default function CreateProducts() {
                 console.log(error);
                 toast.error(`Thêm sản phẩm không thành công!`);
             });
+      console.log(product);
     };
+    const [img, setImg] = useState(null);
+
+    const upImg = () => {
+
+        if (img == null) return;
+        const imagerRef = ref(storage, `images/${img.name + v4()}`);
+        uploadBytes(imagerRef, img).then(() => {
+            getDownloadURL(imagerRef).then((url) => {
+                setImages([{ url: url }]);
+                //    console.log(images); // Được thực thi khi state đã được cập nhật
+                   console.log(url); // in ra đường dẫn của ảnh
+         
+            });
+          
+        });
+    };
+    useEffect(() => {
+        if (images.length > 0) {
+            handleSubmit1();
+        }
+    }, [images]);
     return (
         <>
             <Menu>
@@ -64,7 +98,7 @@ export default function CreateProducts() {
                     <h4>Thêm Sản Phẩm</h4>
                 </div>
                 <div className="panel-body">
-                    <form className="form-horizontal" onSubmit={handleSubmit}>
+                    <form className="form-horizontal" onSubmit={upImg}>
                         <div className="form-group">
                             <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_accomodation">
                                 Loại hàng
@@ -146,48 +180,14 @@ export default function CreateProducts() {
                                 Ảnh sản phẩm
                             </label>
                             <div className="col-md-8">
-                                <div className="col-md-3 indent-small">
-                                    <div className="form-group internal">
-                                        <input
-                                            className="form-control"
-                                            id="id_last_name"
-                                            placeholder="Ảnh 1"
-                                            type="text"
-                                            value={images1}
-                                            onChange={(event) => (
-                                                setImages1(event.target.value),
-                                                setImages([{ url: images1 }, { url: images2 }, { url: images3 }])
-                                            )}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-md-3 indent-small">
-                                    <div className="form-group internal">
-                                        <input
-                                            className="form-control"
-                                            id="id_last_name"
-                                            placeholder="Ảnh 2"
-                                            type="text"
-                                            value={images2}
-                                            onChange={(event) => (
-                                                setImages2(event.target.value),
-                                                setImages([{ url: images1 }, { url: images2 }, { url: images3 }])
-                                            )}
-                                        />
-                                    </div>
-                                </div>
                                 <div className="col-md-2 indent-small">
                                     <div className="form-group internal">
                                         <input
                                             className="form-control"
                                             id="id_last_name"
                                             placeholder="Ảnh 3"
-                                            type="text"
-                                            value={images3}
-                                            onChange={(event) => (
-                                                setImages3(event.target.value),
-                                                setImages([{ url: images1 }, { url: images2 }, { url: images3 }])
-                                            )}
+                                            type="file"
+                                            onChange={(event) => setImg(event.target.files[0])}
                                         />
                                     </div>
                                 </div>
@@ -207,14 +207,22 @@ export default function CreateProducts() {
                                 ></textarea>
                             </div>
                         </div>
-                        <div className="form-group">
+                        {/* <div className="form-group">
                             <div className="col-md-offset-4 col-md-3">
                                 <button className="btn-lg btn-primary" type="submit">
                                     Thêm sản phẩm
                                 </button>
                             </div>
-                        </div>
+                        </div> */}
                     </form>
+                    {/* <button onClick={upImg}>toan</button> */}
+                    <div className="form-group">
+                        <div className="col-md-offset-4 col-md-3">
+                            <button className="btn-lg btn-primary" onClick={upImg} >
+                                Thêm sản phẩm
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
