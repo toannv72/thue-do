@@ -6,6 +6,7 @@ import 'react-date-range/dist/theme/default.css'; // import theme
 import { DateRange } from 'react-date-range';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 // import { Calendar } from 'react-date-range';
+import moment from 'moment';
 function Settings() {
     const currentUser = localStorage.getItem('user');
     const User = JSON.parse(localStorage.getItem('user'));
@@ -17,13 +18,6 @@ function Settings() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [open, setOpen] = useState(false);
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const handleOpen = () => {
-        setOpen(true);
-    };
-    const { pathname } = useLocation();
     const [state, setState] = useState([
         {
             startDate: new Date(),
@@ -31,8 +25,34 @@ function Settings() {
             key: 'selection',
         },
     ]);
+const [sumDay, setSumDay] = useState(0);
+    const BorrowDate = moment(state[0].startDate);
+    const ReturnDate = moment(state[0].endDate);
+    const orderBorrowDate = BorrowDate.format('YYYY/MM/DD');
+    const orderReturnDate = ReturnDate.format('YYYY/MM/DD');
+    const orderBorrowDay = BorrowDate.format('DD');
+    const orderReturnDay = ReturnDate.format('DD');
+    const day = orderReturnDay - orderBorrowDay + 1;
 
-    // console.log(state);
+    // console.log(orderReturnDate - orderBorrowDate);
+
+    // Tính toán số ngày giữa ngày mượn và ngày trả
+
+    // console.log(orderReturnDay);
+    const handleClose = () => {
+        setOpen(false);
+         const date = moment(orderBorrowDate);
+         const date1 = moment(orderReturnDate);
+        const numDays = date1.diff(date, 'days');
+     
+        setSumDay(numDays);
+    };
+       console.log(sumDay);
+    const handleOpen = () => {
+        setOpen(true);
+    };
+    const { pathname } = useLocation();
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
@@ -54,6 +74,8 @@ function Settings() {
                 },
             );
     }, []);
+    const [pay, setPay] = useState(products.price);
+
     return (
         <>
             {currentUser ? (
@@ -65,7 +87,7 @@ function Settings() {
                             <div className="pay-info-item i-name-phone">
                                 <span className="pay-header-user-name">
                                     TÊN:
-                                    {User.lastName} {''}
+                                    {User.lastName}
                                     {User.firstName}
                                 </span>
                             </div>
@@ -107,9 +129,11 @@ function Settings() {
                                 </div>
                                 <div className="pay-price">{products.price}</div>
                                 <div className="pay-quantity">
-                                    <button onClick={handleOpen}>Chọn ngày thuê</button>
+                                    <p> {orderBorrowDate}</p>
+                                    <p>{orderReturnDate}</p>
+                                    <button onClick={handleOpen}>Chọn ngày</button>
 
-                                    <Dialog 
+                                    <Dialog
                                         // maxWidth={800}
                                         // maxHeight={800}
                                         open={open}
@@ -133,7 +157,7 @@ function Settings() {
                                         <DialogActions></DialogActions>
                                     </Dialog>
                                 </div>
-                                <div className="pay-total-price">{products.price}</div>
+                                <div className="pay-total-price"> {products.price + (products.price * sumDay) / 2}</div>
                             </div>
 
                             <div className="pay-submit">
@@ -170,7 +194,9 @@ function Settings() {
                                     <div div="pay-shipping-change-delivery">
                                         <div className="pay-shipping-change-transporter">
                                             <dt className="pay-totalprice-label"> Tổng số tiền thanh toán </dt>
-                                            <dd className="pay-total-price-payment">{products.price} </dd>
+                                            <dd className="pay-total-price-payment">
+                                                {products.price + (products.price * sumDay) / 2 + products.deposit}
+                                            </dd>
                                         </div>
                                     </div>
                                 </div>

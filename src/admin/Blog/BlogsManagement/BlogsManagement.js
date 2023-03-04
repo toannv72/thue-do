@@ -8,6 +8,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import Image from '~/components/Image';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { storage } from '~/configs/firebase';
+import { v4 } from 'uuid';
 const cx = classNames.bind(styles);
 export default function CreateProducts() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -22,6 +25,9 @@ export default function CreateProducts() {
     const [description, setDescription] = useState('');
     const [imageTitle, setImageTitle] = useState('');
     const [imageCover, setImageCover] = useState('');
+
+    const [toan, setToan] = useState(false);
+
     const handleDelete = (product) => {
         setProductToDelete(product);
         setShowDeleteConfirmation(true);
@@ -47,8 +53,7 @@ export default function CreateProducts() {
         }
     };
 
-    const confirmEdit = (event) => {
-        event.preventDefault();
+    const confirmEdit = () => {
         const updatedProduct = {
             id: productToEdit,
             title: title,
@@ -57,6 +62,7 @@ export default function CreateProducts() {
             imageTitle: imageTitle,
             imageCover: imageCover,
         };
+        console.log(updatedProduct);
 
         axios
             .put(`${process.env.REACT_APP_BASE_URLS}blog/update`, updatedProduct)
@@ -72,6 +78,7 @@ export default function CreateProducts() {
                 console.log(error);
                 toast.error(`Thay đổi sản phẩm không thành công!`);
             });
+        setToan(false);
     };
     const cancelDelete = () => {
         setShowDeleteConfirmation(false);
@@ -100,7 +107,52 @@ export default function CreateProducts() {
             setSearchTerm(searchValue);
         }
     };
+    const [img, setImg] = useState(null);
+    const [img1, setImg1] = useState(null);
 
+    const upImg = () => {
+        if (img == null && img1 == null) return;
+        const urls = [];
+        const urls1 = [];
+        for (let index = 0; index < img.length; index++) {
+            const imagerRef = ref(storage, `images/${img[index].name + v4()}`);
+            uploadBytes(imagerRef, img[index]).then(() => {
+                getDownloadURL(imagerRef).then((url) => {
+                    // setImages([...images, { url: url }]);
+
+                    //    console.log(images); // Được thực thi khi state đã được cập nhật
+                    // console.log(url); // in ra đường dẫn của ảnh
+                    // console.log(index);
+
+                    setImageCover(url);
+                });
+            });
+        }
+        for (let index = 0; index < img1.length; index++) {
+            const imagerRef1 = ref(storage, `images/${img1[index].name + v4()}`);
+            uploadBytes(imagerRef1, img1[index]).then(() => {
+                getDownloadURL(imagerRef1).then((url1) => {
+                    // setImages([...images, { url: url }]);
+                    urls1.push({ url: url1 });
+                    //    console.log(images); // Được thực thi khi state đã được cập nhật
+                    // console.log(url); // in ra đường dẫn của ảnh
+                    // console.log(index);
+                    // console.log(img.length);
+                    if (index === img1.length - 1) {
+                        setImageTitle(url1);
+                        setToan(true);
+                    }
+                });
+            });
+        }
+    };
+    // console.log(images);
+    useEffect(() => {
+        if (toan) {
+            confirmEdit();
+            // console.log('toan');
+        }
+    }, [toan]);
     return (
         <>
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
@@ -297,10 +349,11 @@ export default function CreateProducts() {
                                                 <input
                                                     className="form-control"
                                                     id="id_last_name"
-                                                    placeholder="Ảnh tiêu đề"
-                                                    type="text"
-                                                    value={imageTitle}
-                                                    onChange={(event) => setImageTitle(event.target.value)}
+                                                    placeholder="Ảnh 3"
+                                                    type="file"
+                                                    onChange={(e) => {
+                                                        setImg(e.target.files);
+                                                    }}
                                                 />
                                             </div>
                                         </div>
@@ -316,32 +369,32 @@ export default function CreateProducts() {
                                                 <input
                                                     className="form-control"
                                                     id="id_last_name"
-                                                    placeholder=" Ảnh bìa"
-                                                    type="text"
-                                                    value={imageCover}
-                                                    onChange={(event) => setImageCover(event.target.value)}
+                                                    placeholder="Ảnh 3"
+                                                    type="file"
+                                                    onChange={(e) => {
+                                                        setImg1(e.target.files);
+                                                    }}
                                                 />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className="form-group">
-                                    <div className="col-md-offset-1 col-md-12">
-                                        <button
-                                            className="btn-lg btn-primary"
-                                            style={{ marginLeft: 100, marginRight: 100, background: 'red' }}
-                                            type="submit"
-                                            onClick={confirmEdit}
-                                        >
-                                            Thay đổi
-                                        </button>
-                                        <button className="btn-lg btn-primary" type="submit" onClick={cancelEdit}>
-                                            Hủy
-                                        </button>
-                                    </div>
-                                </div>
                             </form>
+                            <div className="form-group">
+                                <div className="col-md-offset-1 col-md-12">
+                                    <button
+                                        className="btn-lg btn-primary"
+                                        style={{ marginLeft: 100, marginRight: 100, background: 'red' }}
+                                        type="submit"
+                                        onClick={upImg}
+                                    >
+                                        Thay đổi
+                                    </button>
+                                    <button className="btn-lg btn-primary" type="submit" onClick={cancelEdit}>
+                                        Hủy
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

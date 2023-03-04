@@ -15,8 +15,8 @@ export default function CreateProducts() {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
     const [deposit, setDeposit] = useState(0);
-    const [images, setImages] = useState([]);
     const [category, setCategory] = useState();
+    const [images, setImages] = useState([]);
     const [toan, setToan] = useState(false);
 
     const handleSubmit1 = () => {
@@ -35,8 +35,7 @@ export default function CreateProducts() {
                 console.log(error);
                 toast.error(`Thêm sản phẩm không thành công!`);
             });
-                        setToan(false);
-        
+        setToan(false);
     };
     const [img, setImg] = useState(null);
 
@@ -50,10 +49,10 @@ export default function CreateProducts() {
                     // setImages([...images, { url: url }]);
                     urls.push({ url: url });
                     //    console.log(images); // Được thực thi khi state đã được cập nhật
-                    console.log(url); // in ra đường dẫn của ảnh
-                    console.log(index); 
-                    console.log(img.length); 
-                    if (index === img.length-1) {
+                    // console.log(url); // in ra đường dẫn của ảnh
+                    // console.log(index);
+                    // console.log(img.length);
+                    if (index === img.length - 1) {
                         setImages(urls);
                         setToan(true);
                     }
@@ -61,11 +60,11 @@ export default function CreateProducts() {
             });
         }
     };
-    console.log(images);
+    // console.log(images);
     useEffect(() => {
         if (toan) {
             handleSubmit1();
-            console.log('toan');
+            // console.log('toan');
         }
     }, [toan]);
     return (

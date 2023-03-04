@@ -6,6 +6,9 @@ import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import './Create.css';
 import axios from 'axios';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { storage } from '~/configs/firebase';
+import { v4 } from 'uuid';
 
 const cx = classNames.bind(styles);
 export default function CreateProducts() {
@@ -15,10 +18,11 @@ export default function CreateProducts() {
     const [imageTitle, setImageTitle] = useState('');
     const [imageCover, setImageCover] = useState('');
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const [toan, setToan] = useState(false);
+
+    const handleSubmit = () => {
         const product = { title, author, description, imageTitle, imageCover };
-console.log(product);
+        console.log(product);
         axios
             .post(`${process.env.REACT_APP_BASE_URLS}blog/create`, product)
             .then((response) => {
@@ -32,7 +36,56 @@ console.log(product);
                 console.log(error);
                 toast.error(`Thêm blog không thành công!`);
             });
+        setToan(false);
     };
+    const [img, setImg] = useState(null);
+    const [img1, setImg1] = useState(null);
+
+    const upImg = () => {
+        if (img == null && img1 == null) return;
+        const urls = [];
+        const urls1 = [];
+        for (let index = 0; index < img.length; index++) {
+            const imagerRef = ref(storage, `images/${img[index].name + v4()}`);
+            uploadBytes(imagerRef, img[index]).then(() => {
+                getDownloadURL(imagerRef).then((url) => {
+                    // setImages([...images, { url: url }]);
+                    urls.push({ url: url });
+                    //    console.log(images); // Được thực thi khi state đã được cập nhật
+                    // console.log(url); // in ra đường dẫn của ảnh
+                    // console.log(index);
+                    // console.log(img.length);
+                    if (index === img.length - 1) {
+                        setImageCover(url);
+                    }
+                });
+            });
+        }
+        for (let index = 0; index < img1.length; index++) {
+            const imagerRef1 = ref(storage, `images/${img1[index].name + v4()}`);
+            uploadBytes(imagerRef1, img1[index]).then(() => {
+                getDownloadURL(imagerRef1).then((url) => {
+                    // setImages([...images, { url: url }]);
+                    urls1.push({ url: url });
+                    //    console.log(images); // Được thực thi khi state đã được cập nhật
+                    // console.log(url); // in ra đường dẫn của ảnh
+                    // console.log(index);
+                    // console.log(img.length);
+                    if (index === img1.length - 1) {
+                        setImageTitle(url);
+                        setToan(true);
+                    }
+                });
+            });
+        }
+    };
+    // console.log(images);
+    useEffect(() => {
+        if (toan) {
+            handleSubmit();
+            // console.log('toan');
+        }
+    }, [toan]);
     return (
         <>
             <Menu>
@@ -52,7 +105,7 @@ console.log(product);
                     <h4>Đăng blog</h4>
                 </div>
                 <div className="panel-body">
-                    <form className="form-horizontal" onSubmit={handleSubmit}>
+                    <form className="form-horizontal">
                         <div className="form-group">
                             <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
                                 Tiêu đề
@@ -128,10 +181,11 @@ console.log(product);
                                         <input
                                             className="form-control"
                                             id="id_last_name"
-                                            placeholder="Ảnh tiêu đề"
-                                            type="text"
-                                            value={imageTitle}
-                                            onChange={(event) => setImageTitle(event.target.value)}
+                                            placeholder="Ảnh 3"
+                                            type="file"
+                                            onChange={(e) => {
+                                                setImg(e.target.files);
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -147,24 +201,24 @@ console.log(product);
                                         <input
                                             className="form-control"
                                             id="id_last_name"
-                                            placeholder=" Ảnh bìa"
-                                            type="text"
-                                            value={imageCover}
-                                            onChange={(event) => setImageCover(event.target.value)}
+                                            placeholder="Ảnh 3"
+                                            type="file"
+                                            onChange={(e) => {
+                                                setImg1(e.target.files);
+                                            }}
                                         />
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div className="form-group">
-                            <div className="col-md-offset-4 col-md-3">
-                                <button className="btn-lg btn-primary" type="submit">
-                                    Tải lên
-                                </button>
-                            </div>
-                        </div>
                     </form>
+                    <div className="form-group">
+                        <div className="col-md-offset-4 col-md-3">
+                            <button className="btn-lg btn-primary" onClick={upImg}>
+                                Tải lên
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

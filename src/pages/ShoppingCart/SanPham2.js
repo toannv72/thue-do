@@ -83,14 +83,11 @@ function SanPham2() {
                                             <img src={e.images[0].url} alt="" className={cx('itemImg')} />
 
                                             <h3 className={cx('h3')}>{e.name}</h3>
-                                            <div className={cx('prodTotal ')}>
-                                                <p>{e.price}</p>
+                                            <div className={cx('prodTotal')}>
+                                                <p>{e.price.toLocaleString('vi-VN')} Đ</p>
                                             </div>
                                             <a href={`./pay:${e.id}`}>
-                                                <Button style={{ background: '#fe2c55', color: 'white' }}>
-                                                    {' '}
-                                                    Thuê
-                                                </Button>
+                                                <Button style={{ background: '#fe2c55', color: 'white' }}>Thuê</Button>
                                             </a>
                                             <div className={cx('cartSectio')}>
                                                 <button

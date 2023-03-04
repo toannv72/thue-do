@@ -133,11 +133,11 @@
 }
 
 .cart .items .cartSection {
-        display: flex;
+    display: flex;
     vertical-align: middle;
-width: 90%;
-            align-items: center;
-            justify-content: space-between;
+    width: 90%;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .cart .items .cartSection .itemNumber {
@@ -191,8 +191,13 @@ width: 90%;
 .cart .items .cartSection.prodTotal p {
     font-weight: bold;
     font-size: 1.25em;
+    color: #000000;
 }
-
+.prodTotal p {
+    font-weight: bold;
+    color: #000000;
+    font-size: 1.25em;
+}
 .cart .items .cartSection input.qty {
     width: 2em;
     text-align: center;
@@ -248,9 +253,11 @@ button.remove {
 button.remove:hover {
     background: #f30;
 }
-.h3{
+
+.h3 {
     width: 500px;
 }
+
 .promoCode {
     border: 2px solid #efefef;
     float: left;
