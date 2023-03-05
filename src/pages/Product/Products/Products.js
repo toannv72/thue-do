@@ -17,22 +17,25 @@ export default function Products() {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-
-    const product = { id: lastPart };
-    const user = { id: JSON.parse(localStorage.getItem('user')).id };
-    console.log(user);
+             localStorage.setItem('car', false);
+    
+    // console.log(user);
     const createUser = () => {
+        const product = { id: lastPart };
+        const user = { id: JSON.parse(localStorage.getItem('user')).id };
         const products = { product, user };
         axios
             .post(`${process.env.REACT_APP_BASE_URLS}cart-iteam/create`, products)
             .then((response) => {
-                console.log(response.data);
+               
                 toast.success(`Thêm vào giỏ thành công!`);
+            
             })
             .catch((error) => {
                 console.log(error);
                 toast.error(`Thêm vào giỏ không thành công!`);
             });
+      
     };
 
     useEffect(() => {
@@ -52,7 +55,6 @@ export default function Products() {
                 },
             );
     }, []);
-
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {

@@ -7,6 +7,9 @@ import { DateRange } from 'react-date-range';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 // import { Calendar } from 'react-date-range';
 import moment from 'moment';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+
 function Settings() {
     const currentUser = localStorage.getItem('user');
     const User = JSON.parse(localStorage.getItem('user'));
@@ -25,11 +28,11 @@ function Settings() {
             key: 'selection',
         },
     ]);
-const [sumDay, setSumDay] = useState(0);
+    const [sumDay, setSumDay] = useState(0);
     const BorrowDate = moment(state[0].startDate);
     const ReturnDate = moment(state[0].endDate);
-    const orderBorrowDate = BorrowDate.format('YYYY/MM/DD');
-    const orderReturnDate = ReturnDate.format('YYYY/MM/DD');
+    const orderBorrowDate = BorrowDate.format('YYYY-MM-DD');
+    const orderReturnDate = ReturnDate.format('YYYY-MM-DD');
     const orderBorrowDay = BorrowDate.format('DD');
     const orderReturnDay = ReturnDate.format('DD');
     const day = orderReturnDay - orderBorrowDay + 1;
@@ -41,13 +44,13 @@ const [sumDay, setSumDay] = useState(0);
     // console.log(orderReturnDay);
     const handleClose = () => {
         setOpen(false);
-         const date = moment(orderBorrowDate);
-         const date1 = moment(orderReturnDate);
+        const date = moment(orderBorrowDate);
+        const date1 = moment(orderReturnDate);
         const numDays = date1.diff(date, 'days');
-     
+
         setSumDay(numDays);
     };
-       console.log(sumDay);
+    console.log(sumDay);
     const handleOpen = () => {
         setOpen(true);
     };
@@ -75,20 +78,53 @@ const [sumDay, setSumDay] = useState(0);
             );
     }, []);
     const [pay, setPay] = useState(products.price);
+    const [name, setName] = useState(User.lastName + ' ' + User.firstName);
+    const [address, setAddress] = useState(User.address);
+    const [phone, setPhone] = useState(User.phone);
+    // const [totalPrice, setTotalPrice] = useState(10);
+    const [message, setMessage] = useState('');
+    console.log(message);
+
+    const order = async () => {
+        const order = {
+            totalPrice: products.price + (products.price * sumDay) / 2 + products.deposit,
+            message: message,
+            address: address,
+            phone: phone,
+            name: name,
+            orderDetails: {
+                orderBorrowDate: orderBorrowDate,
+                orderReturnDate: orderReturnDate,
+                productId: products.id,
+            },
+            userId: User.id,
+        };
+        console.log(order);
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URLS}order/create`, order);
+            console.log(response.data);
+               toast.success(`Đặt hàng thành công!`);
+        } catch (error) {
+            console.log(error);
+               toast.error(`Đặt không thành công!`);
+               console.log('no');
+
+        }
+    };
 
     return (
         <>
             {currentUser ? (
                 <div className="pay-main">
+                    <ToastContainer />
                     <div className="border-envelop"></div>
                     <div className="pay-header-user-location">
-                        <div className="pay-info">
+                        {/* <div className="pay-info">
                             Thông tin nhận hàng:<br></br>
                             <div className="pay-info-item i-name-phone">
                                 <span className="pay-header-user-name">
                                     TÊN:
-                                    {User.lastName}
-                                    {User.firstName}
+                                    {User.lastName} {User.firstName}
                                 </span>
                             </div>
                             <div className="pay-info-item i-phone">
@@ -102,7 +138,7 @@ const [sumDay, setSumDay] = useState(0);
                                     <span>Thay đổi</span>
                                 </a>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="pay-container">
                             <div className="pay-header-selection header-res">
                                 <div className="pay-product">
@@ -175,6 +211,8 @@ const [sumDay, setSumDay] = useState(0);
                                                 <input
                                                     className="pay-footer-noting-txt"
                                                     placeholder="Lưu ý cho người bán"
+                                                    value={message}
+                                                    onChange={(e) => setMessage(e.target.value)}
                                                 />
                                             </div>
                                         </div>
@@ -200,10 +238,41 @@ const [sumDay, setSumDay] = useState(0);
                                         </div>
                                     </div>
                                 </div>
-
+                                <div className="pay-info">
+                                    Thông tin nhận hàng:<br></br>
+                                    <div className="pay-info-item i-name-phone">
+                                        <input value={name} onChange={(e) => setName(e.target.value)} />
+                                    </div>
+                                    <br />
+                                    <div className="pay-info-item i-phone">
+                                        Số điện thoại:
+                                        <span className="pay-header-user-phone">
+                                            {' '}
+                                            <br />
+                                            <input value={phone} onChange={(e) => setPhone(e.target.value)} />
+                                        </span>
+                                    </div>
+                                    <br />
+                                    <div className="pay-info-item i-phone">
+                                        ĐỊA CHỈ:
+                                        <span className="pay-header-user-phone">
+                                            <input value={address} onChange={(e) => setAddress(e.target.value)} />
+                                        </span>
+                                    </div>
+                                    {/* <div className="pay-info-item i-change">
+                                        <a href="" className="pay-change-selected">
+                                            <span>Thay đổi</span>
+                                        </a>
+                                    </div> */}
+                                </div>
                                 <div className="pay-footer-sunmit divSubmitBtn">
                                     <div className="div-payment">
-                                        <input type="button" value="Thanh toán" className="pay-submit-btn" />
+                                        <input
+                                            type="button"
+                                            value="Thanh toán"
+                                            className="pay-submit-btn"
+                                            onClick={order}
+                                        />
                                     </div>
                                 </div>
                             </div>

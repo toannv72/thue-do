@@ -59,7 +59,7 @@ function SanPham2() {
                     setError(error);
                 },
             );
-    }, [open]);
+    }, [open]); 
     if (error) {
         return <ErrorToast message={error.message} />;
     } else if (!isLoaded) {

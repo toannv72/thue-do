@@ -6,7 +6,7 @@ import {
     faEarthAsia,
     faEllipsisVertical,
     faGear,
-    // faKeyboard,  
+    // faKeyboard,
     faSignOut,
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
@@ -22,6 +22,9 @@ import Menu from '~/components/Popper/Menu';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 // import Image from '~/components/Image';
 import Search from '../Search';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import tr from 'date-fns/esm/locale/tr/index.js';
 
 const cx = classNames.bind(styles);
 
@@ -57,6 +60,9 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
+    const [error, setError] = useState(null);
+    const [items, setItems] = useState([]);
+
     // check dang nhap
     const currentUser = localStorage.getItem('user');
     const imgUser = JSON.parse(localStorage.getItem('user'));
@@ -68,7 +74,37 @@ function Header() {
                 break;
             default:
         }
-    }; 
+    };
+
+
+    useEffect(() => {
+        if (imgUser) {
+            const user = JSON.parse(localStorage.getItem('user')).id;
+
+          
+            // localStorage.setItem('car', false);
+   
+            setTimeout(() => {
+          fetch(`${process.env.REACT_APP_BASE_URLS}cart-iteam/viewCart/${user}`)
+              .then((res) => res.json())
+              .then(
+                  (result) => {
+                      // setIsLoaded(true);
+                      setItems(result);
+                  },
+                  // Note: it's important to handle errors here
+                  // instead of a catch() block so that we don't swallow
+                  // exceptions from actual bugs in components.
+                  (error) => {
+                      // setIsLoaded(true);
+                      setError(error);
+                  },
+              );
+            //  console.log("toan");
+         }, 2000);
+        }
+    }, );
+    // console.log(items.product);
 
     const userMenu = [
         {
@@ -107,16 +143,19 @@ function Header() {
                                 <Tippy delay={[0, 50]} content="Giỏ Hàng " placement="bottom">
                                     <button className={cx('action-btn')}>
                                         <UploadIcon />
+                                        <span className={cx('badge')}>
+                                            {items.product ? items.product.length : 0}
+                                        </span>
                                     </button>
                                 </Tippy>
                             </Link>
-                            <Link to={config.routes.message}>
+                            {/* <Link to={config.routes.message}>
                                 <Tippy delay={[0, 50]} content="Tin Nhắn" placement="bottom">
                                     <button className={cx('action-btn')}>
                                         <MessageIcon />
                                     </button>
                                 </Tippy>
-                            </Link>
+                            </Link> */}
                             <Tippy delay={[0, 50]} content="Thông báo" placement="bottom">
                                 <button className={cx('action-btn')}>
                                     <InboxIcon />
