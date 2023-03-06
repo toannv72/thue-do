@@ -39,7 +39,7 @@ function Search() {
                     setError(error);
                 },
             );
-    }, []);
+    }, [lastPart]);
 
     if (error) {
         return <ErrorToast message={error.message} />;

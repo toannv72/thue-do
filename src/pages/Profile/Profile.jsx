@@ -8,7 +8,7 @@ import config from '~/config';
 
 const cx = classNames.bind(styles);
 function Profile() {
-    const id = localStorage.getItem('username');
+    // const id = localStorage.getItem('username');
     const imgUser = JSON.parse(localStorage.getItem('user'));
 
     return (

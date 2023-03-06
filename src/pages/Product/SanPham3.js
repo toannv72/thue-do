@@ -30,7 +30,7 @@ function SanPham3({ url }) {
                     setError(error);
                 },
             );
-    }, []);
+    }, [url]);
 
     if (error) {
         return <ErrorToast message={error.message} />;

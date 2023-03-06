@@ -13,12 +13,12 @@ export default function Products() {
     const cx = className.bind(styles);
     const currentUrl = window.location.href;
     const urlParts = currentUrl.split('products:');
-    const [lastPart, setLastPart] = useState(urlParts[urlParts.length - 1]);
+    const lastPart=urlParts[urlParts.length - 1];
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-             localStorage.setItem('car', false);
-    
+   
+
     // console.log(user);
     const createUser = () => {
         const product = { id: lastPart };
@@ -27,17 +27,16 @@ export default function Products() {
         axios
             .post(`${process.env.REACT_APP_BASE_URLS}cart-iteam/create`, products)
             .then((response) => {
-               
                 toast.success(`Thêm vào giỏ thành công!`);
-            
+              
             })
             .catch((error) => {
                 console.log(error);
                 toast.error(`Thêm vào giỏ không thành công!`);
             });
-      
-    };
-
+           
+        };
+        
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}products/getOne/${lastPart}`)
             .then((res) => res.json())
@@ -54,7 +53,7 @@ export default function Products() {
                     setError(error);
                 },
             );
-    }, []);
+    }, [lastPart]);
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {

@@ -1,9 +1,9 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { red } from '@mui/material/colors';
-import axios from 'axios';
+// import { red } from '@mui/material/colors';
+// import axios from 'axios';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
-import { DateRange } from 'react-date-range';
+// import { DateRange } from 'react-date-range';
 import { useLocation } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import ErrorToast from '../Product/ErrorToast';
@@ -59,7 +59,7 @@ function SanPham2() {
                     setError(error);
                 },
             );
-    }, [open]); 
+    }, [open, user]); 
     if (error) {
         return <ErrorToast message={error.message} />;
     } else if (!isLoaded) {

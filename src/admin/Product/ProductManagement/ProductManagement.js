@@ -88,8 +88,6 @@ export default function CreateProducts() {
             .catch((error) => {
                 console.log(error);
                 toast.error(`Thay đổi sản phẩm không thành công!`);
-                toast.error(`Thay đổi sản phẩm không thành công!`);
-                toast.error(`Thay đổi sản phẩm không thành công!`);
             });
         setToan(false);
     };
