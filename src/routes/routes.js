@@ -39,6 +39,7 @@ import Technology from '~/pages/ProductCategory/Technology';
 import Sport from '~/pages/ProductCategory/Sport';
 import Fashion from '~/pages/ProductCategory/Fashion';
 import Jewelry from '~/pages/ProductCategory/Jewelry';
+import About from '~/pages/About';
 // import ProductManagement from '~/layouts/Admin/ProductManagement/ProductManagement';
 
 // Public routes
@@ -59,6 +60,7 @@ const publicRoutes = [
     { path: config.routes.products, component: Products },
     { path: config.routes.post, component: Posts },
     { path: config.routes.pay, component: Pay },
+    { path: config.routes.about, component: About },
 
     { path: config.routes.technology, component: Technology },
     { path: config.routes.sport, component: Sport },

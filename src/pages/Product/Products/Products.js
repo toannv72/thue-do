@@ -32,7 +32,7 @@ export default function Products() {
             })
             .catch((error) => {
                 console.log(error);
-                toast.error(`Thêm vào giỏ không thành công!`);
+                toast.error(`${error.response.data.message}`);
             });
            
         };

@@ -105,11 +105,11 @@ function Settings() {
         console.log(order);
         try {
             const response = await axios.post(`${process.env.REACT_APP_BASE_URLS}order/create`, order);
-            // console.log(response.data);
+            console.log(response.data);
             toast.success(`Đặt hàng thành công!`);
         } catch (error) {
-            console.log(error);
-            toast.error(`Đặt không thành công!`);
+            console.log(error.response.data.message);
+            toast.error(`${error.response.data.message}!`);
             console.log('no');
         }
     };

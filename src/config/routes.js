@@ -23,11 +23,11 @@ const routes = {
     sport: '/sport',
     fashion: '/fashion',
     jewelry: '/jewelry',
+    about: '/about',
 
     EditProfile: '/editProfile',
     History: '/history',
     EditOrders: '/editOrders',
- 
 
     adminHome: '/admin/home',
 
