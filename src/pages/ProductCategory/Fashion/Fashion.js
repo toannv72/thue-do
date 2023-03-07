@@ -19,7 +19,7 @@ function Fashion() {
                     autoFocus={true}
                     emulateTouch={true}
                     //chế độ trung tâm
-                    centerMode={true}
+                    // centerMode={true}
                 >
                     {/* {items.map((item, index) => (
                         <div key={index}>
@@ -27,12 +27,15 @@ function Fashion() {
                      
                         </div>
                     ))} */}
-                    <img alt="" src="https://github.com/toansola3/thue-do/blob/master/img/QuanAo.png?raw=true" />
-                    <img alt="" src="https://github.com/toansola3/thue-do/blob/master/img/QuanAo2.png?raw=true" />
-                    <img alt="" src="https://github.com/toansola3/thue-do/blob/master/img/QuanAo3.png?raw=true" />
+                    <img
+                        alt=""
+                        src="https://raw.githubusercontent.com/toansola3/thue-do/master/img/Ch%C3%BAc%20m%E1%BB%ABng%20!.png"
+                    />
+                    {/* <img alt="" src="https://github.com/toansola3/thue-do/blob/master/img/QuanAo2.png?raw=true" />
+                    <img alt="" src="https://github.com/toansola3/thue-do/blob/master/img/QuanAo3.png?raw=true" /> */}
                 </Carousel>
             </div>
-            <FeaturedTitle titles="Thời Trang" children={<Category url="categories/getOne/1" />} />
+            <FeaturedTitle titles="Nhạc cụ" children={<Category url="categories/getOne/1" />} />
             <Quote />
         </div>
     );

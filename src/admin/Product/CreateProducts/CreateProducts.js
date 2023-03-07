@@ -9,6 +9,7 @@ import axios from 'axios';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '~/configs/firebase';
 import { v4 } from 'uuid';
+import { CircularProgress } from '@mui/material';
 const cx = classNames.bind(styles);
 export default function CreateProducts() {
     const [name, setName] = useState('');
@@ -18,15 +19,16 @@ export default function CreateProducts() {
     const [category, setCategory] = useState();
     const [images, setImages] = useState([]);
     const [toan, setToan] = useState(false);
-
+    const [circular, setCircular] = useState(false);
     const handleSubmit1 = () => {
         const product = { name, description, price, images, category, deposit };
-
+        console.log(product);
         axios
             .post(`${process.env.REACT_APP_BASE_URLS}products/create`, product)
             .then((response) => {
                 if (response.status === 200) {
                     toast.success(`Thêm sản phẩm thành công!`);
+                    console.log(response);
                 } else {
                     toast.error(`Thêm sản phẩm không thành công!`);
                 }
@@ -36,18 +38,21 @@ export default function CreateProducts() {
                 toast.error(`Thêm sản phẩm không thành công!`);
             });
         setToan(false);
+        setCircular(false);
+
     };
     const [img, setImg] = useState(null);
 
     const upImg = () => {
         if (img == null) return;
         const urls = [];
+        setCircular(true);
         for (let index = 0; index < img.length; index++) {
             const imagerRef = ref(storage, `images/${img[index].name + v4()}`);
             uploadBytes(imagerRef, img[index]).then(() => {
                 getDownloadURL(imagerRef).then((url) => {
                     // setImages([...images, { url: url }]);
-                    urls.push({ url: url });
+                    urls.push({ url: url, name: index });
                     //    console.log(images); // Được thực thi khi state đã được cập nhật
                     // console.log(url); // in ra đường dẫn của ảnh
                     // console.log(index);
@@ -98,7 +103,7 @@ export default function CreateProducts() {
                                     onChange={(event) => setCategory({ id: event.target.value })}
                                 >
                                     <option value="">--Chọn loại sản phẩm--</option>
-                                    <option value="1">Quần áo</option>
+                                    <option value="1">Nhạc cụ</option>
                                     <option value="2">Trang sức</option>
                                     <option value="3">Công nghệ</option>
                                     <option value="4">Thể thao</option>
@@ -199,6 +204,8 @@ export default function CreateProducts() {
                             </div>
                         </div>
                     </form>
+                    {circular && <><CircularProgress color="secondary" /></>
+                    }
                     <div className="form-group">
                         <div className="col-md-offset-4 col-md-3">
                             <button className="btn-lg btn-primary" onClick={upImg}>

@@ -80,9 +80,15 @@ function SanPham2() {
                                 <div className={cx('items')} key={index}>
                                     <div className={cx('infoWrap')}>
                                         <div className={cx('cartSection')}>
-                                            <img src={e.images[0].url} alt="" className={cx('itemImg')} />
+                                            <a href={`/products:${e.id}`}>
+                                                {' '}
+                                                <img src={e.images[0].url} alt="" className={cx('itemImg')} />
+                                            </a>
 
-                                            <h3 className={cx('h3')}>{e.name}</h3>
+                                            <a href={`/products:${e.id}`}>
+                                                {' '}
+                                                <h3 className={cx('h3')}>{e.name}</h3>
+                                            </a>
                                             <div className={cx('prodTotal')}>
                                                 <p>{e.price.toLocaleString('vi-VN')} Đ</p>
                                             </div>

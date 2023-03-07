@@ -179,7 +179,9 @@
 
 .cart .items .cartSection .itemImg {
     width: 4em;
+    height: 6em;
     float: left;
+    object-fit: cover;
 }
 
 .cart .items .cartSection.qtyWrap,
@@ -193,11 +195,13 @@
     font-size: 1.25em;
     color: #000000;
 }
+
 .prodTotal p {
     font-weight: bold;
     color: #000000;
     font-size: 1.25em;
 }
+
 .cart .items .cartSection input.qty {
     width: 2em;
     text-align: center;
