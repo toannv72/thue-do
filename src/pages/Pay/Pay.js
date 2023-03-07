@@ -77,16 +77,16 @@ function Settings() {
                     // setError(error);
                 },
             );
-    }, []);
-    const [pay, setPay] = useState(products.price);
+    }, [lastPart]);
+    // const [pay, setPay] = useState(products.price);
     const [name, setName] = useState(User.lastName + ' ' + User.firstName);
     const [address, setAddress] = useState(User.address);
     const [phone, setPhone] = useState(User.phone);
-    const [id, setid] = useState(User.id);
+    // const [id, setid] = useState(User.id);
 
     // const [totalPrice, setTotalPrice] = useState(10);
     const [message, setMessage] = useState('');
-    console.log(id);
+ 
 
     const order = async () => {
         const order = {
@@ -95,7 +95,7 @@ function Settings() {
             address: address,
             phone: phone,
             name: name,
-            userId: id,
+            userId: User.id,
             orderDetails: {
                 orderBorrowDate: orderBorrowDate,
                 orderReturnDate: orderReturnDate,
@@ -109,7 +109,8 @@ function Settings() {
             toast.success(`Đặt hàng thành công!`);
         } catch (error) {
             console.log(error.response.data.message);
-            toast.error(`${error.response.data.message}!`);
+            // toast.error(`${error.response.data.message}!`);
+            toast.error(`Sản phẩm này đã có người thuê!`);
             console.log('no');
         }
     };
@@ -238,7 +239,7 @@ function Settings() {
                                         <div div="pay-shipping-change-delivery">
                                             <div className="pay-shipping-change-transporter">
                                                 <dt className="pay-totalprice-label"> Tổng số tiền thanh toán </dt>
-                                                <dd className="pay-total-price-payment">
+                                                <dd className="pay-total-price-payment" style={{fontSize:"2.3rem"}}>
                                                     {products.price + (products.price * sumDay) / 2 + products.deposit}
                                                 </dd>
                                             </div>

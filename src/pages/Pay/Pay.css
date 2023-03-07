@@ -39,8 +39,32 @@
 }
 
 
+.pay-info-item input {
 
+    width: 500px;
+    flex: 1 1;
+    height: 100%;
+    padding-right: 40px;
+    color: var(--black);
+    font-size: 1.6rem;
+    caret-color: var(--primary);
+    background-color: transparent;
+    font-family: var(--font-family);
+}
 
+.pay-info-item {
+    display: inline-flex;
+    text-align: left;
+
+    padding: 1%;
+    position: relative;
+    height: 46px;
+    padding-left: 16px;
+    display: flex;
+    background-color: rgba(22, 24, 35, 0.06);
+    border-radius: var(--search-border-radius);
+    border: 1.5px solid transparent;
+}
 
 .pay-info {
     display: block;
@@ -50,12 +74,6 @@
     align-items: stretch;
 }
 
-.pay-info-item {
-    display: inline-flex;
-    text-align: left;
-
-    padding: 3%;
-}
 
 .pay-header-selection {
 
@@ -109,10 +127,13 @@
 }
 
 .pay-quantity button {
-    background-color: rgb(254 44 85);
-    color: #ffffff;
+    background-color: rgb(255, 255, 255);
+    color: #f50c0c;
 }
-
+.pay-quantity button:hover{
+    /* background-color: rgb(254 44 85); */
+    color: #f5c30c;
+}
 .pay-total-price {
     width: 20%;
 
@@ -207,6 +228,17 @@
     padding: 1%;
     font: 12;
     height: 60px;
+
+        text-align: left;
+            padding: 1%;
+            position: relative;
+            height: 46px;
+            padding-left: 16px;
+            display: flex;
+            background-color: rgba(22, 24, 35, 0.06);
+            border-radius: var(--search-border-radius);
+            border: 1.5px solid transparent;
+            width: 190px;
 }
 
 .pay-item-footer-transport {
@@ -335,11 +367,13 @@
     /* margin-left: auto; */
     text-align: right;
     float: right;
+    padding: 15px;
+   
 }
 
 .pay-totalprice-label {
     display: inline;
-    width: 77%;
+    width: 74%;
     padding: 15px;
 }
 
@@ -397,6 +431,8 @@
         display: block;
         padding: 1%;
     }
+
+
 
     .pay-header-selection {
         align-items: stretch;

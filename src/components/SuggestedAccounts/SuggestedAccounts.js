@@ -11,9 +11,9 @@ function SuggestedAccounts({ label }) {
             <p className={cx('label')}>{label}</p>
 
             <AccountItem
-                name="Thời Trang"
+                name="Nhạc cụ"
                 link="/fashion"
-                img="https://scontent.fsgn2-7.fna.fbcdn.net/v/t1.15752-9/328650646_1024693248523162_6394091229000750571_n.png?_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=PYgWD-pHCJ0AX9Sth7F&_nc_ht=scontent.fsgn2-7.fna&oh=03_AdR-Lj1_XPFnRgZJpxMpPwyZE0xrdm7kzcjF6fU1RmMVTg&oe=64242E77"
+                img="https://images.unsplash.com/photo-1610087844449-5b1e6f34032e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
             />
             <AccountItem
                 name="Công Nghệ"

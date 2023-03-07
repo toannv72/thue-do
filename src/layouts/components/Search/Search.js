@@ -10,7 +10,7 @@ import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/hooks';
 import styles from './Search.module.scss';
-import { Link } from 'react-router-dom';
+
 
 const cx = classNames.bind(styles);
 
@@ -57,9 +57,11 @@ function Search() {
             setSearchValue(searchValue);
         }
     };
-    const handleSearch=() => {
-    console.log(123);
-}
+    const handleSearch = (event) => {
+        if (event.key === 'Enter') {
+            window.location.href = `/search:${searchValue}`;
+        }
+    };
     return (
         // Using a wrapper <div> tag around the reference element solves
         // this by creating a new parentNode context.
@@ -79,34 +81,34 @@ function Search() {
                 )}
                 onClickOutside={handleHideResult}
             >
-                    <div className={cx('search')}>
-                        <input
-                            ref={inputRef}
-                            value={searchValue}
-                            placeholder="Tìm kiếm món đồ nào đó..."
-                            spellCheck={false}
-                            onChange={handleChange}
-                            onFocus={() => setShowResult(true)}
-                        />
-                        {!!searchValue && !loading && (
-                            <button className={cx('clear')} onClick={handleClear}>
-                                <FontAwesomeIcon icon={faCircleXmark} />
-                            </button>
-                        )}
-                        {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-                        {searchValue ? (
-                            <a href={`/search:${searchValue}`}>
-                                <button className={cx('search-btn')}>
-                                    <SearchIcon />
-                                </button>
-                            </a>
-                        ) : (
-                            <button className={cx('search-btn')} >
+                <div className={cx('search')} >
+                    <input
+                        ref={inputRef}
+                        value={searchValue}
+                        placeholder="Tìm kiếm món đồ nào đó..."
+                        spellCheck={false}
+                        onChange={handleChange}
+                        onFocus={() => setShowResult(true)}
+                        onKeyPress={handleSearch}
+                    />
+                    {!!searchValue && !loading && (
+                        <button className={cx('clear')} onClick={handleClear}>
+                            <FontAwesomeIcon icon={faCircleXmark} />
+                        </button>
+                    )}
+                    {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
+                    {searchValue ? (
+                        <a href={`/search:${searchValue}`}>
+                            <button className={cx('search-btn')} type="button">
                                 <SearchIcon />
                             </button>
-                        )}
-                    </div>
-            
+                        </a>
+                    ) : (
+                        <button className={cx('search-btn')}>
+                            <SearchIcon />
+                        </button>
+                    )}
+                </div>
             </HeadlessTippy>
         </div>
     );
