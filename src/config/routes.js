@@ -21,7 +21,7 @@ const routes = {
 
     technology: '/technology',
     sport: '/sport',
-    fashion: '/fashion',
+    musicalInstruments: '/musicalInstruments',
     jewelry: '/jewelry',
     about: '/about',
 

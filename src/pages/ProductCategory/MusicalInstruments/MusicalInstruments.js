@@ -6,7 +6,7 @@ import styles from '../Category/SanPham3.module.scss';
 import classNames from 'classnames/bind';
 import { Carousel } from 'react-responsive-carousel';
 const cx = classNames.bind(styles);
-function Fashion() {
+function MusicalInstruments() {
     return (
         <div>
             <div className={cx('toan')}>
@@ -41,4 +41,4 @@ function Fashion() {
     );
 }
 
-export default Fashion;
+export default MusicalInstruments;

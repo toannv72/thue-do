@@ -8,13 +8,12 @@ export default function name() {
         <main className={cx('page-content')}>
             <div className={cx('card')}>
                 <div className={cx('content')}>
-                    <h2 className={cx('title')}>THỜI TRANG</h2>
+                    <h2 className={cx('title')}>NHẠC CỤ</h2>
                     <p className={cx('copy')}>
-                        Bạn đang cần một món đồ hiệu thật oách để dự một buổi tiệc, tại sao phải bỏ cả đống tiền để mua
-                        trong khi bạn chỉ dùng nó chỉ vài tiếng, chụp vài tấm hình post Facebook rồi chẳng khi nào đụng
-                        đến nữa. Giải pháp thông minh cho tình huống này là bạn có thể đi thuê. Thuê đồ vừa có thể giải
-                        quyết tất cả nhu cầu của bạn vừa tiết kiệm được tiền bạc, thời gian và công sức. Đó là lý do thị
-                        trường cho thuê đồ hiệu vô cùng nở rộ thời gian qua.
+                        Các nhà trị liệu âm nhạc làm việc trong các lĩnh vực liên quan đến sức khỏe, điều trị cho khách
+                        hàng ở mọi lứa tuổi từ trẻ sơ sinh đến người già và hỗ trợ các vấn đề và khuyết tật khác nhau.
+                        Nhà trị liệu âm nhạc xác định các mục tiêu phù hợp, thu thập và phân tích thông tin về phản ứng
+                        của khách hàng đối với âm nhạc và cung cấp các kế hoạch điều trị tùy chỉnh cho phù hợp.
                     </p>
                     <a className={cx('btn')} href="/fashion">
                         Book Now
@@ -29,8 +28,7 @@ export default function name() {
                         nếu bạn không có nhu cầu sử dụng chúng thường xuyên và trong thời gian dài sẽ gây lãng phí. Bên
                         cạnh đó, những dụng cụ thể thao chính hãng, mang đến trải nghiệm tuyệt vời cho người sử dụng
                         thường có giá bán tương đối cao mà không phải ai cũng có thể mua được. Việc thuê dụng cụ thể
-                        thao giúp bạn vừa tiết kiệm được chi phí , vừa có cơ hội sử dụng nhiều loại dụng cụ thể thao
-                        chính hãng và hiệu quả.
+                        thao giúp bạn vừa tiết kiệm được chi phí .
                     </p>
                     <a className={cx('btn')} href="/sport">
                         Book Now

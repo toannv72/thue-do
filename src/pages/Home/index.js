@@ -23,7 +23,7 @@ function ControlledCarousel() {
             {/* <Home3 /> */}
             <FeaturedTitle
                 titles="Gợi ý sản phẩm"
-                children={<SanPham3 url="products/getAllProduct?page=0&size=20" />}
+                children={<SanPham3 url="products/getAllProduct?page=0&size=10&sort=id%2Cdesc" />}
             />
             <Footer />
         </div>

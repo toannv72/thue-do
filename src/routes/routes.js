@@ -37,9 +37,10 @@ import { CreateBlogs } from '~/admin/Blog/CreateBlogs';
 import { BlogsManagement } from '~/admin/Blog/BlogsManagement';
 import Technology from '~/pages/ProductCategory/Technology';
 import Sport from '~/pages/ProductCategory/Sport';
-import Fashion from '~/pages/ProductCategory/Fashion';
+import MusicalInstruments from '~/pages/ProductCategory/MusicalInstruments';
 import Jewelry from '~/pages/ProductCategory/Jewelry';
 import About from '~/pages/About';
+import DefaultLayout2 from '~/layouts/DefaultLayout2';
 // import ProductManagement from '~/layouts/Admin/ProductManagement/ProductManagement';
 
 // Public routes
@@ -53,7 +54,6 @@ const publicRoutes = [
     { path: config.routes.search, component: Search },
     { path: config.routes.message, component: Message, layout: HeaderOnly },
     { path: config.routes.shoppingCart, component: ShoppingCart },
-    { path: config.routes.settings, component: Setting },
     { path: config.routes.feedback, component: feedback },
     { path: config.routes.logIn, component: Login, layout: HeaderOnly },
     { path: config.routes.register, component: Register, layout: HeaderOnly },
@@ -62,9 +62,11 @@ const publicRoutes = [
     { path: config.routes.pay, component: Pay },
     { path: config.routes.about, component: About },
 
+    { path: config.routes.settings, component: Setting, layout: DefaultLayout2},
+
     { path: config.routes.technology, component: Technology },
     { path: config.routes.sport, component: Sport },
-    { path: config.routes.fashion, component: Fashion },
+    { path: config.routes.musicalInstruments, component: MusicalInstruments },
     { path: config.routes.jewelry, component: Jewelry },
 
     { path: config.routes.EditProfile, component: EditProfile },
