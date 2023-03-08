@@ -17,6 +17,7 @@ export default function Products() {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
+    const currentUser = localStorage.getItem('user');
    
 
     // console.log(user);
@@ -108,16 +109,43 @@ export default function Products() {
                                     <div className={cx('h-y3ij')}>{products.description}</div>
                                     <div className={cx('p+UZsF')}>
                                         <div className={cx('ThEIyI')}>
-                                            <div className={cx('p+UZsF')}>
-                                                <button className={cx('btn')} type="button" onClick={createUser}>
-                                                    <span>Thêm vào giỏ hàng</span>
-                                                </button>
-                                                <Link to={`/pay:${products.id}`}>
-                                                    <button className={cx('btn')} type="button" aria-disabled="false">
-                                                        Thuê ngay
+                                            {currentUser ? (
+                                                <div className={cx('p+UZsF')}>
+                                                    <button className={cx('btn')} type="button" onClick={createUser}>
+                                                        <span>Thêm vào giỏ hàng</span>
                                                     </button>
-                                                </Link>
-                                            </div>
+                                                    <Link to={`/pay:${products.id}`}>
+                                                        <button
+                                                            className={cx('btn')}
+                                                            type="button"
+                                                            aria-disabled="false"
+                                                        >
+                                                            Thuê ngay
+                                                        </button>
+                                                    </Link>
+                                                </div>
+                                            ) : (
+                                                <div className={cx('p+UZsF')}>
+                                                    <a href={`/login`} target="_blank">
+                                                        <button
+                                                            className={cx('btn')}
+                                                            type="button"
+                                                            onClick={createUser}
+                                                        >
+                                                            <span>Thêm vào giỏ hàng</span>
+                                                        </button>
+                                                    </a>
+                                                    <a href={`/login`} target="_blank">
+                                                        <button
+                                                            className={cx('btn')}
+                                                            type="button"
+                                                            aria-disabled="false"
+                                                        >
+                                                            Thuê ngay
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

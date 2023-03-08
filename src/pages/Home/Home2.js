@@ -15,7 +15,7 @@ export default function name() {
                         Nhà trị liệu âm nhạc xác định các mục tiêu phù hợp, thu thập và phân tích thông tin về phản ứng
                         của khách hàng đối với âm nhạc và cung cấp các kế hoạch điều trị tùy chỉnh cho phù hợp.
                     </p>
-                    <a className={cx('btn')} href="/fashion">
+                    <a className={cx('btn')} href="/musicalInstruments">
                         Book Now
                     </a>
                 </div>
