@@ -53,15 +53,18 @@ export default function Order() {
                 />
 
                 <h1> Order</h1>
-                <div className={cx("project-boxes jsGridView")}>
+                <div
+                    className={cx('project-boxes jsGridView')}
+                    style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}
+                >
                     {items.contends.map((item, index) => (
-                        <div className={cx("project-box-wrapper")} key={index}>
-                            <div className={cx("project-box")}>
-                                <div className={cx("project-box-header")}>
+                        <div className={cx('project-box-wrapper')} key={index}>
+                            <div className={cx('project-box')}>
+                                <div className={cx('project-box-header')}>
                                     <span>{item.orderDetails[0].orderBorrowDate}</span>
                                     <span>{item.orderDetails[0].orderReturnDate}</span>
-                                    <div className={cx("more-wrapper")}>
-                                        <button className={cx("project-btn-more")}>
+                                    <div className={cx('more-wrapper')}>
+                                        <button className={cx('project-btn-more')}>
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="24"
@@ -72,7 +75,8 @@ export default function Order() {
                                                 strokeWidth="2"
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
-                                                className={cx("feather feather-more-vertical")}>
+                                                className={cx('feather feather-more-vertical')}
+                                            >
                                                 <circle cx="12" cy="12" r="1" />
                                                 <circle cx="12" cy="5" r="1" />
                                                 <circle cx="12" cy="19" r="1" />
@@ -80,34 +84,24 @@ export default function Order() {
                                         </button>
                                     </div>
                                 </div>
-                                <div className={cx("project-box-content-header")}>
-                                    <p className={cx("box-content-header" )}>
-                                    
-                                    {item.name}</p>
-                                    <p className={cx("box-content-subheader" )}>
-                                        
-                                    Địa chỉ: {item.address}</p>
-                                    <p className={cx("box-content-subheader" )}>
-                                        
-                                    SĐT{item.phone}</p>
-                                    <p className={cx("box-content-subheader" )}>
-                                        
-                                    Lời nhắn: {item.message}</p>
-                                    <p className={cx("box-content-subheader")}>
+                                <div className={cx('project-box-content-header')}>
+                                    <p className={cx('box-content-header')}>{item.name}</p>
+                                    <p className={cx('box-content-subheader')}>Địa chỉ: {item.address}</p>
+                                    <p className={cx('box-content-subheader')}>SĐT{item.phone}</p>
+                                    <p className={cx('box-content-subheader')}>Lời nhắn: {item.message}</p>
+                                    <p className={cx('box-content-subheader')}>
                                         Số tiền thu:{item.totalPrice.toLocaleString('vi-VN')}đ
                                     </p>
                                 </div>
-                                <div className={cx("box-progress-wrapper")}>
-                                    <p className={cx("box-progress-header")}>Progress</p>
-                                    <div className={cx("box-progress-bar")}>
-                                        <span className={cx("box-progress" )}>
-                                            
-                                        </span>
+                                <div className={cx('box-progress-wrapper')}>
+                                    <p className={cx('box-progress-header')}>Progress</p>
+                                    <div className={cx('box-progress-bar')}>
+                                        <span className={cx('box-progress')}></span>
                                     </div>
                                 </div>
-                                <div className={cx("project-box-footer")}>
-                                    <div className={cx("participants")}>
-                                        <button className={cx("add-participant")}>
+                                <div className={cx('project-box-footer')}>
+                                    <div className={cx('participants')}>
+                                        <button className={cx('add-participant')}>
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="12"
@@ -118,21 +112,19 @@ export default function Order() {
                                                 strokeWidth="3"
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
-                                                className={cx("feather feather-plus")}
+                                                className={cx('feather feather-plus')}
                                             >
                                                 <path d="M12 5v14M5 12h14" />
                                             </svg>
                                         </button>
                                     </div>
-                                    <div className={cx("days-left" )}>
-                                        
-                                    2 Days Left</div>
+                                    <div className={cx('days-left')}>2 Days Left</div>
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
-                <p style={{}}>
+                <p style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
                     <Pagination
                         count={totalPage}
                         page={currentPage}

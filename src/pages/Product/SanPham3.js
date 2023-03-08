@@ -19,7 +19,7 @@ function SanPham3({ url }) {
     const [items, setItems] = useState([]);
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
-        console.log(value);
+        // console.log(value);
     };
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}products/getAllProduct?page=${currentPage - 1}&size=10&sort=id%2Cdesc`)
@@ -78,16 +78,16 @@ function SanPham3({ url }) {
                         </div>
                     ))}
                 </div>
-                <Link to="/">
-                    {/* <div>Xem Thêm </div> */}
-                </Link>
-                <Pagination
-                    count={totalPage}
-                    page={currentPage}
-                    onChange={handlePageChange}
-                    variant="outlined"
-                    shape="rounded"
-                />
+                <Link to="/">{/* <div>Xem Thêm </div> */}</Link>
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+                    <Pagination
+                        count={totalPage}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        variant="outlined"
+                        shape="rounded"
+                    />
+                </div>
             </div>
         );
     }
