@@ -32,7 +32,10 @@ export default function Sport() {
                     <img alt="" src="https://github.com/toansola3/thue-do/blob/master/img/TheThao%20(3).png?raw=true" />
                 </Carousel>
             </div>
-            <FeaturedTitle titles="Thể Thao" children={<Category url="categories/getOne/4" />} />
+            <FeaturedTitle
+                titles="Thể Thao"
+                children={<Category url="4" />}
+            />
             <Quote />
         </div>
     );

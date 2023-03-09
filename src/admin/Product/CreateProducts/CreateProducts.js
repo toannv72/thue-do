@@ -20,6 +20,7 @@ export default function CreateProducts() {
     const [images, setImages] = useState([]);
     const [toan, setToan] = useState(false);
     const [circular, setCircular] = useState(false);
+
     const handleSubmit1 = () => {
         const product = { name, description, price, images, category, deposit };
         console.log(product);
@@ -39,7 +40,6 @@ export default function CreateProducts() {
             });
         setToan(false);
         setCircular(false);
-
     };
     const [img, setImg] = useState(null);
 
@@ -47,23 +47,32 @@ export default function CreateProducts() {
         if (img == null) return;
         const urls = [];
         setCircular(true);
+   
+
         for (let index = 0; index < img.length; index++) {
             const imagerRef = ref(storage, `images/${img[index].name + v4()}`);
             uploadBytes(imagerRef, img[index]).then(() => {
                 getDownloadURL(imagerRef).then((url) => {
                     // setImages([...images, { url: url }]);
-                    urls.push({ url: url, name: index });
+                    urls.push({ url: url, name: `abc${index + 2}` });
                     //    console.log(images); // Được thực thi khi state đã được cập nhật
                     // console.log(url); // in ra đường dẫn của ảnh
                     // console.log(index);
                     // console.log(img.length);
-                    if (index === img.length - 1) {
+                    // console.log(urls);
+                    console.log(img.length);
+                    console.log(urls.length);
+                    
+                    if (img.length === urls.length) {
                         setImages(urls);
                         setToan(true);
+                        // console.log("tong",img.length);
+                        // console.log('tong2', index);
                     }
                 });
             });
         }
+        // setImages(urls);
     };
     // console.log(images);
     useEffect(() => {
@@ -204,8 +213,11 @@ export default function CreateProducts() {
                             </div>
                         </div>
                     </form>
-                    {circular && <><CircularProgress color="secondary" /></>
-                    }
+                    {circular && (
+                        <>
+                            <CircularProgress color="secondary" />
+                        </>
+                    )}
                     <div className="form-group">
                         <div className="col-md-offset-4 col-md-3">
                             <button className="btn-lg btn-primary" onClick={upImg}>

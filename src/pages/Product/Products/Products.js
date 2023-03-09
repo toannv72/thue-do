@@ -55,6 +55,7 @@ export default function Products() {
                 },
             );
     }, [lastPart]);
+    console.log(lastPart);
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -155,7 +156,7 @@ export default function Products() {
                         <div className={cx('FeaturedTitle')}>
                             <FeaturedTitle
                                 titles="Sản phẩm liên quan"
-                                children={<Category url={`categories/getOne/${products.category.id}`} />}
+                                children={<Category url={`${products.category.id}`} />}
                             />
                         </div>
                     </div>

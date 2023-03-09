@@ -41,7 +41,10 @@ export default function Jewelry() {
                     />
                 </Carousel>
             </div>
-            <FeaturedTitle titles="Trang Sức" children={<Category url="categories/getOne/2" />} />
+            <FeaturedTitle
+                titles="Trang Sức"
+                children={<Category url="2" />}
+            />
             <Quote />
         </div>
     );

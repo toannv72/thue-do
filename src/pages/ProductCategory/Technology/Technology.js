@@ -31,7 +31,10 @@ export default function Technology() {
                    <img alt="" src="https://github.com/toansola3/thue-do/blob/master/img/CongNghe%20(1).png?raw=true" />
                </Carousel>
            </div>
-           <FeaturedTitle titles="Công Nghệ" children={<Category url="categories/getOne/3" />} />
+           <FeaturedTitle
+               titles="Công Nghệ"
+               children={<Category url="3" />}
+           />
            <Quote />
        </div>
    );

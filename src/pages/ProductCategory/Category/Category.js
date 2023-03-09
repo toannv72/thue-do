@@ -4,7 +4,7 @@ import Splitting from 'splitting';
 import { useEffect, useState } from 'react';
 import ErrorToast from '~/pages/Product/ErrorToast';
 import Image from '~/components/Image';
-
+import { Pagination } from '@mui/material';
 
 Splitting();
 const cx = classNames.bind(styles);
@@ -13,14 +13,20 @@ function Category({ url }) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
-
+    const [totalPage, setTotalPage] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+        console.log(value);
+    };
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_BASE_URLS}${url}`)
+        fetch(`${process.env.REACT_APP_BASE_URLS}categories/getOne/${url}?page=${currentPage-1}&size=10&sort=id%2Cdesc`)
             .then((res) => res.json())
             .then(
                 (result) => {
                     setIsLoaded(true);
                     setItems(result);
+                    setTotalPage(result.pageProducts.totalPage);
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
@@ -30,7 +36,7 @@ function Category({ url }) {
                     setError(error);
                 },
             );
-    }, []);
+    }, [currentPage]);
 
     if (error) {
         return <ErrorToast message={error.message} />;
@@ -39,7 +45,6 @@ function Category({ url }) {
     } else {
         return (
             <div>
-                
                 <div className={cx('card')}>
                     <link
                         rel="stylesheet"
@@ -47,7 +52,7 @@ function Category({ url }) {
                         integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
                         crossOrigin="anonymous"
                     />
-                    {items.products.map((item, index) => (
+                    {items.pageProducts.contends.map((item, index) => (
                         <div className={cx('container')} key={index}>
                             <a href={`/products:${item.id}`}>
                                 <div className={cx('to')}>
@@ -70,6 +75,13 @@ function Category({ url }) {
                         </div>
                     ))}
                 </div>
+                <Pagination
+                    count={totalPage}
+                    page={currentPage}
+                    onChange={handlePageChange}
+                    variant="outlined"
+                    shape="rounded"
+                />
             </div>
         );
     }

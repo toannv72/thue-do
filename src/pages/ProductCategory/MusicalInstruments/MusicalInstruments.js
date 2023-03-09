@@ -35,7 +35,10 @@ function MusicalInstruments() {
                     <img alt="" src="https://github.com/toansola3/thue-do/blob/master/img/QuanAo3.png?raw=true" /> */}
                 </Carousel>
             </div>
-            <FeaturedTitle titles="Nhạc cụ" children={<Category url="categories/getOne/1" />} />
+            <FeaturedTitle
+                titles="Nhạc cụ"
+                children={<Category url="1" />}
+            />
             <Quote />
         </div>
     );

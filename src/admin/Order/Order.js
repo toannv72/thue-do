@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import ErrorToast from '~/pages/Product/ErrorToast';
 import './style.css';
 import classNames from 'classnames/bind';
+import moment from 'moment';
 import styles from './Order.module.scss';
 const cx = classNames.bind(styles);
 
@@ -61,8 +62,19 @@ export default function Order() {
                         <div className={cx('project-box-wrapper')} key={index}>
                             <div className={cx('project-box')}>
                                 <div className={cx('project-box-header')}>
-                                    <span>{item.orderDetails[0].orderBorrowDate}</span>
-                                    <span>{item.orderDetails[0].orderReturnDate}</span>
+                                    <div>
+                                        <div>
+                                            <span>
+                                                Ngày thuê: {moment(item.orderDetails[0].orderBorrowDate).format('YYYY-MM-DD')}
+                                            </span>
+                                        </div>
+                                      
+                                        <div>
+                                            <span>
+                                                Ngày trả: {moment(item.orderDetails[0].orderReturnDate).format('YYYY-MM-DD')}
+                                            </span>
+                                        </div>
+                                    </div>
                                     <div className={cx('more-wrapper')}>
                                         <button className={cx('project-btn-more')}>
                                             <svg
