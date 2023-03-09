@@ -57,10 +57,7 @@ function EditOrders() {
                 <Menu>
                     <div className={cx('function')}>
                         <div className={cx('')}>
-                            <MenuItem title="Chỉnh sửa trang cá nhân" to={config.routes.EditProfile} />
-                        </div>
-                        <div className={cx('')}>
-                            <MenuItem title="Chỉnh sửa đơn đặt hàng " to={config.routes.EditOrders} />
+                            <MenuItem title="Đơn đặt hàng" to={config.routes.EditOrders} />
                         </div>
                         <div className={cx('')}>
                             <MenuItem title="Lịch sử" to={config.routes.History} />

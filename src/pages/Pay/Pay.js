@@ -167,7 +167,7 @@ function Settings() {
                                             <span className="pay-item-span-type"> </span>
                                         </div>
                                     </div>
-                                    <div className="pay-price">{products.price}</div>
+                                    <div className="pay-price">{products.price.toLocaleString('vi-VN')}</div>
                                     <div className="pay-quantity">
                                         <p> {orderBorrowDate}</p>
                                         <p>{orderReturnDate}</p>
@@ -199,7 +199,7 @@ function Settings() {
                                     </div>
                                     <div className="pay-total-price">
                                         {' '}
-                                        {products.price + (products.price * sumDay) / 2}
+                                        {(products.price + (products.price * sumDay) / 2).toLocaleString('vi-VN')}
                                     </div>
                                 </div>
 
@@ -232,15 +232,21 @@ function Settings() {
                                             <div div="pay-shipping-change-delivery">
                                                 <div className="pay-shipping-change-transporter">
                                                     {/* <dt className="pay-totalprice-label"></dt> */}
-                                                    <dd className="pay-total-price-payment">{products.deposit}</dd>
+                                                    <dd className="pay-total-price-payment">
+                                                        {products.deposit.toLocaleString('vi-VN')}
+                                                    </dd>
                                                 </div>
                                             </div>
                                         </div>
                                         <div div="pay-shipping-change-delivery">
                                             <div className="pay-shipping-change-transporter">
                                                 <dt className="pay-totalprice-label"> Tổng số tiền thanh toán </dt>
-                                                <dd className="pay-total-price-payment" style={{fontSize:"2.3rem"}}>
-                                                    {products.price + (products.price * sumDay) / 2 + products.deposit}
+                                                <dd className="pay-total-price-payment" style={{ fontSize: '2.3rem' }}>
+                                                    {(
+                                                        products.price +
+                                                        (products.price * sumDay) / 2 +
+                                                        products.deposit
+                                                    ).toLocaleString('vi-VN')}
                                                 </dd>
                                             </div>
                                         </div>

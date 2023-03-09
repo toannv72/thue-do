@@ -1,4 +1,3 @@
-
 import images from '~/assets/images';
 import './Profile.css';
 import classNames from 'classnames/bind';
@@ -21,7 +20,6 @@ function Profile() {
                         <img
                             className="user-header"
                             src={imgUser.imageUrl ? imgUser.imageUrl : images.noImage1}
-                           
                             alt=""
                         />
                     </div>
@@ -59,10 +57,7 @@ function Profile() {
                 <Menu>
                     <div className={cx('function')}>
                         <div className={cx('')}>
-                            <MenuItem title="Chỉnh sửa trang cá nhân" to={config.routes.EditProfile} />
-                        </div>
-                        <div className={cx('')}>
-                            <MenuItem title="Chỉnh sửa đơn đặt hàng " to={config.routes.EditOrders} />
+                            <MenuItem title="Đơn đặt hàng" to={config.routes.EditOrders} />
                         </div>
                         <div className={cx('')}>
                             <MenuItem title="Lịch sử" to={config.routes.History} />

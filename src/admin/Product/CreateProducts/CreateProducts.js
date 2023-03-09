@@ -44,7 +44,12 @@ export default function CreateProducts() {
     const [img, setImg] = useState(null);
 
     const upImg = () => {
-        if (img == null) return;
+        // if (img == null) return;
+
+        // console.log(category.id);
+        if (img == null||name === '' || price <= 0 || deposit <= 0 || category.id <=0) {
+            return toast.error(`vui lòng nhập đầy đủ thông tin !`);
+        } 
         const urls = [];
         setCircular(true);
    
@@ -60,8 +65,8 @@ export default function CreateProducts() {
                     // console.log(index);
                     // console.log(img.length);
                     // console.log(urls);
-                    console.log(img.length);
-                    console.log(urls.length);
+                    // console.log(img.length);
+                    // console.log(urls.length);
                     
                     if (img.length === urls.length) {
                         setImages(urls);
