@@ -17,7 +17,7 @@ function Settings() {
     const currentUrl = window.location.href;
     const urlParts = currentUrl.split('pay:');
     const lastPart = urlParts[urlParts.length - 1];
-// console.log(User.id);
+    // console.log(User.id);
     const [products, setProducts] = useState([]);
     // const [error, setError] = useState(null);
     // const [isLoaded, setIsLoaded] = useState(false);
@@ -42,7 +42,7 @@ function Settings() {
 
     // Tính toán số ngày giữa ngày mượn và ngày trả
 
-    // console.log(orderReturnDay);
+    console.log(products);
     const handleClose = () => {
         setOpen(false);
         const date = moment(orderBorrowDate);
@@ -86,7 +86,6 @@ function Settings() {
 
     // const [totalPrice, setTotalPrice] = useState(10);
     const [message, setMessage] = useState('');
- 
 
     const order = async () => {
         const order = {
@@ -167,7 +166,7 @@ function Settings() {
                                             <span className="pay-item-span-type"> </span>
                                         </div>
                                     </div>
-                                    <div className="pay-price">{products.price.toLocaleString('vi-VN')}</div>
+                                    <div className="pay-price">{(products.price * 1).toLocaleString('vi-VN')}</div>
                                     <div className="pay-quantity">
                                         <p> {orderBorrowDate}</p>
                                         <p>{orderReturnDate}</p>
@@ -198,7 +197,6 @@ function Settings() {
                                         </Dialog>
                                     </div>
                                     <div className="pay-total-price">
-                                        {' '}
                                         {(products.price + (products.price * sumDay) / 2).toLocaleString('vi-VN')}
                                     </div>
                                 </div>
@@ -233,7 +231,7 @@ function Settings() {
                                                 <div className="pay-shipping-change-transporter">
                                                     {/* <dt className="pay-totalprice-label"></dt> */}
                                                     <dd className="pay-total-price-payment">
-                                                        {products.deposit.toLocaleString('vi-VN')}
+                                                        {(products.deposit * 1).toLocaleString('vi-VN')}
                                                     </dd>
                                                 </div>
                                             </div>

@@ -1,10 +1,10 @@
 import images from '~/assets/images';
 import './Profile.css';
-import classNames from 'classnames/bind';
-import styles from './Product.module.scss';
 import Menu, { MenuItem } from './Menu';
 import config from '~/config';
 
+import classNames from 'classnames/bind';
+import styles from './Product.module.scss';
 const cx = classNames.bind(styles);
 function Profile() {
     // const id = localStorage.getItem('username');

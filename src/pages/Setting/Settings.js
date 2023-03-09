@@ -1,6 +1,8 @@
-import { TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
-
+import classNames from 'classnames/bind';
+import styles from './Settings.module.scss';
+const cx = classNames.bind(styles);
 function Settings() {
     const User = JSON.parse(localStorage.getItem('user'));
 
@@ -12,41 +14,56 @@ function Settings() {
     return (
         <>
             <p> Thay đổi thông tin </p>
-            <TextField
-                id="outlined-basic"
-                label="Họ "
-                variant="outlined"
-                size="Normal"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-            ></TextField>
-            <TextField
-                id="outlined-basic"
-                label="Tên"
-                variant="outlined"
-                size="Normal"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-            ></TextField>
-           
-            <TextField
-                id="outlined-basic"
-                label="Địa chỉ nhận hàng"
-                variant="outlined"
-                size="Normal"
-                fullWidth
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-            ></TextField>
-            <TextField
-                id="outlined-basic"
-                label="Số điện thoại"
-                variant="outlined"
-                size="Normal"
-                fullWidth
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-            ></TextField>
+            <div classNames={cx('TextField1')} style={{ margin: 10 }}>
+                <TextField
+                    disabled
+                    // id="filled-disabled"
+                    defaultValue="Hello World"
+                    // variant="filled"
+                    label="Họ "
+                    size="Normal"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                ></TextField>
+            </div>
+            <div classNames={cx('TextField')} style={{ margin: 10 }}>
+                <TextField
+                    id="outlined-basic"
+                    label="Tên"
+                    disabled
+                    // variant="filled"
+                    size="Normal"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                ></TextField>
+            </div>
+            <div classNames={cx('TextField')} style={{ margin: 10 }}>
+                <TextField
+                    id="standard-disabled"
+                    label="Địa chỉ nhận hàng"
+                    // variant="filled"
+                    disabled
+                    size="Normal"
+                    fullWidth
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                ></TextField>
+            </div>
+            <div classNames={cx('TextField')} style={{ margin: 10 }}>
+                <TextField
+                    id="outlined-disabled"
+                    label="Số điện thoại"
+                    // variant="filled"
+                    size="Normal"
+                    disabled
+                    fullWidth
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                ></TextField>
+            </div>
+            <Button variant="contained" color="success" style={{ margin: 10 }}>
+                Thay đổi
+            </Button>
         </>
     );
 }
