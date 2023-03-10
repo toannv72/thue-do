@@ -3,14 +3,15 @@ import { useLocation } from 'react-router-dom';
 import './Pay.css';
 import 'react-date-range/dist/styles.css'; // import stylesheet
 import 'react-date-range/dist/theme/default.css'; // import theme
-import { DateRange } from 'react-date-range';
+import { DateRange, DateRangePicker } from 'react-date-range';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 // import { Calendar } from 'react-date-range';
 import moment from 'moment';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import Footer from '~/layouts/Footer';
-
+import { addDays } from 'date-fns';
+import { isValidNumber } from 'libphonenumber-js';
 function Settings() {
     const currentUser = localStorage.getItem('user');
     const User = JSON.parse(localStorage.getItem('user'));
@@ -29,6 +30,28 @@ function Settings() {
             key: 'selection',
         },
     ]);
+
+    // const [disabledDates, setDisabledDates] = useState(
+    //     [new Date('Mar 11, 2023'), new Date('3 20, 2023')]
+    // );
+
+    //////////////////////////////////////////
+
+    const disabledDates = [];
+    const startDate = new Date('Mar 12, 2023');
+    const endDate = new Date('Mar 20, 2023');
+
+    // Loop from start date to end date
+    let currentDate = startDate;
+    while (currentDate <= endDate) {
+        // Add current date to disabled dates array
+        disabledDates.push(new Date(currentDate));
+
+        // Increment current date by one day
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    //////////////////////////////////////////
     const [sumDay, setSumDay] = useState(0);
     const BorrowDate = moment(state[0].startDate);
     const ReturnDate = moment(state[0].endDate);
@@ -79,7 +102,9 @@ function Settings() {
             );
     }, [lastPart]);
     // const [pay, setPay] = useState(products.price);
-    const [name, setName] = useState(User.lastName + ' ' + User.firstName);
+    const [name, setName] = useState(
+        (User.lastName ? User.lastName : '') + ' ' + (User.firstName ? User.firstName : ''),
+    );
     const [address, setAddress] = useState(User.address);
     const [phone, setPhone] = useState(User.phone);
     // const [id, setid] = useState(User.id);
@@ -88,6 +113,18 @@ function Settings() {
     const [message, setMessage] = useState('');
 
     const order = async () => {
+        if (name === '' || address === '' || phone === '') {
+            toast.error(`Vui lòng nhập đầy đủ thông tin`);
+            return;
+        }
+        if (phone <= 99999999 || !isValidNumber(phone, 'VN')) {
+            toast.error(`Số điện thoại không hợp lệ`);
+            return;
+        }
+         if (address <= 99999999) {
+             toast.error(`Số điện thoại không hợp lệ`);
+             return;
+         }
         const order = {
             totalPrice: products.price + (products.price * sumDay) / 2 + products.deposit,
             message: message,
@@ -191,6 +228,8 @@ function Settings() {
                                                     // onRangeFocusChange={handleRangeFocusChange}
                                                     ranges={state}
                                                     minDate={new Date()}
+                                                    // maxDate={new Date("Aug 1,2023 0:0:1")}
+                                                    disabledDates={disabledDates}
                                                 />
                                             </DialogContent>
                                             <DialogActions></DialogActions>

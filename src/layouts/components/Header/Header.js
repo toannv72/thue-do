@@ -132,7 +132,7 @@ function Header() {
             title: 'Settings',
             to: '/settings',
         },
-        ...MENU_ITEMS,
+        // ...MENU_ITEMS,
 
         {
             icon: <FontAwesomeIcon icon={faSignOut} />,

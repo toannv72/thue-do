@@ -13,12 +13,11 @@ export default function Products() {
     const cx = className.bind(styles);
     const currentUrl = window.location.href;
     const urlParts = currentUrl.split('products:');
-    const lastPart=urlParts[urlParts.length - 1];
+    const lastPart = urlParts[urlParts.length - 1];
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const currentUser = localStorage.getItem('user');
-   
 
     // console.log(user);
     const createUser = () => {
@@ -29,15 +28,13 @@ export default function Products() {
             .post(`${process.env.REACT_APP_BASE_URLS}cart-iteam/create`, products)
             .then((response) => {
                 toast.success(`Thêm vào giỏ thành công!`);
-              
             })
             .catch((error) => {
                 console.log(error);
                 toast.error(`${error.response.data.message}`);
             });
-           
-        };
-        
+    };
+
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}products/getOne/${lastPart}`)
             .then((res) => res.json())
@@ -102,7 +99,7 @@ export default function Products() {
                                             <div className={cx('c8aTLs')}>đã thuê</div>
                                         </div> */}
                                         </div>
-                                        <button className={cx('GyD5JO')}>Báo cáo</button>
+                                        {/* <button className={cx('GyD5JO')}>Báo cáo</button> */}
                                     </div>
                                     <div className={cx('product-price')}>
                                         {products.price.toLocaleString('vi-VN')} đ/ngày

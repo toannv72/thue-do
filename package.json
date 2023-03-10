@@ -25,6 +25,7 @@
     "gapi-script": "^1.2.0",
     "i": "^0.3.7",
     "jquery": "^3.6.3",
+    "libphonenumber-js": "^1.10.21",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "normalize.css": "^8.0.1",
