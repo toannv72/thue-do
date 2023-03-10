@@ -65,13 +65,15 @@ export default function Order() {
                                     <div>
                                         <div>
                                             <span>
-                                                Ngày thuê: {moment(item.orderDetails[0].orderBorrowDate).format('YYYY-MM-DD')}
+                                                Ngày thuê:{' '}
+                                                {moment(item.orderDetails[0].orderBorrowDate).format('YYYY-MM-DD')}
                                             </span>
                                         </div>
-                                      
+
                                         <div>
                                             <span>
-                                                Ngày trả: {moment(item.orderDetails[0].orderReturnDate).format('YYYY-MM-DD')}
+                                                Ngày trả:{' '}
+                                                {moment(item.orderDetails[0].orderReturnDate).format('YYYY-MM-DD')}
                                             </span>
                                         </div>
                                     </div>
@@ -99,14 +101,17 @@ export default function Order() {
                                 <div className={cx('project-box-content-header')}>
                                     <p className={cx('box-content-header')}>{item.name}</p>
                                     <p className={cx('box-content-subheader')}>Địa chỉ: {item.address}</p>
-                                    <p className={cx('box-content-subheader')}>SĐT{item.phone}</p>
+                                    <p className={cx('box-content-subheader')}>
+                                        Tên sản phẩm: {item.orderDetails[0].product.name}
+                                    </p>
+                                    <p className={cx('box-content-subheader')}>SĐT:{item.phone}</p>
                                     <p className={cx('box-content-subheader')}>Lời nhắn: {item.message}</p>
                                     <p className={cx('box-content-subheader')}>
                                         Số tiền thu:{item.totalPrice.toLocaleString('vi-VN')}đ
                                     </p>
                                 </div>
                                 <div className={cx('box-progress-wrapper')}>
-                                    <p className={cx('box-progress-header')}>Progress</p>
+                                    {/* <p className={cx('box-progress-header')}>Progress</p> */}
                                     <div className={cx('box-progress-bar')}>
                                         <span className={cx('box-progress')}></span>
                                     </div>
@@ -130,7 +135,7 @@ export default function Order() {
                                             </svg>
                                         </button>
                                     </div>
-                                    <div className={cx('days-left')}>2 Days Left</div>
+                                    {/* <div className={cx('days-left')}>2 Days Left</div> */}
                                 </div>
                             </div>
                         </div>

@@ -30,12 +30,12 @@ function Sidebar2() {
                 />
                 <MenuItem
                     title="Thông Tin"
-                    to={config.routes.product}
+                    to={config.routes.information}
                     icon={<User />}
                     activeIcon={<LiveActiveUser />}
                 />
                 {/* <MenuItem title="LIVE" to={config.routes.live} icon={<LiveIcon />} activeIcon={<LiveActiveIcon />} /> */}
-                <MenuItem title="Đổi Mật Khẩu" to={config.routes.blog} icon={<User />} activeIcon={<User />} />
+                <MenuItem title="Đổi Mật Khẩu" to={config.routes.password} icon={<User />} activeIcon={<User />} />
             </Menu>
 
             <SuggestedAccounts label="Danh mục sản phẩm" />

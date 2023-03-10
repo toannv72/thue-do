@@ -16,8 +16,8 @@ export default function CreateProducts() {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-    const [showEditConfirmation, setShowEditConfirmation] = useState(false);
     const [productToDelete, setProductToDelete] = useState(null);
+    const [showEditConfirmation, setShowEditConfirmation] = useState(false);
     const [productToEdit, setProductToEdit] = useState(null);
 
     const [name, setName] = useState('');
@@ -34,12 +34,12 @@ export default function CreateProducts() {
         setProductToDelete(product);
         setShowDeleteConfirmation(true);
     };
-    const handleEdit = () => {
-        setShowEditConfirmation(true);
-    };
     const cancelDelete = () => {
         setShowDeleteConfirmation(false);
         setProductToDelete(null);
+    };
+    const handleEdit = () => {
+        setShowEditConfirmation(true);
     };
     const cancelEdit = () => {
         setShowEditConfirmation(false);

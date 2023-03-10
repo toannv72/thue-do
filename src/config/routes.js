@@ -19,6 +19,9 @@ const routes = {
     admin: '/admin',
     pay: '/pay:id',
 
+    password: '/password',
+    information: '/information',
+
     technology: '/technology',
     sport: '/sport',
     musicalInstruments: '/musicalInstruments',

@@ -41,6 +41,8 @@ import MusicalInstruments from '~/pages/ProductCategory/MusicalInstruments';
 import Jewelry from '~/pages/ProductCategory/Jewelry';
 import About from '~/pages/About';
 import DefaultLayout2 from '~/layouts/DefaultLayout2';
+import Password from '~/pages/Setting/Password';
+import Information from '~/pages/Setting/Information';
 // import ProductManagement from '~/layouts/Admin/ProductManagement/ProductManagement';
 
 // Public routes
@@ -62,7 +64,10 @@ const publicRoutes = [
     { path: config.routes.pay, component: Pay },
     { path: config.routes.about, component: About },
 
-    { path: config.routes.settings, component: Setting, layout: DefaultLayout2},
+    { path: config.routes.password, component: Password, layout: DefaultLayout2 },
+    { path: config.routes.information, component: Information, layout: DefaultLayout2 },
+
+    { path: config.routes.settings, component: Setting, layout: DefaultLayout2 },
 
     { path: config.routes.technology, component: Technology },
     { path: config.routes.sport, component: Sport },
