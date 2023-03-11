@@ -20,7 +20,12 @@ export default function Post({ title, img, writing, hour, id }) {
                     <hr />
                 </div>
             </Link>
-            <p className="postDesc">{writing}</p>
+            <p
+                className="postDesc"
+                dangerouslySetInnerHTML={{
+                    __html: writing,
+                }}
+            ></p>
         </div>
     );
 }

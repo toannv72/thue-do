@@ -9,22 +9,30 @@ import axios from 'axios';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '~/configs/firebase';
 import { v4 } from 'uuid';
+import React, { Component } from 'react';
+import { EditorState, convertToRaw } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
 
 const cx = classNames.bind(styles);
 export default function CreateProducts() {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
-    const [description, setDescription] = useState('');
+    const [description, setDescription] = useState(EditorState.createEmpty());
     const [imageTitle, setImageTitle] = useState('');
     const [imageCover, setImageCover] = useState('');
 
     const [toan, setToan] = useState(false);
-
     const handleSubmit = () => {
-        const product = { title, author, description, imageTitle, imageCover };
-        console.log(product);
         axios
-            .post(`${process.env.REACT_APP_BASE_URLS}blog/create`, product)
+            .post(`${process.env.REACT_APP_BASE_URLS}blog/create`, {
+                title,
+                author,
+                description: draftToHtml(convertToRaw(description.getCurrentContent())),
+                imageTitle,
+                imageCover,
+            })
             .then((response) => {
                 if (response.status === 200) {
                     toast.success(`Thêm blog thành công!`);
@@ -102,6 +110,9 @@ export default function CreateProducts() {
             // console.log('toan');
         }
     }, [toan]);
+    function onEditorStateChange(editorState) {
+        setDescription(editorState);
+    }
     return (
         <>
             <Menu>
@@ -176,13 +187,21 @@ export default function CreateProducts() {
                                             value={description}
                                             onChange={(event) => setDescription(event.target.value)}
                                         /> */}
-                                        <textarea
+                                        {/* <textarea
                                             onChange={(event) => setDescription(event.target.value)}
                                             className="form-control"
                                             id="id_comments"
                                             placeholder="Nội dung Blog"
                                             rows="5"
-                                        ></textarea>
+                                        ></textarea> */}
+                                        <div>
+                                            <Editor
+                                                editorState={description}
+                                                wrapperClassName="demo-wrapper"
+                                                editorClassName="demo-editor"
+                                                onEditorStateChange={onEditorStateChange}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

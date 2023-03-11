@@ -12,6 +12,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import Footer from '~/layouts/Footer';
 import { addDays } from 'date-fns';
 import { isValidNumber } from 'libphonenumber-js';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+
 function Settings() {
     const currentUser = localStorage.getItem('user');
     const User = JSON.parse(localStorage.getItem('user'));
@@ -38,7 +40,7 @@ function Settings() {
     //////////////////////////////////////////
 
     const disabledDates = [];
-    const startDate = new Date('Mar 12, 2023');
+    const startDate = new Date('Mar 15, 2023');
     const endDate = new Date('Mar 20, 2023');
 
     // Loop from start date to end date
@@ -111,6 +113,7 @@ function Settings() {
 
     // const [totalPrice, setTotalPrice] = useState(10);
     const [message, setMessage] = useState('');
+    
 
     const order = async () => {
         if (name === '' || address === '' || phone === '') {
@@ -121,10 +124,10 @@ function Settings() {
             toast.error(`Số điện thoại không hợp lệ`);
             return;
         }
-         if (address <= 99999999) {
-             toast.error(`Số điện thoại không hợp lệ`);
-             return;
-         }
+        if (address <= 99999999) {
+            toast.error(`Số điện thoại không hợp lệ`);
+            return;
+        }
         const order = {
             totalPrice: products.price + (products.price * sumDay) / 2 + products.deposit,
             message: message,
