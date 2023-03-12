@@ -14,6 +14,7 @@ export default function SinglePost() {
 
     const currentUrl = window.location.href;
     const urlParts = currentUrl.split('post:');
+    console.log(urlParts);
     const [lastPart, setLastPart] = useState(urlParts[urlParts.length - 1]);
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
@@ -34,7 +35,7 @@ export default function SinglePost() {
                     setError(error);
                 },
             );
-    }, []);
+    }, [lastPart]);
 
     if (error) {
         return <div>Error: {error.message}</div>;
@@ -55,11 +56,15 @@ export default function SinglePost() {
                     <div className="singlePostInfo">
                         <span style={{ display: 'flex' }}>
                             <h2> Author:</h2>
-                            <h2 style={{ color:"black" }}>{products.author}</h2>
+                            <h2 style={{ color: 'black' }}>{products.author}</h2>
                         </span>
-                       
                     </div>
-                    <p className="singlePostDesc">{products.description}</p>
+                    <p
+                        className="singlePostDesc"
+                        dangerouslySetInnerHTML={{
+                            __html: products.description,
+                        }}
+                    ></p>
                 </div>
                 <Footer />
             </div>

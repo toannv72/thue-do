@@ -37,8 +37,8 @@ function Password() {
     };
     const cancelEdit = () => {
         setShowEditConfirmation(false);
-        setPassword("")
-        setPasswordNew("")
+        setPassword('');
+        setPasswordNew('');
     };
 
     const confirmPassword = () => {
@@ -53,11 +53,10 @@ function Password() {
                 // toast.success(`Thay đổi mật khẩu thành công!`);
                 if (response.status === 200) {
                     toast.success(`Thay đổi mật khẩu thành công!`);
-                     setPassword('');
-                     setPasswordNew('');
+                    setPassword('');
+                    setPasswordNew('');
                 } else {
                     toast.error(`Thay đổi mật khẩu không thành công!`);
-                    
                 }
                 setShowEditConfirmation(false);
             })
