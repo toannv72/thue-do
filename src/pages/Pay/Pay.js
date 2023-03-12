@@ -39,7 +39,9 @@ function Settings() {
 
     //////////////////////////////////////////
 
-    const [disabledDates, setDisabledDates] = useState([]);
+    const disabledDates = [];
+    const startDate = new Date('Mar 12, 2023');
+    const endDate = new Date('Mar 20, 2023');
 
     // const startDate = new Date('3 15,2023');
     // const endDate = new Date('3 20, 2023');
@@ -125,7 +127,7 @@ function Settings() {
                         while (currentDate <= endDate) {
                             // Add current date to disabled dates array
                             disabledDates.push(new Date(currentDate));
-                            setDisabledDates(disabledDates);
+                            disabledDates(disabledDates);
                             // Increment current date by one day
                             currentDate.setDate(currentDate.getDate() + 1);
                         }
@@ -170,6 +172,7 @@ function Settings() {
 
     // const [totalPrice, setTotalPrice] = useState(10);
     const [message, setMessage] = useState('');
+    
 
     const order = async () => {
         if (name === '' || address === '' || phone === '') {
