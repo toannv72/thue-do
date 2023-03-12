@@ -39,20 +39,20 @@ function Settings() {
 
     //////////////////////////////////////////
 
-    const disabledDates = [];
-    const startDate = new Date('Mar 15, 2023');
-    const endDate = new Date('Mar 20, 2023');
+    const [disabledDates, setDisabledDates] = useState([]);
 
+    // const startDate = new Date('3 15,2023');
+    // const endDate = new Date('3 20, 2023');
+    // console.log(startDate);
     // Loop from start date to end date
-    let currentDate = startDate;
-    while (currentDate <= endDate) {
-        // Add current date to disabled dates array
-        disabledDates.push(new Date(currentDate));
+    // let currentDate = startDate;
+    // while (currentDate <= endDate) {
+    //     // Add current date to disabled dates array
+    //     disabledDates.push(new Date(currentDate));
 
-        // Increment current date by one day
-        currentDate.setDate(currentDate.getDate() + 1);
-    }
-
+    //     // Increment current date by one day
+    //     currentDate.setDate(currentDate.getDate() + 1);
+    // }
     //////////////////////////////////////////
     const [sumDay, setSumDay] = useState(0);
     const BorrowDate = moment(state[0].startDate);
@@ -67,7 +67,6 @@ function Settings() {
 
     // Tính toán số ngày giữa ngày mượn và ngày trả
 
-    console.log(products);
     const handleClose = () => {
         setOpen(false);
         const date = moment(orderBorrowDate);
@@ -103,6 +102,64 @@ function Settings() {
                 },
             );
     }, [lastPart]);
+    const [orders, setOrders] = useState();
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_BASE_URLS}order-details/getAllByProduct/${lastPart}`)
+            .then((res) => res.json())
+            .then(
+                (result) => {
+                    setOrders(result);
+                    let start = 0;
+                    const disabledDates = [];
+                     console.log('🚀 ~ file: Pay.js:128 ~ useEffect ~ disabledDates:', disabledDates);
+                    while (start <= result.length) {
+                        const startDate = new Date(`${moment(result[start].orderBorrowDate).format('MM DD,YYYY')}`);
+                        console.log(startDate);
+
+                        const endDate = new Date(`${moment(result[start].orderReturnDate).format('MM DD,YYYY')}`);
+                        console.log(endDate);
+                        // console.log(moment(result[0].orderReturnDate).format('MM DD,YYYY'));
+                        // Loop from start date to end date
+                        
+                        let currentDate = startDate;
+                        while (currentDate <= endDate) {
+                            // Add current date to disabled dates array
+                            disabledDates.push(new Date(currentDate));
+                            setDisabledDates(disabledDates);
+                            // Increment current date by one day
+                            currentDate.setDate(currentDate.getDate() + 1);
+                        }
+                        start++ ;
+                    }
+                    // const startDate = new Date(`${moment(result[0].orderBorrowDate).format('MM DD,YYYY')}`);
+                    // console.log(startDate);
+
+                    // const endDate = new Date(`${moment(result[0].orderReturnDate).format('MM DD,YYYY')}`);
+                    // console.log(endDate);
+                    // // console.log(moment(result[0].orderReturnDate).format('MM DD,YYYY'));
+                    // // Loop from start date to end date
+                    // const disabledDates = [];
+                    // let currentDate = startDate;
+                    // while (currentDate <= endDate) {
+                    //     // Add current date to disabled dates array
+                    //     disabledDates.push(new Date(currentDate));
+                    //     console.log('🚀 ~ file: Pay.js:128 ~ useEffect ~ disabledDates:', disabledDates);
+                    //     setDisabledDates(disabledDates);
+                    //     // Increment current date by one day
+                    //     currentDate.setDate(currentDate.getDate() + 1);
+                    // }
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    // setIsLoaded(true);
+                    // setError(error);
+                },
+            );
+    }, [lastPart]);
+
+    useEffect(() => {}, [orders]);
     // const [pay, setPay] = useState(products.price);
     const [name, setName] = useState(
         (User.lastName ? User.lastName : '') + ' ' + (User.firstName ? User.firstName : ''),
@@ -113,7 +170,6 @@ function Settings() {
 
     // const [totalPrice, setTotalPrice] = useState(10);
     const [message, setMessage] = useState('');
-    
 
     const order = async () => {
         if (name === '' || address === '' || phone === '') {

@@ -104,7 +104,16 @@ export default function Products() {
                                     <div className={cx('product-price')}>
                                         {products.price.toLocaleString('vi-VN')} đ/ngày
                                     </div>
-                                    <div className={cx('h-y3ij')}>{products.description}</div>
+                                    <div className={cx('h-y3ij')}>
+                                        {' '}
+                                        <p
+                                            className="singlePostDesc"
+                                            dangerouslySetInnerHTML={{
+                                                __html: products.description,
+                                            }}
+                                        ></p>
+                                        {/* {products.description} */}
+                                    </div>
                                     <div className={cx('p+UZsF')}>
                                         <div className={cx('ThEIyI')}>
                                             {currentUser ? (

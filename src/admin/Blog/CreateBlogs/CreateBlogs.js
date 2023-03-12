@@ -69,7 +69,6 @@ export default function CreateProducts() {
                 // console.log(index);
                 // console.log(img.length);
                 setImageTitle(url);
-
             });
         });
         const imagerRef1 = ref(storage, `images/${img1[0].name + v4()}`);
@@ -177,7 +176,7 @@ export default function CreateProducts() {
                                 Nội dung
                             </label>
                             <div className="col-md-8">
-                                <div className="col-md-4 indent-small">
+                                <div className="col-md-8 indent-small">
                                     <div className="form-group internal">
                                         {/* <textarea
                                             className="form-control"
@@ -194,12 +193,13 @@ export default function CreateProducts() {
                                             placeholder="Nội dung Blog"
                                             rows="5"
                                         ></textarea> */}
-                                        <div>
+                                        <div style={{ backgroundColor: '#fff' }}>
                                             <Editor
                                                 editorState={description}
                                                 wrapperClassName="demo-wrapper"
                                                 editorClassName="demo-editor"
                                                 onEditorStateChange={onEditorStateChange}
+                                                placeholder="Nội dung Blog"
                                             />
                                         </div>
                                     </div>

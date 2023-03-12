@@ -10,10 +10,15 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '~/configs/firebase';
 import { v4 } from 'uuid';
 import { CircularProgress } from '@mui/material';
+
+import { EditorState, convertToRaw } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
 const cx = classNames.bind(styles);
 export default function CreateProducts() {
     const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
+    const [description, setDescription] = useState(EditorState.createEmpty());
     const [price, setPrice] = useState(0);
     const [deposit, setDeposit] = useState(0);
     const [category, setCategory] = useState();
@@ -21,11 +26,22 @@ export default function CreateProducts() {
     const [toan, setToan] = useState(false);
     const [circular, setCircular] = useState(false);
 
+    function onEditorStateChange(editorState) {
+        setDescription(editorState);
+    }
     const handleSubmit1 = () => {
-        const product = { name, description, price, images, category, deposit };
-        console.log(product);
+        // const product = { name, description, price, images, category, deposit };
+        // console.log(product);
         axios
-            .post(`${process.env.REACT_APP_BASE_URLS}products/create`, product)
+            .post(`${process.env.REACT_APP_BASE_URLS}products/create`, {
+                name,
+                description: draftToHtml(convertToRaw(description.getCurrentContent())),
+
+                price,
+                images,
+                category,
+                deposit,
+            })
             .then((response) => {
                 if (response.status === 200) {
                     toast.success(`Thêm sản phẩm thành công!`);
@@ -47,12 +63,11 @@ export default function CreateProducts() {
         // if (img == null) return;
 
         // console.log(category.id);
-        if (img == null||name === '' || price <= 0 || deposit <= 0 || category.id <=0) {
+        if (img == null || name === '' || price <= 0 || deposit <= 0 || category.id <= 0) {
             return toast.error(`vui lòng nhập đầy đủ thông tin !`);
-        } 
+        }
         const urls = [];
         setCircular(true);
-   
 
         for (let index = 0; index < img.length; index++) {
             const imagerRef = ref(storage, `images/${img[index].name + v4()}`);
@@ -67,7 +82,7 @@ export default function CreateProducts() {
                     // console.log(urls);
                     // console.log(img.length);
                     // console.log(urls.length);
-                    
+
                     if (img.length === urls.length) {
                         setImages(urls);
                         setToan(true);
@@ -208,13 +223,22 @@ export default function CreateProducts() {
                                 Miêu tả sản phẩm
                             </label>
                             <div className="col-md-6">
-                                <textarea
+                                {/* <textarea
                                     onChange={(event) => setDescription(event.target.value)}
                                     className="form-control"
                                     id="id_comments"
                                     placeholder="Miêu tả"
                                     rows="5"
-                                ></textarea>
+                                ></textarea> */}
+                                <div style={{ backgroundColor: '#fff' }}>
+                                    <Editor
+                                        editorState={description}
+                                        wrapperClassName="demo-wrapper"
+                                        editorClassName="demo-editor"
+                                        placeholder="Miêu tả"
+                                        onEditorStateChange={onEditorStateChange}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </form>

@@ -11,6 +11,11 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '~/configs/firebase';
 import { v4 } from 'uuid';
+import { EditorState, convertToRaw } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
+
 const cx = classNames.bind(styles);
 export default function CreateProducts() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -91,6 +96,10 @@ export default function CreateProducts() {
             });
         setToan(false);
     };
+
+    function onEditorStateChange(editorState) {
+        setDescription(editorState);
+    }
     useEffect(() => {
         if (toan) {
             confirmEdit();
@@ -230,7 +239,7 @@ export default function CreateProducts() {
                     </tbody>
                 </table>
             </div>
-            {showDeleteConfirmation && (
+            {/* {showDeleteConfirmation && (
                 <div className={cx('contact-container')}>
                     <div className="swal-modal" role="dialog" aria-modal="true">
                         <div className="swal-title">
@@ -248,7 +257,45 @@ export default function CreateProducts() {
                         </div>
                     </div>
                 </div>
-            )}
+            )} */}
+            <Dialog
+                maxWidth={1100}
+                // maxHeight={800}
+                open={showDeleteConfirmation}
+                // TransitionComponent={Transition}
+                keepMounted
+                onClose={cancelDelete}
+                aria-describedby="alert-dialog-slide-description"
+            >
+                <DialogActions>
+                    <div>
+                        <div role="dialog" aria-modal="true">
+                            <div className="">
+                                <h1>Cảnh báo</h1>
+                            </div>
+                            <h2>Bạn có chắc chắn là muốn xóa sản phẩm này?</h2>
+                            <div className={cx('swal-footer')}>
+                                <Button onClick={cancelDelete} style={{ background: '#0de667', color: 'white' }}>
+                                    Hủy bỏ
+                                </Button>
+                            </div>
+                            <Button
+                                onClick={() => {
+                                    confirmDelete();
+                                }}
+                                style={{
+                                    marginLeft: 100,
+                                    marginRight: 100,
+                                    background: 'red',
+                                    color: 'white',
+                                }}
+                            >
+                                Đồng ý
+                            </Button>
+                        </div>
+                    </div>
+                </DialogActions>
+            </Dialog>
 
             <Dialog
                 maxWidth={1100}
@@ -262,7 +309,7 @@ export default function CreateProducts() {
                 <DialogActions>
                     <div>
                         <div className={cx('ip')}>
-                            <div className="panel panel-primary dialog-panel" >
+                            <div className="panel panel-primary dialog-panel">
                                 <div className="panel-heading">
                                     <h4>Thay đổi thông tin sản phẩm</h4>
                                 </div>
@@ -414,6 +461,15 @@ export default function CreateProducts() {
                                                     placeholder="Miêu tả"
                                                     rows="5"
                                                 ></textarea>
+                                                <div style={{ backgroundColor: '#fff' }}>
+                                                    <Editor
+                                                        editorState={description}
+                                                        wrapperClassName="demo-wrapper"
+                                                        editorClassName="demo-editor"
+                                                        placeholder="Miêu tả"
+                                                        onEditorStateChange={onEditorStateChange}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="form-group">
@@ -429,6 +485,7 @@ export default function CreateProducts() {
                                             <button className="btn-lg btn-primary" type="" onClick={cancelEdit}>
                                                 Hủy
                                             </button> */}
+                                            
                                                 <Button
                                                     onClick={() => {
                                                         upImg();

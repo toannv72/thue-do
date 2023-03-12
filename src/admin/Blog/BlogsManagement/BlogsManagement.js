@@ -11,6 +11,7 @@ import Image from '~/components/Image';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '~/configs/firebase';
 import { v4 } from 'uuid';
+import { Pagination } from '@mui/material';
 const cx = classNames.bind(styles);
 export default function CreateProducts() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -28,6 +29,14 @@ export default function CreateProducts() {
 
     const [toan, setToan] = useState(false);
 
+    const [totalPage, setTotalPage] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
+    const handlePageChange = (event, value) => {
+        window.scrollTo(0, 0);
+        setCurrentPage(value);
+
+        // console.log(value);
+    };
     const handleDelete = (product) => {
         setProductToDelete(product);
         setShowDeleteConfirmation(true);
@@ -91,15 +100,18 @@ export default function CreateProducts() {
 
     useEffect(() => {
         const fetchSearchResults = async () => {
-            const response = await fetch(`${process.env.REACT_APP_BASE_URLS}blog/${searchTerm}`);
+            const response = await fetch(
+                `${process.env.REACT_APP_BASE_URLS}blog/${searchTerm}?page=${currentPage - 1}&size=5`,
+            );
             const data = await response.json();
-            setSearchResults(data);
+            setSearchResults(data.contends);
+            setTotalPage(data.totalPage);
         };
 
         if (searchTerm !== '') {
             fetchSearchResults();
         }
-    }, [searchTerm, productToDelete, productToEdit, showEditConfirmation]);
+    }, [searchTerm, productToDelete, productToEdit, showEditConfirmation, currentPage]);
 
     const handleInputChange = (event) => {
         const searchValue = event.target.value;
@@ -245,6 +257,15 @@ export default function CreateProducts() {
                         ))}
                     </tbody>
                 </table>
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+                    <Pagination
+                        count={totalPage}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        variant="outlined"
+                        shape="rounded"
+                    />
+                </div>
             </div>
             {showDeleteConfirmation && (
                 <div className={cx('contact-container')}>
