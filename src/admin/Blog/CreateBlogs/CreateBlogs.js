@@ -35,6 +35,8 @@ export default function CreateProducts() {
             })
             .then((response) => {
                 if (response.status === 200) {
+                    console.log(imageTitle, imageCover);
+
                     toast.success(`Thêm blog thành công!`);
                 } else {
                     toast.error(`Thêm blog không thành công!`);
@@ -56,52 +58,42 @@ export default function CreateProducts() {
         if (img == null || img1 == null || title < 0 || author === '' || description === '') {
             return toast.error(`vui lòng nhập đầy đủ thông tin !`);
         }
+
         const urls = [];
         const urls1 = [];
 
-        const imagerRef = ref(storage, `images/${img[0].name + v4()}`);
-        uploadBytes(imagerRef, img[0]).then(() => {
-            getDownloadURL(imagerRef).then((url) => {
-                // setImages([...images, { url: url }]);
-                urls.push({ url: url });
-                //    console.log(images); // Được thực thi khi state đã được cập nhật
-                // console.log(url); // in ra đường dẫn của ảnh
-                // console.log(index);
-                // console.log(img.length);
-                setImageTitle(url);
+        for (let index = 0; index < img.length; index++) {
+            const imagerRef = ref(storage, `images/${img[index].name + v4()}`);
+            // eslint-disable-next-line no-loop-func
+            uploadBytes(imagerRef, img[index]).then(() => {
+                getDownloadURL(imagerRef).then((url) => {
+                    urls.push({ url: url });
+                    if (img.length === urls.length) {
+                        setImageTitle(url);
+                        console.log("ok1");
+                        for (let index = 0; index < img1.length; index++) {
+                            const imagerRef = ref(storage, `images/${img1[index].name + v4()}`);
+                            // eslint-disable-next-line no-loop-func
+                            uploadBytes(imagerRef, img1[index]).then(() => {
+                                getDownloadURL(imagerRef).then((url) => {
+                                    urls1.push({ url: url });
+                                    if (img1.length === urls1.length) {
+                                        setImageCover(url);
+                                        console.log('ok2');
+                                        setToan(true);
+                                    }
+                                });
+                            });
+                        }
+                    }
+                });
             });
-        });
-        const imagerRef1 = ref(storage, `images/${img1[0].name + v4()}`);
-        uploadBytes(imagerRef1, img1[0]).then(() => {
-            getDownloadURL(imagerRef1).then((url) => {
-                // setImages([...images, { url: url }]);
-                urls1.push({ url: url });
-                //    console.log(images); // Được thực thi khi state đã được cập nhật
-                // console.log(url); // in ra đường dẫn của ảnh
-                // console.log(index);
-                // console.log(img.length);
-                setToan(true);
-                setImageCover(url);
-            });
-        });
-        // for (let index = 0; index < img1.length; index++) {
-        //     const imagerRef1 = ref(storage, `images/${img1[index].name + v4()}`);
-        //     uploadBytes(imagerRef1, img1[index]).then(() => {
-        //         getDownloadURL(imagerRef1).then((url) => {
-        //             // setImages([...images, { url: url }]);
-        //             urls1.push({ url: url });
-        //             //    console.log(images); // Được thực thi khi state đã được cập nhật
-        //             // console.log(url); // in ra đường dẫn của ảnh
-        //             // console.log(index);
-        //             // console.log(img.length);
-        //             if (index === img1.length - 1) {
-        //                 setImageTitle(url);
-        //                 setToan(true);
-        //             }
-        //         });
-        //     });
-        // }
+            
+        }
+        
+        // setImages(urls);
     };
+
     // console.log(images);
     useEffect(() => {
         if (toan) {

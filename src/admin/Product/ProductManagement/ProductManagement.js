@@ -70,18 +70,27 @@ export default function CreateProducts() {
     };
 
     const confirmEdit = () => {
-        const updatedProduct = {
-            id: productToEdit,
-            name: name,
-            status: status,
-            description: description,
-            price: price,
-            deposit: deposit,
-            category: { id: category },
-            images: images,
-        };
+        // const updatedProduct = {
+        //     id: productToEdit,
+        //     name: name,
+        //     status: status,
+        //     description: draftToHtml(convertToRaw(description.getCurrentContent())),
+        //     price: price,
+        //     deposit: deposit,
+        //     category: { id: category },
+        //     images: images,
+        // };
         axios
-            .put(`${process.env.REACT_APP_BASE_URLS}products/update`, updatedProduct)
+            .put(`${process.env.REACT_APP_BASE_URLS}products/update`, {
+                id: productToEdit,
+                name: name,
+                status: status,
+                description: draftToHtml(convertToRaw(description.getCurrentContent())),
+                price: price,
+                deposit: deposit,
+                category: { id: category },
+                images: images,
+            })
             .then((response) => {
                 if (response.status === 200) {
                     toast.success(`Thay đổi sản phẩm thành công!`);
@@ -136,8 +145,7 @@ export default function CreateProducts() {
                     urls.push({ url: url });
                     //    console.log(images); // Được thực thi khi state đã được cập nhật
                     // console.log(url); // in ra đường dẫn của ảnh
-
-                    if (index === img.length - 1) {
+                    if (img.length === urls.length) {
                         setImages(urls);
                         setToan(true);
                     }
@@ -454,13 +462,13 @@ export default function CreateProducts() {
                                                 Miêu tả sản phẩm
                                             </label>
                                             <div className="col-md-6">
-                                                <textarea
+                                                {/* <textarea
                                                     onChange={(event) => setDescription(event.target.value)}
                                                     className="form-control"
                                                     id="id_comments"
                                                     placeholder="Miêu tả"
                                                     rows="5"
-                                                ></textarea>
+                                                ></textarea> */}
                                                 <div style={{ backgroundColor: '#fff' }}>
                                                     <Editor
                                                         editorState={description}

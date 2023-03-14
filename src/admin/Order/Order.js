@@ -102,7 +102,7 @@ export default function Order() {
                                     <p className={cx('box-content-header')}>{item.name}</p>
                                     <p className={cx('box-content-subheader')}>Địa chỉ: {item.address}</p>
                                     <p className={cx('box-content-subheader')}>
-                                        Tên sản phẩm: {item.orderDetails[0].product.name}
+                                        {/* Tên sản phẩm: {item.orderDetails[0].product.name} */}
                                     </p>
                                     <p className={cx('box-content-subheader')}>SĐT:{item.phone}</p>
                                     <p className={cx('box-content-subheader')}>Lời nhắn: {item.message}</p>

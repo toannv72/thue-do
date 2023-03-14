@@ -3,16 +3,14 @@ import { useLocation } from 'react-router-dom';
 import './Pay.css';
 import 'react-date-range/dist/styles.css'; // import stylesheet
 import 'react-date-range/dist/theme/default.css'; // import theme
-import { DateRange, DateRangePicker } from 'react-date-range';
+import { DateRange } from 'react-date-range';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 // import { Calendar } from 'react-date-range';
 import moment from 'moment';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import Footer from '~/layouts/Footer';
-import { addDays } from 'date-fns';
 import { isValidNumber } from 'libphonenumber-js';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 function Settings() {
     const currentUser = localStorage.getItem('user');
@@ -33,15 +31,11 @@ function Settings() {
         },
     ]);
 
-    // const [disabledDates, setDisabledDates] = useState(
-    //     [new Date('Mar 11, 2023'), new Date('3 20, 2023')]
-    // );
+    const [disabledDates, setDisabledDates] = useState();
 
     //////////////////////////////////////////
 
-    const disabledDates = [];
-    const startDate = new Date('Mar 12, 2023');
-    const endDate = new Date('Mar 20, 2023');
+    // const disabledDates = [];
 
     // const startDate = new Date('3 15,2023');
     // const endDate = new Date('3 20, 2023');
@@ -113,7 +107,7 @@ function Settings() {
                     setOrders(result);
                     let start = 0;
                     const disabledDates = [];
-                     console.log('🚀 ~ file: Pay.js:128 ~ useEffect ~ disabledDates:', disabledDates);
+                    console.log('🚀 ~ file: Pay.js:128 ~ useEffect ~ disabledDates:', disabledDates);
                     while (start <= result.length) {
                         const startDate = new Date(`${moment(result[start].orderBorrowDate).format('MM DD,YYYY')}`);
                         console.log(startDate);
@@ -122,16 +116,16 @@ function Settings() {
                         console.log(endDate);
                         // console.log(moment(result[0].orderReturnDate).format('MM DD,YYYY'));
                         // Loop from start date to end date
-                        
+
                         let currentDate = startDate;
                         while (currentDate <= endDate) {
                             // Add current date to disabled dates array
                             disabledDates.push(new Date(currentDate));
-                            disabledDates(disabledDates);
+                            setDisabledDates(disabledDates);
                             // Increment current date by one day
                             currentDate.setDate(currentDate.getDate() + 1);
                         }
-                        start++ ;
+                        start++;
                     }
                     // const startDate = new Date(`${moment(result[0].orderBorrowDate).format('MM DD,YYYY')}`);
                     // console.log(startDate);
@@ -172,7 +166,6 @@ function Settings() {
 
     // const [totalPrice, setTotalPrice] = useState(10);
     const [message, setMessage] = useState('');
-    
 
     const order = async () => {
         if (name === '' || address === '' || phone === '') {

@@ -32,6 +32,7 @@ function SanPham2() {
 
             if (response.ok) {
                 toast.success(`Xóa sản phẩm thành công!`);
+                 setOpen(false);
             } else {
                 toast.error(`Xóa sản phẩm không thành công!`);
             }
@@ -130,7 +131,7 @@ function SanPham2() {
                         <Button
                             onClick={() => {
                                 deletecar();
-                                handleClose();
+                                // handleClose();
                             }}
                             style={{ background: 'red', color: 'white' }}
                         >

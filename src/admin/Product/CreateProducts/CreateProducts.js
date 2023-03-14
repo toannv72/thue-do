@@ -36,7 +36,6 @@ export default function CreateProducts() {
             .post(`${process.env.REACT_APP_BASE_URLS}products/create`, {
                 name,
                 description: draftToHtml(convertToRaw(description.getCurrentContent())),
-
                 price,
                 images,
                 category,
@@ -73,21 +72,10 @@ export default function CreateProducts() {
             const imagerRef = ref(storage, `images/${img[index].name + v4()}`);
             uploadBytes(imagerRef, img[index]).then(() => {
                 getDownloadURL(imagerRef).then((url) => {
-                    // setImages([...images, { url: url }]);
                     urls.push({ url: url, name: `abc${index + 2}` });
-                    //    console.log(images); // Được thực thi khi state đã được cập nhật
-                    // console.log(url); // in ra đường dẫn của ảnh
-                    // console.log(index);
-                    // console.log(img.length);
-                    // console.log(urls);
-                    // console.log(img.length);
-                    // console.log(urls.length);
-
                     if (img.length === urls.length) {
                         setImages(urls);
                         setToan(true);
-                        // console.log("tong",img.length);
-                        // console.log('tong2', index);
                     }
                 });
             });

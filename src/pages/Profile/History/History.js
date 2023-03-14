@@ -1,7 +1,7 @@
 import images from '~/assets/images';
 
 import classNames from 'classnames/bind';
-import styles from '../Product.module.scss';
+import styles from './Product.module.scss';
 import Menu, { MenuItem } from '../Menu';
 import config from '~/config';
 import { useEffect } from 'react';
@@ -33,6 +33,9 @@ function History() {
             );
     }, [imgUser.id]);
     console.log(items);
+    
+
+
     return (
         <div>
             <div className="back-to-top" style={{ display: 'block', opacity: 1 }}></div>
@@ -140,13 +143,10 @@ function History() {
                                     </p>
                                     <p className={cx('box-content-subheader')}>
                                         Số tiền thuê:
-                                        {(item.totalPrice - item.orderDetails[0].product.deposit).toLocaleString(
-                                            'vi-VN',
-                                        )}
-                                        đ
+                                        {(item.totalPrice - item.orderDetails[0].deposit).toLocaleString('vi-VN')}đ
                                     </p>
                                     <p className={cx('box-content-subheader')}>
-                                        Số tiền đặt cọc:{item.orderDetails[0].product.deposit.toLocaleString('vi-VN')}đ
+                                        Số tiền đặt cọc:{item.orderDetails[0].deposit.toLocaleString('vi-VN')}đ
                                     </p>
                                     <p className={cx('box-content-subheader')}>
                                         Số tiền thê+ đặt cọc:{item.totalPrice.toLocaleString('vi-VN')}đ
@@ -157,7 +157,10 @@ function History() {
                                 </div>
                                 <div className={cx('project-box-footer')}>
                                     <div className={cx('participants')}>
-                                        <button className={cx('add-participant')}>
+                                        <button
+                                            className={cx('days-left')}
+                                            style={{ display: 'flex', alignItems: 'center' }}
+                                        >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="12"
@@ -172,6 +175,7 @@ function History() {
                                             >
                                                 <path d="M12 5v14M5 12h14" />
                                             </svg>
+                                            Chi tiết
                                         </button>
                                     </div>
                                     <div className={cx('days-left')}>
