@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Pagination } from '@mui/material';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '~/configs/firebase';
 import { v4 } from 'uuid';
@@ -35,6 +35,14 @@ export default function CreateProducts() {
     const [images, setImages] = useState([]);
     const [toan, setToan] = useState(false);
 
+    const [totalPage, setTotalPage] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
+    const handlePageChange = (event, value) => {
+        window.scrollTo(0, 0);
+        setCurrentPage(value);
+
+        // console.log(value);
+    };
     const handleDelete = (product) => {
         setProductToDelete(product);
         setShowDeleteConfirmation(true);
@@ -116,20 +124,39 @@ export default function CreateProducts() {
     }, [toan]);
     useEffect(() => {
         const fetchSearchResults = async () => {
-            const response = await fetch(`${process.env.REACT_APP_BASE_URLS}products/${searchTerm}`);
+            const response = await fetch(
+                `${process.env.REACT_APP_BASE_URLS}products/page/${searchTerm}?page=${currentPage - 1}&size=10`,
+            );
             const data = await response.json();
-            setSearchResults(data);
+             setSearchResults(data.contends);
+             setTotalPage(data.totalPage);
         };
 
         if (searchTerm !== '') {
             fetchSearchResults();
         }
-    }, [searchTerm, productToDelete]);
+    }, [searchTerm, productToDelete, currentPage]);
 
+  useEffect(() => {
+      const fetchSearchResults = async () => {
+          const response = await fetch(
+              `${process.env.REACT_APP_BASE_URLS}products/getAllProduct?page=${currentPage-1}&size=10`,
+          );
+          const data = await response.json();
+          setSearchResults(data.contends);
+          setTotalPage(data.totalPage);
+      };
+
+      if (searchTerm === '') {
+          fetchSearchResults();
+      }
+  }, [searchTerm, productToDelete, currentPage]);
     const handleInputChange = (event) => {
         const searchValue = event.target.value;
         if (!searchValue.startsWith(' ')) {
             setSearchTerm(searchValue);
+            setCurrentPage(1);
+
         }
     };
     const [img, setImg] = useState(null);
@@ -246,6 +273,15 @@ export default function CreateProducts() {
                         ))}
                     </tbody>
                 </table>
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+                    <Pagination
+                        count={totalPage}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        variant="outlined"
+                        shape="rounded"
+                    />
+                </div>
             </div>
             {/* {showDeleteConfirmation && (
                 <div className={cx('contact-container')}>
@@ -493,7 +529,7 @@ export default function CreateProducts() {
                                             <button className="btn-lg btn-primary" type="" onClick={cancelEdit}>
                                                 Hủy
                                             </button> */}
-                                            
+
                                                 <Button
                                                     onClick={() => {
                                                         upImg();

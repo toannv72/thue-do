@@ -122,7 +122,20 @@ export default function CreateProducts() {
             fetchSearchResults();
         }
     }, [searchTerm, productToDelete, productToEdit, showEditConfirmation, currentPage]);
+  useEffect(() => {
+      const fetchSearchResults = async () => {
+          const response = await fetch(
+              `${process.env.REACT_APP_BASE_URLS}blog/getAllBlog?page=${currentPage - 1}&size=10`,
+          );
+          const data = await response.json();
+          setSearchResults(data.contends);
+          setTotalPage(data.totalPage);
+      };
 
+      if (searchTerm === '') {
+          fetchSearchResults();
+      }
+  }, [searchTerm, productToDelete, productToEdit, showEditConfirmation, currentPage]);
     const handleInputChange = (event) => {
         const searchValue = event.target.value;
         if (!searchValue.startsWith(' ')) {

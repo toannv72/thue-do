@@ -3,7 +3,7 @@ import styles from './Product.module.scss';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogTitle, Pagination } from '@mui/material';
 const cx = classNames.bind(styles);
 
 export default function User() {
@@ -22,6 +22,14 @@ export default function User() {
     const [email, setEmail] = useState();
     // const [avatar, setAvatar] = useState();
 
+    const [totalPage, setTotalPage] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
+    const handlePageChange = (event, value) => {
+        window.scrollTo(0, 0);
+        setCurrentPage(value);
+
+        // console.log(value);
+    };
     const confirmEdit = (event) => {
         event.preventDefault();
         const updatedUser = {
@@ -115,20 +123,38 @@ export default function User() {
 
     useEffect(() => {
         const fetchSearchResults = async () => {
-            const response = await fetch(`${process.env.REACT_APP_BASE_URLS}users/${searchTerm}`);
+            const response = await fetch(
+                `${process.env.REACT_APP_BASE_URLS}users/${searchTerm}?page=${currentPage - 1}&size=10`,
+            );
             const data = await response.json();
-            setSearchResults(data);
+            setSearchResults(data.contends);
+            setTotalPage(data.totalPage);
         };
 
         if (searchTerm !== '') {
             fetchSearchResults();
         }
-    }, [searchTerm, productToLook, showLOCKEDConfirmation, showDeleteConfirmation]);
+    }, [searchTerm, productToLook, showLOCKEDConfirmation, showDeleteConfirmation, currentPage]);
+    useEffect(() => {
+        const fetchSearchResults = async () => {
+            const response = await fetch(
+                `${process.env.REACT_APP_BASE_URLS}users/getAll?page=${currentPage - 1}&size=10`,
+            );
+            const data = await response.json();
+            setSearchResults(data.contends);
+            setTotalPage(data.totalPage);
+        };
+
+        if (searchTerm === '') {
+            fetchSearchResults();
+        }
+    }, [searchTerm, productToLook, showLOCKEDConfirmation, showDeleteConfirmation, currentPage]);
 
     const handleInputChange = (event) => {
         const searchValue = event.target.value;
         if (!searchValue.startsWith(' ')) {
             setSearchTerm(searchValue);
+             setCurrentPage(1);
         }
     };
 
@@ -234,6 +260,15 @@ export default function User() {
                         ))}
                     </tbody>
                 </table>
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+                    <Pagination
+                        count={totalPage}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        variant="outlined"
+                        shape="rounded"
+                    />
+                </div>
             </div>
             {showDeleteConfirmation && (
                 <div className={cx('contact-container')}>
@@ -286,103 +321,89 @@ export default function User() {
                 <DialogActions>
                     <div className={cx('contact-container1')}>
                         <div className="panel panel-primary dialog-panel">
-                           
-                                <div className={cx('panel-heading')}>
-                                    <h4>Chỉnh sửa người dùng</h4>
-                              
-                                </div>
-                                <div className="panel-body">
-                                    <form className="form-horizontal">
-                                        <div className="form-group">
-                                            <label
-                                                className="control-label col-md-2 col-md-offset-2"
-                                                htmlFor="id_title"
-                                            >
-                                                firstName
-                                            </label>
-                                            <div className="col-md-8">
-                                                <div className="col-md-4 indent-small">
-                                                    <div className="form-group internal">
-                                                        <input
-                                                            className="form-control"
-                                                            id="id_last_name"
-                                                            placeholder="Đặt cọc"
-                                                            type="text"
-                                                            value={firstName}
-                                                            onChange={(event) => setFirstName(event.target.value)}
-                                                        />
-                                                    </div>
+                            <div className={cx('panel-heading')}>
+                                <h4>Chỉnh sửa người dùng</h4>
+                            </div>
+                            <div className="panel-body">
+                                <form className="form-horizontal">
+                                    <div className="form-group">
+                                        <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                            firstName
+                                        </label>
+                                        <div className="col-md-8">
+                                            <div className="col-md-4 indent-small">
+                                                <div className="form-group internal">
+                                                    <input
+                                                        className="form-control"
+                                                        id="id_last_name"
+                                                        placeholder="Đặt cọc"
+                                                        type="text"
+                                                        value={firstName}
+                                                        onChange={(event) => setFirstName(event.target.value)}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="form-group">
-                                            <label
-                                                className="control-label col-md-2 col-md-offset-2"
-                                                htmlFor="id_title"
-                                            >
-                                                LastName
-                                            </label>
-                                            <div className="col-md-8">
-                                                <div className="col-md-4 indent-small">
-                                                    <div className="form-group internal">
-                                                        <input
-                                                            className="form-control"
-                                                            id="id_last_name"
-                                                            placeholder="Đặt cọc"
-                                                            type="text"
-                                                            value={lastName}
-                                                            onChange={(event) => setLastName(event.target.value)}
-                                                        />
-                                                    </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                            LastName
+                                        </label>
+                                        <div className="col-md-8">
+                                            <div className="col-md-4 indent-small">
+                                                <div className="form-group internal">
+                                                    <input
+                                                        className="form-control"
+                                                        id="id_last_name"
+                                                        placeholder="Đặt cọc"
+                                                        type="text"
+                                                        value={lastName}
+                                                        onChange={(event) => setLastName(event.target.value)}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div className="form-group">
-                                            <label
-                                                className="control-label col-md-2 col-md-offset-2"
-                                                htmlFor="id_title"
-                                            >
-                                                Số điện thoại
-                                            </label>
-                                            <div className="col-md-8">
-                                                <div className="col-md-4 indent-small">
-                                                    <div className="form-group internal">
-                                                        <input
-                                                            className="form-control"
-                                                            id="id_last_name"
-                                                            placeholder="Đặt cọc"
-                                                            type="text"
-                                                            value={phone}
-                                                            onChange={(event) => setPhone(event.target.value)}
-                                                        />
-                                                    </div>
+                                    <div className="form-group">
+                                        <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                            Số điện thoại
+                                        </label>
+                                        <div className="col-md-8">
+                                            <div className="col-md-4 indent-small">
+                                                <div className="form-group internal">
+                                                    <input
+                                                        className="form-control"
+                                                        id="id_last_name"
+                                                        placeholder="Đặt cọc"
+                                                        type="text"
+                                                        value={phone}
+                                                        onChange={(event) => setPhone(event.target.value)}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="form-group">
-                                            <label
-                                                className="control-label col-md-2 col-md-offset-2"
-                                                htmlFor="id_title"
-                                            >
-                                                Email
-                                            </label>
-                                            <div className="col-md-8">
-                                                <div className="col-md-4 indent-small">
-                                                    <div className="form-group internal">
-                                                        <input
-                                                            className="form-control"
-                                                            id="id_last_name"
-                                                            placeholder="Đặt cọc"
-                                                            type="text"
-                                                            value={email}
-                                                            onChange={(event) => setEmail(event.target.value)}
-                                                        />
-                                                    </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                            Email
+                                        </label>
+                                        <div className="col-md-8">
+                                            <div className="col-md-4 indent-small">
+                                                <div className="form-group internal">
+                                                    <input
+                                                        className="form-control"
+                                                        id="id_last_name"
+                                                        placeholder="Đặt cọc"
+                                                        type="text"
+                                                        value={email}
+                                                        onChange={(event) => setEmail(event.target.value)}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* <div className="form-group">
+                                    </div>
+                                    {/* <div className="form-group">
                                     <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
                                         Avatar
                                     </label>
@@ -401,47 +422,43 @@ export default function User() {
                                         </div>
                                     </div>
                                 </div> */}
-                                        <div className="form-group">
-                                            <label
-                                                className="control-label col-md-2 col-md-offset-2"
-                                                htmlFor="id_title"
-                                            >
-                                                Password
-                                            </label>
-                                            <div className="col-md-8">
-                                                <div className="col-md-4 indent-small">
-                                                    <div className="form-group internal">
-                                                        <input
-                                                            className="form-control"
-                                                            id="id_last_name"
-                                                            placeholder="Giá tiền"
-                                                            type="text"
-                                                            value={password}
-                                                            onChange={(event) => setPassword(event.target.value)}
-                                                        />
-                                                    </div>
+                                    <div className="form-group">
+                                        <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                            Password
+                                        </label>
+                                        <div className="col-md-8">
+                                            <div className="col-md-4 indent-small">
+                                                <div className="form-group internal">
+                                                    <input
+                                                        className="form-control"
+                                                        id="id_last_name"
+                                                        placeholder="Giá tiền"
+                                                        type="text"
+                                                        value={password}
+                                                        onChange={(event) => setPassword(event.target.value)}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                    <div className="form-group">
-                                        <div className="col-md-offset-1 col-md-12">
-                                            <button
-                                                className="btn-lg btn-primary"
-                                                style={{ marginLeft: 100, marginRight: 100, background: 'red' }}
-                                                type="submit"
-                                                onClick={confirmEdit}
-                                            >
-                                                Thay đổi
-                                            </button>
-                                            <button className="btn-lg btn-primary" type="submit" onClick={cancelEdit}>
-                                                Hủy
-                                            </button>
-                                        </div>
+                                    </div>
+                                </form>
+                                <div className="form-group">
+                                    <div className="col-md-offset-1 col-md-12">
+                                        <button
+                                            className="btn-lg btn-primary"
+                                            style={{ marginLeft: 100, marginRight: 100, background: 'red' }}
+                                            type="submit"
+                                            onClick={confirmEdit}
+                                        >
+                                            Thay đổi
+                                        </button>
+                                        <button className="btn-lg btn-primary" type="submit" onClick={cancelEdit}>
+                                            Hủy
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                       
+                        </div>
                     </div>
                 </DialogActions>
             </Dialog>
