@@ -11,7 +11,6 @@ import {
    
     BlogActiveIcon,
    
-    TiemActiveIcon,
 } from '~/components/Icons';
 import SuggestedAccounts from '~/components/SuggestedAccounts';
 import config from '~/config';
@@ -36,11 +35,11 @@ function Sidebar() {
                     icon={<BlogActiveIcon />}
                     activeIcon={<BlogActiveIcon />}
                 />
-              
             </Menu>
 
-            <SuggestedAccounts label="Danh mục sản phẩm" />
-
+            <div className={cx('danh_muc')}>
+                <SuggestedAccounts label="Danh mục sản phẩm" />
+            </div>
         </aside>
     );
 }

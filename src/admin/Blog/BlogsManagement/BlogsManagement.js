@@ -1,7 +1,7 @@
 import config from '~/config';
 import Menu, { MenuItem } from '../../Menu';
 import classNames from 'classnames/bind';
-import styles from './Product.module.scss';
+import styles from './BlogsManagement.module.scss';
 import { useEffect, useState } from 'react';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -11,12 +11,13 @@ import Image from '~/components/Image';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '~/configs/firebase';
 import { v4 } from 'uuid';
-import { Dialog, DialogActions, Pagination } from '@mui/material';
+import { Button, Dialog, DialogActions, Pagination } from '@mui/material';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import { convertToRaw } from 'draft-js';
+import moment from 'moment';
 const cx = classNames.bind(styles);
-export default function CreateProducts() {
+export default function BlogsManagement() {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -121,21 +122,21 @@ export default function CreateProducts() {
         if (searchTerm !== '') {
             fetchSearchResults();
         }
-    }, [searchTerm, productToDelete, productToEdit, showEditConfirmation, currentPage]);
-  useEffect(() => {
-      const fetchSearchResults = async () => {
-          const response = await fetch(
-              `${process.env.REACT_APP_BASE_URLS}blog/getAllBlog?page=${currentPage - 1}&size=10`,
-          );
-          const data = await response.json();
-          setSearchResults(data.contends);
-          setTotalPage(data.totalPage);
-      };
+    }, [searchTerm, productToDelete, currentPage]);
+    useEffect(() => {
+        const fetchSearchResults = async () => {
+            const response = await fetch(
+                `${process.env.REACT_APP_BASE_URLS}blog/getAllBlog?page=${currentPage - 1}&size=10&sort=id%2Cdesc`,
+            );
+            const data = await response.json();
+            setSearchResults(data.contends);
+            setTotalPage(data.totalPage);
+        };
 
-      if (searchTerm === '') {
-          fetchSearchResults();
-      }
-  }, [searchTerm, productToDelete, productToEdit, showEditConfirmation, currentPage]);
+        if (searchTerm === '') {
+            fetchSearchResults();
+        }
+    }, [searchTerm, productToDelete, currentPage]);
     const handleInputChange = (event) => {
         const searchValue = event.target.value;
         if (!searchValue.startsWith(' ')) {
@@ -182,7 +183,7 @@ export default function CreateProducts() {
                 });
             });
         }
-    }
+    };
     useEffect(() => {
         if (toan) {
             confirmEdit();
@@ -236,15 +237,19 @@ export default function CreateProducts() {
                             <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>{result.id}</td>
-                                <td>{result.title}</td>
+                                <td style={{ width: 150 }}>
+                                    <p className="postDesc">{result.title}</p>
+                                </td>
                                 <td>
                                     <Image className={cx('img')} src={result.imageTitle} alt="" width="100px;" />
                                 </td>
                                 <td>
                                     <Image className={cx('img')} src={result.imageCover} alt="" width="100px;" />
                                 </td>
-                                <td>{result.author}</td>
                                 <td>
+                                    <p> {result.author}</p>
+                                </td>
+                                <td style={{ width: 300 }}>
                                     <p
                                         className="postDesc"
                                         dangerouslySetInnerHTML={{
@@ -253,7 +258,7 @@ export default function CreateProducts() {
                                     ></p>
                                 </td>
 
-                                <td>{result.createdDate}</td>
+                                <td>{moment(result.createdDate).format('YYYY-MM-DD')}</td>
                                 <td>
                                     <div className={cx('delete')}>
                                         <button
@@ -318,8 +323,8 @@ export default function CreateProducts() {
                     </div>
                 </div>
             )} */}
-            <Dialog
-                maxWidth={1100}
+            {/* <Dialog
+                // maxWidth={1100}
                 // maxHeight={800}
                 open={showDeleteConfirmation}
                 // TransitionComponent={Transition}
@@ -346,7 +351,47 @@ export default function CreateProducts() {
                         </div>
                     </div>
                 </DialogActions>
+            </Dialog> */}
+
+            <Dialog
+                maxWidth={1100}
+                // maxHeight={800}
+                open={showDeleteConfirmation}
+                // TransitionComponent={Transition}
+                keepMounted
+                onClose={cancelDelete}
+                aria-describedby="alert-dialog-slide-description"
+            >
+                <DialogActions>
+                    <div>
+                        <div role="dialog" aria-modal="true">
+                            <div className="">
+                                <h1>Cảnh báo</h1>
+                            </div>
+                            <h2>Bạn có chắc chắn là muốn xóa sản phẩm này?</h2>
+                            <div className={cx('swal-footer')}>
+                                <Button onClick={cancelDelete} style={{ background: '#0de667', color: 'white' }}>
+                                    Hủy bỏ
+                                </Button>
+                            </div>
+                            <Button
+                                onClick={() => {
+                                    confirmDelete();
+                                }}
+                                style={{
+                                    marginLeft: 100,
+                                    marginRight: 100,
+                                    background: 'red',
+                                    color: 'white',
+                                }}
+                            >
+                                Đồng ý
+                            </Button>
+                        </div>
+                    </div>
+                </DialogActions>
             </Dialog>
+
             <Dialog
                 maxWidth={1100}
                 // maxHeight={800}

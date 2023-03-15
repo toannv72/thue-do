@@ -1,3 +1,15 @@
+.function {
+    display: flex;
+}
+
+.function a {
+    text-decoration: none
+}
+
+// .days-left{
+//     display: flex;
+//         align-items: center;
+// }
 .app-container {
     width: 100%;
     display: flex;
@@ -648,31 +660,9 @@
 }
 
 .days-left:hover {
-    background-color: #fe2c55;
+    background-color: #2e8af4;
 }
-.huy:hover {
-    background-color: #fa0000;
-}.ok:hover {
-    background-color: rgba(8, 8, 251, 0.6);
-}
-.huy {
-    background-color: rgba(255, 0, 0, 0.6);
-    font-size: 12px;
-    border-radius: 20px;
-    flex-shrink: 0;
-    padding: 6px 16px;
-    font-weight: 700;
-    // color: #ffffff;
-}
-.ok {
-    background-color: rgba(8, 125, 251, 0.6);
-    font-size: 12px;
-    border-radius: 20px;
-    flex-shrink: 0;
-    padding: 6px 16px;
-    font-weight: 700;
-    // color: #ffffff;
-}
+
 .participants img {
     width: 20px;
     height: 20px;
@@ -700,6 +690,21 @@
 }
 
 .days-left {
+    background-color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    border-radius: 20px;
+    flex-shrink: 0;
+    padding: 6px 16px;
+    font-weight: 700;
+    color: black;
+}
+
+.days-left button {
+
+    color: black;
+}
+
+.days-left1 {
     background-color: rgba(255, 255, 255, 0.6);
     font-size: 12px;
     border-radius: 20px;

@@ -5,6 +5,7 @@ import ErrorToast from '~/pages/Product/ErrorToast';
 import './style.css';
 import classNames from 'classnames/bind';
 import moment from 'moment';
+import { Button, Dialog, DialogActions } from '@mui/material';
 import styles from './Order.module.scss';
 const cx = classNames.bind(styles);
 
@@ -14,6 +15,15 @@ export default function Order() {
     const [items, setItems] = useState([]);
     const [totalPage, setTotalPage] = useState();
     const [currentPage, setCurrentPage] = useState(1);
+
+      const [open, setOpen] = useState(false);
+
+      const handleClickOpen = () => {
+          setOpen(true);
+      };
+      const handleClose = () => {
+          setOpen(false);
+      };
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}order/getAll?page=${currentPage - 1}&size=2&sort=id%2Cdesc`)
             .then((res) => res.json())
@@ -78,7 +88,7 @@ export default function Order() {
                                         </div>
                                     </div>
                                     <div className={cx('more-wrapper')}>
-                                        <button className={cx('project-btn-more')}>
+                                        {/* <button className={cx('project-btn-more')}>
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="24"
@@ -95,7 +105,7 @@ export default function Order() {
                                                 <circle cx="12" cy="5" r="1" />
                                                 <circle cx="12" cy="19" r="1" />
                                             </svg>
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
                                 <div className={cx('project-box-content-header')}>
@@ -118,7 +128,14 @@ export default function Order() {
                                 </div>
                                 <div className={cx('project-box-footer')}>
                                     <div className={cx('participants')}>
-                                        <button className={cx('add-participant')}>
+                                        <button
+                                            className={cx('days-left')}
+                                            style={{ display: 'flex', alignItems: 'center' }}
+                                            onClick={() => {
+                                                // setItemHistory(item);
+                                                handleClickOpen();
+                                            }}
+                                        >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="12"
@@ -133,9 +150,19 @@ export default function Order() {
                                             >
                                                 <path d="M12 5v14M5 12h14" />
                                             </svg>
+                                            Chi tiết
                                         </button>
                                     </div>
                                     {/* <div className={cx('days-left')}>2 Days Left</div> */}
+                                    <button className={cx('ok')}>Xác nhận</button>{' '}
+                                    <button className={cx('huy')}>Hủy</button>
+                                    <div className={cx('days-left1')}>
+                                        Số ngày thuê:
+                                        {moment(item.orderDetails[0].orderReturnDate).diff(
+                                            moment(item.orderDetails[0].orderBorrowDate),
+                                            'days',
+                                        ) + 1}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -150,6 +177,32 @@ export default function Order() {
                         shape="rounded"
                     />
                 </p>
+                <Dialog
+                    maxWidth={1100}
+                    // maxHeight={800}
+                    open={open}
+                    // TransitionComponent={Transition}
+                    keepMounted
+                    onClose={handleClose}
+                    aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogActions>
+                        <div>
+                            <div role="dialog" aria-modal="true">
+                                <h2>Chi tiết sản phẩn </h2>
+                                {/* <p>{itemHistory.name}</p>
+                                <p> {itemHistory.address}</p>
+                                <p> {itemHistory.orderDetails ? itemHistory.orderDetails[0].product.name : 'aaa'}</p> */}
+
+                                <div className={cx('swal-footer')}>
+                                    <Button onClick={handleClose} style={{ background: '#0de667', color: 'white' }}>
+                                        Đóng
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>
+                    </DialogActions>
+                </Dialog>
             </>
         );
     }

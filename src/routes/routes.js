@@ -43,6 +43,7 @@ import About from '~/pages/About';
 import DefaultLayout2 from '~/layouts/DefaultLayout2';
 import Password from '~/pages/Setting/Password';
 import Information from '~/pages/Setting/Information';
+import Payment from '~/pages/Payment/Payment';
 // import ProductManagement from '~/layouts/Admin/ProductManagement/ProductManagement';
 
 // Public routes
@@ -62,6 +63,7 @@ const publicRoutes = [
     { path: config.routes.products, component: Products },
     { path: config.routes.post, component: Posts },
     { path: config.routes.pay, component: Pay },
+    { path: config.routes.payment, component: Payment },
     { path: config.routes.about, component: About },
 
     { path: config.routes.password, component: Password, layout: DefaultLayout2 },

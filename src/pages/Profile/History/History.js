@@ -1,13 +1,14 @@
 import images from '~/assets/images';
 
 import classNames from 'classnames/bind';
-import styles from './Product.module.scss';
+import styles from './History.module.scss';
 import Menu, { MenuItem } from '../Menu';
 import config from '~/config';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import moment from 'moment';
 import ErrorToast from '~/pages/Product/ErrorToast';
+import { Button, Dialog, DialogActions } from '@mui/material';
 
 const cx = classNames.bind(styles);
 function History() {
@@ -15,7 +16,17 @@ function History() {
     const imgUser = JSON.parse(localStorage.getItem('user'));
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState();
+    const [itemHistory, setItemHistory] = useState([]);
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}order/getAllByUser/${imgUser.id}`)
             .then((res) => res.json())
@@ -33,7 +44,6 @@ function History() {
                 },
             );
     }, [imgUser.id]);
-    console.log(items);
 
     if (error) {
         return <ErrorToast message={error.message} />;
@@ -161,28 +171,33 @@ function History() {
                                     </div>
                                     <div className={cx('project-box-footer')}>
                                         <div className={cx('participants')}>
-                                            <button
-                                                className={cx('days-left')}
-                                                style={{ display: 'flex', alignItems: 'center' }}
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="12"
-                                                    height="12"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    strokeWidth="3"
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    className={cx('feather feather-plus')}
+                                            <div className={cx('days-left')}>
+                                                <Button
+                                                    style={{ display: 'flex', alignItems: 'center' }}
+                                                    onClick={() => {
+                                                        setItemHistory(item);
+                                                        handleClickOpen();
+                                                    }}
                                                 >
-                                                    <path d="M12 5v14M5 12h14" />
-                                                </svg>
-                                                Chi tiết
-                                            </button>
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="12"
+                                                        height="12"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        strokeWidth="3"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        className={cx('feather feather-plus')}
+                                                    >
+                                                        <path d="M12 5v14M5 12h14" />
+                                                    </svg>
+                                                    Chi tiết
+                                                </Button>
+                                            </div>
                                         </div>
-                                        <div className={cx('days-left')}>
+                                        <div className={cx('days-left1')}>
                                             Số ngày thuê:{' '}
                                             {moment(item.orderDetails[0].orderReturnDate).diff(
                                                 moment(item.orderDetails[0].orderBorrowDate),
@@ -195,6 +210,32 @@ function History() {
                         ))}
                     </div>
                 </div>
+                <Dialog
+                    maxWidth={1100}
+                    // maxHeight={800}
+                    open={open}
+                    // TransitionComponent={Transition}
+                    keepMounted
+                    onClose={handleClose}
+                    aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogActions>
+                        <div>
+                            <div role="dialog" aria-modal="true">
+                                <h2>Chi tiết sản phẩn </h2>
+                                <p>{itemHistory.name}</p>
+                                <p> {itemHistory.address}</p>
+                                <p> {itemHistory.orderDetails ? itemHistory.orderDetails[0].product.name : 'aaa'}</p>
+
+                                <div className={cx('swal-footer')}>
+                                    <Button onClick={handleClose} style={{ background: '#0de667', color: 'white' }}>
+                                        Đóng
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>
+                    </DialogActions>
+                </Dialog>
             </div>
         );
     }

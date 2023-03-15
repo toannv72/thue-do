@@ -1,0 +1,259 @@
+.function {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    margin: auto;
+
+    height: 50px;
+}
+
+.postDesc {
+    font-weight: 400;
+    width: 100px;
+    font-size: 14px;
+    line-height: 24px;
+    color: #444444;
+    margin-top: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+}
+
+.postDesc2 {
+    font-weight: 400;
+    width: 300px;
+    font-size: 14px;
+    line-height: 24px;
+    color: #444444;
+    margin-top: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+}
+
+.function a {
+    text-decoration: none
+}
+
+.card {
+
+    img {
+        width: 50px;
+    }
+}
+
+.table {
+    font-size: large;
+    text-align: center;
+}
+
+.delete {
+    button {
+        background: red;
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.edit {
+    button {
+        background: rgb(13, 230, 103);
+        height: 30px;
+        width: 30px;
+    }
+}
+
+.img {
+    width: 50px;
+}
+
+.contact-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background: rgb(220, 211, 214);
+    width: 478px;
+    height: 200px;
+    text-align: center;
+
+    /* đảm bảo rằng phần tử hiển thị trên các phần tử khác */
+    h1 {
+        margin-bottom: 13px;
+        margin-top: 26px;
+    }
+
+    h2 {
+        color: black;
+        text-align: center;
+        font-weight: 500;
+        font-size: 15px !important;
+    }
+}
+
+.contact-container1 {
+    // position: fixed;
+    //     // top: 20%;
+    //     // left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     z-index: 9999;
+    //     // background: rgb(220, 211, 214);
+    width: 1078px;
+    // height: 500px;
+    text-align: center;
+}
+
+.swal-footer {
+    display: inline-flex;
+    text-align: right;
+    padding-top: 13px;
+    margin-top: 13px;
+    padding: 13px 16px;
+    border-radius: inherit;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    .button {
+
+        width: 50px;
+        color: #d21010 !important;
+        border-radius: 0.357rem;
+        box-shadow: none !important;
+        border: none;
+        background-color: #ffbdbd !important;
+    }
+
+    .button1 {
+        width: 50px;
+        margin-left: 25px;
+        height: 40px;
+        background: rgb(191 255 184) !important;
+        border-radius: 0.357rem;
+        box-shadow: none !important;
+        color: rgb(13 136 0) !important;
+        border: none;
+    }
+}
+
+.function {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    margin: auto;
+
+    height: 50px;
+}
+
+.function a {
+    text-decoration: none
+}
+
+.card {
+
+    img {
+        width: 50px;
+    }
+}
+
+.table {
+    font-size: large;
+    text-align: center;
+}
+
+.delete {
+    button {
+        background: red;
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.edit {
+    button {
+        background: rgb(13, 230, 103);
+        height: 30px;
+        width: 30px;
+    }
+}
+
+.img {
+    width: 50px;
+}
+
+.contact-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background: rgb(220, 211, 214);
+    width: 478px;
+    height: 200px;
+    text-align: center;
+
+    /* đảm bảo rằng phần tử hiển thị trên các phần tử khác */
+    h1 {
+        margin-bottom: 13px;
+        margin-top: 26px;
+    }
+
+    h2 {
+        color: black;
+        text-align: center;
+        font-weight: 500;
+        font-size: 15px !important;
+    }
+}
+
+.contact-container1 {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    // transform: translate(-50%, -50%);
+    // z-index: 9999;
+    // background: rgb(220, 211, 214);
+    width: 1278px;
+    height: 200px;
+    text-align: center;
+}
+
+.ip {
+    width: 1000px;
+}
+
+.swal-footer {
+    display: inline-flex;
+    text-align: right;
+    padding-top: 13px;
+    margin-top: 13px;
+    padding: 13px 16px;
+    border-radius: inherit;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    .button {
+
+        width: 50px;
+        color: #d21010 !important;
+        border-radius: 0.357rem;
+        box-shadow: none !important;
+        border: none;
+        background-color: #ffbdbd !important;
+    }
+
+    .button1 {
+        width: 50px;
+        margin-left: 25px;
+        height: 40px;
+        background: rgb(191 255 184) !important;
+        border-radius: 0.357rem;
+        box-shadow: none !important;
+        color: rgb(13 136 0) !important;
+        border: none;
+    }
+}

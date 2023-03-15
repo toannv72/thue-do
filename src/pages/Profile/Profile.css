@@ -410,15 +410,23 @@
     position: absolute;
     z-index: 12;
 }
-
+.user-icon-svg{
+    width: 100%;
+        position: absolute;
+        z-index: 12;
+        margin-top: -57px;
+        float:right;display: flex;
+            flex-direction: row-reverse;
+}
 .user-icon {
     width: 110px;
-        height: 90px;
+        height: 110px;
     display: block;
     border-radius: 50%;
     border: .5em solid var(--bc);
     background-color: var(--bc);
     z-index: 12;
+    object-fit: cover;
 }
 
 .user-header-inner {

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import Quote from '~/layouts/Footer/Footer';
 import './test.css';
-import classNames from 'classnames/bind';
-import styles from './Login.module.scss';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
+import classNames from 'classnames/bind';
+import styles from './Login.module.scss';
 const cx = classNames.bind(styles);
 
 function Login() {

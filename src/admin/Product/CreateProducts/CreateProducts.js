@@ -14,7 +14,6 @@ import { CircularProgress } from '@mui/material';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
 const cx = classNames.bind(styles);
 export default function CreateProducts() {
     const [name, setName] = useState('');

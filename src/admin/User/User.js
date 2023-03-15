@@ -328,7 +328,7 @@ export default function User() {
                                 <form className="form-horizontal">
                                     <div className="form-group">
                                         <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
-                                            firstName
+                                            Họ
                                         </label>
                                         <div className="col-md-8">
                                             <div className="col-md-4 indent-small">
@@ -336,7 +336,7 @@ export default function User() {
                                                     <input
                                                         className="form-control"
                                                         id="id_last_name"
-                                                        placeholder="Đặt cọc"
+                                                        placeholder="Họ"
                                                         type="text"
                                                         value={firstName}
                                                         onChange={(event) => setFirstName(event.target.value)}
@@ -347,7 +347,7 @@ export default function User() {
                                     </div>
                                     <div className="form-group">
                                         <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
-                                            LastName
+                                            Tên
                                         </label>
                                         <div className="col-md-8">
                                             <div className="col-md-4 indent-small">
@@ -355,7 +355,7 @@ export default function User() {
                                                     <input
                                                         className="form-control"
                                                         id="id_last_name"
-                                                        placeholder="Đặt cọc"
+                                                        placeholder="Tên"
                                                         type="text"
                                                         value={lastName}
                                                         onChange={(event) => setLastName(event.target.value)}
@@ -375,7 +375,7 @@ export default function User() {
                                                     <input
                                                         className="form-control"
                                                         id="id_last_name"
-                                                        placeholder="Đặt cọc"
+                                                        placeholder="Số điện thoại"
                                                         type="text"
                                                         value={phone}
                                                         onChange={(event) => setPhone(event.target.value)}
@@ -394,7 +394,7 @@ export default function User() {
                                                     <input
                                                         className="form-control"
                                                         id="id_last_name"
-                                                        placeholder="Đặt cọc"
+                                                        placeholder="Email"
                                                         type="text"
                                                         value={email}
                                                         onChange={(event) => setEmail(event.target.value)}
@@ -424,7 +424,7 @@ export default function User() {
                                 </div> */}
                                     <div className="form-group">
                                         <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
-                                            Password
+                                            Mật khẩu
                                         </label>
                                         <div className="col-md-8">
                                             <div className="col-md-4 indent-small">
@@ -432,7 +432,7 @@ export default function User() {
                                                     <input
                                                         className="form-control"
                                                         id="id_last_name"
-                                                        placeholder="Giá tiền"
+                                                        placeholder="Mật khẩu"
                                                         type="text"
                                                         value={password}
                                                         onChange={(event) => setPassword(event.target.value)}

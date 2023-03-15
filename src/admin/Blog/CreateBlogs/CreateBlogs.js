@@ -9,11 +9,11 @@ import axios from 'axios';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '~/configs/firebase';
 import { v4 } from 'uuid';
-import React, { Component } from 'react';
+import React from 'react';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
+import { CircularProgress } from '@mui/material';
 
 const cx = classNames.bind(styles);
 export default function CreateProducts() {
@@ -22,6 +22,7 @@ export default function CreateProducts() {
     const [description, setDescription] = useState(EditorState.createEmpty());
     const [imageTitle, setImageTitle] = useState('');
     const [imageCover, setImageCover] = useState('');
+    const [circular, setCircular] = useState(false);
 
     const [toan, setToan] = useState(false);
     const handleSubmit = () => {
@@ -36,9 +37,12 @@ export default function CreateProducts() {
             .then((response) => {
                 if (response.status === 200) {
                     console.log(imageTitle, imageCover);
+                    setCircular(false);
 
                     toast.success(`Thêm blog thành công!`);
                 } else {
+                    setCircular(false);
+
                     toast.error(`Thêm blog không thành công!`);
                 }
             })
@@ -53,11 +57,12 @@ export default function CreateProducts() {
 
     const upImg = () => {
         // if (img == null && img1 == null) return;
-
+        
         // console.log(category.id);
         if (img == null || img1 == null || title < 0 || author === '' || description === '') {
             return toast.error(`vui lòng nhập đầy đủ thông tin !`);
         }
+        setCircular(true);
 
         const urls = [];
         const urls1 = [];
@@ -70,7 +75,6 @@ export default function CreateProducts() {
                     urls.push({ url: url });
                     if (img.length === urls.length) {
                         setImageTitle(url);
-                        console.log("ok1");
                         for (let index = 0; index < img1.length; index++) {
                             const imagerRef = ref(storage, `images/${img1[index].name + v4()}`);
                             // eslint-disable-next-line no-loop-func
@@ -79,7 +83,6 @@ export default function CreateProducts() {
                                     urls1.push({ url: url });
                                     if (img1.length === urls1.length) {
                                         setImageCover(url);
-                                        console.log('ok2');
                                         setToan(true);
                                     }
                                 });
@@ -88,9 +91,8 @@ export default function CreateProducts() {
                     }
                 });
             });
-            
         }
-        
+
         // setImages(urls);
     };
 
@@ -239,6 +241,11 @@ export default function CreateProducts() {
                             </div>
                         </div>
                     </form>
+                    {circular && (
+                        <>
+                            <CircularProgress color="secondary" />
+                        </>
+                    )}
                     <div className="form-group">
                         <div className="col-md-offset-4 col-md-3">
                             <button className="btn-lg btn-primary" onClick={upImg}>

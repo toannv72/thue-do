@@ -18,6 +18,7 @@ const routes = {
     post: '/post:id',
     admin: '/admin',
     pay: '/pay:id',
+    payment: '/Payment/:id',
 
     password: '/password',
     information: '/information',

@@ -5,11 +5,15 @@ import config from '~/config';
 
 import classNames from 'classnames/bind';
 import styles from './Product.module.scss';
+import { MayAnh } from '~/components/Icons';
+import { Button } from '@mui/material';
 const cx = classNames.bind(styles);
 function Profile() {
     // const id = localStorage.getItem('username');
     const imgUser = JSON.parse(localStorage.getItem('user'));
-
+function ChangePhoto() {
+    
+}
     return (
         <div>
             <div className="back-to-top" style={{ display: 'block', opacity: 1 }}></div>
@@ -23,7 +27,18 @@ function Profile() {
                             alt=""
                         />
                     </div>
+                    <div className="user-info-bar">
+                        <div className="ufo-bar-col3">
+                            <div className=" user-icon-svg">
+                                <Button variant="contained" component="label" onClick={ChangePhoto}>
+                                    <img src={images.logoCamera} alt="" style={{ width: 30 }} />
+                                    Thêm ảnh bìa
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <div className="user-info-bar">
                     <div className="ufo-bar-col1"></div>
                     <div className="ufo-bar-col2">

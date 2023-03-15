@@ -37,3 +37,12 @@
 .active-icon {
     display: none;
 }
+ @media (max-width: 740px) {
+
+     /* styles cho khi trình duyệt có chiều rộng <= 767px */
+
+    .title {
+            display: none;
+        }
+       
+ }

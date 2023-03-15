@@ -15,7 +15,7 @@
     padding: 8px;
     margin-top: 10px;
     cursor: pointer;
-        align-items: center;
+    align-items: center;
 }
 
 .avatar {
@@ -54,4 +54,17 @@
     font-weight: 700;
     color: #fe2c55;
     cursor: pointer;
+}
+
+@media (max-width: 740px) {
+
+    /* styles cho khi trình duyệt có chiều rộng <= 767px */
+
+    .item-info {
+        display: none;
+    }
+
+    .label {
+        display: none;
+    }
 }

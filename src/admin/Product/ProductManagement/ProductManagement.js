@@ -140,7 +140,7 @@ export default function CreateProducts() {
   useEffect(() => {
       const fetchSearchResults = async () => {
           const response = await fetch(
-              `${process.env.REACT_APP_BASE_URLS}products/getAllProduct?page=${currentPage-1}&size=10`,
+              `${process.env.REACT_APP_BASE_URLS}products/getAllProduct?page=${currentPage - 1}&size=10&sort=id%2Cdesc`,
           );
           const data = await response.json();
           setSearchResults(data.contends);
