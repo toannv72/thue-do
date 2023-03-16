@@ -6,43 +6,7 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 export default function Home() {
     // clik voo ddeer chayj anh
-    function toan(key) {
-        items.map((item, index) => {
-            if (key === index) {
-                console.log(item.img);
-                return (window.location = '/blog');
-            }
-            return item.img;
-        });
-    }
-
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState([]);
-    // console.log(localStorage.getItem('email'));
-    // console.log(localStorage.getItem('password'));
-    // console.log(localStorage.getItem('token'));
-    // Note: the empty deps array [] means
-    // this useEffect will run once
-    // similar to componentDidMount()
-    useEffect(() => {
-        fetch('http://localhost:3000/Responsive')
-            .then((res) => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setItems(result);
-                },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                },
-            );
-    }, []);
-
+  
     // if (error) {
     //     return <div>Error: {error.message}</div>;
     // } else if (!isLoaded) {
@@ -60,14 +24,9 @@ export default function Home() {
                     emulateTouch={true}
                     //chế độ trung tâm
                     // centerMode={true}
-                    onClickItem={toan}
+                    
                 >
-                    {/* {items.map((item, index) => (
-                        <div key={index}>
-                            <img alt={index} src={item.img} />
-                     
-                        </div>
-                    ))} */}
+                   
                     <img
                         alt=""
                         src="https://raw.githubusercontent.com/toansola3/thue-do/master/img/328063220_619078163361298_6566497839462960659_n.jpg"

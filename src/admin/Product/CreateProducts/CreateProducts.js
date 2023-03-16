@@ -18,8 +18,8 @@ const cx = classNames.bind(styles);
 export default function CreateProducts() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState(EditorState.createEmpty());
-    const [price, setPrice] = useState(0);
-    const [deposit, setDeposit] = useState(0);
+    const [price, setPrice] = useState(1);
+    const [deposit, setDeposit] = useState(1);
     const [category, setCategory] = useState();
     const [images, setImages] = useState([]);
     const [toan, setToan] = useState(false);
@@ -64,9 +64,12 @@ export default function CreateProducts() {
         if (img == null || name === '' || price <= 0 || deposit <= 0 || category.id <= 0) {
             return toast.error(`vui lòng nhập đầy đủ thông tin !`);
         }
+        //  if (typeof price !== 'number' || typeof deposit !== 'number') {
+        //      console.log(typeof price);
+        //      return toast.error(`vui lòng nhập số trong giá tiền !`);
+        //  }
         const urls = [];
         setCircular(true);
-
         for (let index = 0; index < img.length; index++) {
             const imagerRef = ref(storage, `images/${img[index].name + v4()}`);
             uploadBytes(imagerRef, img[index]).then(() => {
@@ -140,7 +143,7 @@ export default function CreateProducts() {
                                             placeholder="Tên sản phẩm"
                                             type="text"
                                             value={name}
-                                            onChange={(event) => setName(event.target.value)}
+                                            onChange={(event) => !event.target.value.startsWith(' ') ? setName(event.target.value) : <></>}
                                         />
                                     </div>
                                 </div>
@@ -159,7 +162,7 @@ export default function CreateProducts() {
                                             placeholder="Giá tiền"
                                             type="text"
                                             value={price}
-                                            onChange={(event) => setPrice(event.target.value)}
+                                            onChange={(event) => !event.target.value.startsWith(' ') ? setPrice(event.target.value) : <></>}
                                         />
                                     </div>
                                 </div>
@@ -178,7 +181,7 @@ export default function CreateProducts() {
                                             placeholder="Đặt cọc"
                                             type="text"
                                             value={deposit}
-                                            onChange={(event) => setDeposit(event.target.value)}
+                                            onChange={(event) =>!event.target.value.startsWith(' ') ? setDeposit(event.target.value) : <></>}
                                         />
                                     </div>
                                 </div>

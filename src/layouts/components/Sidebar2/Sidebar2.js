@@ -2,14 +2,6 @@ import classNames from 'classnames/bind';
 import styles from './Sidebar.module.scss';
 import Menu, { MenuItem } from './Menu';
 import {
-    HomeIcon,
-    // HomeActiveIcon,
-    UserGroupIcon,
-    // UserGroupActiveIcon,
-    // LiveIcon,
-    // LiveActiveIcon,
-    BlogActiveIcon,
-    TiemActiveIcon,
     User,
     LiveActiveUser,
 } from '~/components/Icons';

@@ -107,13 +107,12 @@ function Settings() {
                     setOrders(result);
                     let start = 0;
                     const disabledDates = [];
-                    console.log('🚀 ~ file: Pay.js:128 ~ useEffect ~ disabledDates:', disabledDates);
                     while (start <= result.length) {
                         const startDate = new Date(`${moment(result[start].orderBorrowDate).format('MM DD,YYYY')}`);
-                        console.log(startDate);
+                        // console.log(startDate);
 
                         const endDate = new Date(`${moment(result[start].orderReturnDate).format('MM DD,YYYY')}`);
-                        console.log(endDate);
+                        // console.log(endDate);
                         // console.log(moment(result[0].orderReturnDate).format('MM DD,YYYY'));
                         // Loop from start date to end date
 
@@ -157,9 +156,7 @@ function Settings() {
 
     useEffect(() => {}, [orders]);
     // const [pay, setPay] = useState(products.price);
-    const [name, setName] = useState(
-        (User.lastName ? User.lastName : '') + ' ' + (User.firstName ? User.firstName : ''),
-    );
+    const [name, setName] = useState((User.lastName ? +' ' : '') + (User.firstName ? User.firstName : ''));
     const [address, setAddress] = useState(User.address);
     const [phone, setPhone] = useState(User.phone);
     // const [id, setid] = useState(User.id);
@@ -168,18 +165,16 @@ function Settings() {
     const [message, setMessage] = useState('');
 
     const order = async () => {
-        if (name === '' || address === '' || phone === '') {
+     
+        if (name === null || name === '' || name === ' ' || address === '' || phone === '' || phone === null) {
             toast.error(`Vui lòng nhập đầy đủ thông tin`);
             return;
         }
-        if (phone <= 99999999 || !isValidNumber(phone, 'VN')) {
-            toast.error(`Số điện thoại không hợp lệ`);
-            return;
-        }
-        if (address <= 99999999) {
-            toast.error(`Số điện thoại không hợp lệ`);
-            return;
-        }
+        console.log(name);
+          if (phone <= 99999999 || !isValidNumber(phone, 'VN')) {
+              toast.error(`Số điện thoại không hợp lệ`);
+              return;
+          }
         const order = {
             totalPrice: products.price + (products.price * sumDay) / 2 + products.deposit,
             message: message,
@@ -198,11 +193,14 @@ function Settings() {
             const response = await axios.post(`${process.env.REACT_APP_BASE_URLS}order/create`, order);
             console.log(response.data);
             toast.success(`Đặt hàng thành công!`);
+             setTimeout(() => {
+                 window.location.href = '/Payment/:id';
+             }, 3000);
         } catch (error) {
             console.log(error.response.data.message);
             // toast.error(`${error.response.data.message}!`);
             toast.error(`Sản phẩm này đã có người thuê!`);
-            console.log('no');
+        
         }
     };
 
@@ -346,20 +344,21 @@ function Settings() {
                                     <div className="pay-info">
                                         <div> Thông tin nhận hàng:</div>
                                         <div className="pay-info-item">
-                                            <input value={name} onChange={(e) => setName(e.target.value)} />
+                                            <input
+                                                value={name}
+                                                onChange={(e) => (!e.target.value.startsWith(' ')?setName(e.target.value):<></>)}
+                                            />
                                         </div>
                                         <br />
                                         <div> Số điện thoại:</div>
                                         <div className="pay-info-item">
                                             <br />
-                                            <input value={phone} onChange={(e) => setPhone(e.target.value)} />
+                                            <input value={phone} onChange={(e) => (!e.target.value.startsWith(' ')?setPhone(e.target.value):<></>)} />
                                         </div>
                                         <br />
                                         <div>ĐỊA CHỈ:</div>
                                         <div className="pay-info-item">
-                                            <span className="pay-header-user-phone">
-                                                <input value={address} onChange={(e) => setAddress(e.target.value)} />
-                                            </span>
+                                            <input value={address} onChange={(e) => (!e.target.value.startsWith(' ')?setAddress(e.target.value):<></>)} />
                                         </div>
                                         {/* <div className="pay-info-item i-change">
                                             <a href="" className="pay-change-selected">

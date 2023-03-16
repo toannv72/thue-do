@@ -59,7 +59,7 @@ export default function CreateProducts() {
         // if (img == null && img1 == null) return;
         
         // console.log(category.id);
-        if (img == null || img1 == null || title < 0 || author === '' || description === '') {
+        if (img == null || img1 == null || title === '' || author === '' || description === '') {
             return toast.error(`vui lòng nhập đầy đủ thông tin !`);
         }
         setCircular(true);
@@ -139,7 +139,13 @@ export default function CreateProducts() {
                                             placeholder="Tiêu đề"
                                             type="text"
                                             value={title}
-                                            onChange={(event) => setTitle(event.target.value)}
+                                            onChange={(event) =>
+                                                !event.target.value.startsWith(' ') ? (
+                                                    setTitle(event.target.value)
+                                                ) : (
+                                                    <></>
+                                                )
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -158,7 +164,11 @@ export default function CreateProducts() {
                                             placeholder="Tác giả"
                                             type="text"
                                             value={author}
-                                            onChange={(event) => setAuthor(event.target.value)}
+                                            onChange={(event) =>!event.target.value.startsWith(' ') ? (
+                                                    setAuthor(event.target.value)
+                                                ) : (
+                                                    <></>
+                                                ) }
                                         />
                                     </div>
                                 </div>
