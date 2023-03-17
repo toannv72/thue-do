@@ -164,11 +164,13 @@ export default function CreateProducts() {
                                             placeholder="Tác giả"
                                             type="text"
                                             value={author}
-                                            onChange={(event) =>!event.target.value.startsWith(' ') ? (
+                                            onChange={(event) =>
+                                                !event.target.value.startsWith(' ') ? (
                                                     setAuthor(event.target.value)
                                                 ) : (
                                                     <></>
-                                                ) }
+                                                )
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -182,8 +184,7 @@ export default function CreateProducts() {
                             <div className="col-md-8">
                                 <div className="col-md-8 indent-small">
                                     <div className="form-group internal">
-                                      
-                                        <div style={{ backgroundColor: '#fff' }}>
+                                        <div style={{ backgroundColor: '#fff'}}>
                                             <Editor
                                                 editorState={description}
                                                 wrapperClassName="demo-wrapper"

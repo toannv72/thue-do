@@ -54,7 +54,8 @@
     "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.1",
     "splitting": "^1.0.6",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "webpack": "^5.76.2"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^5.0.0",

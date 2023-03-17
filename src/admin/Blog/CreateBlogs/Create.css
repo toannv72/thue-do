@@ -10,6 +10,12 @@
     margin: 10px;
 }
 
+.rdw-editor-main {
+    height: 200px;
+}
+.demo-editor {
+    height: 200px;
+}
 .datepicker-dropdown {
     z-index: 200 !important;
 }

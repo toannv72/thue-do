@@ -3,14 +3,11 @@ import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-
-import * as searchServices from '~/services/searchService';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/hooks';
 import styles from './Search.module.scss';
-
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +23,7 @@ function Search() {
 
     useEffect(() => {
         if (!debouncedValue.trim()) {
+            console.log('data');
             setSearchResult([]);
             return;
         }
@@ -34,6 +32,7 @@ function Search() {
             setLoading(true);
             const result = await fetch(`${process.env.REACT_APP_BASE_URLS}products/${searchValue}`);
             const data = await result.json();
+            console.log(data);
             setSearchResult(data);
             setLoading(false);
         };
@@ -59,7 +58,9 @@ function Search() {
     };
     const handleSearch = (event) => {
         if (event.key === 'Enter') {
-            window.location.href = `/search:${searchValue}`;
+            if (searchValue) {
+                window.location.href = `/search:${searchValue}`;
+            }
         }
     };
     return (
@@ -81,7 +82,7 @@ function Search() {
                 )}
                 onClickOutside={handleHideResult}
             >
-                <div className={cx('search')} >
+                <div className={cx('search')}>
                     <input
                         ref={inputRef}
                         value={searchValue}
