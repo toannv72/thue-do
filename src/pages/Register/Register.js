@@ -75,7 +75,7 @@ function Login() {
         }
         if (password && username) {
             // setValid(true);
-            window.location.href = '/';
+            window.location.href = '/login';
         }
         // setSubmitted(true);
     };

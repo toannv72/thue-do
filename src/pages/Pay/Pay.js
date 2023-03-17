@@ -258,7 +258,7 @@ function Settings() {
                                             <span className="pay-item-span-type"> </span>
                                         </div>
                                     </div>
-                                    <div className="pay-price">{(products.price * 1).toLocaleString('vi-VN')}</div>
+                                    <div className="pay-price">{(products.price * 1).toLocaleString('vi-VN')}đ</div>
                                     <div className="pay-quantity">
                                         <p> {orderBorrowDate}</p>
                                         <p>{orderReturnDate}</p>
@@ -291,7 +291,7 @@ function Settings() {
                                         </Dialog>
                                     </div>
                                     <div className="pay-total-price">
-                                        {(products.price + (products.price * sumDay) / 2).toLocaleString('vi-VN')}
+                                        {(products.price + (products.price * sumDay) / 2).toLocaleString('vi-VN')}đ
                                     </div>
                                 </div>
 
@@ -325,7 +325,7 @@ function Settings() {
                                                 <div className="pay-shipping-change-transporter">
                                                     {/* <dt className="pay-totalprice-label"></dt> */}
                                                     <dd className="pay-total-price-payment">
-                                                        {(products.deposit * 1).toLocaleString('vi-VN')}
+                                                        {(products.deposit * 1).toLocaleString('vi-VN')}đ
                                                     </dd>
                                                 </div>
                                             </div>
@@ -338,7 +338,7 @@ function Settings() {
                                                         products.price +
                                                         (products.price * sumDay) / 2 +
                                                         products.deposit
-                                                    ).toLocaleString('vi-VN')}
+                                                    ).toLocaleString('vi-VN')}đ
                                                 </dd>
                                             </div>
                                         </div>

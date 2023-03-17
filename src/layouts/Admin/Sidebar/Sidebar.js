@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './Sidebar.module.scss';
-import   './Sidebar.css';
+import './Sidebar.css';
 import Menu, { MenuItem } from './Menu';
 
 // import SuggestedAccounts from '~/components/SuggestedAccounts';
@@ -49,13 +49,13 @@ function Sidebar() {
                             <MenuItem title="Home" to={config.routes.adminHome} />
                         </li> */}
                         <li className="">
-                            <MenuItem title="Sản phẩm " to={config.routes.adminProduct} />
+                            <MenuItem title="Sản phẩm " to={config.routes.adminCreateProduct} />
                         </li>
                         <li className="">
                             <MenuItem title="Người dùng" to={config.routes.adminUser} />
                         </li>
                         <li className="">
-                            <MenuItem title="Blog" to={config.routes.adminBlog} />
+                            <MenuItem title="Blog" to={config.routes.adminCreateBlog} />
                         </li>
                         <li className="">
                             <MenuItem title="Đơn hàng" to={config.routes.adminOrder} />
