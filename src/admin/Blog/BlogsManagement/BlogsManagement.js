@@ -12,10 +12,12 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '~/configs/firebase';
 import { v4 } from 'uuid';
 import { Button, Dialog, DialogActions, Pagination } from '@mui/material';
-import { Editor } from 'react-draft-wysiwyg';
+import {  Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
-import { convertToRaw } from 'draft-js';
+import { convertToRaw, EditorState, ContentState } from 'draft-js';
+
 import moment from 'moment';
+import DOMPurify from 'dompurify';
 const cx = classNames.bind(styles);
 export default function BlogsManagement() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -65,6 +67,7 @@ export default function BlogsManagement() {
             setProductToDelete(null);
         }
     };
+    console.log(description);
 
     const confirmEdit = () => {
         const updatedProduct = {
@@ -122,7 +125,7 @@ export default function BlogsManagement() {
         if (searchTerm !== '') {
             fetchSearchResults();
         }
-    }, [searchTerm, productToDelete, currentPage]);
+    }, [searchTerm, productToDelete, currentPage, showEditConfirmation]);
     useEffect(() => {
         const fetchSearchResults = async () => {
             const response = await fetch(
@@ -282,8 +285,18 @@ export default function BlogsManagement() {
                                             data-toggle="modal"
                                             data-target="#ModalUP"
                                             onClick={() => {
-                                                setProductToEdit(result.id);
                                                 handleEdit();
+                                                setProductToEdit(result.id);
+                                                setAuthor(result.author);
+                                                setTitle(result.title);
+                                                 const plainTextDescription = DOMPurify.sanitize(result.description, {
+                                                     ALLOWED_TAGS: [],
+                                                 });
+                                                setDescription(
+                                                    EditorState.createWithContent(
+                                                        ContentState.createFromText(plainTextDescription),
+                                                    ),
+                                                );
                                             }}
                                         >
                                             <i className="fas fa-edit"></i>
@@ -304,54 +317,6 @@ export default function BlogsManagement() {
                     />
                 </div>
             </div>
-            {/* {showDeleteConfirmation && (
-                <div className={cx('contact-container')}>
-                    <div className="swal-modal" role="dialog" aria-modal="true">
-                        <div className="swal-title">
-                            <h1>Cảnh báo</h1>
-                        </div>
-                        <h2>Bạn có chắc chắn là muốn xóa sản phẩm này?</h2>
-                        <div className={cx('swal-footer')}>
-                            <button className={cx('button')} onClick={cancelDelete}>
-                                Hủy bỏ
-                            </button>
-
-                            <button className={cx('button1')} onClick={confirmDelete}>
-                                Đồng ý
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )} */}
-            {/* <Dialog
-                // maxWidth={1100}
-                // maxHeight={800}
-                open={showDeleteConfirmation}
-                // TransitionComponent={Transition}
-                keepMounted
-                onClose={cancelDelete}
-                aria-describedby="alert-dialog-slide-description"
-            >
-                <DialogActions>
-                    <div className={cx('contact-container')}>
-                        <div className="swal-modal" role="dialog" aria-modal="true">
-                            <div className="swal-title">
-                                <h1>Cảnh báo</h1>
-                            </div>
-                            <h2>Bạn có chắc chắn là muốn xóa sản phẩm này?</h2>
-                            <div className={cx('swal-footer')}>
-                                <button className={cx('button')} onClick={cancelDelete}>
-                                    Hủy bỏ
-                                </button>
-
-                                <button className={cx('button1')} onClick={confirmDelete}>
-                                    Đồng ý
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </DialogActions>
-            </Dialog> */}
 
             <Dialog
                 maxWidth={1100}
@@ -402,7 +367,7 @@ export default function BlogsManagement() {
                 aria-describedby="alert-dialog-slide-description"
             >
                 <DialogActions>
-                    <div className={cx('contact-container1')}>
+                    <div>
                         <div className="panel panel-primary dialog-panel">
                             <div className="panel-heading">
                                 <h4>Thêm Sản Phẩm</h4>
@@ -422,7 +387,13 @@ export default function BlogsManagement() {
                                                         placeholder="Tiêu đề"
                                                         type="text"
                                                         value={title}
-                                                        onChange={(event) => setTitle(event.target.value)}
+                                                        onChange={(event) =>
+                                                            !event.target.value.startsWith(' ') ? (
+                                                                setTitle(event.target.value)
+                                                            ) : (
+                                                                <></>
+                                                            )
+                                                        }
                                                     />
                                                 </div>
                                             </div>
@@ -441,7 +412,13 @@ export default function BlogsManagement() {
                                                         placeholder="Tác giả"
                                                         type="text"
                                                         value={author}
-                                                        onChange={(event) => setAuthor(event.target.value)}
+                                                        onChange={(event) =>
+                                                            !event.target.value.startsWith(' ') ? (
+                                                                setAuthor(event.target.value)
+                                                            ) : (
+                                                                <></>
+                                                            )
+                                                        }
                                                     />
                                                 </div>
                                             </div>

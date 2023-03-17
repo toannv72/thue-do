@@ -11,10 +11,11 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Pagination }
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '~/configs/firebase';
 import { v4 } from 'uuid';
-import { EditorState, convertToRaw } from 'draft-js';
+import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
+import DOMPurify from 'dompurify';
 
 const cx = classNames.bind(styles);
 export default function CreateProducts() {
@@ -92,7 +93,7 @@ export default function CreateProducts() {
             .put(`${process.env.REACT_APP_BASE_URLS}products/update`, {
                 id: productToEdit,
                 name: name,
-                status: status,
+                // status: status,
                 description: draftToHtml(convertToRaw(description.getCurrentContent())),
                 price: price,
                 deposit: deposit,
@@ -101,6 +102,7 @@ export default function CreateProducts() {
             })
             .then((response) => {
                 if (response.status === 200) {
+                    console.log(status);
                     toast.success(`Thay đổi sản phẩm thành công!`);
                 } else {
                     toast.error(`Thay đổi sản phẩm không thành công!`);
@@ -162,7 +164,9 @@ export default function CreateProducts() {
     const [img, setImg] = useState(null);
 
     const upImg = () => {
-        if (img == null) return;
+        if (img == null) {
+            setToan(true);
+        };
         const urls = [];
         for (let index = 0; index < img.length; index++) {
             const imagerRef = ref(storage, `images/${img[index].name + v4()}`);
@@ -263,6 +267,24 @@ export default function CreateProducts() {
                                             onClick={() => {
                                                 setProductToEdit(result.id);
                                                 handleEdit();
+
+                                                setStatus(result.author);
+                                                setPrice(result.price);
+                                                setDeposit(result.deposit);
+                                                setName(result.name);
+
+                                                setCategory(result.category.id);
+                                                setStatus(result.status);
+
+                                                console.log(result);
+                                                const plainTextDescription = DOMPurify.sanitize(result.description, {
+                                                    ALLOWED_TAGS: [],
+                                                });
+                                                setDescription(
+                                                    EditorState.createWithContent(
+                                                        ContentState.createFromText(plainTextDescription),
+                                                    ),
+                                                );
                                             }}
                                         >
                                             <i className="fas fa-edit"></i>
@@ -283,25 +305,7 @@ export default function CreateProducts() {
                     />
                 </div>
             </div>
-            {/* {showDeleteConfirmation && (
-                <div className={cx('contact-container')}>
-                    <div className="swal-modal" role="dialog" aria-modal="true">
-                        <div className="swal-title">
-                            <h1>Cảnh báo</h1>
-                        </div>
-                        <h2>Bạn có chắc chắn là muốn xóa sản phẩm này?</h2>
-                        <div className={cx('swal-footer')}>
-                            <button className={cx('button')} onClick={cancelDelete}>
-                                Hủy bỏ
-                            </button>
-
-                            <button className={cx('button1')} onClick={confirmDelete}>
-                                Đồng ý
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )} */}
+            
             <Dialog
                 maxWidth={1100}
                 // maxHeight={800}
@@ -380,14 +384,14 @@ export default function CreateProducts() {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div className="form-group">
+                                        {/* <div className="form-group">
                                             <label
                                                 className="control-label col-md-2 col-md-offset-2"
                                                 htmlFor="id_accomodation"
                                             >
                                                 Trạng thái
                                             </label>
-                                            <div className="col-md-2">
+                                            <div className="col-md-3">
                                                 <select
                                                     className="form-control"
                                                     id="id_accomodation"
@@ -399,7 +403,7 @@ export default function CreateProducts() {
                                                     <option value="REJECTED">REJECTED</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className="form-group">
                                             <label
                                                 className="control-label col-md-2 col-md-offset-2"

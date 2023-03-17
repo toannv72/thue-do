@@ -156,13 +156,16 @@ function Settings() {
 
     useEffect(() => {}, [orders]);
     // const [pay, setPay] = useState(products.price);
-    const [name, setName] = useState((User.lastName ? +' ' : '') + (User.firstName ? User.firstName : ''));
+    const [name, setName] = useState(
+        (User.lastName ? (User.lastName + ' ') : '') + (User.firstName ? User.firstName : ''),
+    );
     const [address, setAddress] = useState(User.address);
     const [phone, setPhone] = useState(User.phone);
     // const [id, setid] = useState(User.id);
 
     // const [totalPrice, setTotalPrice] = useState(10);
     const [message, setMessage] = useState('');
+        console.log(name);
 
     const order = async () => {
      
@@ -170,7 +173,6 @@ function Settings() {
             toast.error(`Vui lòng nhập đầy đủ thông tin`);
             return;
         }
-        console.log(name);
           if (phone <= 99999999 || !isValidNumber(phone, 'VN')) {
               toast.error(`Số điện thoại không hợp lệ`);
               return;

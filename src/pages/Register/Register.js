@@ -27,11 +27,21 @@ function Login() {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
+ function isValidEmail(email) {
+     // Biểu thức chính quy để kiểm tra định dạng email
+     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+     return emailRegex.test(email);
+ }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!username || !email || !password) {
             setErrorMessage('Vui lòng nhập đầy đủ thông tin');
+            return;
+        }
+        if (!isValidEmail(email)) {
+            console.log('Đây là email không hợp lệ');
+            setError('Địa chỉ email không hợp lệ');
             return;
         }
         try {
@@ -76,9 +86,10 @@ function Login() {
             setErrorMessage1('Vui lòng nhập đầy đủ thông tin');
             return;
         }
+         
         try {
             // Send a post request to the server with the user's email and password
-            const response = await fetch(`https://product-rental.herokuapp.com/api/users/login`, {
+            const response = await fetch(`${process.env.REACT_APP_BASE_URLS}users/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -198,7 +209,7 @@ function Login() {
                         <a className="form__link" href="# ">
                             Quên mật khẩu?
                         </a>
-                        <button className="form__button button submit">ĐĂNG NHẬP</button>
+                        <button className="form__button button submit" >ĐĂNG NHẬP</button>
                     </form>
                 </div>
                 <div className={`switch ${cnt4}`} id="switch-cnt">

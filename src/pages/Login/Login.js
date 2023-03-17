@@ -9,11 +9,11 @@ import styles from './Login.module.scss';
 const cx = classNames.bind(styles);
 
 function Login() {
-        const { pathname } = useLocation();
+    const { pathname } = useLocation();
 
-        useEffect(() => {
-            window.scrollTo(0, 0);
-        }, [pathname]);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     // const [cnt1, setcnt1] = useState('');
     // const [cnt2, setcnt2] = useState('');
@@ -34,11 +34,22 @@ function Login() {
     const [errorMessage1, setErrorMessage1] = useState('');
     const [error, setError] = useState('');
     const [error1, setError1] = useState('');
- 
+    const [errorEmail, setErrorEmail] = useState('');
+    function isValidEmail(email) {
+        // Biểu thức chính quy để kiểm tra định dạng email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!username || !email || !password) {
             setErrorMessage('Vui lòng nhập đầy đủ thông tin');
+            return;
+        }
+        if (!isValidEmail(email)) {
+            console.log('Đây là email không hợp lệ');
+            setError('Địa chỉ email không hợp lệ');
             return;
         }
         try {
@@ -72,7 +83,7 @@ function Login() {
         }
         if (password && username) {
             // setValid(true);
-            window.location.href = '/';
+            window.location.href = '/login';
         }
         // setSubmitted(true);
     };
@@ -123,7 +134,7 @@ function Login() {
                 console.log('user');
                 window.location.href = '/';
             }
-        } 
+        }
     };
     return (
         <div>
@@ -156,6 +167,9 @@ function Login() {
                             value={email}
                         />
                         {errorMessage && !email && <span className={cx('error')}>Vui lòng nhập Email</span>}
+                        {/* {!isValidEmail(email) && !email && (
+                            <span className={cx('error')}>Địa chỉ Email không hợp lệ</span>
+                        )} */}
                         <input
                             className="form__input"
                             type="password"
@@ -169,7 +183,7 @@ function Login() {
                         <button className="form__button button submit">ĐĂNG KÝ</button>
                     </form>
                 </div>
-                <div className={`container b-container ${cnt1} ${cnt2}`} id="b-container" style={{width:515}}>
+                <div className={`container b-container ${cnt1} ${cnt2}`} id="b-container" style={{ width: 515 }}>
                     <form className="form" id="b-form" method="" action="" onSubmit={handleSubmit1}>
                         <h2 className="form_title title">Đăng nhập vào Website</h2>
                         <div className="form__icons">
@@ -204,7 +218,6 @@ function Login() {
                         {errorMessage1 && !password && <span className={cx('error')}>Vui lòng nhập Mật Khẩu </span>}
                         {error1 && <p className={cx('error')}>{error1}</p>}
 
-
                         <a className="form__link" href="# ">
                             Quên mật khẩu?
                         </a>
@@ -216,9 +229,7 @@ function Login() {
                     <div className={`switch__circle switch__circle--t ${cnt4}`}></div>
                     <div className={`switch__container ${cnt5}`} id={`switch-c1 `}>
                         <h2 className="switch__title title">Chào mừng bạn đã quay trở lại Thuê Đồ</h2>
-                        <p className="switch__description description">
-                            Bạn đã có tài khoản? Hãy đăng nhập ở đây nhé!
-                        </p>
+                        <p className="switch__description description">Bạn đã có tài khoản? Hãy đăng nhập ở đây nhé!</p>
                         <button
                             className="switch__button button switch-btn"
                             onClick={() => {
@@ -227,7 +238,6 @@ function Login() {
                                 setcnt3('');
                                 setcnt4('is-txr');
                                 setcnt5('is-hidden');
-
                                 setEmail('');
                                 setPassword('');
                                 setUsername('');
@@ -242,9 +252,7 @@ function Login() {
                     </div>
                     <div className={`switch__container ${cnt3}`} id="switch-c2">
                         <h2 className="switch__title title">Chào mừng bạn đến với Thuê Đồ</h2>
-                        <p className="switch__description description">
-                            Bạn chưa có tài khoản? Hãy đăng ký ở đây nhé!
-                        </p>
+                        <p className="switch__description description">Bạn chưa có tài khoản? Hãy đăng ký ở đây nhé!</p>
                         <button
                             className="switch__button button switch-btn1"
                             onClick={() => {
