@@ -63,6 +63,9 @@ function Sidebar() {
                         <li className="">
                             <MenuItem title="Thông báo" to={config.routes.adminNotification} />
                         </li>
+                        <li className="">
+                            <MenuItem title="Thống kê" to={config.routes.adminDashboard} />
+                        </li>
                     </ul>
                 </aside>
             </Menu>

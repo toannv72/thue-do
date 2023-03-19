@@ -38,6 +38,7 @@ const routes = {
     adminCreateProduct: '/admin/product/create',
     adminProductManagement: '/admin/product/management',
     adminProduct: '/admin/product',
+    adminDashboard: '/admin/dashboard',
 
     adminNotification: '/admin/notification',
     adminOrder: '/admin/order',

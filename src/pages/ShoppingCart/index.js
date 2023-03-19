@@ -1,1 +1,1 @@
-export { default } from './GioHang';
+export { default } from './Cart';

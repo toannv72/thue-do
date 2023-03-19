@@ -44,6 +44,7 @@ import DefaultLayout2 from '~/layouts/DefaultLayout2';
 import Password from '~/pages/Setting/Password';
 import Information from '~/pages/Setting/Information';
 import Payment from '~/pages/Payment/Payment';
+import Dashboard from '~/admin/Dashboards/Dashboards';
 // import ProductManagement from '~/layouts/Admin/ProductManagement/ProductManagement';
 
 // Public routes
@@ -85,6 +86,7 @@ const publicRoutes = [
     { path: config.routes.adminOrder, component: OrderAdmin, layout: AdminLayout },
     { path: config.routes.adminProduct, component: ProductAdmin, layout: AdminLayout },
     { path: config.routes.adminUser, component: UserAdmin, layout: AdminLayout },
+    { path: config.routes.adminDashboard, component: Dashboard, layout: AdminLayout },
 
     { path: config.routes.adminCreateProduct, component: CreateProducts, layout: AdminLayout },
     { path: config.routes.adminProductManagement, component: ProductManagement, layout: AdminLayout },

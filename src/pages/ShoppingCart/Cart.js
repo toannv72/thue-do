@@ -1,14 +1,14 @@
 import Quote from "~/layouts/Footer/Footer";
 // import SanPham from "./SanPham";
-import SanPham2 from './SanPham2';
+import Carts from './Carts';
 
-function GioHang() {
+function ShoppingCart() {
     return (
         <div>
-            <SanPham2/>
+            <Carts />
             <Quote />
         </div>
     );
 }
 
-export default GioHang;
+export default ShoppingCart;

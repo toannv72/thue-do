@@ -1,21 +1,21 @@
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, ComposedChart, Legend, Line, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
-export default function Notification() {
+export default function Dashboard() {
     const data1 = [
-        { name: 'Group A', value: 400  },
+        { name: 'Group A', value: 400 },
         { name: 'Group B', value: 300 },
         { name: 'Group C', value: 300 },
         { name: 'Group D', value: 200 },
     ];
     const data = [
         {
-            name: 'Page A',
+            name: 'thangs 1',
             uv: 4000,
             pv: 2400,
             amt: 2400,
         },
         {
-            name: 'Page B',
+            name: 'thangs 2',
             uv: 3000,
             pv: 1398,
             amt: 2210,
@@ -57,7 +57,6 @@ export default function Notification() {
             amt: 2100,
         },
     ];
-    
 
     return (
         <>
@@ -80,13 +79,15 @@ export default function Notification() {
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
-                        <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+                        <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
+                        <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
+                        <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
                     </AreaChart>
                 </ResponsiveContainer>
                 <p>Maybe some other content</p>
 
                 <ResponsiveContainer width="100%" height={200}>
-                    <AreaChart
+                    <BarChart
                         width={500}
                         height={200}
                         data={data}
@@ -102,8 +103,10 @@ export default function Notification() {
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
-                        <Area type="monotone" dataKey="pv" stroke="#82ca9d" fill="#82ca9d" />
-                    </AreaChart>
+                        <Legend />
+                        <Bar dataKey="pv" fill="#8884d8" />
+                        <Bar dataKey="uv" fill="#82ca9d" />
+                    </BarChart>
                 </ResponsiveContainer>
             </div>
             <div>
@@ -153,7 +156,6 @@ export default function Notification() {
                     </PieChart>
                 </ResponsiveContainer>
             </div>
-
         </>
     );
 }
