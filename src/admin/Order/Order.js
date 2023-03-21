@@ -7,6 +7,8 @@ import classNames from 'classnames/bind';
 import moment from 'moment';
 import { Button, Dialog, DialogActions } from '@mui/material';
 import styles from './Order.module.scss';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
 const cx = classNames.bind(styles);
 
 export default function Order() {
@@ -17,6 +19,11 @@ export default function Order() {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemOne, setItemOne] = useState([]);
     const [open, setOpen] = useState(false);
+    const [PENDING, setPENDING] = useState(false);
+
+    const [item, setItem] = useState(null);
+
+    const [status, setStatus] = useState('');
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -44,13 +51,41 @@ export default function Order() {
                 setIsLoaded(true);
                 setError(error.message);
             });
-    }, [currentPage]);
+    }, [currentPage, PENDING]);
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
         console.log(value);
     };
-    console.log(items);
-    console.log(error);
+    useEffect(() => {
+        if (PENDING) {
+            axios
+                .put(`${process.env.REACT_APP_BASE_URLS}order/updateStatus/${item}?status=${status}`, {})
+                .then((response) => {
+                    if (response.status === 200) {
+                        console.log(`thành công ${item}`);
+                        if (status === 'CANCELLED') {
+                            toast.warning(`Đã hủy đơn hàng!`);
+                        } else {
+                            toast.success(`Đã xác nhận đơn hàng!`);
+                        }
+                        setPENDING(false);
+                    } else {
+                        toast.error(`Đơn hàng bị lỗi`);
+                        setPENDING(false);
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    toast.error(`Đơn hàng bị lỗi`);
+                    setPENDING(false);
+                });
+        }
+    }, [PENDING, item]);
+    function handeOk() {
+        setPENDING(true);
+    }
+
+    console.log(item);
     if (error) {
         return <ErrorToast message={error.message} />;
     } else if (!isLoaded) {
@@ -62,15 +97,18 @@ export default function Order() {
                     rel="stylesheet"
                     href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
                 />
-
-                <h1> Order</h1>
+                <ToastContainer />
+                <h1> Đơn hàng</h1>
                 <div
                     className={cx('project-boxes jsGridView')}
                     style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}
                 >
                     {items.contends.map((item, index) => (
                         <div className={cx('project-box-wrapper')} key={index}>
-                            <div className={cx('project-box')}>
+                            <div
+                                className={cx('project-box')}
+                                style={item.status === 'CANCELLED' ? { backgroundColor: '#ffd3e2' } : {}}
+                            >
                                 <div className={cx('project-box-header')}>
                                     <div>
                                         <div style={{ marginBottom: 30 }}>
@@ -159,8 +197,105 @@ export default function Order() {
                                         </button>
                                     </div>
                                     {/* <div className={cx('days-left')}>2 Days Left</div> */}
-                                    <button className={cx('ok')}>Xác nhận</button>{' '}
-                                    <button className={cx('huy')}>Hủy</button>
+
+                                    {item.status === 'CANCELLED' ? (
+                                        <>
+                                            <button
+                                                className={cx('ok')}
+                                                onClick={() => {
+                                                    handeOk();
+                                                    setStatus('DELIVERING');
+                                                    setItem(item.orderDetails[0].id);
+                                                }}
+                                            >
+                                                Xác nhận lại
+                                            </button>
+                                            <h3 style={{ color: 'red' }}>Đơn hàng đã bị hủy</h3>
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
+                                    {item.status === 'PENDING' ? (
+                                        <>
+                                            <button
+                                                className={cx('ok')}
+                                                onClick={() => {
+                                                    handeOk();
+                                                    setStatus('DELIVERING');
+                                                    setItem(item.orderDetails[0].id);
+                                                }}
+                                            >
+                                                Xác nhận
+                                            </button>
+
+                                            <button
+                                                className={cx('huy')}
+                                                onClick={() => {
+                                                    handeOk();
+                                                    setStatus('CANCELLED');
+
+                                                    setItem(item.orderDetails[0].id);
+                                                }}
+                                            >
+                                                Hủy
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
+                                    {item.status === 'DELIVERING' ? (
+                                        <>
+                                            <button
+                                                className={cx('ok')}
+                                                onClick={() => {
+                                                    handeOk();
+                                                    setStatus('DELIVERED');
+                                                    setItem(item.orderDetails[0].id);
+                                                }}
+                                            >
+                                                Đã giao
+                                            </button>
+                                            <button
+                                                className={cx('huy')}
+                                                onClick={() => {
+                                                    handeOk();
+                                                    setStatus('CANCELLED');
+
+                                                    setItem(item.orderDetails[0].id);
+                                                }}
+                                            >
+                                                Hủy đơn hàng
+                                            </button>
+                                            <h2 style={{ color: 'blue' }}>Đã xác nhận</h2>
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
+                                    {item.status === 'DELIVERED' ? (
+                                        <>
+                                            <button
+                                                className={cx('ok')}
+                                                onClick={() => {
+                                                    handeOk();
+                                                    setStatus('RECALLED');
+                                                    setItem(item.orderDetails[0].id);
+                                                }}
+                                            >
+                                                Xác nhận đã thu hồi
+                                            </button>
+
+                                            <h2 style={{ color: 'blue' }}>Đang được thuê</h2>
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
+                                    {item.status === 'RECALLED' ? (
+                                        <>
+                                            <h2 style={{ color: 'blue' }}>Đơn thành công</h2>
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
                                     <div className={cx('days-left1')}>
                                         Số ngày thuê:
                                         {moment(item.orderDetails[0].orderReturnDate).diff(
@@ -194,10 +329,6 @@ export default function Order() {
                     <DialogActions>
                         <div>
                             <div role="dialog" aria-modal="true">
-                                <h2>Chi tiết sản phẩn </h2>
-                                <p>{itemOne.name}</p>
-                                <p> {itemOne.address}</p>
-                                <p> {itemOne.orderDetails ? itemOne.orderDetails[0].product.name : ''}</p>
                                 <div className={cx('main')}>
                                     <div
                                         style={{
@@ -344,26 +475,7 @@ export default function Order() {
                                                                                                         gian sớm nhất.
                                                                                                     </td>
                                                                                                 </tr>
-                                                                                                <tr>
-                                                                                                    <td
-                                                                                                        colSpan={2}
-                                                                                                        style={{
-                                                                                                            padding:
-                                                                                                                '15 0 10 30',
-                                                                                                            fontSize: 12,
-                                                                                                            color: '#666666',
-                                                                                                        }}
-                                                                                                    >
-                                                                                                        <b>
-                                                                                                            Thời gian
-                                                                                                            hoàn tất
-                                                                                                            giao hàng:
-                                                                                                            Giao trước
-                                                                                                            20:00 ngày
-                                                                                                            25/11/2017
-                                                                                                        </b>
-                                                                                                    </td>
-                                                                                                </tr>
+                                                                                                <tr></tr>
                                                                                                 <tr>
                                                                                                     <td
                                                                                                         colSpan={2}
@@ -684,10 +796,10 @@ export default function Order() {
                                                                                                                                         )} */}
                                                                                                                                         {itemOne.orderDetails
                                                                                                                                             ? (
-                                                                                                                                                  (itemOne.totalPrice) -
-                                                                                                                                                  (itemOne
+                                                                                                                                                  itemOne.totalPrice -
+                                                                                                                                                  itemOne
                                                                                                                                                       .orderDetails[0]
-                                                                                                                                                      .deposit)
+                                                                                                                                                      .deposit
                                                                                                                                               ).toLocaleString(
                                                                                                                                                   'vi-VN',
                                                                                                                                               )
@@ -791,9 +903,11 @@ export default function Order() {
                                                                                                                                         }
                                                                                                                                         align="right"
                                                                                                                                     >
-                                                                                                                                        {itemOne.totalPrice?itemOne.totalPrice.toLocaleString(
-                                                                                                                                            'vi-VN',
-                                                                                                                                        ):""}
+                                                                                                                                        {itemOne.totalPrice
+                                                                                                                                            ? itemOne.totalPrice.toLocaleString(
+                                                                                                                                                  'vi-VN',
+                                                                                                                                              )
+                                                                                                                                            : ''}
 
                                                                                                                                         đ
                                                                                                                                     </td>

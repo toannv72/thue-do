@@ -68,18 +68,18 @@ export default function CreateProducts() {
         const urls1 = [];
 
         for (let index = 0; index < img.length; index++) {
-            const imagerRef = ref(storage, `images/${img[index].name + v4()}`);
+            const imageRef = ref(storage, `images/${img[index].name + v4()}`);
             // eslint-disable-next-line no-loop-func
-            uploadBytes(imagerRef, img[index]).then(() => {
-                getDownloadURL(imagerRef).then((url) => {
+            uploadBytes(imageRef, img[index]).then(() => {
+                getDownloadURL(imageRef).then((url) => {
                     urls.push({ url: url });
                     if (img.length === urls.length) {
                         setImageTitle(url);
                         for (let index = 0; index < img1.length; index++) {
-                            const imagerRef = ref(storage, `images/${img1[index].name + v4()}`);
+                            const imageRef = ref(storage, `images/${img1[index].name + v4()}`);
                             // eslint-disable-next-line no-loop-func
-                            uploadBytes(imagerRef, img1[index]).then(() => {
-                                getDownloadURL(imagerRef).then((url) => {
+                            uploadBytes(imageRef, img1[index]).then(() => {
+                                getDownloadURL(imageRef).then((url) => {
                                     urls1.push({ url: url });
                                     if (img1.length === urls1.length) {
                                         setImageCover(url);

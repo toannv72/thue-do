@@ -169,12 +169,14 @@ function Header() {
                                     </button>
                                 </Tippy>
                             </Link> */}
-                            <Tippy delay={[0, 50]} content="Thông báo" placement="bottom">
-                                <button className={cx('action-btn')}>
-                                    <InboxIcon />
-                                    <span className={cx('badge')}>13</span>
-                                </button>
-                            </Tippy>
+                            <Link to={config.routes.notification}>
+                                <Tippy delay={[0, 50]} content="Thông báo" placement="bottom">
+                                    <button className={cx('action-btn')}>
+                                        <InboxIcon />
+                                        <span className={cx('badge')}>13</span>
+                                    </button>
+                                </Tippy>
+                            </Link>
                         </>
                     ) : (
                         <>
@@ -187,19 +189,23 @@ function Header() {
                         </>
                     )}
 
-                  { currentUser? <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
-                        {currentUser ? (
-                            <img
-                                className={cx('user-avatar')}
-                                src={imgUser.avatar ? imgUser.avatar : images.noImage}
-                                alt=""
-                            />
-                        ) : (
-                            <button className={cx('more-btn')}>
-                                <FontAwesomeIcon icon={faEllipsisVertical} />
-                            </button>
-                        )}
-                    </Menu>:<></>}
+                    {currentUser ? (
+                        <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                            {currentUser ? (
+                                <img
+                                    className={cx('user-avatar')}
+                                    src={imgUser.avatar ? imgUser.avatar : images.noImage}
+                                    alt=""
+                                />
+                            ) : (
+                                <button className={cx('more-btn')}>
+                                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                                </button>
+                            )}
+                        </Menu>
+                    ) : (
+                        <></>
+                    )}
                 </div>
             </div>
         </header>

@@ -64,7 +64,7 @@ export default function CreateProducts() {
 
     const confirmDelete = async () => {
         setShowDeleteConfirmation(false);
-        console.log(123);
+       
         if (productToDelete) {
             const response = await fetch(`${process.env.REACT_APP_BASE_URLS}products/remove/${productToDelete}`, {
                 method: 'DELETE',
@@ -104,7 +104,7 @@ export default function CreateProducts() {
             })
             .then((response) => {
                 if (response.status === 200) {
-                    console.log(status);
+                   console.log(images);
                     toast.success(`Thay đổi sản phẩm thành công!`);
                 } else {
                     toast.error(`Thay đổi sản phẩm không thành công!`);
@@ -279,7 +279,6 @@ export default function CreateProducts() {
                                                 setCategory(result.category.id);
                                                 setStatus(result.status);
 
-                                                console.log(result);
                                                 const plainTextDescription = DOMPurify.sanitize(result.description, {
                                                     ALLOWED_TAGS: [],
                                                 });

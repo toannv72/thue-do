@@ -32,6 +32,7 @@ const routes = {
     EditProfile: '/editProfile',
     History: '/history',
     EditOrders: '/editOrders',
+    notification: '/notification',
 
     adminHome: '/admin/home',
 

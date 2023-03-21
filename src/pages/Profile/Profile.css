@@ -6,7 +6,7 @@
     display: none;
     z-index: 98;
 }
-
+  
 .back-to-top a svg {
     fill: var(--bc-purple);
 }

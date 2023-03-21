@@ -45,6 +45,7 @@ import Password from '~/pages/Setting/Password';
 import Information from '~/pages/Setting/Information';
 import Payment from '~/pages/Payment/Payment';
 import Dashboard from '~/admin/Dashboards/Dashboards';
+import Notification from '~/pages/Notification/Notification';
 // import ProductManagement from '~/layouts/Admin/ProductManagement/ProductManagement';
 
 // Public routes
@@ -66,6 +67,8 @@ const publicRoutes = [
     { path: config.routes.pay, component: Pay },
     { path: config.routes.payment, component: Payment },
     { path: config.routes.about, component: About },
+
+    { path: config.routes.notification, component: Notification },
 
     { path: config.routes.password, component: Password, layout: DefaultLayout2 },
     { path: config.routes.information, component: Information, layout: DefaultLayout2 },

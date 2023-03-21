@@ -50,6 +50,7 @@ export default function BlogsManagement() {
     const handleEdit = () => {
         setShowEditConfirmation(true);
     };
+    console.log(searchResults);
     const confirmDelete = async () => {
         setShowDeleteConfirmation(false);
 
@@ -67,7 +68,7 @@ export default function BlogsManagement() {
             setProductToDelete(null);
         }
     };
-    console.log(description);
+
 
     const confirmEdit = () => {
         const updatedProduct = {
@@ -78,7 +79,7 @@ export default function BlogsManagement() {
             imageTitle: imageTitle,
             imageCover: imageCover,
         };
-        console.log(updatedProduct);
+     
 
         axios
             .put(`${process.env.REACT_APP_BASE_URLS}blog/update`, {
@@ -91,6 +92,7 @@ export default function BlogsManagement() {
             })
             .then((response) => {
                 if (response.status === 200) {
+                    console.log(imageTitle);
                     toast.success(`Thay đổi sản phẩm thành công!`);
                 } else {
                     toast.error(`Thay đổi sản phẩm không thành công!`);
@@ -139,7 +141,7 @@ export default function BlogsManagement() {
         if (searchTerm === '') {
             fetchSearchResults();
         }
-    }, [searchTerm, productToDelete, currentPage]);
+    }, [searchTerm, productToDelete, currentPage, showEditConfirmation]);
     const handleInputChange = (event) => {
         const searchValue = event.target.value;
         if (!searchValue.startsWith(' ')) {
@@ -154,8 +156,17 @@ export default function BlogsManagement() {
         setDescription(editorState);
     }
     const upImg = () => {
-        if (img == null || img1 == null || title < 0 || author === '' || description === '') {
+        if ( title < 0 || author === '' || description === '') {
             return toast.error(`vui lòng nhập đầy đủ thông tin !`);
+        }
+          if (img == null) {
+              setToan(true);
+              setImageCover("");
+              return;
+          }
+        if (img1 == null) {
+            setToan(true);
+            return;
         }
         const urls = [];
         const urls1 = [];
@@ -167,7 +178,7 @@ export default function BlogsManagement() {
                     urls.push({ url: url });
                     if (img.length === urls.length) {
                         setImageTitle(url);
-                        console.log('ok1');
+                       
                         for (let index = 0; index < img1.length; index++) {
                             const imagerRef = ref(storage, `images/${img1[index].name + v4()}`);
                             // eslint-disable-next-line no-loop-func
@@ -176,7 +187,7 @@ export default function BlogsManagement() {
                                     urls1.push({ url: url });
                                     if (img1.length === urls1.length) {
                                         setImageCover(url);
-                                        console.log('ok2');
+                                      
                                         setToan(true);
                                     }
                                 });
@@ -244,10 +255,11 @@ export default function BlogsManagement() {
                                     <p className="postDesc">{result.title}</p>
                                 </td>
                                 <td>
-                                    <Image className={cx('img')} src={result.imageTitle} alt="" width="100px;" />
+                                    <img className={cx('img')} src={result.imageTitle} alt="" width="100px;" />
+                                    {console.log(result.imageTitle)}
                                 </td>
                                 <td>
-                                    <Image className={cx('img')} src={result.imageCover} alt="" width="100px;" />
+                                    <img className={cx('img')} src={result.imageCover} alt="" width="100px;" />
                                 </td>
                                 <td>
                                     <p> {result.author}</p>
@@ -368,159 +380,141 @@ export default function BlogsManagement() {
             >
                 <DialogActions>
                     <div>
-                       
-                            <div className="panel panel-primary dialog-panel">
-                                <div className="panel-heading">
-                                    <h4>Sửa Blog</h4>
-                                </div>
-                                <div className="panel-body">
-                                    <form className="form-horizontal">
-                                        <div className="form-group">
-                                            <label
-                                                className="control-label col-md-2 col-md-offset-2"
-                                                htmlFor="id_title"
-                                            >
-                                                Tiêu đề
-                                            </label>
-                                            <div className="col-md-8">
-                                                <div className="col-md-8 indent-small">
-                                                    <div className="form-group internal">
-                                                        <input
-                                                            className="form-control"
-                                                            id="id_last_name"
-                                                            placeholder="Tiêu đề"
-                                                            type="text"
-                                                            value={title}
-                                                            onChange={(event) =>
-                                                                !event.target.value.startsWith(' ') ? (
-                                                                    setTitle(event.target.value)
-                                                                ) : (
-                                                                    <></>
-                                                                )
-                                                            }
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label
-                                                className="control-label col-md-2 col-md-offset-2"
-                                                htmlFor="id_title"
-                                            >
-                                                Tác giả
-                                            </label>
-                                            <div className="col-md-8">
-                                                <div className="col-md-4 indent-small">
-                                                    <div className="form-group internal">
-                                                        <input
-                                                            className="form-control"
-                                                            id="id_last_name"
-                                                            placeholder="Tác giả"
-                                                            type="text"
-                                                            value={author}
-                                                            onChange={(event) =>
-                                                                !event.target.value.startsWith(' ') ? (
-                                                                    setAuthor(event.target.value)
-                                                                ) : (
-                                                                    <></>
-                                                                )
-                                                            }
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="form-group">
-                                            <label
-                                                className="control-label col-md-2 col-md-offset-2"
-                                                htmlFor="id_title"
-                                            >
-                                                Nội dung
-                                            </label>
-                                            <div className="col-md-8">
-                                                <div className="col-md-8 indent-small">
-                                                    <div className="form-group internal">
-                                                    
-                                                        <div style={{ backgroundColor: '#fff' }}>
-                                                            <Editor
-                                                                editorState={description}
-                                                                wrapperClassName="demo-wrapper"
-                                                                editorClassName="demo-editor"
-                                                                placeholder="Miêu tả"
-                                                                onEditorStateChange={onEditorStateChange}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label
-                                                className="control-label col-md-2 col-md-offset-2"
-                                                htmlFor="id_title"
-                                            >
-                                                Ảnh tiêu đề
-                                            </label>
-                                            <div className="col-md-8">
-                                                <div className="col-md-4 indent-small">
-                                                    <div className="form-group internal">
-                                                        <input
-                                                            className="form-control"
-                                                            id="id_last_name"
-                                                            placeholder="Ảnh 3"
-                                                            type="file"
-                                                            onChange={(e) => {
-                                                                setImg(e.target.files);
-                                                            }}
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label
-                                                className="control-label col-md-2 col-md-offset-2"
-                                                htmlFor="id_title"
-                                            >
-                                                Ảnh bìa
-                                            </label>
-                                            <div className="col-md-8">
-                                                <div className="col-md-4 indent-small">
-                                                    <div className="form-group internal">
-                                                        <input
-                                                            className="form-control"
-                                                            id="id_last_name"
-                                                            placeholder="Ảnh 3"
-                                                            type="file"
-                                                            onChange={(e) => {
-                                                                setImg1(e.target.files);
-                                                            }}
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                        <div className="panel panel-primary dialog-panel">
+                            <div className="panel-heading">
+                                <h4>Sửa Blog</h4>
+                            </div>
+                            <div className="panel-body">
+                                <form className="form-horizontal">
                                     <div className="form-group">
-                                        <div className="col-md-offset-1 col-md-12">
-                                            <button
-                                                className="btn-lg btn-primary"
-                                                style={{ marginLeft: 100, marginRight: 100, background: 'red' }}
-                                                type="submit"
-                                                onClick={upImg}
-                                            >
-                                                Thay đổi
-                                            </button>
-                                            <button className="btn-lg btn-primary" type="submit" onClick={cancelEdit}>
-                                                Hủy
-                                            </button>
+                                        <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                            Tiêu đề
+                                        </label>
+                                        <div className="col-md-8">
+                                            <div className="col-md-8 indent-small">
+                                                <div className="form-group internal">
+                                                    <input
+                                                        className="form-control"
+                                                        id="id_last_name"
+                                                        placeholder="Tiêu đề"
+                                                        type="text"
+                                                        value={title}
+                                                        onChange={(event) =>
+                                                            !event.target.value.startsWith(' ') ? (
+                                                                setTitle(event.target.value)
+                                                            ) : (
+                                                                <></>
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                            Tác giả
+                                        </label>
+                                        <div className="col-md-8">
+                                            <div className="col-md-4 indent-small">
+                                                <div className="form-group internal">
+                                                    <input
+                                                        className="form-control"
+                                                        id="id_last_name"
+                                                        placeholder="Tác giả"
+                                                        type="text"
+                                                        value={author}
+                                                        onChange={(event) =>
+                                                            !event.target.value.startsWith(' ') ? (
+                                                                setAuthor(event.target.value)
+                                                            ) : (
+                                                                <></>
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                            Nội dung
+                                        </label>
+                                        <div className="col-md-8">
+                                            <div className="col-md-8 indent-small">
+                                                <div className="form-group internal">
+                                                    <div style={{ backgroundColor: '#fff' }}>
+                                                        <Editor
+                                                            editorState={description}
+                                                            wrapperClassName="demo-wrapper"
+                                                            editorClassName="demo-editor"
+                                                            placeholder="Miêu tả"
+                                                            onEditorStateChange={onEditorStateChange}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                            Ảnh tiêu đề
+                                        </label>
+                                        <div className="col-md-8">
+                                            <div className="col-md-4 indent-small">
+                                                <div className="form-group internal">
+                                                    <input
+                                                        className="form-control"
+                                                        id="id_last_name"
+                                                        placeholder="Ảnh 3"
+                                                        type="file"
+                                                        onChange={(e) => {
+                                                            setImg(e.target.files);
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
+                                            Ảnh bìa
+                                        </label>
+                                        <div className="col-md-8">
+                                            <div className="col-md-4 indent-small">
+                                                <div className="form-group internal">
+                                                    <input
+                                                        className="form-control"
+                                                        id="id_last_name"
+                                                        placeholder="Ảnh 3"
+                                                        type="file"
+                                                        onChange={(e) => {
+                                                            setImg1(e.target.files);
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div className="form-group">
+                                    <div className="col-md-offset-1 col-md-12">
+                                        <button
+                                            className="btn-lg btn-primary"
+                                            style={{ marginLeft: 100, marginRight: 100, background: 'red' }}
+                                            type="submit"
+                                            onClick={upImg}
+                                        >
+                                            Thay đổi
+                                        </button>
+                                        <button className="btn-lg btn-primary" type="submit" onClick={cancelEdit}>
+                                            Hủy
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                      
+                        </div>
                     </div>
                 </DialogActions>
             </Dialog>

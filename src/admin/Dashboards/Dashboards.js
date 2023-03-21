@@ -1,67 +1,45 @@
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, ComposedChart, Legend, Line, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { useEffect, useState } from 'react';
+import {
+    Area,
+    AreaChart,
+    Bar,
+    BarChart,
+    CartesianGrid,
+    Legend,
+    Pie,
+    PieChart,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
+} from 'recharts';
 
 export default function Dashboard() {
-    const data1 = [
-        { name: 'Group A', value: 400 },
-        { name: 'Group B', value: 300 },
-        { name: 'Group C', value: 300 },
-        { name: 'Group D', value: 200 },
-    ];
-    const data = [
-        {
-            name: 'thangs 1',
-            uv: 4000,
-            pv: 2400,
-            amt: 2400,
-        },
-        {
-            name: 'thangs 2',
-            uv: 3000,
-            pv: 1398,
-            amt: 2210,
-        },
-        {
-            name: 'Page C',
-            uv: 2000,
-            pv: 9800,
-            amt: 2290,
-        },
-        {
-            name: 'Page D',
-            uv: 2780,
-            pv: 3908,
-            amt: 2000,
-        },
-        {
-            name: 'Page E',
-            uv: 1890,
-            pv: 4800,
-            amt: 2181,
-        },
-        {
-            name: 'Page F',
-            uv: 2390,
-            pv: 3800,
-            amt: 2500,
-        },
-        {
-            name: 'Page G',
-            uv: 3490,
-            pv: 4300,
-            amt: 2100,
-        },
-        {
-            name: 'Page G',
-            uv: 3490,
-            pv: 4300,
-            amt: 2100,
-        },
-    ];
+    const [data, setData] = useState([]);
+    const [data1, setData1] = useState([]);
+  
+    useEffect(() => {
+        const fetchSearchResults = async () => {
+            const response = await fetch(`${process.env.REACT_APP_BASE_URLS}order/getStatic/2023`);
+            const data = await response.json();
+            setData(data);
+        };
+        fetchSearchResults();
+    }, []);
+    useEffect(() => {
+        const fetchSearchResults = async () => {
+            const response = await fetch(`${process.env.REACT_APP_BASE_URLS}users/getStatic/2023`);
+            const data = await response.json();
+            setData1(data);
+        };
+        fetchSearchResults();
+    }, []);
 
     return (
         <>
+            <h1>Thống kê đơn hàng theo từng tháng trong 1 năm</h1>
             <div style={{ width: '100%' }}>
-                <h4>A demo of synchronized AreaCharts</h4>
+                <h1>Thống kê doanh thu</h1>
                 <ResponsiveContainer width="100%" height={200}>
                     <AreaChart
                         width={500}
@@ -76,22 +54,23 @@ export default function Dashboard() {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
+                        <XAxis dataKey="month" />
                         <YAxis />
+                        <Legend />
+
                         <Tooltip />
-                        <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
-                        <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-                        <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
+                        <Area type="monotone" dataKey="totalRevenue" stackId="1" stroke="#8884d8" fill="#8884d8" />
                     </AreaChart>
                 </ResponsiveContainer>
-                <p>Maybe some other content</p>
-
+                <h1>Thống kê số đơn hàng</h1>
+            </div>
+            <div>
                 <ResponsiveContainer width="100%" height={200}>
                     <BarChart
                         width={500}
                         height={200}
                         data={data}
-                        syncId="anyId"
+                        syncId="anyIds"
                         margin={{
                             top: 10,
                             right: 30,
@@ -100,62 +79,54 @@ export default function Dashboard() {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
+                        <XAxis dataKey="month" />
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="pv" fill="#8884d8" />
-                        <Bar dataKey="uv" fill="#82ca9d" />
+                        <Bar dataKey="totalOrders" fill="#8884d8" />
+                    </BarChart>
+                </ResponsiveContainer>
+                <ResponsiveContainer width="100%" height={200}>
+                    <AreaChart
+                        width={500}
+                        height={200}
+                        data={data}
+                        margin={{
+                            top: 10,
+                            right: 30,
+                            left: 0,
+                            bottom: 0,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="month" />
+                        <YAxis />
+                        <Tooltip />
+                        <Area type="monotone" dataKey="totalOrders" stroke="#8884d8" fill="#8884d8" />
+                    </AreaChart>
+                </ResponsiveContainer>
+                <ResponsiveContainer width="100%" height={200}>
+                    <BarChart
+                        width={500}
+                        height={200}
+                        data={data1}
+                        margin={{
+                            top: 10,
+                            right: 30,
+                            left: 0,
+                            bottom: 0,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="month" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey="totalAccountUnLocked" fill="#82ca9d" />
                     </BarChart>
                 </ResponsiveContainer>
             </div>
-            <div>
-                <ResponsiveContainer width="100%" height={200}>
-                    <AreaChart
-                        width={500}
-                        height={200}
-                        data={data}
-                        margin={{
-                            top: 10,
-                            right: 30,
-                            left: 0,
-                            bottom: 0,
-                        }}
-                    >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
-                    </AreaChart>
-                </ResponsiveContainer>
-                <ResponsiveContainer width="100%" height={200}>
-                    <AreaChart
-                        width={500}
-                        height={200}
-                        data={data}
-                        margin={{
-                            top: 10,
-                            right: 30,
-                            left: 0,
-                            bottom: 0,
-                        }}
-                    >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Area connectNulls type="monotone" dataKey="pv" stroke="#8884d8" fill="#8884d8" />
-                    </AreaChart>
-                </ResponsiveContainer>
-            </div>
-            <div style={{ width: '100%', height: 300 }}>
-                <ResponsiveContainer>
-                    <PieChart>
-                        <Pie dataKey="value" data={data1} fill="#8884d8" label />
-                    </PieChart>
-                </ResponsiveContainer>
-            </div>
+            ssssss
         </>
     );
 }
