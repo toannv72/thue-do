@@ -3,10 +3,11 @@ import classNames from 'classnames/bind';
 import Splitting from 'splitting';
 import { useEffect, useState } from 'react';
 
-import ErrorToast from './ErrorToast';
+// import ErrorToast from './ErrorToast';
 import Image from '~/components/Image';
 import { Link } from 'react-router-dom';
 import { Pagination } from '@mui/material';
+import ErrorToast from '../Product/ErrorToast';
 
 Splitting();
 const cx = classNames.bind(styles);
@@ -26,7 +27,7 @@ function SanPham3({ url ,y }) {
      }, [currentPage]);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_BASE_URLS}products/getAllProduct?page=${currentPage - 1}&size=10${url}`)
+        fetch(`${process.env.REACT_APP_BASE_URLS}products/getRandomProduct?page=${currentPage - 1}&size=10${url}`)
             .then((res) => res.json())
             .then(
                 (result) => {
@@ -84,13 +85,13 @@ function SanPham3({ url ,y }) {
                 </div>
                 <Link to="/">{/* <div>Xem Thêm </div> */}</Link>
                 <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
-                    <Pagination
+                    {/* <Pagination
                         count={totalPage}
                         page={currentPage}
                         onChange={handlePageChange}
                         variant="outlined"
                         shape="rounded"
-                    />
+                    /> */}
                 </div>
             </div>
         );

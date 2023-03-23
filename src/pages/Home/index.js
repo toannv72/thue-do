@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Footer from '~/layouts/Footer/Footer';
 import FeaturedTitle from '../Product/FeaturedTitle/FeaturedTitle';
 
-import SanPham3 from '../Product/SanPham3';
+import SanPham3 from './SanPham3';
 import TextRun from '../TextRun/TextRun';
 import Home from './Home';
 import Home2 from './Home2';
@@ -23,7 +23,7 @@ function ControlledCarousel() {
             {/* <Home3 /> */}
             <FeaturedTitle
                 titles="Gợi ý sản phẩm"
-                children={<SanPham3 url="products/getAllProduct?page=0&size=10&sort=id%2Cdesc" />}
+                children={<SanPham3 url="" y="790"/>}
             />
             <Footer />
         </div>

@@ -232,7 +232,45 @@ export const LiveActiveUser = ({ width = '3rem', height = '3rem', className }) =
         <path d="M391.9 391.6L368 320H144l-23.9 71.6C154.9 426.5 202.9 448 256 448s101.1-21.5 135.9-56.4zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z" />
     </svg>
 );
-
+export const Lock = ({ width = '3rem', height = '3rem', className }) => (
+    <svg
+        baseProfile="tiny"
+        height={height}
+        className={className}
+        width={width}
+        version="1.1"
+        viewBox="0 0 32 32"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <g id="Guides__x26__Forms" />
+        <g id="Icons">
+            <g>
+                <path d="M23,14v-2c0-3.866-3.134-7-7-7s-7,3.134-7,7v2H7v13h18V14H23z M11,12c0-2.757,2.243-5,5-5c2.757,0,5,2.243,5,5v2H11V12z     M23,25H9v-9h14V25z" />
+                <path d="M15,20.611V23h2v-2.389c0.305-0.275,0.5-0.668,0.5-1.111c0-0.828-0.672-1.5-1.5-1.5s-1.5,0.672-1.5,1.5    C14.5,19.943,14.695,20.336,15,20.611z" />
+            </g>
+        </g>
+    </svg>
+);
+export const LiveActiveLock = ({ width = '3rem', height = '3rem', className }) => (
+    <svg
+        baseProfile="tiny"
+        height={height}
+        className={className}
+        fill="currentColor"
+        width={width}
+        version="1.1"
+        viewBox="0 0 32 32"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <g id="Guides__x26__Forms" />
+        <g id="Icons">
+            <g>
+                <path d="M23,14v-2c0-3.866-3.134-7-7-7s-7,3.134-7,7v2H7v13h18V14H23z M11,12c0-2.757,2.243-5,5-5c2.757,0,5,2.243,5,5v2H11V12z     M23,25H9v-9h14V25z" />
+                <path d="M15,20.611V23h2v-2.389c0.305-0.275,0.5-0.668,0.5-1.111c0-0.828-0.672-1.5-1.5-1.5s-1.5,0.672-1.5,1.5    C14.5,19.943,14.695,20.336,15,20.611z" />
+            </g>
+        </g>
+    </svg>
+);
 // export const Tiem = ({ width = '2.7rem', height = '2.7rem', className }) => (
 //     <svg
 //         className={className}

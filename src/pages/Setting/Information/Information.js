@@ -1,8 +1,9 @@
-import { Button, Dialog, DialogActions, FormControl, InputLabel, OutlinedInput, TextField } from '@mui/material';
+import { Button, Dialog, DialogActions, TextField } from '@mui/material';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Settings.module.scss';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
 const cx = classNames.bind(styles);
 function Information() {
     const User = JSON.parse(localStorage.getItem('user'));
@@ -32,9 +33,9 @@ function Information() {
             })
             .then((response) => {
                 if (response.status === 200) {
-                    //  toast.success(`Thay đổi sản phẩm thành công!`);
+                    toast.success(`Thay đổi thông tin thành công!`);
                 } else {
-                    //  toast.error(`Thay đổi sản phẩm không thành công!`);
+                    toast.error(`Thay đổi thông tin không thành công!`);
                 }
                 localStorage.setItem('user', JSON.stringify(response.data));
                 // console.log(response.data);
@@ -42,12 +43,13 @@ function Information() {
             })
             .catch((error) => {
                 console.log(error);
+                toast.error(`Thay đổi thông tin không thành công!`);
                 setShowEditConfirmation(false);
             });
-      
     }
     return (
         <>
+            <ToastContainer />
             <h1> Thay đổi thông tin </h1>
             <div classNames={cx('TextField1')} style={{ margin: 10, font: 'caption' }}>
                 <TextField
@@ -55,7 +57,7 @@ function Information() {
                     // id="filled-disabled"
                     defaultValue="Hello World"
                     // variant="filled"
-                    label="Họ "
+                    label="Tên"
                     size="Normal"
                     value={User.firstName}
                     style={{ font: 'caption' }}
@@ -64,7 +66,7 @@ function Information() {
             <div classNames={cx('TextField')} style={{ margin: 10 }}>
                 <TextField
                     id="outlined-basic"
-                    label="Tên"
+                    label="Họ"
                     disabled
                     // variant="filled"
                     size="Normal"
@@ -124,7 +126,7 @@ function Information() {
                                 // id="filled-disabled"
                                 defaultValue="Hello World"
                                 // variant="filled"
-                                label="Họ "
+                                label="Tên"
                                 size="Normal"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
@@ -133,7 +135,7 @@ function Information() {
                         <div classNames={cx('TextField')} style={{ margin: 10 }}>
                             <TextField
                                 id="outlined-basic"
-                                label="Tên"
+                                label="Họ"
                                 // variant="filled"
                                 size="Normal"
                                 value={lastName}

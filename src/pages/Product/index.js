@@ -10,9 +10,9 @@ function Following() {
         <div>
             <FeaturedTitle
                 titles="Gợi ý hôm nay"
-                children={<SanPham3 url="products/getAllProduct?page=0&size=500&sort=id%2Cdesc" />}
+                children={<SanPham3 url="&sort=id%2Cdesc" y="0"/>}
             />
-            <FeaturedTitle titles="Sản phẩm hot" children={<SanPham3 url="products/getAllProduct?page=0&size=20" />} />
+            <FeaturedTitle titles="Sản phẩm hot" children={<SanPham3 url="" y="800"/>} />
 
          
             <Quote />

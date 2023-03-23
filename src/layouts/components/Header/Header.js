@@ -120,17 +120,17 @@ function Header() {
         }
     }, 2000);
     // console.log(items.product);
-
+console.log(JSON.parse(localStorage.getItem('user')));
     const userMenu = [
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: `/@${localStorage.getItem('username')}`,
+            to: `/@${JSON.parse(localStorage.getItem('user')).username}`,
         },
         {
             icon: <FontAwesomeIcon icon={faGear} />,
             title: 'Settings',
-            to: '/settings',
+            to: '/information',
         },
         // ...MENU_ITEMS,
 
