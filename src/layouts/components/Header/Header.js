@@ -125,7 +125,7 @@ console.log(JSON.parse(localStorage.getItem('user')));
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: `/@${JSON.parse(localStorage.getItem('user')).username}`,
+            to: `/@${localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')).username:""}`,
         },
         {
             icon: <FontAwesomeIcon icon={faGear} />,
