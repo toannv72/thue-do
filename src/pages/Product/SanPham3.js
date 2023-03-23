@@ -11,7 +11,7 @@ import { Pagination } from '@mui/material';
 Splitting();
 const cx = classNames.bind(styles);
 
-function SanPham3({ url ,y }) {
+function SanPham3({ url, y }) {
     const [totalPage, setTotalPage] = useState();
     const [currentPage, setCurrentPage] = useState(1);
     const [error, setError] = useState(null);
@@ -21,9 +21,9 @@ function SanPham3({ url ,y }) {
         setCurrentPage(value);
         // console.log(value);
     };
-     useEffect(() => {
-         window.scrollTo(0, y);
-     }, [currentPage]);
+    useEffect(() => {
+        window.scrollTo(0, y);
+    }, [currentPage]);
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}products/getAllProduct?page=${currentPage - 1}&size=10${url}`)

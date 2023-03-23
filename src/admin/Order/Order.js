@@ -1,4 +1,4 @@
-import { Pagination } from '@mui/material';
+import { Pagination, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ErrorToast from '~/pages/Product/ErrorToast';
@@ -22,9 +22,17 @@ export default function Order() {
     const [PENDING, setPENDING] = useState(false);
 
     const [item, setItem] = useState(null);
+    const [showEditConfirmation, setShowEditConfirmation] = useState(false);
 
     const [status, setStatus] = useState('');
-
+    const [contend, setContend] = useState('');
+    const handleEdit = () => {
+        setShowEditConfirmation(true);
+    };
+    const cancelEdit = () => {
+        setShowEditConfirmation(false);
+        setContend('');
+    };
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -59,14 +67,14 @@ export default function Order() {
     useEffect(() => {
         if (PENDING) {
             axios
-                .put(`${process.env.REACT_APP_BASE_URLS}order/updateStatus/${item}?status=${status}`, {})
+                .put(`${process.env.REACT_APP_BASE_URLS}order/updateStatus/${item}?status=${status}&contend=${contend}`)
                 .then((response) => {
                     if (response.status === 200) {
                         console.log(`thành công ${item}`);
                         if (status === 'CANCELLED') {
                             toast.warning(`Đã hủy đơn hàng!`);
                         } else {
-                            toast.success(`Đã xác nhận đơn hàng!`);
+                            toast.success(`Đã xác nhận đơn hàng thành công!`);
                         }
                         setPENDING(false);
                     } else {
@@ -200,16 +208,6 @@ export default function Order() {
 
                                     {item.status === 'CANCELLED' ? (
                                         <>
-                                            <button
-                                                className={cx('ok')}
-                                                onClick={() => {
-                                                    handeOk();
-                                                    setStatus('DELIVERING');
-                                                    setItem(item.orderDetails[0].id);
-                                                }}
-                                            >
-                                                Xác nhận lại
-                                            </button>
                                             <h3 style={{ color: 'red' }}>Đơn hàng đã bị hủy</h3>
                                         </>
                                     ) : (
@@ -231,9 +229,8 @@ export default function Order() {
                                             <button
                                                 className={cx('huy')}
                                                 onClick={() => {
-                                                    handeOk();
+                                                    handleEdit();
                                                     setStatus('CANCELLED');
-
                                                     setItem(item.orderDetails[0].id);
                                                 }}
                                             >
@@ -255,17 +252,7 @@ export default function Order() {
                                             >
                                                 Đã giao
                                             </button>
-                                            <button
-                                                className={cx('huy')}
-                                                onClick={() => {
-                                                    handeOk();
-                                                    setStatus('CANCELLED');
 
-                                                    setItem(item.orderDetails[0].id);
-                                                }}
-                                            >
-                                                Hủy đơn hàng
-                                            </button>
                                             <h2 style={{ color: 'blue' }}>Đã xác nhận</h2>
                                         </>
                                     ) : (
@@ -999,6 +986,42 @@ export default function Order() {
                             </div>
                         </div>
                     </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    maxWidth={1100}
+                    // maxHeight={800}
+                    open={showEditConfirmation}
+                    // TransitionComponent={Transition}
+                    keepMounted
+                    onClose={cancelEdit}
+                    aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogActions>
+                        <div style={{ margin: 10, width: 500 }}>
+                            <div classNames={cx('TextField1')} style={{ margin: 10, font: 'caption' }}>
+                                <h1>Nhập lý do đơn hàng bị hủy</h1>
+                                <TextField
+                                    // id="filled-disabled"
+                                    defaultValue="Hello World"
+                                    // variant="filled"
+                                    label="Lý do :"
+                                    size="Normal"
+                                    fullWidth
+                                    value={contend}
+                                    onChange={(e) => setContend(e.target.value)}
+                                ></TextField>
+                            </div>
+                        </div>
+                    </DialogActions>
+                    <div>
+                        <Button variant="contained" color="success" style={{ margin: 10 }} onClick={handeOk}>
+                            Gửi
+                        </Button>
+                        <Button variant="contained" style={{ margin: 10 }} onClick={cancelEdit}>
+                            Hủy
+                        </Button>
+                    </div>
                 </Dialog>
             </>
         );

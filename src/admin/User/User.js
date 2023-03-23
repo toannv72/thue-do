@@ -89,8 +89,9 @@ export default function User() {
 
             .catch((error) => {
                 console.log(error);
-                toast.error(`Khóa người dùng không thành công!`);
+                toast.error(`Không thể khóa tài khoản ADMIN!`);
             });
+        setShowDeleteConfirmation(false);
     };
 
     const confirmUNLOCKED = (event) => {
