@@ -157,7 +157,7 @@ function Settings() {
     useEffect(() => {}, [orders]);
     // const [pay, setPay] = useState(products.price);
     const [name, setName] = useState(
-        (User.lastName ? (User.lastName + ' ') : '') + (User.firstName ? User.firstName : ''),
+        (User.lastName ? User.lastName + ' ' : '') + (User.firstName ? User.firstName : ''),
     );
     const [address, setAddress] = useState(User.address);
     const [phone, setPhone] = useState(User.phone);
@@ -165,18 +165,17 @@ function Settings() {
 
     // const [totalPrice, setTotalPrice] = useState(10);
     const [message, setMessage] = useState('');
-        console.log(name);
+    console.log(name);
 
     const order = async () => {
-     
         if (name === null || name === '' || name === ' ' || address === '' || phone === '' || phone === null) {
             toast.error(`Vui lòng nhập đầy đủ thông tin`);
             return;
         }
-          if (phone <= 99999999 || !isValidNumber(phone, 'VN')) {
-              toast.error(`Số điện thoại không hợp lệ`);
-              return;
-          }
+        if (phone <= 99999999 || !isValidNumber(phone, 'VN')) {
+            toast.error(`Số điện thoại không hợp lệ`);
+            return;
+        }
         const order = {
             totalPrice: products.price + (products.price * sumDay) / 2 + products.deposit,
             message: message,
@@ -195,14 +194,11 @@ function Settings() {
             const response = await axios.post(`${process.env.REACT_APP_BASE_URLS}order/create`, order);
             console.log(response.data);
             toast.success(`Đặt hàng thành công!`);
-             setTimeout(() => {
-                 window.location.href = '/Payment/:id';
-             }, 3000);
+            window.location.href = `/Payment/${response.data.id}`;
         } catch (error) {
             console.log(error.response.data.message);
             // toast.error(`${error.response.data.message}!`);
             toast.error(`Sản phẩm này đã có người thuê!`);
-        
         }
     };
 
@@ -338,7 +334,8 @@ function Settings() {
                                                         products.price +
                                                         (products.price * sumDay) / 2 +
                                                         products.deposit
-                                                    ).toLocaleString('vi-VN')}đ
+                                                    ).toLocaleString('vi-VN')}
+                                                    đ
                                                 </dd>
                                             </div>
                                         </div>
@@ -348,19 +345,31 @@ function Settings() {
                                         <div className="pay-info-item">
                                             <input
                                                 value={name}
-                                                onChange={(e) => (!e.target.value.startsWith(' ')?setName(e.target.value):<></>)}
+                                                onChange={(e) =>
+                                                    !e.target.value.startsWith(' ') ? setName(e.target.value) : <></>
+                                                }
                                             />
                                         </div>
                                         <br />
                                         <div> Số điện thoại:</div>
                                         <div className="pay-info-item">
                                             <br />
-                                            <input value={phone} onChange={(e) => (!e.target.value.startsWith(' ')?setPhone(e.target.value):<></>)} />
+                                            <input
+                                                value={phone}
+                                                onChange={(e) =>
+                                                    !e.target.value.startsWith(' ') ? setPhone(e.target.value) : <></>
+                                                }
+                                            />
                                         </div>
                                         <br />
                                         <div>ĐỊA CHỈ:</div>
                                         <div className="pay-info-item">
-                                            <input value={address} onChange={(e) => (!e.target.value.startsWith(' ')?setAddress(e.target.value):<></>)} />
+                                            <input
+                                                value={address}
+                                                onChange={(e) =>
+                                                    !e.target.value.startsWith(' ') ? setAddress(e.target.value) : <></>
+                                                }
+                                            />
                                         </div>
                                         {/* <div className="pay-info-item i-change">
                                             <a href="" className="pay-change-selected">

@@ -34,7 +34,6 @@ function Login() {
     const [errorMessage1, setErrorMessage1] = useState('');
     const [error, setError] = useState('');
     const [error1, setError1] = useState('');
-    const [errorEmail, setErrorEmail] = useState('');
     function isValidEmail(email) {
         // Biểu thức chính quy để kiểm tra định dạng email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

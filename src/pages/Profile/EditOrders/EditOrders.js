@@ -1,7 +1,7 @@
 import images from '~/assets/images';
 
 import classNames from 'classnames/bind';
-import styles from '../Product.module.scss';
+import styles from '../Profile.module.scss';
 import Menu, { MenuItem } from '../Menu';
 import config from '~/config';
 
