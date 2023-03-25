@@ -43,6 +43,11 @@ const routes = {
 
     adminNotification: '/admin/notification',
     adminOrder: '/admin/order',
+    adminOrder1: '/admin/order/new',
+    adminOrder5: '/admin/order/delivery',
+    adminOrder2: '/admin/order/renting',
+    adminOrder3: '/admin/order/success',
+    adminOrder4: '/admin/order/cancel',
     adminUser: '/admin/user',
     adminBlog: '/admin/blog',
     adminCreateBlog: '/admin/blog/create',

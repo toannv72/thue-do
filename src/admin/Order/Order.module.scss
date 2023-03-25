@@ -15,7 +15,18 @@
 .app-container textarea {
     font-family: "DM Sans", sans-serif;
 }
+.function {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    margin: auto;
+}
 
+.function a {
+    text-decoration: none
+}
 .app-content {
     display: flex;
     height: 100%;

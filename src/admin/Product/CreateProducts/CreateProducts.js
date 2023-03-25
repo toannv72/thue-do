@@ -142,7 +142,7 @@ export default function CreateProducts() {
 
                         <div className="form-group">
                             <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
-                                Tên sảm phẩm
+                                Tên sản phẩm
                             </label>
                             <div className="col-md-8">
                                 <div className="col-md-8 indent-small">
@@ -194,7 +194,7 @@ export default function CreateProducts() {
                         </div>
                         <div className="form-group">
                             <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
-                                Giá tiền đặt cọc sản phẩm
+                                Giá tiền đặt cọc 
                             </label>
                             <div className="col-md-8">
                                 <div className="col-md-4 indent-small">

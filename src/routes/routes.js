@@ -25,6 +25,12 @@ import AdminLayout from '~/layouts/Admin/AdminLayout';
 import { ProductAdmin } from '~/admin/Product';
 import { NotificationAdmin } from '~/admin/Notification';
 import { OrderAdmin } from '~/admin/Order';
+import { OrderAdmin1 } from '~/admin/Order/OrderPending';
+import { OrderAdmin2 } from '~/admin/Order/OrderRenting';
+import { OrderAdmin3 } from '~/admin/Order/OrderSuccess';
+
+
+
 import { UserAdmin } from '~/admin/User';
 import { HomeAdmin } from '~/admin/Home';
 import { CreateProducts } from '~/admin/Product/CreateProducts';
@@ -46,6 +52,8 @@ import Information from '~/pages/Setting/Information';
 import Payment from '~/pages/Payment/Payment';
 import Dashboard from '~/admin/Dashboards/Dashboards';
 import Notification from '~/pages/Notification/Notification';
+import { OrderAdmin4 } from '~/admin/Order/OrderCancel';
+import { OrderAdmin5 } from '~/admin/Order/OrderDelivery';
 // import ProductManagement from '~/layouts/Admin/ProductManagement/ProductManagement';
 
 // Public routes
@@ -87,6 +95,11 @@ const publicRoutes = [
     { path: config.routes.adminHome, component: HomeAdmin, layout: AdminLayout },
     { path: config.routes.adminNotification, component: NotificationAdmin, layout: AdminLayout },
     { path: config.routes.adminOrder, component: OrderAdmin, layout: AdminLayout },
+    { path: config.routes.adminOrder1, component: OrderAdmin1, layout: AdminLayout },
+    { path: config.routes.adminOrder2, component: OrderAdmin2, layout: AdminLayout },
+    { path: config.routes.adminOrder3, component: OrderAdmin3, layout: AdminLayout },
+    { path: config.routes.adminOrder4, component: OrderAdmin4, layout: AdminLayout },
+    { path: config.routes.adminOrder5, component: OrderAdmin5, layout: AdminLayout },
     { path: config.routes.adminProduct, component: ProductAdmin, layout: AdminLayout },
     { path: config.routes.adminUser, component: UserAdmin, layout: AdminLayout },
     { path: config.routes.adminDashboard, component: Dashboard, layout: AdminLayout },

@@ -1,1 +1,1 @@
-export { default as OrderAdmin } from './Order';
+export { default as OrderAdmin } from './Orders';

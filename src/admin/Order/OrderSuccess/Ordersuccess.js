@@ -2,13 +2,15 @@ import { Pagination, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ErrorToast from '~/pages/Product/ErrorToast';
-import './style.css';
+
 import classNames from 'classnames/bind';
 import moment from 'moment';
 import { Button, Dialog, DialogActions } from '@mui/material';
-import styles from './Order.module.scss';
+import styles from '../Order.module.scss';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
+import Menu, { MenuItem } from '~/admin/Menu';
+import config from '~/config';
 const cx = classNames.bind(styles);
 
 export default function Order() {
@@ -40,7 +42,7 @@ export default function Order() {
         setOpen(false);
     };
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_BASE_URLS}order/getAll?page=${currentPage - 1}&size=6&sort=id%2Cdesc`)
+        fetch(`${process.env.REACT_APP_BASE_URLS}order/getAllStatus?page=${currentPage - 1}&size=6&status=PAID&sort=id%2Cdesc`)
             .then((res) => res.json())
             .then(
                 (result) => {
@@ -59,8 +61,9 @@ export default function Order() {
                 setIsLoaded(true);
                 setError(error.message);
             });
-        cancelEdit()
+        cancelEdit();
     }, [currentPage, PENDING]);
+
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
         console.log(value);
@@ -79,13 +82,15 @@ export default function Order() {
                         }
                         setPENDING(false);
                     } else {
-                        toast.error(`Đơn hàng bị lỗi`);
+                        toast.error(response.response.data.message);
                         setPENDING(false);
                     }
                 })
                 .catch((error) => {
                     console.log(error);
-                    toast.error(`Đơn hàng bị lỗi`);
+                    console.log(error.response.data.message);
+                    toast.error(error.response.data.message);
+
                     setPENDING(false);
                 });
         }
@@ -94,7 +99,7 @@ export default function Order() {
         setPENDING(true);
     }
 
-    console.log(item);
+    // console.log(item);
     if (error) {
         return <ErrorToast message={error.message} />;
     } else if (!isLoaded) {
@@ -102,10 +107,25 @@ export default function Order() {
     } else {
         return (
             <>
-                <link
-                    rel="stylesheet"
-                    href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
-                />
+                <Menu>
+                    <div className={cx('function')}>
+                        <div className={cx('')}>
+                            <MenuItem title="Đơn mới" to={config.routes.adminOrder1} />
+                        </div>
+                        <div className={cx('')}>
+                            <MenuItem title="Đơn thuê" to={config.routes.adminOrder5} />
+                        </div>
+                        <div className={cx('')}>
+                            <MenuItem title="Đang thuê" to={config.routes.adminOrder2} />
+                        </div>
+                        <div className={cx('')}>
+                            <MenuItem title="Đơn hoàn thành" to={config.routes.adminOrder3} />
+                        </div>
+                        <div className={cx('')}>
+                            <MenuItem title="Đơn hủy" to={config.routes.adminOrder4} />
+                        </div>
+                    </div>
+                </Menu>
                 <ToastContainer />
                 <h1> Đơn hàng</h1>
                 <div
@@ -220,7 +240,7 @@ export default function Order() {
                                                 className={cx('ok')}
                                                 onClick={() => {
                                                     handeOk();
-                                                    setStatus('DELIVERING');
+                                                    setStatus('CONFIRMED');
                                                     setItem(item.orderDetails[0].id);
                                                 }}
                                             >
@@ -241,13 +261,13 @@ export default function Order() {
                                     ) : (
                                         <></>
                                     )}
-                                    {item.status === 'DELIVERING' ? (
+                                    {item.status === 'CONFIRMED' ? (
                                         <>
                                             <button
                                                 className={cx('ok')}
                                                 onClick={() => {
                                                     handeOk();
-                                                    setStatus('DELIVERED');
+                                                    setStatus('DELIVERING');
                                                     setItem(item.orderDetails[0].id);
                                                 }}
                                             >
@@ -259,13 +279,13 @@ export default function Order() {
                                     ) : (
                                         <></>
                                     )}
-                                    {item.status === 'DELIVERED' ? (
+                                    {item.status === 'DELIVERING' ? (
                                         <>
                                             <button
                                                 className={cx('ok')}
                                                 onClick={() => {
                                                     handeOk();
-                                                    setStatus('RECALLED');
+                                                    setStatus('PAID');
                                                     setItem(item.orderDetails[0].id);
                                                 }}
                                             >
@@ -277,7 +297,7 @@ export default function Order() {
                                     ) : (
                                         <></>
                                     )}
-                                    {item.status === 'RECALLED' ? (
+                                    {item.status === 'PAID' ? (
                                         <>
                                             <h2 style={{ color: 'blue' }}>Đơn thành công</h2>
                                         </>
@@ -564,7 +584,9 @@ export default function Order() {
                                                                                                                                 fontSize: 12,
                                                                                                                             }}
                                                                                                                         >
-                                                                                                                            7119538441
+                                                                                                                            {
+                                                                                                                                itemOne.id
+                                                                                                                            }
                                                                                                                         </strong>
                                                                                                                     </td>
                                                                                                                 </tr>
@@ -600,7 +622,11 @@ export default function Order() {
                                                                                                                                 fontSize: 12,
                                                                                                                             }}
                                                                                                                         >
-                                                                                                                            20/11/2017
+                                                                                                                            {moment(
+                                                                                                                                itemOne.createdDate,
+                                                                                                                            ).format(
+                                                                                                                                'YYYY-MM-DD',
+                                                                                                                            )}
                                                                                                                         </strong>
                                                                                                                     </td>
                                                                                                                 </tr>

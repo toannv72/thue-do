@@ -206,9 +206,7 @@ function Login() {
                         {errorMessage1 && !password && <span className={cx('error')}>Vui lòng nhập Mật Khẩu </span>}
 
                         {error1 ? <span className={cx('error')}>{error1}</span> : <></>}
-                        <a className="form__link" href="# ">
-                            Quên mật khẩu?
-                        </a>
+                       
                         <button className="form__button button submit" >ĐĂNG NHẬP</button>
                     </form>
                 </div>

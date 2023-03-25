@@ -23,15 +23,18 @@ function Settings() {
     // const [error, setError] = useState(null);
     // const [isLoaded, setIsLoaded] = useState(false);
     const [open, setOpen] = useState(false);
+    const [disabledDates, setDisabledDates] = useState();
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1); // Cộng thêm 1 ngày vào ngày hiện tại
     const [state, setState] = useState([
         {
-            startDate: new Date(),
-            endDate: new Date(),
+            startDate: new Date(tomorrow),
+            endDate: new Date(tomorrow),
             key: 'selection',
         },
     ]);
 
-    const [disabledDates, setDisabledDates] = useState();
 
     //////////////////////////////////////////
 
@@ -278,7 +281,7 @@ function Settings() {
                                                     // retainEndDateOnFirstSelection={false}
                                                     // onRangeFocusChange={handleRangeFocusChange}
                                                     ranges={state}
-                                                    minDate={new Date()}
+                                                    minDate={tomorrow}
                                                     // maxDate={new Date("Aug 1,2023 0:0:1")}
                                                     disabledDates={disabledDates}
                                                 />
