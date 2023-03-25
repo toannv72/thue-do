@@ -167,6 +167,14 @@ export default function CreateProducts() {
     const [img, setImg] = useState(null);
 
     const upImg = () => {
+        if (price <= 0) {
+            console.log(typeof price);
+
+            return toast.error(`Vui lòng nhập giá tiền hợp lệ!`);
+        }
+        if (deposit <= 0) {
+            return toast.error(`Vui lòng nhập giá tiền đặt cọc hợp lệ!`);
+        }
         if (img == null) {
             setToan(true);
         }
@@ -455,7 +463,9 @@ export default function CreateProducts() {
                                                                 className="form-control"
                                                                 id="id_last_name"
                                                                 placeholder="Giá tiền"
-                                                                type="text"
+                                                                type="number"
+                                                                min="1"
+                                                                max="10000000000"
                                                                 value={price}
                                                                 onChange={(event) => setPrice(event.target.value)}
                                                             />
@@ -477,7 +487,9 @@ export default function CreateProducts() {
                                                                 className="form-control"
                                                                 id="id_last_name"
                                                                 placeholder="Đặt cọc"
-                                                                type="text"
+                                                                type="number"
+                                                                min="1"
+                                                                max="10000000000"
                                                                 value={deposit}
                                                                 onChange={(event) => setDeposit(event.target.value)}
                                                             />
@@ -501,6 +513,7 @@ export default function CreateProducts() {
                                                                 placeholder="Ảnh 3"
                                                                 type="file"
                                                                 multiple
+                                                                accept="image/jpeg,image/png,image/gif"
                                                                 onChange={(e) => {
                                                                     setImg(e.target.files);
                                                                 }}

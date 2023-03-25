@@ -25,6 +25,39 @@ export default function CreateProducts() {
     const [circular, setCircular] = useState(false);
 
     const [toan, setToan] = useState(false);
+
+const [selectedImages, setSelectedImages] = useState([]);
+
+function handleImageSelect(event) {
+    const files = event.target.files;
+    const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    const images = [];
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+
+        if (validImageTypes.includes(file.type)) {
+            const reader = new FileReader();
+
+            reader.onload = (event) => {
+                images.push({
+                    name: file.name,
+                    type: file.type,
+                    size: file.size,
+                    dataUrl: event.target.result,
+                });
+
+                // Update state with the selected images
+                setSelectedImages(images);
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            console.warn(`File "${file.name}" is not a valid image file.`);
+        }
+    }
+}
+
     const handleSubmit = () => {
         axios
             .post(`${process.env.REACT_APP_BASE_URLS}blog/create`, {
@@ -184,7 +217,7 @@ export default function CreateProducts() {
                             <div className="col-md-8">
                                 <div className="col-md-8 indent-small">
                                     <div className="form-group internal">
-                                        <div style={{ backgroundColor: '#fff'}}>
+                                        <div style={{ backgroundColor: '#fff' }}>
                                             <Editor
                                                 editorState={description}
                                                 wrapperClassName="demo-wrapper"
@@ -209,8 +242,10 @@ export default function CreateProducts() {
                                             id="id_last_name"
                                             placeholder="Ảnh 3"
                                             type="file"
+                                            accept="image/jpeg,image/png,image/gif"
                                             onChange={(e) => {
                                                 setImg(e.target.files);
+                                                handleImageSelect();
                                             }}
                                         />
                                     </div>
@@ -229,6 +264,7 @@ export default function CreateProducts() {
                                             id="id_last_name"
                                             placeholder="Ảnh 3"
                                             type="file"
+                                            accept="image/jpeg,image/png,image/gif"
                                             onChange={(e) => {
                                                 setImg1(e.target.files);
                                             }}

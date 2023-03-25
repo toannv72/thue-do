@@ -59,6 +59,7 @@ export default function Order() {
                 setIsLoaded(true);
                 setError(error.message);
             });
+        cancelEdit()
     }, [currentPage, PENDING]);
     const handlePageChange = (event, value) => {
         setCurrentPage(value);

@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './Payment.module.scss';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ErrorToast from '../Product/ErrorToast';
 import moment from 'moment';
 import { Button } from '@mui/material';
+
+import config from '~/config';
+import routes from '~/config/routes';
 const cx = classNames.bind(styles);
 
 export default function Payment() {
@@ -142,7 +145,7 @@ export default function Payment() {
                                                                                             color: '#666666',
                                                                                         }}
                                                                                     >
-                                                                                        Kính chào Quý khách
+                                                                                        Kính chào Quý khách :
                                                                                         <strong
                                                                                             style={{
                                                                                                 color: '#333333',
@@ -667,11 +670,20 @@ export default function Payment() {
                     </div>
                 </div>
                 <div className={cx('swal-footer')}>
-                    <Button
-                        style={{ background: '#fe2c55', color: 'white', marginLeft: '60%', fontSize: 10, padding: 20 }}
-                    >
-                        Tiếp tục mua thuê đồ
-                    </Button>
+                    <Link to="/">
+                        <Button
+                            className={cx('Button')}
+                            style={{
+                                background: '#fe2c55',
+                                color: 'white',
+                                marginLeft: '60%',
+                                fontSize: 10,
+                                padding: 20,
+                            }}
+                        >
+                            Tiếp tục mua thuê đồ
+                        </Button>
+                    </Link>
                 </div>
             </>
         );

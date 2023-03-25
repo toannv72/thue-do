@@ -20,7 +20,7 @@ export default function CreateProducts() {
     const [description, setDescription] = useState(EditorState.createEmpty());
     const [price, setPrice] = useState(1);
     const [deposit, setDeposit] = useState(1);
-    const [category, setCategory] = useState();
+    const [category, setCategory] = useState({ id: 0});
     const [images, setImages] = useState([]);
     const [toan, setToan] = useState(false);
     const [circular, setCircular] = useState(false);
@@ -50,7 +50,7 @@ export default function CreateProducts() {
             })
             .catch((error) => {
                 console.log(error);
-                toast.error(`Thêm sản phẩm không thành công!`);
+                  toast.error(`Thêm sản phẩm không thành công!`);
             });
         setToan(false);
         setCircular(false);
@@ -61,13 +61,21 @@ export default function CreateProducts() {
         // if (img == null) return;
 
         // console.log(category.id);
-        if (img == null || name === '' || price <= 0 || deposit <= 0 || category.id <= 0) {
-            return toast.error(`vui lòng nhập đầy đủ thông tin !`);
+        
+        if (img == null || name === '' || price === '' || deposit === '' ) {
+            return toast.error(`Vui lòng nhập đầy đủ thông tin !`);
         }
-        //  if (typeof price !== 'number' || typeof deposit !== 'number') {
-        //      console.log(typeof price);
-        //      return toast.error(`vui lòng nhập số trong giá tiền !`);
-        //  }
+        if (category.id <= 0) {
+            return toast.error(`Vui chọn thể loại sản phẩm !`);
+        }
+        if ( price <= 0) {
+            console.log(typeof price);
+
+            return toast.error(`Vui lòng nhập giá tiền hợp lệ!`);
+        }
+        if ( deposit <= 0) {
+            return toast.error(`Vui lòng nhập giá tiền đặt cọc hợp lệ!`);
+        }
         const urls = [];
         setCircular(true);
         for (let index = 0; index < img.length; index++) {
@@ -93,6 +101,9 @@ export default function CreateProducts() {
     }, [toan]);
     return (
         <>
+            <div className={cx('table')}>
+                <ToastContainer />
+            </div>
             <Menu>
                 <div className={cx('function')}>
                     <div className={cx('')}>
@@ -104,7 +115,6 @@ export default function CreateProducts() {
                 </div>
             </Menu>
             <h1>Add Product</h1>
-            <ToastContainer />
             <div className="panel panel-primary dialog-panel">
                 <div className="panel-heading">
                     <h4>Thêm Sản Phẩm</h4>
@@ -143,7 +153,13 @@ export default function CreateProducts() {
                                             placeholder="Tên sản phẩm"
                                             type="text"
                                             value={name}
-                                            onChange={(event) => !event.target.value.startsWith(' ') ? setName(event.target.value) : <></>}
+                                            onChange={(event) =>
+                                                !event.target.value.startsWith(' ') ? (
+                                                    setName(event.target.value)
+                                                ) : (
+                                                    <></>
+                                                )
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -160,9 +176,17 @@ export default function CreateProducts() {
                                             className="form-control"
                                             id="id_last_name"
                                             placeholder="Giá tiền"
-                                            type="text"
+                                            type="number"
+                                            min="1"
+                                            max="10000000000"
                                             value={price}
-                                            onChange={(event) => !event.target.value.startsWith(' ') ? setPrice(event.target.value) : <></>}
+                                            onChange={(event) =>
+                                                !event.target.value.startsWith(' ') ? (
+                                                    setPrice(event.target.value)
+                                                ) : (
+                                                    <></>
+                                                )
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -179,9 +203,17 @@ export default function CreateProducts() {
                                             className="form-control"
                                             id="id_last_name"
                                             placeholder="Đặt cọc"
-                                            type="text"
+                                            type="number"
+                                            min="1"
+                                            max="10000000000"
                                             value={deposit}
-                                            onChange={(event) =>!event.target.value.startsWith(' ') ? setDeposit(event.target.value) : <></>}
+                                            onChange={(event) =>
+                                                !event.target.value.startsWith(' ') ? (
+                                                    setDeposit(event.target.value)
+                                                ) : (
+                                                    <></>
+                                                )
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -200,6 +232,7 @@ export default function CreateProducts() {
                                             placeholder="Ảnh 3"
                                             type="file"
                                             multiple
+                                            accept="image/jpeg,image/png,image/gif"
                                             onChange={(e) => {
                                                 setImg(e.target.files);
                                             }}
