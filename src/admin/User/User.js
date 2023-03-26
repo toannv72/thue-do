@@ -30,10 +30,11 @@ export default function User() {
 
         // console.log(value);
     };
+    console.log(userToEdit);
     const confirmEdit = (event) => {
         event.preventDefault();
         const updatedUser = {
-            id: userToEdit,
+            id: userToEdit.id,
             password: password,
             firstName: firstName,
             lastName: lastName,
@@ -44,16 +45,16 @@ export default function User() {
             .put(`${process.env.REACT_APP_BASE_URLS}users/update`, updatedUser)
             .then((response) => {
                 if (response.status === 200) {
-                    toast.success(`Thay đổi sản phẩm thành công!`);
+                    toast.success(`Thay đổi thông tin thành công!`);
                 } else {
-                    toast.error(`Thay đổi sản phẩm không thành công!`);
+                    toast.error(`Thay đổi sản thông tin thành công!`);
                 }
                 setShowEditUser(false);
             })
             .catch((error) => {
                 console.log(error);
                 setShowEditUser(false);
-                toast.error(`Thay đổi sản phẩm không thành công!`);
+                toast.error(`Thay đổi sản thông tin thành công!`);
             });
     };
 
@@ -135,7 +136,7 @@ export default function User() {
         if (searchTerm !== '') {
             fetchSearchResults();
         }
-    }, [searchTerm, productToLook, showLOCKEDConfirmation, showDeleteConfirmation, currentPage]);
+    }, [searchTerm, productToLook, showLOCKEDConfirmation, showDeleteConfirmation, currentPage, showEditUser]);
     useEffect(() => {
         const fetchSearchResults = async () => {
             const response = await fetch(
@@ -149,7 +150,7 @@ export default function User() {
         if (searchTerm === '') {
             fetchSearchResults();
         }
-    }, [searchTerm, productToLook, showLOCKEDConfirmation, showDeleteConfirmation, currentPage]);
+    }, [searchTerm, productToLook, showLOCKEDConfirmation, showDeleteConfirmation, currentPage, showEditUser]);
 
     const handleInputChange = (event) => {
         const searchValue = event.target.value;
@@ -196,7 +197,7 @@ export default function User() {
                                 <td>{index + 1}</td>
                                 <td>{result.username}</td>
                                 <td>
-                                    {result.lastName} {result.firstName}
+                                    {result.firstName} {result.lastName}
                                 </td>
                                 <td>{result.address}</td>
                                 <td>
@@ -249,8 +250,12 @@ export default function User() {
                                             data-toggle="modal"
                                             data-target="#ModalUP"
                                             onClick={() => {
-                                                setUserToEdit(result.id);
-                                                handleEdit();
+                                                setUserToEdit(result);
+                                                setEmail(result.email);
+                                                setPhone(result.phone)
+                                                setLastName(result.lastName)
+                                                setFirstName(result.firstName)
+                                                handleEdit(result);
                                             }}
                                         >
                                             <i className="fas fa-edit"></i>
@@ -423,7 +428,7 @@ export default function User() {
                                         </div>
                                     </div>
                                 </div> */}
-                                    <div className="form-group">
+                                    {/* <div className="form-group">
                                         <label className="control-label col-md-2 col-md-offset-2" htmlFor="id_title">
                                             Mật khẩu
                                         </label>
@@ -441,7 +446,7 @@ export default function User() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </form>
                                 <div className="form-group">
                                     <div className="col-md-offset-1 col-md-12">
