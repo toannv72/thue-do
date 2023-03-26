@@ -631,6 +631,42 @@ export default function Order() {
                                                                                                                         </strong>
                                                                                                                     </td>
                                                                                                                 </tr>
+                                                                                                                <tr>
+                                                                                                                    <td
+                                                                                                                        style={{
+                                                                                                                            padding:
+                                                                                                                                '5 20',
+                                                                                                                        }}
+                                                                                                                        width="50%"
+                                                                                                                    >
+                                                                                                                        <strong
+                                                                                                                            style={{
+                                                                                                                                color: '#666666',
+                                                                                                                                fontSize: 12,
+                                                                                                                            }}
+                                                                                                                        >
+                                                                                                                            Địa chỉ giao hàng
+                                                                                                                        </strong>
+                                                                                                                    </td>
+                                                                                                                    <td
+                                                                                                                        style={{
+                                                                                                                            padding:
+                                                                                                                                '5 20',
+                                                                                                                        }}
+                                                                                                                        width="50%"
+                                                                                                                    >
+                                                                                                                        <strong
+                                                                                                                            style={{
+                                                                                                                                color: '#333333',
+                                                                                                                                fontSize: 12,
+                                                                                                                            }}
+                                                                                                                        >
+                                                                                                                            {
+                                                                                                                                itemOne.address
+                                                                                                                            }
+                                                                                                                        </strong>
+                                                                                                                    </td>
+                                                                                                                </tr>
                                                                                                             </tbody>
                                                                                                         </table>
                                                                                                     </td>

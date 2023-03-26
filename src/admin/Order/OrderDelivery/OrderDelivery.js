@@ -127,7 +127,7 @@ export default function Order() {
                     </div>
                 </Menu>
                 <ToastContainer />
-             
+
                 <div
                     className={cx('project-boxes jsGridView')}
                     style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}
@@ -514,7 +514,7 @@ export default function Order() {
                                                                                                     ></td>
                                                                                                     <td
                                                                                                         width=""
-                                                                                                        // style="padding:0,margin:0"
+                                                                                                    // style="padding:0,margin:0"
                                                                                                     ></td>
                                                                                                 </tr>
                                                                                                 <tr>
@@ -630,10 +630,47 @@ export default function Order() {
                                                                                                                         </strong>
                                                                                                                     </td>
                                                                                                                 </tr>
+                                                                                                                <tr>
+                                                                                                                    <td
+                                                                                                                        style={{
+                                                                                                                            padding:
+                                                                                                                                '5 20',
+                                                                                                                        }}
+                                                                                                                        width="50%"
+                                                                                                                    >
+                                                                                                                        <strong
+                                                                                                                            style={{
+                                                                                                                                color: '#666666',
+                                                                                                                                fontSize: 12,
+                                                                                                                            }}
+                                                                                                                        >
+                                                                                                                            Địa chỉ giao hàng
+                                                                                                                        </strong>
+                                                                                                                    </td>
+                                                                                                                    <td
+                                                                                                                        style={{
+                                                                                                                            padding:
+                                                                                                                                '5 20',
+                                                                                                                        }}
+                                                                                                                        width="50%"
+                                                                                                                    >
+                                                                                                                        <strong
+                                                                                                                            style={{
+                                                                                                                                color: '#333333',
+                                                                                                                                fontSize: 12,
+                                                                                                                            }}
+                                                                                                                        >
+                                                                                                                            {
+                                                                                                                                itemOne.address
+                                                                                                                            }
+                                                                                                                        </strong>
+                                                                                                                    </td>
+                                                                                                                </tr>
                                                                                                             </tbody>
                                                                                                         </table>
                                                                                                     </td>
                                                                                                 </tr>
+                                                                                                
                                                                                                 <tr>
                                                                                                     <td colSpan={2}>
                                                                                                         <table
@@ -761,9 +798,9 @@ export default function Order() {
                                                                                                                                     >
                                                                                                                                         {itemOne.orderDetails
                                                                                                                                             ? itemOne
-                                                                                                                                                  .orderDetails[0]
-                                                                                                                                                  .product
-                                                                                                                                                  .name
+                                                                                                                                                .orderDetails[0]
+                                                                                                                                                .product
+                                                                                                                                                .name
                                                                                                                                             : ''}
                                                                                                                                     </td>
 
@@ -775,12 +812,12 @@ export default function Order() {
                                                                                                                                     >
                                                                                                                                         {itemOne.orderDetails
                                                                                                                                             ? moment(
-                                                                                                                                                  itemOne
-                                                                                                                                                      .orderDetails[0]
-                                                                                                                                                      .orderReturnDate,
-                                                                                                                                              ).format(
-                                                                                                                                                  'YYYY-MM-DD',
-                                                                                                                                              )
+                                                                                                                                                itemOne
+                                                                                                                                                    .orderDetails[0]
+                                                                                                                                                    .orderReturnDate,
+                                                                                                                                            ).format(
+                                                                                                                                                'YYYY-MM-DD',
+                                                                                                                                            )
                                                                                                                                             : ''}
                                                                                                                                     </td>
                                                                                                                                     <td
@@ -791,12 +828,12 @@ export default function Order() {
                                                                                                                                     >
                                                                                                                                         {itemOne.orderDetails
                                                                                                                                             ? moment(
-                                                                                                                                                  itemOne
-                                                                                                                                                      .orderDetails[0]
-                                                                                                                                                      .orderBorrowDate,
-                                                                                                                                              ).format(
-                                                                                                                                                  'YYYY-MM-DD',
-                                                                                                                                              )
+                                                                                                                                                itemOne
+                                                                                                                                                    .orderDetails[0]
+                                                                                                                                                    .orderBorrowDate,
+                                                                                                                                            ).format(
+                                                                                                                                                'YYYY-MM-DD',
+                                                                                                                                            )
                                                                                                                                             : ''}
                                                                                                                                     </td>
                                                                                                                                     <td
@@ -810,13 +847,13 @@ export default function Order() {
                                                                                                                                         )} */}
                                                                                                                                         {itemOne.orderDetails
                                                                                                                                             ? (
-                                                                                                                                                  itemOne.totalPrice -
-                                                                                                                                                  itemOne
-                                                                                                                                                      .orderDetails[0]
-                                                                                                                                                      .deposit
-                                                                                                                                              ).toLocaleString(
-                                                                                                                                                  'vi-VN',
-                                                                                                                                              )
+                                                                                                                                                itemOne.totalPrice -
+                                                                                                                                                itemOne
+                                                                                                                                                    .orderDetails[0]
+                                                                                                                                                    .deposit
+                                                                                                                                            ).toLocaleString(
+                                                                                                                                                'vi-VN',
+                                                                                                                                            )
                                                                                                                                             : ''}
 
                                                                                                                                         đ
@@ -854,8 +891,8 @@ export default function Order() {
                                                                                                                                     >
                                                                                                                                         {itemOne.orderDetails
                                                                                                                                             ? itemOne.orderDetails[0].deposit.toLocaleString(
-                                                                                                                                                  'vi-VN',
-                                                                                                                                              )
+                                                                                                                                                'vi-VN',
+                                                                                                                                            )
                                                                                                                                             : ''}
 
                                                                                                                                         đ
@@ -884,15 +921,15 @@ export default function Order() {
                                                                                                                                     >
                                                                                                                                         {itemOne.totalPrice
                                                                                                                                             ? itemOne.totalPrice.toLocaleString(
-                                                                                                                                                  'vi-VN',
-                                                                                                                                              )
+                                                                                                                                                'vi-VN',
+                                                                                                                                            )
                                                                                                                                             : ''}
 
                                                                                                                                         đ
                                                                                                                                     </td>
                                                                                                                                 </tr>
 
-                                                                                                                                
+
                                                                                                                             </tbody>
                                                                                                                         </table>
                                                                                                                     </td>
