@@ -34,6 +34,9 @@ function Information() {
             .then((response) => {
                 if (response.status === 200) {
                     toast.success(`Thay đổi thông tin thành công!`);
+                   setTimeout(() => {
+                       window.location.reload();
+                   }, 1000);
                 } else {
                     toast.error(`Thay đổi thông tin không thành công!`);
                 }

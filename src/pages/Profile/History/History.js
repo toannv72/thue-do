@@ -31,7 +31,7 @@ function History() {
         // console.log(value);
     };
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_BASE_URLS}order/getAllHistoryUser/${imgUser.id}?page=${currentPage - 1}&size=5&check=true`)
+        fetch(`${process.env.REACT_APP_BASE_URLS}order/getAllHistoryUser/${imgUser.id}?page=${currentPage - 1}&size=3&check=false`)
             .then((res) => res.json())
             .then(
                 (result) => {
@@ -46,7 +46,7 @@ function History() {
                     setError(error);
                 },
             );
-    }, [imgUser.id]);
+    }, [imgUser.id, currentPage]);
 
     if (error) {
         return <ErrorToast message={error.message} />;
@@ -113,22 +113,30 @@ function History() {
                     >
                         {items.map((item, index) => (
                             <div className={cx('project-box-wrapper')} key={index}>
-                                <div className={cx('project-box')}>
+                                <div
+                                    className={cx('project-box')}
+                                    style={item.status === 'CANCELLED' ? { backgroundColor: '#ffd3e2' } : {}}
+                                >
                                     <div className={cx('project-box-header')}>
                                         <div>
-                                            <div>
+                                            <div style={{ marginBottom: 30 }}>
                                                 <span>
                                                     Ngày thuê:{' '}
                                                     {moment(item.orderDetails[0].orderBorrowDate).format('YYYY-MM-DD')}
                                                 </span>
-                                            </div>
-
-                                            <div>
-                                                <span>
+                                                <span style={{ marginLeft: 50 }}>
                                                     Ngày trả:{' '}
                                                     {moment(item.orderDetails[0].orderReturnDate).format('YYYY-MM-DD')}
                                                 </span>
                                             </div>
+
+                                            <span>
+                                                Số ngày thuê:
+                                                {moment(item.orderDetails[0].orderReturnDate).diff(
+                                                    moment(item.orderDetails[0].orderBorrowDate),
+                                                    'days',
+                                                ) + 1}
+                                            </span>
                                         </div>
                                         <div className={cx('more-wrapper')}>
                                             {/* <button className={cx('project-btn-more')}>
@@ -152,56 +160,95 @@ function History() {
                                         </div>
                                     </div>
                                     <div className={cx('project-box-content-header')}>
-                                        <p className={cx('')}>
-                                            Tên sản phẩm:
-                                            <a href={`/products:${item.orderDetails[0].product.id}`}>
-                                                {item.orderDetails[0].product.name}
-                                            </a>
-                                        </p>
+                                        <p className={cx('box-content-header')}>{item.orderDetails[0].product.name}</p>
+
+                                        <p className={cx('box-content-header')}>{item.name}</p>
+                                        <p className={cx('box-content-subheader')}>Địa chỉ: {item.address}</p>
+
+                                        <p className={cx('box-content-subheader')}>SĐT:{item.phone}</p>
+                                        <p className={cx('box-content-subheader')}>Lời nhắn: {item.message}</p>
                                         <p className={cx('box-content-subheader')}>
-                                            Số tiền thuê:
-                                            {(item.totalPrice - item.orderDetails[0].deposit).toLocaleString('vi-VN')}đ
-                                        </p>
-                                        <p className={cx('box-content-subheader')}>
-                                            Số tiền đặt cọc:{item.orderDetails[0].deposit.toLocaleString('vi-VN')}đ
-                                        </p>
-                                        <p className={cx('box-content-subheader')}>
-                                            Số tiền thê+ đặt cọc:{item.totalPrice.toLocaleString('vi-VN')}đ
+                                            Số tiền thu:{item.totalPrice.toLocaleString('vi-VN')}đ
                                         </p>
                                     </div>
                                     <div className={cx('box-progress-wrapper')}>
-                                        <p className={cx('box-progress-header')}></p>
+                                        {/* <p className={cx('box-progress-header')}>Progress</p> */}
+                                        <div className={cx('box-progress-bar')}>
+                                            <span className={cx('box-progress')}></span>
+                                        </div>
                                     </div>
                                     <div className={cx('project-box-footer')}>
                                         <div className={cx('participants')}>
-                                            <div className={cx('days-left')}>
-                                                <Button
-                                                    style={{ display: 'flex', alignItems: 'center' }}
-                                                    onClick={() => {
-                                                        setItemHistory(item);
-                                                        handleClickOpen();
-                                                    }}
+                                            <button
+                                                className={cx('days-left')}
+                                                style={{ display: 'flex', alignItems: 'center' }}
+                                                onClick={() => {
+                                                    setItemHistory(item);
+                                                    handleClickOpen();
+                                                }}
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="12"
+                                                    height="12"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="3"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    className={cx('feather feather-plus')}
                                                 >
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="12"
-                                                        height="12"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        strokeWidth="3"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        className={cx('feather feather-plus')}
-                                                    >
-                                                        <path d="M12 5v14M5 12h14" />
-                                                    </svg>
-                                                    Chi tiết
-                                                </Button>
-                                            </div>
+                                                    <path d="M12 5v14M5 12h14" />
+                                                </svg>
+                                                Chi tiết
+                                            </button>
                                         </div>
+                                        {/* <div className={cx('days-left')}>2 Days Left</div> */}
+
+                                        {item.status === 'CANCELLED' ? (
+                                            <>
+                                                <h3 style={{ color: 'red' }}>Đơn hàng đã bị hủy</h3>
+                                            </>
+                                        ) : (
+                                            <></>
+                                        )}
+                                        {item.status === 'PENDING' ? (
+                                            <>
+                                                
+
+                                               
+                                            </>
+                                        ) : (
+                                            <></>
+                                        )}
+                                        {item.status === 'CONFIRMED' ? (
+                                            <>
+                                              
+
+                                                <h2 style={{ color: 'blue' }}>Đã xác nhận</h2>
+                                            </>
+                                        ) : (
+                                            <></>
+                                        )}
+                                        {item.status === 'DELIVERING' ? (
+                                            <>
+                                                
+
+                                                <h2 style={{ color: 'blue' }}>Đang được thuê</h2>
+                                            </>
+                                        ) : (
+                                            <></>
+                                        )}
+                                        {item.status === 'PAID' ? (
+                                            <>
+                                                <h2 style={{ color: 'blue' }}>Đơn thành công</h2>
+                                            </>
+                                        ) : (
+                                            <></>
+                                        )}
                                         <div className={cx('days-left1')}>
-                                            Số ngày thuê:{' '}
+                                            Số ngày thuê:
                                             {moment(item.orderDetails[0].orderReturnDate).diff(
                                                 moment(item.orderDetails[0].orderBorrowDate),
                                                 'days',
@@ -412,7 +459,7 @@ function History() {
                                                                                                                 background:
                                                                                                                     '#fff',
                                                                                                                 width: '97%',
-                                                                                                                margin: '0 auto 10',
+                                                                                                                margin: '0 auto ',
                                                                                                                 border: 'solid 1 #e5e5e5',
                                                                                                             }}
                                                                                                         >
@@ -472,7 +519,9 @@ function History() {
                                                                                                                                 fontSize: 12,
                                                                                                                             }}
                                                                                                                         >
-                                                                                                                            7119538441
+                                                                                                                            {
+                                                                                                                                itemHistory.id
+                                                                                                                            }
                                                                                                                         </strong>
                                                                                                                     </td>
                                                                                                                 </tr>
@@ -508,7 +557,11 @@ function History() {
                                                                                                                                 fontSize: 12,
                                                                                                                             }}
                                                                                                                         >
-                                                                                                                            20/11/2017
+                                                                                                                            {moment(
+                                                                                                                                itemHistory.createdDate,
+                                                                                                                            ).format(
+                                                                                                                                'YYYY-MM-DD',
+                                                                                                                            )}
                                                                                                                         </strong>
                                                                                                                     </td>
                                                                                                                 </tr>
@@ -750,7 +803,7 @@ function History() {
                                                                                                                                         colSpan={
                                                                                                                                             2
                                                                                                                                         }
-                                                                                                                                        align="left"
+                                                                                                                                        align="left" bgcolor="#fffbe2"
                                                                                                                                     >
                                                                                                                                         Tổng
                                                                                                                                         tiền
@@ -762,7 +815,7 @@ function History() {
                                                                                                                                         colSpan={
                                                                                                                                             2
                                                                                                                                         }
-                                                                                                                                        align="right"
+                                                                                                                                        align="right" bgcolor="#fffbe2"
                                                                                                                                     >
                                                                                                                                         {itemHistory.totalPrice
                                                                                                                                             ? itemHistory.totalPrice.toLocaleString(
@@ -774,94 +827,7 @@ function History() {
                                                                                                                                     </td>
                                                                                                                                 </tr>
 
-                                                                                                                                <tr>
-                                                                                                                                    <td
-                                                                                                                                        // style="BORDER-BOTTOM:#e3e3e3 1 solid,PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:13,FONT-WEIGHT:bold,PADDING-TOP:10"
-                                                                                                                                        bgcolor="#fffbe2"
-                                                                                                                                        colSpan={
-                                                                                                                                            2
-                                                                                                                                        }
-                                                                                                                                        align="left"
-                                                                                                                                    >
-                                                                                                                                        Số
-                                                                                                                                        tiền
-                                                                                                                                        còn
-                                                                                                                                        lại
-                                                                                                                                        cần
-                                                                                                                                        thanh
-                                                                                                                                        toán
-                                                                                                                                    </td>
-                                                                                                                                    <td
-                                                                                                                                        // style="BORDER-BOTTOM:#e3e3e3 1 solid,PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,PADDING-TOP:10"
-                                                                                                                                        bgcolor="#fffbe2"
-                                                                                                                                        colSpan={
-                                                                                                                                            2
-                                                                                                                                        }
-                                                                                                                                        align="right"
-                                                                                                                                    >
-                                                                                                                                        {itemHistory.totalPrice
-                                                                                                                                            ? itemHistory.totalPrice.toLocaleString(
-                                                                                                                                                'vi-VN',
-                                                                                                                                            )
-                                                                                                                                            : ''}
 
-                                                                                                                                        đ
-                                                                                                                                    </td>
-                                                                                                                                </tr>
-                                                                                                                                <tr>
-                                                                                                                                    <td
-                                                                                                                                        // style="BORDER-BOTTOM:#e3e3e3 1 solid,PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,FONT-WEIGHT:bold,PADDING-TOP:10"
-                                                                                                                                        colSpan={
-                                                                                                                                            2
-                                                                                                                                        }
-                                                                                                                                        align="left"
-                                                                                                                                    >
-                                                                                                                                        Hình
-                                                                                                                                        thức
-                                                                                                                                        thanh
-                                                                                                                                        toán{' '}
-                                                                                                                                    </td>
-                                                                                                                                    <td
-                                                                                                                                        // style="BORDER-BOTTOM:#e3e3e3 1 solid,PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,PADDING-TOP:10"
-                                                                                                                                        colSpan={
-                                                                                                                                            2
-                                                                                                                                        }
-                                                                                                                                        align="right"
-                                                                                                                                    >
-                                                                                                                                        Thanh
-                                                                                                                                        toán
-                                                                                                                                        khi
-                                                                                                                                        nhận
-                                                                                                                                        hàng
-                                                                                                                                    </td>
-                                                                                                                                </tr>
-                                                                                                                                <tr>
-                                                                                                                                    <td
-                                                                                                                                        // style="PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,FONT-WEIGHT:bold,PADDING-TOP:10"
-                                                                                                                                        colSpan={
-                                                                                                                                            2
-                                                                                                                                        }
-                                                                                                                                        align="left"
-                                                                                                                                    >
-                                                                                                                                        Tình
-                                                                                                                                        trạng
-                                                                                                                                        thanh
-                                                                                                                                        toán{' '}
-                                                                                                                                    </td>
-                                                                                                                                    <td
-                                                                                                                                        // style="PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,PADDING-TOP:10"
-                                                                                                                                        colSpan={
-                                                                                                                                            2
-                                                                                                                                        }
-                                                                                                                                        align="right"
-                                                                                                                                    >
-                                                                                                                                        Chưa
-                                                                                                                                        hoàn
-                                                                                                                                        tất
-                                                                                                                                        thanh
-                                                                                                                                        toán
-                                                                                                                                    </td>
-                                                                                                                                </tr>
                                                                                                                             </tbody>
                                                                                                                         </table>
                                                                                                                     </td>

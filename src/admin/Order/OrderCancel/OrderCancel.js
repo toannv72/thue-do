@@ -315,7 +315,7 @@ export default function Order() {
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    ))} 
                 </div>
                 <p style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
                     <Pagination
