@@ -20,6 +20,10 @@ function Category({ url }) {
         console.log(value);
     };
     useEffect(() => {
+        window.scrollTo(0, 320);
+    }, [currentPage]);
+
+    useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}categories/getOne/${url}?page=${currentPage-1}&size=10&sort=id%2Cdesc`)
             .then((res) => res.json())
             .then(
