@@ -76,6 +76,12 @@ export default function CreateProducts() {
         if ( deposit <= 0) {
             return toast.error(`Vui lòng nhập giá tiền đặt cọc hợp lệ!`);
         }
+        if (price <= 1000) {
+            return toast.error(`Vui lòng nhập giá tiền lớn hơn 1000!`);
+        }
+        if (deposit <= 1000) {
+            return toast.error(`Vui lòng nhập giá tiền đặt cọc lớn hơn 1000!`);
+        }
         const urls = [];
         setCircular(true);
         for (let index = 0; index < img.length; index++) {
@@ -177,7 +183,7 @@ export default function CreateProducts() {
                                             id="id_last_name"
                                             placeholder="Giá tiền"
                                             type="number"
-                                            min="1"
+                                            min="1000"
                                             max="10000000000"
                                             value={price}
                                             onChange={(event) =>
@@ -204,7 +210,7 @@ export default function CreateProducts() {
                                             id="id_last_name"
                                             placeholder="Đặt cọc"
                                             type="number"
-                                            min="1"
+                                            min="1000"
                                             max="10000000000"
                                             value={deposit}
                                             onChange={(event) =>

@@ -31,7 +31,7 @@ const routes = {
 
     EditProfile: '/editProfile',
     History: '/history',
-    EditOrders: '/editOrders',
+    EditOrders: '/ordersProgress',
     notification: '/notification',
 
     adminHome: '/admin/home',
@@ -42,12 +42,12 @@ const routes = {
     adminDashboard: '/admin/dashboard',
 
     adminNotification: '/admin/notification',
-    adminOrder: '/admin/order',
     adminOrder1: '/admin/order/new',
     adminOrder5: '/admin/order/delivery',
     adminOrder2: '/admin/order/renting',
     adminOrder3: '/admin/order/success',
     adminOrder4: '/admin/order/cancel',
+    adminOrder: '/admin/order',
     adminUser: '/admin/user',
     adminBlog: '/admin/blog',
     adminCreateBlog: '/admin/blog/create',

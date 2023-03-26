@@ -58,11 +58,11 @@ function Sidebar() {
                             <MenuItem title="Blog" to={config.routes.adminCreateBlog} />
                         </li>
                         <li className="">
-                            <MenuItem title="Đơn hàng" to={config.routes.adminOrder} />
+                            <MenuItem title="Đơn hàng" to={config.routes.adminOrder1} />
                         </li>
-                        <li className="">
+                        {/* <li className="">
                             <MenuItem title="Thông báo" to={config.routes.adminNotification} />
-                        </li>
+                        </li> */}
                         <li className="">
                             <MenuItem title="Thống kê" to={config.routes.adminDashboard} />
                         </li>

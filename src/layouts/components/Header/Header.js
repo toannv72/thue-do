@@ -63,6 +63,7 @@ const MENU_ITEMS = [
 function Header() {
     const [error, setError] = useState(null);
     const [items, setItems] = useState([]);
+    const [information, setInformation] = useState(0);
 
     // check dang nhap
     const currentUser = localStorage.getItem('user');
@@ -78,6 +79,12 @@ function Header() {
     };
     useEffect(() => {
         handleRequest();
+        
+    });
+
+    useEffect(() => {
+        handleRequest1();
+
     });
     useEffect(() => {
         if (imgUser) {
@@ -88,6 +95,26 @@ function Header() {
                     (result) => {
                         // setIsLoaded(true);
                         setItems(result);
+                    },
+                    // Note: it's important to handle errors here
+                    // instead of a catch() block so that we don't swallow
+                    // exceptions from actual bugs in components.
+                    (error) => {
+                        // setIsLoaded(true);
+                        setError(error);
+                    },
+                );
+        }
+    }, []);
+    useEffect(() => {
+        if (imgUser) {
+            const user = JSON.parse(localStorage.getItem('user')).id;
+            fetch(`${process.env.REACT_APP_BASE_URLS}information/getCountIsReadByUser/${user}`)
+                .then((res) => res.json())
+                .then(
+                    (result) => {
+                        // setIsLoaded(true);
+                        setInformation(result);
                     },
                     // Note: it's important to handle errors here
                     // instead of a catch() block so that we don't swallow
@@ -118,25 +145,45 @@ function Header() {
                     },
                 );
         }
-    }, 2000);
+    }, 1000);
+
+    const handleRequest1 = debounce(() => {
+        if (imgUser) {
+            const user = JSON.parse(localStorage.getItem('user')).id;
+            fetch(`${process.env.REACT_APP_BASE_URLS}information/getCountIsReadByUser/${user}`)
+                .then((res) => res.json())
+                .then(
+                    (result) => {
+                        // setIsLoaded(true);
+                        setInformation(result);
+                    },
+                    // Note: it's important to handle errors here
+                    // instead of a catch() block so that we don't swallow
+                    // exceptions from actual bugs in components.
+                    (error) => {
+                        // setIsLoaded(true);
+                        setError(error);
+                    },
+                );
+        }
+    }, 1000);
     // console.log(items.product);
-console.log(JSON.parse(localStorage.getItem('user')));
     const userMenu = [
         {
             icon: <FontAwesomeIcon icon={faUser} />,
-            title: 'View profile',
-            to: `/@${localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')).username:""}`,
+            title: 'Tài khoản',
+            to: `/@${localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).username : ""}`,
         },
         {
             icon: <FontAwesomeIcon icon={faGear} />,
-            title: 'Settings',
+            title: 'Cài đặt',
             to: '/information',
         },
         // ...MENU_ITEMS,
 
         {
             icon: <FontAwesomeIcon icon={faSignOut} />,
-            title: 'Log out',
+            title: 'Đăng xuất',
             to: '/logout',
             separate: true,
         },
@@ -173,7 +220,8 @@ console.log(JSON.parse(localStorage.getItem('user')));
                                 <Tippy delay={[0, 50]} content="Thông báo" placement="bottom">
                                     <button className={cx('action-btn')}>
                                         <InboxIcon />
-                                        <span className={cx('badge')}>13</span>
+                                        <span className={cx('badge')}>{information ? information : 0}</span>
+                                        {/* {information ? <span className={cx('badge')}>{information}</span> : <></>} */}
                                     </button>
                                 </Tippy>
                             </Link>

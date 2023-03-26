@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import moment from 'moment';
 import ErrorToast from '~/pages/Product/ErrorToast';
-import { Button, Dialog, DialogActions } from '@mui/material';
+import { Button, Dialog, DialogActions, Pagination } from '@mui/material';
 
 const cx = classNames.bind(styles);
 function History() {
@@ -18,7 +18,7 @@ function History() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState();
     const [itemHistory, setItemHistory] = useState([]);
-
+    const [currentPage, setCurrentPage] = useState(1); const [totalPage, setTotalPage] = useState();
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -26,14 +26,17 @@ function History() {
     };
     const handleClose = () => {
         setOpen(false);
+    }; const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+        // console.log(value);
     };
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_BASE_URLS}order/getAllByUser/${imgUser.id}`)
+        fetch(`${process.env.REACT_APP_BASE_URLS}order/getAllHistoryUser/${imgUser.id}?page=${currentPage - 1}&size=5&check=true`)
             .then((res) => res.json())
             .then(
                 (result) => {
                     setIsLoaded(true);
-                    setItems(result);
+                    setItems(result.contends); setTotalPage(result.totalPage);
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
@@ -399,7 +402,7 @@ function History() {
                                                                                                     ></td>
                                                                                                     <td
                                                                                                         width=""
-                                                                                                        // style="padding:0,margin:0"
+                                                                                                    // style="padding:0,margin:0"
                                                                                                     ></td>
                                                                                                 </tr>
                                                                                                 <tr>
@@ -640,9 +643,9 @@ function History() {
                                                                                                                                     >
                                                                                                                                         {itemHistory.orderDetails
                                                                                                                                             ? itemHistory
-                                                                                                                                                  .orderDetails[0]
-                                                                                                                                                  .product
-                                                                                                                                                  .name
+                                                                                                                                                .orderDetails[0]
+                                                                                                                                                .product
+                                                                                                                                                .name
                                                                                                                                             : ''}
                                                                                                                                     </td>
 
@@ -654,12 +657,12 @@ function History() {
                                                                                                                                     >
                                                                                                                                         {itemHistory.orderDetails
                                                                                                                                             ? moment(
-                                                                                                                                                  itemHistory
-                                                                                                                                                      .orderDetails[0]
-                                                                                                                                                      .orderReturnDate,
-                                                                                                                                              ).format(
-                                                                                                                                                  'YYYY-MM-DD',
-                                                                                                                                              )
+                                                                                                                                                itemHistory
+                                                                                                                                                    .orderDetails[0]
+                                                                                                                                                    .orderReturnDate,
+                                                                                                                                            ).format(
+                                                                                                                                                'YYYY-MM-DD',
+                                                                                                                                            )
                                                                                                                                             : ''}
                                                                                                                                     </td>
                                                                                                                                     <td
@@ -670,12 +673,12 @@ function History() {
                                                                                                                                     >
                                                                                                                                         {itemHistory.orderDetails
                                                                                                                                             ? moment(
-                                                                                                                                                  itemHistory
-                                                                                                                                                      .orderDetails[0]
-                                                                                                                                                      .orderBorrowDate,
-                                                                                                                                              ).format(
-                                                                                                                                                  'YYYY-MM-DD',
-                                                                                                                                              )
+                                                                                                                                                itemHistory
+                                                                                                                                                    .orderDetails[0]
+                                                                                                                                                    .orderBorrowDate,
+                                                                                                                                            ).format(
+                                                                                                                                                'YYYY-MM-DD',
+                                                                                                                                            )
                                                                                                                                             : ''}
                                                                                                                                     </td>
                                                                                                                                     <td
@@ -689,13 +692,13 @@ function History() {
                                                                                                                                         )} */}
                                                                                                                                         {itemHistory.orderDetails
                                                                                                                                             ? (
-                                                                                                                                                  itemHistory.totalPrice -
-                                                                                                                                                  itemHistory
-                                                                                                                                                      .orderDetails[0]
-                                                                                                                                                      .deposit
-                                                                                                                                              ).toLocaleString(
-                                                                                                                                                  'vi-VN',
-                                                                                                                                              )
+                                                                                                                                                itemHistory.totalPrice -
+                                                                                                                                                itemHistory
+                                                                                                                                                    .orderDetails[0]
+                                                                                                                                                    .deposit
+                                                                                                                                            ).toLocaleString(
+                                                                                                                                                'vi-VN',
+                                                                                                                                            )
                                                                                                                                             : ''}
 
                                                                                                                                         đ
@@ -733,8 +736,8 @@ function History() {
                                                                                                                                     >
                                                                                                                                         {itemHistory.orderDetails
                                                                                                                                             ? itemHistory.orderDetails[0].deposit.toLocaleString(
-                                                                                                                                                  'vi-VN',
-                                                                                                                                              )
+                                                                                                                                                'vi-VN',
+                                                                                                                                            )
                                                                                                                                             : ''}
 
                                                                                                                                         đ
@@ -763,8 +766,8 @@ function History() {
                                                                                                                                     >
                                                                                                                                         {itemHistory.totalPrice
                                                                                                                                             ? itemHistory.totalPrice.toLocaleString(
-                                                                                                                                                  'vi-VN',
-                                                                                                                                              )
+                                                                                                                                                'vi-VN',
+                                                                                                                                            )
                                                                                                                                             : ''}
 
                                                                                                                                         đ
@@ -798,8 +801,8 @@ function History() {
                                                                                                                                     >
                                                                                                                                         {itemHistory.totalPrice
                                                                                                                                             ? itemHistory.totalPrice.toLocaleString(
-                                                                                                                                                  'vi-VN',
-                                                                                                                                              )
+                                                                                                                                                'vi-VN',
+                                                                                                                                            )
                                                                                                                                             : ''}
 
                                                                                                                                         đ
@@ -892,7 +895,15 @@ function History() {
                             </div>
                         </div>
                     </DialogActions>
-                </Dialog>
+                </Dialog> <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+                    <Pagination
+                        count={totalPage}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        variant="outlined"
+                        shape="rounded"
+                    />
+                </div>
             </div>
         );
     }

@@ -127,7 +127,7 @@ export default function Order() {
                     </div>
                 </Menu>
                 <ToastContainer />
-                <h1> Đơn hàng</h1>
+
                 <div
                     className={cx('project-boxes jsGridView')}
                     style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}
@@ -524,7 +524,7 @@ export default function Order() {
                                                                                                                 background:
                                                                                                                     '#fff',
                                                                                                                 width: '97%',
-                                                                                                                margin: '0 auto 10',
+                                                                                                                margin: '0 auto ',
                                                                                                                 border: 'solid 1 #e5e5e5',
                                                                                                             }}
                                                                                                         >
@@ -868,7 +868,7 @@ export default function Order() {
                                                                                                                                         colSpan={
                                                                                                                                             2
                                                                                                                                         }
-                                                                                                                                        align="left"
+                                                                                                                                        align="left" bgcolor="#fffbe2"
                                                                                                                                     >
                                                                                                                                         Tổng
                                                                                                                                         tiền
@@ -880,7 +880,7 @@ export default function Order() {
                                                                                                                                         colSpan={
                                                                                                                                             2
                                                                                                                                         }
-                                                                                                                                        align="right"
+                                                                                                                                        align="right" bgcolor="#fffbe2"
                                                                                                                                     >
                                                                                                                                         {itemOne.totalPrice
                                                                                                                                             ? itemOne.totalPrice.toLocaleString(
@@ -892,94 +892,7 @@ export default function Order() {
                                                                                                                                     </td>
                                                                                                                                 </tr>
 
-                                                                                                                                <tr>
-                                                                                                                                    <td
-                                                                                                                                        // style="BORDER-BOTTOM:#e3e3e3 1 solid,PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:13,FONT-WEIGHT:bold,PADDING-TOP:10"
-                                                                                                                                        bgcolor="#fffbe2"
-                                                                                                                                        colSpan={
-                                                                                                                                            2
-                                                                                                                                        }
-                                                                                                                                        align="left"
-                                                                                                                                    >
-                                                                                                                                        Số
-                                                                                                                                        tiền
-                                                                                                                                        còn
-                                                                                                                                        lại
-                                                                                                                                        cần
-                                                                                                                                        thanh
-                                                                                                                                        toán
-                                                                                                                                    </td>
-                                                                                                                                    <td
-                                                                                                                                        // style="BORDER-BOTTOM:#e3e3e3 1 solid,PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,PADDING-TOP:10"
-                                                                                                                                        bgcolor="#fffbe2"
-                                                                                                                                        colSpan={
-                                                                                                                                            2
-                                                                                                                                        }
-                                                                                                                                        align="right"
-                                                                                                                                    >
-                                                                                                                                        {itemOne.totalPrice
-                                                                                                                                            ? itemOne.totalPrice.toLocaleString(
-                                                                                                                                                  'vi-VN',
-                                                                                                                                              )
-                                                                                                                                            : ''}
-
-                                                                                                                                        đ
-                                                                                                                                    </td>
-                                                                                                                                </tr>
-                                                                                                                                <tr>
-                                                                                                                                    <td
-                                                                                                                                        // style="BORDER-BOTTOM:#e3e3e3 1 solid,PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,FONT-WEIGHT:bold,PADDING-TOP:10"
-                                                                                                                                        colSpan={
-                                                                                                                                            2
-                                                                                                                                        }
-                                                                                                                                        align="left"
-                                                                                                                                    >
-                                                                                                                                        Hình
-                                                                                                                                        thức
-                                                                                                                                        thanh
-                                                                                                                                        toán{' '}
-                                                                                                                                    </td>
-                                                                                                                                    <td
-                                                                                                                                        // style="BORDER-BOTTOM:#e3e3e3 1 solid,PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,PADDING-TOP:10"
-                                                                                                                                        colSpan={
-                                                                                                                                            2
-                                                                                                                                        }
-                                                                                                                                        align="right"
-                                                                                                                                    >
-                                                                                                                                        Thanh
-                                                                                                                                        toán
-                                                                                                                                        khi
-                                                                                                                                        nhận
-                                                                                                                                        hàng
-                                                                                                                                    </td>
-                                                                                                                                </tr>
-                                                                                                                                <tr>
-                                                                                                                                    <td
-                                                                                                                                        // style="PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,FONT-WEIGHT:bold,PADDING-TOP:10"
-                                                                                                                                        colSpan={
-                                                                                                                                            2
-                                                                                                                                        }
-                                                                                                                                        align="left"
-                                                                                                                                    >
-                                                                                                                                        Tình
-                                                                                                                                        trạng
-                                                                                                                                        thanh
-                                                                                                                                        toán{' '}
-                                                                                                                                    </td>
-                                                                                                                                    <td
-                                                                                                                                        // style="PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,PADDING-TOP:10"
-                                                                                                                                        colSpan={
-                                                                                                                                            2
-                                                                                                                                        }
-                                                                                                                                        align="right"
-                                                                                                                                    >
-                                                                                                                                        Chưa
-                                                                                                                                        hoàn
-                                                                                                                                        tất
-                                                                                                                                        thanh
-                                                                                                                                        toán
-                                                                                                                                    </td>
-                                                                                                                                </tr>
+                                                                                                                                
                                                                                                                             </tbody>
                                                                                                                         </table>
                                                                                                                     </td>

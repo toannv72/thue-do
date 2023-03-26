@@ -72,7 +72,7 @@ function SanPham2() {
                 <ToastContainer />
                 <div className={cx('wrap cf')}>
                     <h1 className={cx('projTitle')}>
-                        Responsive Table<span>-Less</span> Shopping Cart
+                        Giỏ Hàng
                     </h1>
 
                     <div className={cx('cart')}>

@@ -16,7 +16,7 @@ export default function Payment() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const url = useParams();
-    console.log(url);
+    console.log(itemOne.createdDate);
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}order/getOne/${url.id}`)
             .then((res) => res.json())
@@ -145,7 +145,7 @@ export default function Payment() {
                                                                                             color: '#666666',
                                                                                         }}
                                                                                     >
-                                                                                        Kính chào Quý khách :
+                                                                                        Kính chào Quý khách:{" "}
                                                                                         <strong
                                                                                             style={{
                                                                                                 color: '#333333',
@@ -155,7 +155,7 @@ export default function Payment() {
                                                                                         </strong>
                                                                                         <br />
                                                                                         <br /> Chân thành cảm ơn Quý
-                                                                                        khách đã mua sắm !
+                                                                                        khách đã sử dụng dịch vụ thuê đồ của chúng tôi!
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -184,7 +184,7 @@ export default function Payment() {
                                                                                         }}
                                                                                     >
                                                                                         Chúng tôi hy vọng Quý khách hài
-                                                                                        lòng với trải nghiệm mua sắm và
+                                                                                        lòng với trải nghiệm thuê đồ và
                                                                                         các sản phẩm đã chọn.
                                                                                     </td>
                                                                                 </tr>
@@ -199,7 +199,7 @@ export default function Payment() {
                                                                                     ></td>
                                                                                     <td
                                                                                         width=""
-                                                                                        // style="padding:0,margin:0"
+                                                                                    // style="padding:0,margin:0"
                                                                                     ></td>
                                                                                 </tr>
                                                                                 <tr>
@@ -208,7 +208,7 @@ export default function Payment() {
                                                                                             style={{
                                                                                                 background: '#fff',
                                                                                                 width: '97%',
-                                                                                                margin: '0 auto 10',
+                                                                                                margin: '0 auto ',
                                                                                                 border: 'solid 1 #e5e5e5',
                                                                                             }}
                                                                                         >
@@ -262,7 +262,7 @@ export default function Payment() {
                                                                                                                 fontSize: 12,
                                                                                                             }}
                                                                                                         >
-                                                                                                            7119538441
+                                                                                                            {itemOne.id}
                                                                                                         </strong>
                                                                                                     </td>
                                                                                                 </tr>
@@ -297,7 +297,11 @@ export default function Payment() {
                                                                                                                 fontSize: 12,
                                                                                                             }}
                                                                                                         >
-                                                                                                            20/11/2017
+                                                                                                            {moment(
+                                                                                                                itemOne.createdDate,
+                                                                                                            ).format(
+                                                                                                                'YYYY-MM-DD',
+                                                                                                            )}
                                                                                                         </strong>
                                                                                                     </td>
                                                                                                 </tr>
@@ -425,9 +429,9 @@ export default function Payment() {
                                                                                                                     >
                                                                                                                         {itemOne.orderDetails
                                                                                                                             ? itemOne
-                                                                                                                                  .orderDetails[0]
-                                                                                                                                  .product
-                                                                                                                                  .name
+                                                                                                                                .orderDetails[0]
+                                                                                                                                .product
+                                                                                                                                .name
                                                                                                                             : ''}
                                                                                                                     </td>
 
@@ -439,12 +443,12 @@ export default function Payment() {
                                                                                                                     >
                                                                                                                         {itemOne.orderDetails
                                                                                                                             ? moment(
-                                                                                                                                  itemOne
-                                                                                                                                      .orderDetails[0]
-                                                                                                                                      .orderReturnDate,
-                                                                                                                              ).format(
-                                                                                                                                  'YYYY-MM-DD',
-                                                                                                                              )
+                                                                                                                                itemOne
+                                                                                                                                    .orderDetails[0]
+                                                                                                                                    .orderReturnDate,
+                                                                                                                            ).format(
+                                                                                                                                'YYYY-MM-DD',
+                                                                                                                            )
                                                                                                                             : ''}
                                                                                                                     </td>
                                                                                                                     <td
@@ -455,12 +459,12 @@ export default function Payment() {
                                                                                                                     >
                                                                                                                         {itemOne.orderDetails
                                                                                                                             ? moment(
-                                                                                                                                  itemOne
-                                                                                                                                      .orderDetails[0]
-                                                                                                                                      .orderBorrowDate,
-                                                                                                                              ).format(
-                                                                                                                                  'YYYY-MM-DD',
-                                                                                                                              )
+                                                                                                                                itemOne
+                                                                                                                                    .orderDetails[0]
+                                                                                                                                    .orderBorrowDate,
+                                                                                                                            ).format(
+                                                                                                                                'YYYY-MM-DD',
+                                                                                                                            )
                                                                                                                             : ''}
                                                                                                                     </td>
                                                                                                                     <td
@@ -474,13 +478,13 @@ export default function Payment() {
                                                                                                                                         )} */}
                                                                                                                         {itemOne.orderDetails
                                                                                                                             ? (
-                                                                                                                                  itemOne.totalPrice -
-                                                                                                                                  itemOne
-                                                                                                                                      .orderDetails[0]
-                                                                                                                                      .deposit
-                                                                                                                              ).toLocaleString(
-                                                                                                                                  'vi-VN',
-                                                                                                                              )
+                                                                                                                                itemOne.totalPrice -
+                                                                                                                                itemOne
+                                                                                                                                    .orderDetails[0]
+                                                                                                                                    .deposit
+                                                                                                                            ).toLocaleString(
+                                                                                                                                'vi-VN',
+                                                                                                                            )
                                                                                                                             : ''}
 
                                                                                                                         đ
@@ -518,17 +522,20 @@ export default function Payment() {
                                                                                                                     >
                                                                                                                         {itemOne.orderDetails
                                                                                                                             ? itemOne.orderDetails[0].deposit.toLocaleString(
-                                                                                                                                  'vi-VN',
-                                                                                                                              )
+                                                                                                                                'vi-VN',
+                                                                                                                            )
                                                                                                                             : ''}
 
                                                                                                                         đ
                                                                                                                     </td>
                                                                                                                 </tr>
 
+                                                                                                                
+
                                                                                                                 <tr>
                                                                                                                     <td
-                                                                                                                        // style="BORDER-BOTTOM:#e3e3e3 1 solid,PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,BORDER-TOP:#666666 1 dashed,FONT-WEIGHT:bold,PADDING-TOP:10"
+                                                                                                                        // style="BORDER-BOTTOM:#e3e3e3 1 solid,PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:13,FONT-WEIGHT:bold,PADDING-TOP:10"
+                                                                                                                        bgcolor="#fffbe2"
                                                                                                                         colSpan={
                                                                                                                             2
                                                                                                                         }
@@ -540,40 +547,6 @@ export default function Payment() {
                                                                                                                         hàng
                                                                                                                     </td>
                                                                                                                     <td
-                                                                                                                        // style="BORDER-BOTTOM:#e3e3e3 1 solid,PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,BORDER-TOP:#666666 1 dashed,PADDING-TOP:10"
-                                                                                                                        colSpan={
-                                                                                                                            2
-                                                                                                                        }
-                                                                                                                        align="right"
-                                                                                                                    >
-                                                                                                                        {itemOne.totalPrice
-                                                                                                                            ? itemOne.totalPrice.toLocaleString(
-                                                                                                                                  'vi-VN',
-                                                                                                                              )
-                                                                                                                            : ''}
-
-                                                                                                                        đ
-                                                                                                                    </td>
-                                                                                                                </tr>
-
-                                                                                                                <tr>
-                                                                                                                    <td
-                                                                                                                        // style="BORDER-BOTTOM:#e3e3e3 1 solid,PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:13,FONT-WEIGHT:bold,PADDING-TOP:10"
-                                                                                                                        bgcolor="#fffbe2"
-                                                                                                                        colSpan={
-                                                                                                                            2
-                                                                                                                        }
-                                                                                                                        align="left"
-                                                                                                                    >
-                                                                                                                        Số
-                                                                                                                        tiền
-                                                                                                                        còn
-                                                                                                                        lại
-                                                                                                                        cần
-                                                                                                                        thanh
-                                                                                                                        toán
-                                                                                                                    </td>
-                                                                                                                    <td
                                                                                                                         // style="BORDER-BOTTOM:#e3e3e3 1 solid,PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,PADDING-TOP:10"
                                                                                                                         bgcolor="#fffbe2"
                                                                                                                         colSpan={
@@ -583,8 +556,8 @@ export default function Payment() {
                                                                                                                     >
                                                                                                                         {itemOne.totalPrice
                                                                                                                             ? itemOne.totalPrice.toLocaleString(
-                                                                                                                                  'vi-VN',
-                                                                                                                              )
+                                                                                                                                'vi-VN',
+                                                                                                                            )
                                                                                                                             : ''}
 
                                                                                                                         đ
@@ -617,33 +590,7 @@ export default function Payment() {
                                                                                                                         hàng
                                                                                                                     </td>
                                                                                                                 </tr>
-                                                                                                                <tr>
-                                                                                                                    <td
-                                                                                                                        // style="PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,FONT-WEIGHT:bold,PADDING-TOP:10"
-                                                                                                                        colSpan={
-                                                                                                                            2
-                                                                                                                        }
-                                                                                                                        align="left"
-                                                                                                                    >
-                                                                                                                        Tình
-                                                                                                                        trạng
-                                                                                                                        thanh
-                                                                                                                        toán{' '}
-                                                                                                                    </td>
-                                                                                                                    <td
-                                                                                                                        // style="PADDING-BOTTOM:10,PADDING-LEFT:10,PADDING-RIGHT:10,COLOR:#666666,FONTSIZE:12,PADDING-TOP:10"
-                                                                                                                        colSpan={
-                                                                                                                            2
-                                                                                                                        }
-                                                                                                                        align="right"
-                                                                                                                    >
-                                                                                                                        Chưa
-                                                                                                                        hoàn
-                                                                                                                        tất
-                                                                                                                        thanh
-                                                                                                                        toán
-                                                                                                                    </td>
-                                                                                                                </tr>
+                                                                                                                
                                                                                                             </tbody>
                                                                                                         </table>
                                                                                                     </td>

@@ -175,6 +175,12 @@ export default function CreateProducts() {
         if (deposit <= 0) {
             return toast.error(`Vui lòng nhập giá tiền đặt cọc hợp lệ!`);
         }
+        if (price <= 1000) {
+            return toast.error(`Vui lòng nhập giá tiền lớn hơn 1000!`);
+        }
+        if (deposit <= 1000) {
+            return toast.error(`Vui lòng nhập giá tiền đặt cọc lớn hơn 1000!`);
+        }
         if (img == null) {
             setToan(true);
         }
@@ -385,6 +391,7 @@ export default function CreateProducts() {
                                         <h4>Thay đổi thông tin sản phẩm</h4>
                                     </div>
                                     <div className="panel-body">
+                                        <p style={{color:"red"}}>Lưu ý:Loại hàng và ảnh không chọn sẽ lấy dữ liệu cũ</p>
                                         <form className="form-horizontal">
                                             <div className="form-group">
                                                 <label
@@ -399,7 +406,7 @@ export default function CreateProducts() {
                                                         id="id_accomodation"
                                                         onChange={(event) => setCategory(event.target.value)}
                                                     >
-                                                        <option value="">--Chọn loại sản phẩm--</option>
+                                                        <option value="0">--Chọn loại sản phẩm--</option>
                                                         <option value="1">Nhạc Cụ</option>
                                                         <option value="2">Trang sức</option>
                                                         <option value="3">Công nghệ</option>

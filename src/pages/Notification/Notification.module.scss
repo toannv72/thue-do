@@ -526,8 +526,19 @@
 .project-boxes.jsListView .box-progress-wrapper {
     order: 3;
     flex: 1;
+        display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            max-width: 622px;
 }
-
+.box-progress-wrapper {
+    order: 3;
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    max-width: 622px;
+}
 .project-box {
     --main-color-card: #dbf6fd;
     border-radius: 30px;
@@ -537,9 +548,9 @@
     position: relative;
     width: 700px;
     display: flex;
-    align-items: center;
+
     justify-content: space-between;
-    align-items: center;
+
 }
 
 .project-box-header {
@@ -641,6 +652,7 @@
     font-weight: 700;
     line-height: 16px;
     margin: 0;
+    padding: 5px;
 }
 
 .box-progress-percentage {
@@ -923,6 +935,7 @@
         top: 10px;
     }
 }
+
 .app-container {
     width: 100%;
     display: flex;
@@ -1436,10 +1449,6 @@
     font-size: 12px;
 }
 
-.project-boxes.jsListView .box-progress-wrapper {
-    order: 3;
-    flex: 1;
-}
 
 .project-box {
     --main-color-card: #dbf6fd;

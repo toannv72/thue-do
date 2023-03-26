@@ -11,11 +11,11 @@ const cx = classNames.bind(styles);
 function Notification() {
     // const id = localStorage.getItem('username');
     const imgUser = JSON.parse(localStorage.getItem('user'));
+    const [currentPage, setCurrentPage] = useState(1);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState();
     const [itemOne, setItemHistory] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
     const [open, setOpen] = useState(false);
     const [totalPage, setTotalPage] = useState();
     const handleClickOpen = () => {
@@ -29,7 +29,7 @@ function Notification() {
         // console.log(value);
     };
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_BASE_URLS}information/getAllUser/${imgUser.id}?page=${currentPage - 1}&size=10`)
+        fetch(`${process.env.REACT_APP_BASE_URLS}information/getAllUser/${imgUser.id}?page=${currentPage - 1}&size=7`)
             .then((res) => res.json())
             .then(
                 (result) => {
@@ -64,13 +64,14 @@ function Notification() {
                             <div className={cx('project-box-wrapper')} key={index}>
                                 <div className={cx('project-box')}>
                                     <div className={cx('project-box-content-header')}>
-                                        <img src="" alt="" />
+                                        <img src={item.image} alt="" />
                                     </div>
                                     <div className={cx('box-progress-wrapper')}>
                                         <p className={cx('box-progress-header')}>{item.title}</p>
+                                        <p className={cx('box-progress-header')}>{item.description}</p>
                                     </div>
                                     <div className={cx('project-box-footer')}>
-                                        <div className={cx('participants')}>
+                                        {/* <div className={cx('participants')}>
                                             <div className={cx('days-left')}>
                                                 <Button
                                                     style={{ display: 'flex', alignItems: 'center' }}
@@ -96,7 +97,7 @@ function Notification() {
                                                     Chi tiết
                                                 </Button>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
