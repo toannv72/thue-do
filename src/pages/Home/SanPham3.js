@@ -61,7 +61,7 @@ function SanPham3({ url ,y }) {
                     />
                     {items.contends.map((item, index) => (
                         <div className={cx('container')} key={index}>
-                            <a href={`/products:${item.id}`}>
+                            <Link to={`/products:${item.id}`}>
                                 <div className={cx('to')}>
                                     {/* <img src={item.images[1] ? item.images[1].url : ''} alt="" srcSet="" /> */}
                                     {item.images.map((item, indexs) =>
@@ -79,7 +79,7 @@ function SanPham3({ url ,y }) {
                                         <h4>{item.price ? item.price.toLocaleString('vi-VN') : ''}đ</h4>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     ))}
                 </div>

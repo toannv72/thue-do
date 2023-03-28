@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import ErrorToast from '~/pages/Product/ErrorToast';
 import Image from '~/components/Image';
 import { Pagination } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 Splitting();
 const cx = classNames.bind(styles);
@@ -58,7 +59,7 @@ function Category({ url }) {
                     />
                     {items.pageProducts.contends.map((item, index) => (
                         <div className={cx('container')} key={index}>
-                            <a href={`/products:${item.id}`}>
+                            <Link to={`/products:${item.id}`}>
                                 <div className={cx('to')}>
                                     {item.images.map((item, indexs) =>
                                         indexs === 0 ? (
@@ -75,7 +76,7 @@ function Category({ url }) {
                                         <h4>{item.price ? item.price.toLocaleString('vi-VN') : ''}đ</h4>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     ))}
                 </div>

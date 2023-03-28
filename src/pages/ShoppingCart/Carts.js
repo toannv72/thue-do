@@ -4,7 +4,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 // import { DateRange } from 'react-date-range';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import ErrorToast from '../Product/ErrorToast';
 import styles from './SanPham.module.scss';
@@ -81,21 +81,21 @@ function SanPham2() {
                                 <div className={cx('items')} key={index}>
                                     <div className={cx('infoWrap')}>
                                         <div className={cx('cartSection')}>
-                                            <a href={`/products:${e.id}`}>
+                                            <Link to={`/products:${e.id}`}>
                                                 {' '}
                                                 <img src={e.images[0].url} alt="" className={cx('itemImg')} />
-                                            </a>
+                                            </Link>
 
-                                            <a href={`/products:${e.id}`}>
+                                            <Link to={`/products:${e.id}`}>
                                                 {' '}
                                                 <h3 className={cx('h3')}>{e.name}</h3>
-                                            </a>
+                                            </Link>
                                             <div className={cx('prodTotal')}>
                                                 <p>{e.price.toLocaleString('vi-VN')} Đ</p>
                                             </div>
-                                            <a href={`./pay:${e.id}`}>
+                                            <Link to={`/pay:${e.id}`}>
                                                 <Button style={{ background: '#fe2c55', color: 'white' }}>Thuê</Button>
-                                            </a>
+                                            </Link>
                                             <div className={cx('cartSectio')}>
                                                 <button
                                                     href="#"

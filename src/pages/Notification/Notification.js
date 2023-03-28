@@ -24,6 +24,10 @@ function Notification() {
     const handleClose = () => {
         setOpen(false);
     };
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [currentPage]);
+
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
         // console.log(value);

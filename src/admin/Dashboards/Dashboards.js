@@ -105,7 +105,7 @@ export default function Dashboard() {
                             <h3>
                                 <span>{products.totalItem}</span>
                             </h3>
-                            <p>Trips</p>
+                            <p>Product</p>
                         </div>
                     </div>
                     <div className={styles.single_quick}>

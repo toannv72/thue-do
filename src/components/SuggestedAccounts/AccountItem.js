@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 
 import styles from './SuggestedAccounts.module.scss';
 
@@ -8,7 +9,7 @@ function AccountItem({ name, link, img }) {
     return (
         <div>
             {/* <Tippy interactive delay={[800, 0]} offset={[-20, 0]} placement="bottom" render={renderPreview}> */}
-            <a href={link}>
+            <Link to={link}>
                 <div className={cx('account-item')}>
                     <img className={cx('avatar')} src={img} alt="" />
                     <div className={cx('item-info')}>
@@ -18,7 +19,7 @@ function AccountItem({ name, link, img }) {
                         {/* <p className={cx('name')}></p> */}
                     </div>
                 </div>
-            </a>
+            </Link>
             {/* </Tippy> */}
         </div>
     );
