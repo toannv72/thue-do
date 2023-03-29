@@ -1,5 +1,6 @@
 # Getting Started with Create React App
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+back-end is in the path:  [here](https://github.com/haoluonghuynhngoc/product-rental).
 
 ## Available Scripts
 
