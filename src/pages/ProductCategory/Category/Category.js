@@ -23,7 +23,9 @@ function Category({ url }) {
     useEffect(() => {
         window.scrollTo(0, 320);
     }, [currentPage]);
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [url]);
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BASE_URLS}categories/getOne/${url}?page=${currentPage-1}&size=10&sort=id%2Cdesc`)
             .then((res) => res.json())

@@ -1,6 +1,7 @@
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import styles from './Home2.module.scss';
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 export default function name() {
@@ -15,9 +16,9 @@ export default function name() {
                         Nhà trị liệu âm nhạc xác định các mục tiêu phù hợp, thu thập và phân tích thông tin về phản ứng
                         của khách hàng đối với âm nhạc và cung cấp các kế hoạch điều trị tùy chỉnh cho phù hợp.
                     </p>
-                    <a className={cx('btn')} href="/musicalInstruments">
+                    <Link className={cx('btn')} to="/musicalInstruments">
                         Book Now
-                    </a>
+                    </Link>
                 </div>
             </div>
             <div className={cx('card')}>
@@ -30,9 +31,9 @@ export default function name() {
                         thường có giá bán tương đối cao mà không phải ai cũng có thể mua được. Việc thuê dụng cụ thể
                         thao giúp bạn vừa tiết kiệm được chi phí .
                     </p>
-                    <a className={cx('btn')} href="/sport">
+                    <Link className={cx('btn')} to="/sport">
                         Book Now
-                    </a>
+                    </Link>
                 </div>
             </div>
             <div className={cx('card')}>
@@ -46,9 +47,9 @@ export default function name() {
                         từng kiểu trang phục hay các sự kiện tham dự.
                     </p>
 
-                    <a className={cx('btn')} href="/jewelry">
+                    <Link className={cx('btn')} to="/jewelry">
                         Book Now
-                    </a>
+                    </Link>
                 </div>
             </div>
             <div className={cx('card')}>
@@ -59,9 +60,9 @@ export default function name() {
                         phục vụ cho công việc, giải trí thì hiện nay bạn hoàn toàn có thể tìm đến những đơn vị dịch vụ
                         thuê để chọn một sản phẩm phù hợp nhu cầu, chi phí để tác nghiệp.
                     </p>
-                    <a className={cx('btn')} href="/technology">
+                    <Link className={cx('btn')} to="/technology">
                         Book Now
-                    </a>
+                    </Link>
                 </div>
             </div>
         </main>

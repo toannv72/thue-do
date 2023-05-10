@@ -2,7 +2,7 @@ import className from 'classnames/bind';
 import styles from './Products.module.scss';
 import { Carousel } from 'react-responsive-carousel';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import FeaturedTitle from '../FeaturedTitle/FeaturedTitle';
 
 import Image from '~/components/Image';
@@ -18,8 +18,8 @@ export default function Products() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const currentUser = localStorage.getItem('user');
-
-    // console.log(user);
+    const url=useParams()
+    console.log(url);
     const createUser = () => {
         const product = { id: lastPart };
         const user = { id: JSON.parse(localStorage.getItem('user')).id };
@@ -51,7 +51,11 @@ export default function Products() {
                     setError(error);
                 },
             );
-    }, [lastPart]);
+    }, [lastPart, url]);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [url]);
+
     console.log(lastPart);
     if (error) {
         return <div>Error: {error.message}</div>;
@@ -162,7 +166,7 @@ export default function Products() {
                         <div className={cx('FeaturedTitle')}>
                             <FeaturedTitle
                                 titles="Sản phẩm liên quan"
-                                children={<Category url={`${products.category.id}`} />}
+                                children={<Category url={`${products.category.id}`} />} 
                             />
                         </div>
                     </div>
