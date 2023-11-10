@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Quote from '~/layouts/Footer/Footer';
 import './test.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import classNames from 'classnames/bind';
@@ -26,6 +26,7 @@ function Login() {
     const [cnt3, setcnt3] = useState('');
     const [cnt4, setcnt4] = useState('is-txr');
     const [cnt5, setcnt5] = useState('is-hidden');
+    const navigate = useNavigate();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -127,11 +128,13 @@ function Login() {
             const decentralization = JSON.parse(localStorage.getItem('user'));
             // console.log(decentralization.role[0].name);
             if (decentralization.role[0].name === 'ADMIN') {
-                window.location.href = '/admin/product';
+                // window.location.href = '/admin/product';
+                return navigate('/admin/product')
+
                 // console.log('admin');
             } else {
-                console.log('user');
-                window.location.href = '/';
+                return navigate('/')
+                // window.location.href = '/';
             }
         }
     };

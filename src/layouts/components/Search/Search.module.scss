@@ -12,8 +12,8 @@
     display: flex;
 
     background-color: rgba(22, 24, 35, 0.06);
-    border-radius: var(--search-border-radius);
-    border: 1.5px solid transparent;
+    // border-radius: var(--search-border-radius);
+    // border: 1.5px solid transparent;
 
     input {
         flex: 1;
@@ -89,8 +89,8 @@
     justify-content: center;
     width: var(--search-button-width);
     height: 100%;
-    border-top-right-radius: var(--search-border-radius);
-    border-bottom-right-radius: var(--search-border-radius);
+    // border-top-right-radius: var(--search-border-radius);
+    // border-bottom-right-radius: var(--search-border-radius);
     font-size: 1.8rem;
     color: rgba(22, 24, 35, 0.34);
 

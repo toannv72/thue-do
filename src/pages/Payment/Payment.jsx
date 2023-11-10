@@ -17,30 +17,30 @@ export default function Payment() {
     const [isLoaded, setIsLoaded] = useState(false);
     const url = useParams();
     console.log(itemOne.createdDate);
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_BASE_URLS}order/getOne/${url.id}`)
-            .then((res) => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setItemOne(result);
-                },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
-                (error) => {
-                    throw new Error(error.message);
-                },
-            )
-            .catch((error) => {
-                setIsLoaded(true);
-                setError(error.message);
-            });
-    }, [url]);
+    // useEffect(() => {
+    //     fetch(`${process.env.REACT_APP_BASE_URLS}order/getOne/${url.id}`)
+    //         .then((res) => res.json())
+    //         .then(
+    //             (result) => {
+    //                 setIsLoaded(true);
+    //                 setItemOne(result);
+    //             },
+    //             // Note: it's important to handle errors here
+    //             // instead of a catch() block so that we don't swallow
+    //             // exceptions from actual bugs in components.
+    //             (error) => {
+    //                 throw new Error(error.message);
+    //             },
+    //         )
+    //         .catch((error) => {
+    //             setIsLoaded(true);
+    //             setError(error.message);
+    //         });
+    // }, [url]);
 
     if (error) {
         return <ErrorToast message={error.message} />;
-    } else if (!isLoaded) {
+    } else if (isLoaded) {
         return <div>Loading...</div>;
     } else {
         return (

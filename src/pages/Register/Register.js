@@ -3,7 +3,7 @@ import Quote from '~/layouts/Footer/Footer';
 // import './test.css';
 import classNames from 'classnames/bind';
 import styles from './Register.module.scss';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
@@ -14,6 +14,7 @@ function Login() {
     const [cnt3, setcnt3] = useState('is-hidden');
     const [cnt4, setcnt4] = useState('');
     const [cnt5, setcnt5] = useState('');
+    const navigate = useNavigate();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -74,8 +75,9 @@ function Login() {
             console.error(error);
         }
         if (password && username) {
-            // setValid(true);
-            window.location.href = '/login';
+                return navigate('/login')
+                // setValid(true);
+            // window.location.href = '/login';
         }
         // setSubmitted(true);
     };
@@ -119,11 +121,13 @@ function Login() {
             const decentralization = JSON.parse(localStorage.getItem('user'));
             // console.log(decentralization.role[0].name);
             if (decentralization.role[0].name === 'ADMIN') {
-                window.location.href = '/admin/product';
+                return navigate('/admin/product')
+                // window.location.href = '/admin/product';
                 // console.log('admin');
             } else {
-                console.log('user');
-                window.location.href = '/';
+                return navigate('/')
+                // console.log('user');
+                // window.location.href = '/';
             }
         }
     };

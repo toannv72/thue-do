@@ -54,6 +54,7 @@ import Dashboard from '~/admin/Dashboards/Dashboards';
 import Notification from '~/pages/Notification/Notification';
 import { OrderAdmin4 } from '~/admin/Order/OrderCancel';
 import { OrderAdmin5 } from '~/admin/Order/OrderDelivery';
+import NotFound from '~/pages/404/Error';
 // import ProductManagement from '~/layouts/Admin/ProductManagement/ProductManagement';
 
 // Public routes
@@ -110,6 +111,7 @@ const publicRoutes = [
     { path: config.routes.adminBlog, component: BlogAdmin, layout: AdminLayout },
     { path: config.routes.adminCreateBlog, component: CreateBlogs, layout: AdminLayout },
     { path: config.routes.adminBlogManagement, component: BlogsManagement, layout: AdminLayout },
+    { path: "*", component: NotFound },
 ];
 
 const privateRoutes = [];
