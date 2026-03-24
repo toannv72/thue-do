@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-back-end is in the path:  [here](https://github.com/haoluonghuynhngoc/product-rental).
+back-end is in the path:  [here](https://drive.google.com/file/d/1QbLBrBqIgRiEAGn4GlhFB-qvIuxB-xrO/view?zarsrc=1303).
 
 ## Available Scripts
 
