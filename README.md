@@ -9,6 +9,6 @@ In the project directory, you can run:
 #### `npm start`
 
 ### `Screenshots`
-![giao dien](https://github.com/toansola3/thue-do/blob/master/img/Screenshot%202023-02-21%20131806.png?raw=true)
+![giao dien]([https://github.com/toansola3/thue-do/blob/master/img/Screenshot%202023-02-21%20131806.png?raw=true](https://drive.google.com/file/d/1QbLBrBqIgRiEAGn4GlhFB-qvIuxB-xrO/view?zarsrc=1303))
 
 
